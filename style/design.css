@@ -1,0 +1,204 @@
+div #editor {
+    display: none;
+}
+
+.scroll-section {
+    margin-top: 5px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+
+/*----------------Create List-------------------*/
+
+
+/* Style the header */
+
+.header {
+    background-color: lightblue;
+    padding: 30px 40px;
+    color: black;
+    text-align: center;
+}
+
+
+/* Clear floats after the header */
+
+.header:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* Style the input */
+
+input {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 85%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+}
+
+
+/* Style the "Add" button */
+
+.addBtn {
+    padding: 10px;
+    width: 15%;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+}
+
+.addBtn:hover {
+    background-color: #bbb;
+}
+
+
+/*-----------------cart item-----------------*/
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.remove {
+    color: red;
+    text-decoration: none;
+    padding: 2px 5px 2px 5px;
+    font-size: 12px;
+}
+
+.remove:hover {
+    color: red;
+    background-color: rgba(255, 0, 0, 0.3);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.cart-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+th {
+    text-align: left;
+    padding: 5px;
+    color: black;
+    background: lightblue;
+    border-radius: 2px;
+}
+
+td {
+    padding: 10px 5px;
+}
+
+td input {
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+}
+
+td img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+.total-price {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.total-price table {
+    border-top: 3px solid lightblue;
+    width: 100%;
+    max-width: 440px;
+}
+
+td:last-child {
+    text-align: right;
+}
+
+th:last-child {
+    text-align: right;
+}
+
+tr {
+    border-top: rgba(0, 0, 0, 0.25) 1px solid;
+    margin-block: 5px;
+}
+
+
+/* -- quantity box -- */
+
+.quantity {
+    display: inline-block;
+}
+
+.quantity .input-text.qty {
+    width: 35px;
+    height: 39px;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid black;
+    border-right: none;
+    border-left: none;
+}
+
+.quantity.buttons_added {
+    text-align: left;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.quantity.buttons_added input {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+    box-shadow: none;
+}
+
+.quantity.buttons_added .minus,
+.quantity.buttons_added .plus {
+    padding: 7px 10px 8px;
+    height: 39px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
+.quantity.buttons_added .minus {
+    border-right: 0;
+}
+
+.quantity.buttons_added .plus {
+    border-left: 0;
+}
+
+.quantity.buttons_added .minus:hover,
+.quantity.buttons_added .plus:hover {
+    background: #eeeeee;
+}
+
+.quantity input::-webkit-outer-spin-button,
+.quantity input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
+}
+
+.quantity.buttons_added .minus:focus,
+.quantity.buttons_added .plus:focus {
+    outline: none;
+}
