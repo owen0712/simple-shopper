@@ -14,8 +14,8 @@
   }
   
   .social-icon {
-    height: 46px;
-    width: 46px;
+    height: 50px;
+    width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,19 +34,18 @@
     font-size: 15px;
   }
 
-  .form-control {
+  .form-type {
     max-width: 550px;
     width: 100%;
     background-color: #f0f0f0;
     height: 50px;
     border-radius: 20px;
-    display: grid;
-    grid-template-columns: 15% 70% 15%;
     padding: 0 0.4rem;
     position:relative;
+    outline: none;
   }
   
-  .form-control i {
+  .form-type i {
     text-align: center;
     line-height: 55px;
     color: #acacac;
@@ -54,10 +53,8 @@
     font-size: 1.1rem;
   }
   
-  .form-control input {
+  .form-type input {
     background: none;
-    outline: none;
-    border: none;
     line-height: 1;
     font-weight: 600;
     font-size: 1.1rem;
@@ -101,10 +98,10 @@
     text-align: center;
   }
 
-.footer-col-2 img{
-  width: 70px;
-  height: 32px;
-}
+  .footer-col-2 img{
+    width: 70px;
+    height: 32px;
+  }
 
   .footer-col-3, .footer-col-4{
       flex-basis: 12%;
@@ -135,3 +132,41 @@
   .copyright{
     text-align: center;
   }
+
+  .i_check i{
+    position: absolute;
+    top: 45px;
+    right: 10px;
+    visibility: hidden;
+  }
+
+  .i_check small{
+    visibility: hidden;
+    position: absolute;
+    bottom: -18px;
+    left: 7px;
+  }
+
+  .col-md-3.success input{
+    border-color: #2ecc71;
+  }
+
+  .col-md-3.error input{
+    border-color: #e74c3c;
+  }
+
+.col-md-3.success #bi-check-circle-fill{
+  color: #2ecc71;
+  visibility: visible;
+}
+
+
+.col-md-3.error #bi-exclamation-circle-fill{
+  color: #e74c3c;
+  visibility: visible;
+}
+
+.col-md-3.error small{
+  color: #e74c3c;
+  visibility: visible;
+}
