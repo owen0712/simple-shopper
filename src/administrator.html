@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Shopper Administrator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/administrator.css">
+    <script src="js/administrator.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("form").submit(function(e){
+                e.preventDefault();
+                var image = $("#image").val();
+                var name = $("#name").val();
+                var category = $("#category").val();
+                var amount = $("#amount").val();
+                var price = $("#price").val();
+                var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + image + "</td><td>" + name + "</td><td>" + category + "</td><td>" + amount + "</td><td>" + "RM" + price + "</td><td><button class='btn btn-lg btn-info edit-row'>Edit</button></td></tr>";
+                if (image != ''&& name != ''&& category != '' && amount != '' && price != '') {
+                    $("#productTable tbody").append(markup);
+                }
+            });
+            
+            $(".delete-row").click(function(){
+                $("#productTable tbody").find('input[name="record"]').each(function(){
+                    if($(this).is(":checked")){
+                        $(this).parents("tr").remove();
+                    }
+                });
+            });
+
+            $('body').on('click', '.edit-row', function(){
+                var image = $(this).parents('tr').attr('image');
+                var name = $(this).parents('tr').attr('name');
+                var category = $(this).parents('tr').attr('category');
+                var amount = $(this).parents('tr').attr('amount');
+                var price = $(this).parents('tr').attr('price');
+                $(this).parents('tr').find('td:eq(1)').html("<input name='edit_image' type='file' value='" + image + "'>");
+                $(this).parents('tr').find('td:eq(2)').html("<input name='edit_name' type='text' value='" + name + "'>");
+                $(this).parents('tr').find('td:eq(3)').html("<select name='edit_category' value='" + category + "'><option value='Bath and Body'>Bath and Body</option><option value='Instant Food'>Instant Food</option><option value='Canned&Packed Food'>Canned&Packed Food</option><option value='Baby Product'>Baby Product</option><option value='Household Supply'>Household Supply</option><option value='Pet'>Pet</option><option value='Cooking Ingredient'>Cooking Ingredient</option><option value='Cereal'>Cereal</option><option value='Baking Supplies'>Baking Supplies</option><option value='Snack'>Snack</option><option value='Beverage'>Beverage</option><option value='Paper Product'>Paper Product</option></select>");
+                $(this).parents('tr').find('td:eq(4)').html("<input name='edit_amount' type='number' step='1' value='" + amount + "'>");
+                $(this).parents('tr').find('td:eq(5)').html("<input name='edit_price' type='number' step='0.01' value='" + price + "'>");
+                $(this).parents('tr').find('td:eq(6)').prepend("<button type='button' class='btn btn-lg btn-info update-row'>Update</button>");
+                $(this).hide()
+            });
+
+            $('body').on('click', '.update-row', function(){
+                var image = $(this).parents('tr').find("input[name='edit_image']").val();
+                var name = $(this).parents('tr').find("input[name='edit_name']").val();
+                var category = $(this).parents('tr').find("select[name='edit_category']").val();
+                var amount = $(this).parents('tr').find("input[name='edit_amount']").val();
+                var price = $(this).parents('tr').find("input[name='edit_price']").val();
+                if (image != ''&& name != ''&& category != '' && amount != '' && price != '') {
+                    $(this).parents('tr').find('td:eq(1)').text(image);
+                    $(this).parents('tr').find('td:eq(2)').text(name);
+                    $(this).parents('tr').find('td:eq(3)').text(category);
+                    $(this).parents('tr').find('td:eq(4)').text(amount);
+                    $(this).parents('tr').find('td:eq(5)').text("RM" + price);
+
+                    $(this).parents('tr').attr('image', image);
+                    $(this).parents('tr').attr('name', name);
+                    $(this).parents('tr').attr('category', category);
+                    $(this).parents('tr').attr('amount', amount);
+                    $(this).parents('tr').attr('price', price);
+
+                    $(this).parents('tr').find('.edit-row').show();
+                    $(this).parents('tr').find('.update-row').remove();
+                }
+            });
+        });    
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+
+        </header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+          <a class="navbar-brand" href="assets/Logo/SSLogo2.png">
+              <img src="assets/Logo/SSLogo2.png" alt="Simple Shopper Logo" width="200" height="100" class="d-inline-block align-text-top">
+          </a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle btn-lg" href="#" id="navbarDropdown" role="Button" data-toggle="dropdown">Product List</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="src/administrator.html">Bath and Body</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="src/instantFood.html">Instant Food</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="src/cannedFood.html">Canned&Packed Food</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="src/baby.html">Baby Product</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="">Household Supply</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="">Pet</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="">Cooking Ingredient</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="">Cereal</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="">Baking Supplies</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="">Snack</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="">Beverage</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="">Paper Product</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <main>
+            <h2>Bath and Body</h2>
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Total Amount</th>
+                        <th>Price</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-1.jfif" alt="bath-1" height="100" width="100"></td>
+                        <td>Renew Repair Argan Oil of Morocco Shampoo 400ml</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM20.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-2.jfif" alt="bath-2" height="100" width="100"></td>
+                        <td>Rejoice Shampoo 900ml Rich Soft Smooth</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM16.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-3.jpg" alt="bath-3" height="100" width="100"></td>
+                        <td>Dove Nutritive Solutions Shampoo 680ml</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM18.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-4.jpg" alt="bath-4" height="100" width="100"></td>
+                        <td>Sunsilk Shampoo 650ml</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM15.50</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-5.jfif" alt="bath-5" height="100" width="100"></td>
+                        <td>Lifebuoy Total 10 Antibacterial Shower Gel 950ml</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM18.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-6.jfif" alt="bath-6" height="100" width="100"></td>
+                        <td>Shokubutsu Clean Fresh Shower Foam 650ml</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM10.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-7.png" alt="bath-7" height="100" width="100"></td>
+                        <td>Follow Me Anti-bacterial Body Wash 1000ml</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM12.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-8.jfif" alt="bath-8" height="100" width="100"></td>
+                        <td>Follow Me Green Tea Shampoo 6 in 1 650ml</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM15.30</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-9.jfif" alt="bath-9" height="100" width="100"></td>
+                        <td>Lux Shower Gel - Magical Spell 950ml</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM15.50</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="assets/Image/Bath/bath-10.jfif" alt="bath-10" height="100" width="100"></td>
+                        <td>Pantene Micellar Shampoo 500ml</td>
+                        <td>Bath and Body</td>
+                        <td>10</td>
+                        <td>RM17.95</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
+            <button id="add_btn" class="btn btn-success btn-lg">Add product</button>
+            <button type="button" class="delete-row btn btn-danger btn-lg">Delete product</button>
+        </main>
+        <footer>
+
+        </footer>
+    </div>
+    <div class="popup">
+        <form action="" method="POST">
+            <fieldset>
+                <legend>Add New Product</legend>
+                <button id="close" type="button" class="btn-close btn-lg" aria-label="Close"></button>
+                <div class="mb-3">
+                    <label for="image" class="form-label"><span class="red">*</span>Upload image of product:</label>
+                    <input class="form-control" type="file" id="image" required>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Product Name" required>
+                    <label for="name"><span class="red">*</span>Name:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="category" aria-label="Floating label select example" required>
+                        <option value="Bath and Body">Bath and Body</option>
+                        <option value="Instant Food">Instant Food</option>
+                        <option value="Canned&Packed Food">Canned&Packed Food</option>
+                        <option value="Baby Product">Baby Product</option>
+                        <option value="Household Supply">Household Supply</option>
+                        <option value="Pet">Pet</option>
+                        <option value="Cooking Ingredient">Cooking Ingredient</option>
+                        <option value="Cereal">Cereal</option>
+                        <option value="Baking Supplies">Baking Supplies</option>
+                        <option value="Snack">Snack</option>
+                        <option value="Beverage">Beverage</option>
+                        <option value="Paper Product">Paper Product</option>
+                    </select>
+                    <label for="category"><span class="red">*</span>Category:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" step="1" class="form-control" id="amount" required>
+                    <label for="amount"><span class="red">*</span>Total Amount:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" step="0.01" class="form-control" id="price" required>
+                    <label for="price"><span class="red">*</span>Price:</label>
+                </div>
+                <p><span class="red">*</span>Required</p>
+                <button type="submit" class="btn formButton add-row">Add product</button>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
