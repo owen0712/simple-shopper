@@ -8,29 +8,13 @@ header,nav,main,footer{
 }
 
 nav{
-    width: 20%;
     float: left;
     margin-top: 50px;
-    margin-left: 50px;
-}
-
-nav li{
     margin-left: 20px;
 }
 
 nav ul{
-    list-style-type: none;
-    display: block;
-    float:left;
     font-size: 1.2em;
-}
-
-nav a{
-    text-decoration: none;
-}
-
-nav a:hover{
-    color: orange;
 }
 
 main{
