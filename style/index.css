@@ -169,3 +169,16 @@
       grid-gap: 1rem;
   }
 }
+
+#side-scroll{
+  cursor: grab;
+  overflow: auto;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.spacer{
+  padding: 10mm;
+}
