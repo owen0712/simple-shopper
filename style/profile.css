@@ -1,3 +1,7 @@
 label, input{
     margin: 10px;
 }
+
+.btn-danger{
+    width: 50%;
+}
