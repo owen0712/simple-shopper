@@ -1,10 +1,14 @@
 var thetextlist = document.getElementsByClassName("thetext");
 var editorlist = document.getElementsByClassName("editor");
+var removeitem = document.getElementsByClassName("remove");
 for (var i = 0; i < thetextlist.length; i++) {
     thetextlist[i].addEventListener('dblclick', toggleEditor);
 }
 for (var i = 0; i < editorlist.length; i++) {
     editorlist[i].children[1].addEventListener('click', doEdit);
+}
+/*for (var i = 0; i < removeitem.length; i++) {
+    removeitem[i].addEventListener('click', removeFromCart);
 }
 
 /*function myFunction(ev) {
@@ -63,40 +67,6 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
     b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d || (d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(this).is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d && b <= d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
 });
 
-/*
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-    var accordion = document.getElementById("accordionExample");
-    //create <br> element
-    var br = document.createElement("br");
-    accordion.appendChild(br);
-    //crreate <div class="accordion-item">
-    var accordionitem = document.createElement("div");
-    var accordionitematt = document.createAttribute("class");
-    accordionitematt.value = "accordion-item";
-    accordionitem.setAttributeNode(accordionitematt);
-    //create text node that input by user
-    var inputValue = document.getElementById("myInput").value;
-    var t = document.createTextNode(inputValue);
-
-    var accordionheader=document.createElement("h2");
-    accordionitem.appendChild(t);
-
-    if (inputValue === '') {
-        alert("You must write something!");
-    } else {
-        accordion.appendChild(accordionitem);
-    }
-    document.getElementById("myInput").value = "";
-
-
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
-        }
-    }
-}*/
 var list = ["Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
 
 function newElement() {
@@ -172,6 +142,9 @@ function addListId(targetId) {
 }
 
 $('body').on('click', '.deleteList', function() {
+    var decision = confirm("Are you sure you want to delete the entire \"" + $(this).next().text() + "\" list?");
+    if (decision == false)
+        return;
     let parent = $(this).parent().parent().parent().parent();
     addListId($(this).parent().parent().attr("id"));
     $(this).parent().parent().parent().next().remove();
@@ -180,3 +153,68 @@ $('body').on('click', '.deleteList', function() {
         parent.append(`<h1 class="text-center">Create a new list and manage it.</h1>`);
     }
 });
+
+$('main').on('click', '.remove', function() {
+    var decision = confirm("Are you sure you want to delete this item?");
+    if (decision == false)
+        return;
+
+    let grandParent = $(this).parent().parent().parent().parent().parent().parent();
+    let parentRow = $(this).parent().parent().parent().parent();
+    let PreviousRow = $(this).parent().parent().parent().parent().prev();
+    let priceText = parentRow.children().last().text();
+    let price = parseFloat(priceText.substr(3, priceText.length - 1)) * -1;
+    calculate(grandParent.parent(), price);
+    parentRow.remove();
+    if (PreviousRow.parent().children().length == 1) {
+        PreviousRow.parent().parent().next().remove();
+        PreviousRow.parent().remove();
+        grandParent.append(`<h3 class="text-center"> It is an Empty Shopping List </h3>
+        <p class="text-muted text-center">Add item from <a class="backIndex" style="text-decoration:none;" href="./index.html"> HOME</a> page.</p>`);
+    }
+});
+
+$('main').on('change', '.qty', function() {
+    var qty = parseInt($(this).val());
+    var priceText = $(this).parent().parent().prev().find("small").text();
+    var price = parseFloat(priceText.substr(7, priceText.length - 1));
+    var parent = $(this).parent().parent().parent().parent().parent().next();
+    if (qty == 0)
+        return;
+    $(this).parent().parent().next().html("RM " + (qty * price).toFixed(2));
+    calculate(parent, price);
+});
+
+$('main').on('click', '.minus', function() {
+    var qty = parseInt($(this).next().val()) - 1;
+    var priceText = $(this).parent().parent().prev().find("small").text();
+    var price = parseFloat(priceText.substr(7, priceText.length - 1));
+    var parent = $(this).parent().parent().parent().parent().parent().next();
+    if (qty == 0)
+        return;
+    $(this).parent().parent().next().html("RM " + (qty * price).toFixed(2));
+    calculate(parent, -price);
+});
+
+$('main').on('click', '.plus', function() {
+    var qty = parseInt($(this).prev().val()) + 1;
+    var priceText = $(this).parent().parent().prev().find("small").text();
+    var price = parseFloat(priceText.substr(7, priceText.length - 1));
+    var parent = $(this).parent().parent().parent().parent().parent().next();
+    if (qty == 0)
+        return;
+    $(this).parent().parent().next().html("RM " + (qty * price).toFixed(2));
+    calculate(parent, price);
+});
+
+function calculate(parent, price) {
+    var totalTag = parent.find(".totalItemPrice");
+    var totalText = totalTag.text();
+    var total = parseFloat(totalText.substr(3, totalText.length - 1));
+    totalTag.html("RM " + (price + total).toFixed(2));
+}
+
+/*
+function removeFromCart(ev) {
+    ev.target.parentElement.parentElement.parentElement.parentElement.remove;
+}*/
