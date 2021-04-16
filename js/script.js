@@ -94,6 +94,7 @@ function newElement() {
     } else {
         var number = list.pop(0);
         let markup = `
+        <br>
         <div class="accordion-item">
             <h2 class="accordion-header" id="heading${number}">
                 <button class="accordion-button collapsed" style="background-color: lightblue;" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${number}" aria-expanded="false" aria-controls="collapse${number}">
@@ -118,7 +119,7 @@ function newElement() {
                     </div>
                 </div>
             </div>
-        </div><br>`;
+        </div>`;
         $("#accordionExample").append(markup);
         thetextlist = document.getElementsByClassName("thetext");
         editorlist = document.getElementsByClassName("editor");
