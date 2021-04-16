@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initialscale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="stylesheet" href="style/design.css">
+    <link rel="stylesheet" href="design.css">
 
     <title>Simple Shopper | Grocery </title>
 
@@ -41,27 +41,22 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button collapsed" style="background-color: lightblue;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        <p type="button" class="btn btn-outline-danger" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <style>
-                                    .bi-trash-fill:hover{
-                                        fill: darkred;
-                                    }
-                                </style>
+                        <p type="button" class="btn btn-outline-danger deleteList" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-trash-fill" viewBox="0 0 16 16">                                
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                             </svg>                            
                         </p>
                         &nbsp;
-                    <h6 id="thetext" ondblclick="toggleEditor()">Shopping List 1</h5>
-                        <div id="editor">
-                            <input id="ta1" name="ta1" style="margin-bottom: 5px; border-radius: 3px; width:150px;"></text>
-                            <input name="submit" id="submit" type="button" value="Edit List Name" onclick="doEdit()" />
+                    <h6 class="thetext" >Shopping List 1</h6>
+                        <div class="editor">
+                            <input class="ta1" name="ta1" style="margin-bottom: 5px; border-radius: 3px; width:150px;">
+                            <input style="padding: none;" name="submit" id="submit" type="button" value="Edit List Name"  />
                         </div>
 
                         </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body scroll-section" style="background-color: rgba(128, 128, 128, 0.1); max-height: 500px;">
+                    <div class="accordion-body scroll-section">
                         <div class="small-container">
                             <table>
                                 <tr>
@@ -155,22 +150,21 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" style="background-color: lightblue;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <p type="button" class="btn btn-outline-danger" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <style>
-                                    .bi-trash-fill:hover{
-                                        fill: darkred;
-                                    }
-                                </style>
+                        <p type="button" class="btn btn-outline-danger deleteList" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-trash-fill" viewBox="0 0 16 16">                                
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                             </svg>                            
                         </p>
                         &nbsp;
-                        <h6>Shopping List 2</h6>
+                        <h6 class="thetext" >Shopping List 2</h6>
+                        <div class="editor">
+                            <input class="ta1" name="ta1" style="margin-bottom: 5px; border-radius: 3px; width:150px;">
+                            <input style="padding: none;" name="submit" id="submit" type="button" value="Edit List Name"  />
+                        </div>
                 </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body scroll-section" style="background-color: rgba(128, 128, 128, 0.1); max-height: 500px;">
+                    <div class="accordion-body scroll-section">
                         <div class="small-container">
                             <table>
                                 <tr>
@@ -284,114 +278,116 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingThree">
                     <button class="accordion-button collapsed" style="background-color: lightblue;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <p type="button" class="btn btn-outline-danger" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <style>
-                                    .bi-trash-fill:hover{
-                                        fill: darkred;
-                                    }
-                                </style>
+                        <p type="button" class="btn btn-outline-danger deleteList" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-trash-fill" viewBox="0 0 16 16">                                
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                             </svg>                            
                         </p>
                         &nbsp;
-                        <h6>Shopping List 3</h6>
+                        <h6 class="thetext" >Shopping List 3</h6>
+                        <div class="editor">
+                            <input class="ta1" name="ta1" style="margin-bottom: 5px; border-radius: 3px; width:150px;">
+                            <input style="padding: none;" name="submit" id="submit" type="button" value="Edit List Name"  />
+                        </div>
                 </button>
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="small-container">
-                        <table>
-                            <tr>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Subtotal</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="cart-info">
-                                        <img id="Beverage-1" src="Beverage/Beverage-1.jpg">
-                                        <div>
-                                            <p>Coca-Cola Original 235ml</p>
-                                            <small>Price: 2.99</small>
-                                            <br>
-                                            <a href="" class="remove">Remove</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="quantity buttons_added" style="float: left;">
-                                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+"
-                                            class="plus">
-                                    </div>
-                                </td>
-                                <td>RM2.99</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="cart-info">
-                                        <img id="Beverage-2" src="Beverage/Beverage-2.jpg">
-                                        <div>
-                                            <p>100-plus Original 235ml</p>
-                                            <small>Price: 2.99</small>
-                                            <br>
-                                            <a href="" class="remove">Remove</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="quantity buttons_added" style="float: left;">
-                                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+"
-                                            class="plus">
-                                    </div>
-                                </td>
-                                <td>RM2.99</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="cart-info">
-                                        <img id="Beverage-3" src="Beverage/Beverage-3.jpg">
-                                        <div>
-                                            <p>7-up Original 235ml</p>
-                                            <small>Price: 2.99</small>
-                                            <br>
-                                            <a href="" class="remove">Remove</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="quantity buttons_added" style="float: left;">
-                                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+"
-                                            class="plus">
-                                    </div>
-                                </td>
-                                <td>RM2.99</td>
-                            </tr>
-                        </table>
-                        <div class="total-price">
+                    <div class="accordion-body scroll-section">
+                        <div class="small-container">
                             <table>
                                 <tr>
-                                    <td>Subtotal</td>
-                                    <td>RM 5.97</td>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
                                 </tr>
                                 <tr>
-                                    <td>Discount</td>
-                                    <td>-RM 0.97</td>
+                                    <td>
+                                        <div class="cart-info">
+                                            <img id="Beverage-1" src="Beverage/Beverage-1.jpg">
+                                            <div>
+                                                <p>Coca-Cola Original 235ml</p>
+                                                <small>Price: 2.99</small>
+                                                <br>
+                                                <a href="" class="remove">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="quantity buttons_added" style="float: left;">
+                                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                                value="+" class="plus">
+                                        </div>
+                                    </td>
+                                    <td>RM2.99</td>
                                 </tr>
                                 <tr>
-                                    <td>Total</td>
-                                    <td>RM 5.00</td>
+                                    <td>
+                                        <div class="cart-info">
+                                            <img id="Beverage-2" src="Beverage/Beverage-2.jpg">
+                                            <div>
+                                                <p>100-plus Original 235ml</p>
+                                                <small>Price: 2.99</small>
+                                                <br>
+                                                <a href="" class="remove">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="quantity buttons_added" style="float: left;">
+                                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                                value="+" class="plus">
+                                        </div>
+                                    </td>
+                                    <td>RM2.99</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="cart-info">
+                                            <img id="Beverage-3" src="Beverage/Beverage-3.jpg">
+                                            <div>
+                                                <p>7-up Original 235ml</p>
+                                                <small>Price: 2.99</small>
+                                                <br>
+                                                <a href="" class="remove">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="quantity buttons_added" style="float: left;">
+                                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                                value="+" class="plus">
+                                        </div>
+                                    </td>
+                                    <td>RM2.99</td>
                                 </tr>
                             </table>
-                        </div>
+                            <div class="total-price">
+                                <table>
+                                    <tr>
+                                        <td>Subtotal</td>
+                                        <td>RM 5.97</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Discount</td>
+                                        <td>-RM 0.97</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>RM 5.00</td>
+                                    </tr>
+                                </table>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
+            <br>
         </div>
 
     </main>
     <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

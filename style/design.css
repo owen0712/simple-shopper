@@ -1,4 +1,4 @@
-div #editor {
+div .editor {
     display: none;
 }
 
@@ -6,6 +6,7 @@ div #editor {
     margin-top: 5px;
     max-height: 500px;
     overflow-y: auto;
+    background-color: rgba(128, 128, 128, 0.1);
 }
 
 
@@ -33,7 +34,7 @@ div #editor {
 
 /* Style the input */
 
-input {
+#myDIV input {
     margin: 0;
     border: none;
     border-radius: 0;
@@ -67,6 +68,10 @@ input {
 table {
     width: 100%;
     border-collapse: collapse;
+}
+
+.bi-trash-fill:hover {
+    fill: darkred;
 }
 
 .remove {
@@ -201,4 +206,16 @@ tr {
 .quantity.buttons_added .minus:focus,
 .quantity.buttons_added .plus:focus {
     outline: none;
+}
+
+.accordion-item {
+    background: none;
+}
+
+.backIndex:hover {
+    padding: 4px;
+    text-decoration: underline;
+    border-radius: 3px;
+    background: rgba(173, 216, 230, 0.4);
+    font-weight: bolder;
 }
