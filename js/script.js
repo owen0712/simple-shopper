@@ -144,7 +144,7 @@ function newElement() {
                 <div class="accordion-body scroll-section">
                     <div class="small-container">
                         <h3 class="text-center"> It is an Empty Shopping List </h3>
-                        <p class="text-muted text-center">Add item from <a class="backIndex" style="text-decoration:none;" href="src/index.html"> HOME</a> page.</p>
+                        <p class="text-muted text-center">Add item from <a class="backIndex" style="text-decoration:none;" href="./index.html"> HOME</a> page.</p>
                     </div>
                 </div>
             </div>
