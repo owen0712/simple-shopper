@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="forgot.css" rel="stylesheet">
+    
+    <title>Simple Shopper</title>
+   </head>
+   <body>
+     <div class="container">
+       <form class="form" id="form">
+            <h4 style="margin-top: 20px;"><a href="index.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg></a><strong>Forgot password</strong></h4>
+      
+            <div style="margin-left: 36.5%;">
+              <img src="/img/Account-amico.png" style="max-width: 360px; max-height: 560px;">
+            </div>
+            <p class="text-center">Please enter your verificatoin code.</p>
+            <p class="text-center text-muted">We have send a verification code to your registered email/phone ID.</p>
+            
+            <div class="d-flex justify-content-center">
+              <div class = "form-type" style="width: 55px; margin:10px;">
+                <input type="text" style ="width: max-content;" id = "validate1" />
+              </div>
+              <div class = "form-type" style="width: 55px; margin:10px">
+                <input type="text" style ="width: max-content;" id = "validate2"/>
+              </div>
+              <div class = "form-type" style="width: 55px; margin:10px">
+                <input type="text" style ="width: max-content;" id = "validate3" />
+              </div>
+              <div class = "form-type" style="width: 55px; margin:10px">
+                <input type="text" style ="width: max-content;" id = "validate4" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="button" id = "btnSubmit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;" disabled onclick="btnFunction()">Next</button>
+            </div>
+            <p class="text-center text-muted" style="margin-top: 20px;" id="changingText">Please wait until <span id="changing">60</span>s to resend</p>
+       </form><a href="#"></a>
+     </div>
+     <script> 
+      // Array of words 
+      var s = 60;
+      // Function that executes every 2000 milliseconds 
+      var t = setInterval(function() { 
+        // Change the word in the span for a random one in the array of words 
+        $('#changing').html(s);
+        s--;
+        if(s == -1){
+          clearInterval(t);
+          document.getElementById('changingText').innerHTML = "<p>Did not receive the code?<br><a href=\"forgot2.html\">Resend</a> or <a href=\"forgot3.html\">try a different verification method</a></p>";
+        } 
+      }, 1000); 
+     </script>
+     <script>
+       let btnShow = document.querySelector('button');
+       let validate1 = document.getElementById('validate1');
+       let validate2 = document.getElementById('validate2');
+       let validate3 = document.getElementById('validate3');
+       let validate4 = document.getElementById('validate4');
+       let form = document.getElementById('form');
+
+       form.addEventListener('keyup', ()=>{
+          if(validate1.value.trim() === '' ||
+             validate2.value.trim() === '' ||
+             validate3.value.trim() === '' ||
+             validate4.value.trim() === '' ){
+                btnShow.disabled = true
+             }else{
+               btnShow.disabled =  false;
+             }
+       })
+     </script>
+     <script>
+        function btnFunction(){
+            window.location.href= 'forgot1.html';
+       }
+     </script> 
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
+  </body>
+  <footer class="container text-center font-italic" style="margin-top: 40px;">
+    Copyright &copy; arhboy
+    <br>
+</footer>
+</html>
