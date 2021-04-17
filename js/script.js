@@ -181,8 +181,13 @@ $('main').on('change', '.qty', function() {
     var parent = $(this).parent().parent().parent().parent().parent().next();
     if (qty == 0)
         return;
+    var previousPriceText = $(this).parent().parent().next().html();
+    var previousPrice = parseFloat(previousPriceText.substr(3, previousPriceText.length - 1));
+    var totalAddedPrice = (qty * price) - previousPrice;
+
+
     $(this).parent().parent().next().html("RM " + (qty * price).toFixed(2));
-    calculate(parent, price);
+    calculate(parent, totalAddedPrice);
 });
 
 $('main').on('click', '.minus', function() {
