@@ -1,7 +1,17 @@
-label, input{
+main label{
     margin: 10px;
 }
 
+main input{
+    margin: 10px;
+}
+
+main{
+    margin-left: 150px;
+    width: 60%;
+}
+
 .btn-danger{
-    width: 50%;
+    width: 350px;
+    margin-bottom: 100px;
 }

@@ -21,6 +21,7 @@ $('#dob').val(user['dob']);
 
 $('form').on('submit',function(e){
     e.preventDefault();
+    alert("Profile updated");
     user['username']=$('#username').val();
     user['name']=$('#name').val();
     user['email']=$('#email').val();
@@ -35,7 +36,9 @@ $('form').on('submit',function(e){
 })
 
 $('.btn-danger').on('click',function(){
-    //ask yes or no
-    alert("Account deleted");
-    //return home
+    var decision = confirm("Are you sure you want to delete the account?");
+    if(decision){
+        alert("Account deleted");
+        window.location.href='index.html';
+    }
 })
