@@ -1,7 +1,6 @@
 AOS.init();
-localStorage.setItem("test","10");
 window.load=doShowAll();
-
+window.onload=search();
 
 const ele = document.getElementsByClassName('side-scroll');
 ele.scrollTop = 100;
@@ -19,9 +18,46 @@ const mouseMoveHandler = function(e) {
     ele.scrollLeft = pos.left - dx;
 };
 
-document.getElementById("searchButton").addEventListener("click", function() {
+//search function
+
+// document.getElementById("searchButton").addEventListener("click", function() {
+//     var input, filter,shopctg, card, target, txtValue, ctgvalue;
+//     input = document.getElementById("search");
+//     filter = input.value.toUpperCase();
+//     shopctg = document.getElementsByClassName("shopctg");
+//     for(var i = 0;i<shopctg.length;i++)
+//     {
+//         card = shopctg[i].getElementsByClassName("card");
+//         ctgvalue = 0;
+//         for(var j = 0;j<card.length;j++)
+//         {
+//             target = card[j].getElementsByClassName("card-title")[0];
+//             txtValue = target.textContent || target.innerText;
+//             if(txtValue.toUpperCase().indexOf(filter)>-1)
+//             {
+//                 card[j].style.display = "";
+//             }else{
+//                 card[j].style.display = "none";
+//                 ctgvalue++;
+//             }
+//         }
+//         if(ctgvalue == card.length)
+//         {
+//             shopctg[i].style.display = "none";
+//         }else{shopctg[i].style.display = "";}
+//     }
+// });
+
+
+function search(){
+    const currentURL=window.location.search;
+    const urlParam= new URLSearchParams(currentURL);
+    var searchName=urlParam.get('search');
+
+
     var input, filter,shopctg, card, target, txtValue, ctgvalue;
     input = document.getElementById("search");
+    input.value=searchName;
     filter = input.value.toUpperCase();
     shopctg = document.getElementsByClassName("shopctg");
     for(var i = 0;i<shopctg.length;i++)
@@ -45,7 +81,7 @@ document.getElementById("searchButton").addEventListener("click", function() {
             shopctg[i].style.display = "none";
         }else{shopctg[i].style.display = "";}
     }
-});
+}
 
 
 
@@ -164,6 +200,11 @@ function doShowAll() {
     }
 }
 
-
-
-
+function searchFunc(){
+    input = document.getElementById("search");
+    var search= input.value;
+    console.log(search);
+    var newURL="../src/search.html?search="+search;
+    // newURL=encodeURIComponent(newURL); should have encoding but it doesn't work yet
+    window.location.href=newURL;
+}
