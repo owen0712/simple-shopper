@@ -159,6 +159,13 @@
   height: auto;
 }
 
+.product-image{
+  height: 190px;
+  width: 190px;
+  min-height: 170px;
+  max-height: 100mm;
+}
+
 @supports (display: grid) {
   .cards {
       margin: 0;
@@ -170,14 +177,12 @@
   }
 }
 
+
 #side-scroll{
   cursor: grab;
   overflow: auto;
 }
 
-::-webkit-scrollbar{
-  display: none;
-}
 
 .spacer{
   padding: 10mm;
