@@ -1,7 +1,6 @@
-.row a{
-      text-decoration: none;
-      color: rgb(0, 0, 0);
-  }
+  .row a{
+        color: rgb(0, 0, 0);
+    }
 
   .social-text {
     padding: 0.7rem 0;
@@ -40,16 +39,16 @@
     background-color: #f0f0f0;
     height: 50px;
     border-radius: 20px;
-    padding: 0 0.4rem;
+    padding: 0 0.2rem;
     position:relative;
     outline: none;
+    border: none;
   }
   
   .form-type i {
     text-align: center;
     line-height: 55px;
     color: #acacac;
-    transition: 0.5s;
     font-size: 1.1rem;
   }
   
@@ -73,6 +72,7 @@
     font-size: 14px;
     padding: 30px 0 10px;
     width: 100%;
+    float: left;
   }
 
   .footer p{
@@ -98,6 +98,10 @@
     text-align: center;
   }
 
+  .footer-col-2 li{
+    padding-left: 50px;
+  }
+
   .footer-col-2 img{
     width: 70px;
     height: 32px;
@@ -108,7 +112,7 @@
       text-align: center;
   }
 
-  ul{
+  .footer ul{
     list-style-type: none;
     text-align:justify;
     padding-left: 40px;
@@ -135,9 +139,9 @@
 
   .i_check i{
     position: absolute;
-    top: 45px;
+    top: 55px;
     right: 10px;
-    visibility: hidden;
+    visibility:hidden;
   }
 
   .i_check small{
@@ -169,4 +173,40 @@
 .col-md-3.error small{
   color: #e74c3c;
   visibility: visible;
+}
+
+.form hr{
+  border: none;
+  background: #3fc1c9;
+  height: 3px;
+  width: 550px;
+  right: auto;
+}
+
+.i_check2 i{
+  position:absolute;
+  right: 46px;
+  top: 10px;
+  visibility:hidden;
+}
+
+.i_check2 small{
+  visibility: hidden;
+  position:absolute;
+  bottom: -20px;
+  left: 7%;
+}
+
+.col-md-2.error #bi-exclamation-circle-fill{
+  color: #e74c3c;
+  visibility: visible;
+}
+
+.col-md-2.error small{
+  color: #e74c3c;
+  visibility: visible;
+}
+
+#sign_text{
+  color: #3fc1c9;
 }

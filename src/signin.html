@@ -16,37 +16,49 @@
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
     <link href="signUp.css" rel="stylesheet">
+    <link href="signin.css" rel="stylesheet">
   </head>
 
   <body class="text-center">  
-    <form class="form-signin">
+    <form class="form-signin" id="form">
         <h5>Welcome to Simple Shopper!</h5>
         <p class="text-muted">Please Log in.</p>
-        <div class = "input-field">
+        <div class = "input-field" style="width:350px">
           <i class="bi bi-person-circle"></i>
-          <input type="text" placeholder="Phone number or email" required/>
+          <input type="text" placeholder="Phone number or email" id = "phone_email"/>
+          <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
+          <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
+          <small>Error Message</small>
         </div>
-        <div class = "input-field">
+        <div class = "input-field" style="width:350px; margin-top: 30px; margin-bottom: 20px;">
           <i class="bi bi-lock-fill"></i>
           <input type="password" placeholder="Password" id = "myInput"/>
           <span class="eye" onclick="myFunction()">
               <i id = "hide1" class="bi bi-eye-fill"></i>
               <i id = "hide2" class="bi bi-eye-slash-fill"></i>
           </span>
+          <i class="bi bi-check-circle-fill" id="bi-check-circle-fill" ></i>
+          <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
+          <small>Error Message</small>
         </div>
         <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
+          <br>
+          <select class="custom-select custom-select-sm" style="width: 120px; height:40px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
+            <option value="Male">Customer</option>
+            <option value="Female">Administrator</option>
+          </select>
         </div>
         <div id = "signInsection">
             <i class="bi bi-arrow-right-circle-fill"></i>
-            <a href="#" style="color:rgb(38, 126, 209);">Forgot password?</a>
-            <button class="btn btn-primary" type="submit" id = "signIn">Sign in</button>
+            <a href="forgot3.html" style="color:rgb(38, 126, 209);">Forgot password?</a>
+            <button type="submit" id = "submit" class="btn btn-primary" style="border-radius: 55px; margin-left: 10px; width: 100px;">Login</button>
         </div>
-        <hr><p class="social-media">Or login with social social platforms</p> </span>
+        <hr>
+        <p class="social-media">Or <strong><span id="sign_text">&nbsp;login</span></strong>&nbsp;with social social platforms</p> </span>
           <div class="social-media">
             <a hred="#" class="social-icon">
               <i class="bi bi-facebook" id = "Facebook" style="background-image: url(Facebook_icon.png);"></i>
@@ -59,10 +71,10 @@
             </a>
           </div>
           <br>
-          <div class="row">
+          <div class="row" style="justify-content: center;">
             <label class="text-muted">New to Simple Shopper?&nbsp;&nbsp;&nbsp;</label>
             <i class="bi bi-arrow-right-circle-fill"></i>
-            <a href="sign.html" style="color:rgb(16, 146, 206); margin-left: 4px;">Sign up here</a>
+            <a href="sign.html" style="color:rgb(38, 126, 209); margin-left: 4px;">Sign up here</a>
           </div>
           <br>
     </form>
@@ -130,6 +142,64 @@
            z.style.display = "block";
          }
       }
+  </script>
+  <script>
+      const form = document.getElementById('form');
+      const phone_email = document.getElementById('phone_email');
+      const password = document.getElementById('myInput');
+
+      form.addEventListener('submit', (e) =>{
+        e.preventDefault();
+
+        checkInputs();
+      })
+
+      function checkInputs(){
+        const phone_emailValue = phone_email.value.trim();
+        const passwordValue = password.value.trim();
+
+        if(!validateEmail(phone_emailValue) && !validatePhone(phone_emailValue)){
+          setErrorFor(phone_email, 'Mandatory');
+        }
+
+        if(passwordValue === ''){
+            setErrorFor(password, 'Password cannot be blank');
+          }
+        else if(passwordValue.length>15){
+            setErrorFor(password, 'Password length cannot exceed 15 characters')
+          }
+        else if(passwordValue.length < 8){
+            setErrorFor(password, 'Password must at least 8 characters long');
+        }else{
+            setSuccessFor(password)
+          }
+      }
+
+      function validateEmail(email){
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email); 
+      }
+
+      function validatePhone(phone){
+        var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        return re.test(phone);
+      }
+
+      function setErrorFor(input, message){
+        const input_field = input.parentElement; //col-md-3
+        const small = input_field.querySelector('small');
+
+        // add error message inside small
+        small.innerText = message;
+
+        // add error class
+        input_field.className = 'input-field error';
+      }
+      function setSuccessFor(input){
+        const input_field = input.parentElement; //col-md-3
+        input_field.className = 'input-field success';
+        window.location.href = "index.html"
+    }
   </script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
