@@ -85,6 +85,11 @@ function checkInputs(){
     if(!Date.parse(birthValue)){
         setErrorForDate(birth, 'Birthday cannot be blank');
     }
+    
+    if(name1Value !=='' && name2Value !== '' && passwordValue !== '' && password2Value !== '' &&
+        emailValue !== '' && phoneValue !== '' && birthValue !== ''){
+            linkToLoginPage();
+    }
 }
 
 
@@ -113,6 +118,9 @@ function setErrorForDate(input, message){
 function setSuccessFor(input){
     const col_md_3 = input.parentElement; //col-md-3
     col_md_3.className = 'col-md-3 mb-3 success';
+}
+
+function linkToLoginPage(){
     window.location.href = "signin.html"
 }
 
