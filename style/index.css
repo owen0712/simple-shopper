@@ -177,6 +177,11 @@
   }
 }
 
+.card-category{
+  font-weight:normal;
+  font-size: small;
+}
+
 
 #side-scroll{
   cursor: grab;
