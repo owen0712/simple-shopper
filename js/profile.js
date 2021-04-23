@@ -1,11 +1,4 @@
-const user={
-    username:"simplekid",
-    name:"Sim Ple Kid",
-    email:"simplekid@gmail.com",
-    phone:"0123456789",
-    gender:'male',
-    dob:"2021-04-14"
-}
+const user=JSON.parse(localStorage.getItem('user'))
 
 $('#username').val(user['username']);
 $('#name').val(user['name']);
@@ -21,7 +14,7 @@ $('#dob').val(user['dob']);
 
 $('form').on('submit',function(e){
     e.preventDefault();
-    alert("Profile updated");
+    swal("Good job!", "Profile Updated", "success");
     user['username']=$('#username').val();
     user['name']=$('#name').val();
     user['email']=$('#email').val();
@@ -35,10 +28,23 @@ $('form').on('submit',function(e){
     user['dob']=$('#dob').val();
 })
 
-$('.btn-danger').on('click',function(){
-    var decision = confirm("Are you sure you want to delete the account?");
-    if(decision){
-        alert("Account deleted");
-        window.location.href='index.html';
-    }
+$('.btn-danger').on('click',function(e){
+    e.preventDefault()
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this account!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            swal("Your account has been deleted!", {
+            icon: "success",
+            });
+            setTimeout(function(){window.location.href='index.html'}, 1000);
+        } else {
+            swal("Your account still exist!");
+        }
+    });
 })

@@ -1,7 +1,4 @@
-const user={
-    username:"simplekid",
-    password:"simplekid123"
-}
+const user=JSON.parse(localStorage.getItem('user'))
 
 function showCurrentPassword(){
     let x = document.querySelector("#current_password")
@@ -61,6 +58,7 @@ const form = document.querySelector('form')
 form.addEventListener('submit', (e) =>{
     e.preventDefault();
     if(checkCurrentPassword()&&checkNewPassword()&&checkConfirmPassword()){
+        swal("Successfully!", "Password Modified", "success");
         user['password']=c_password.value.trim();
     }
 })

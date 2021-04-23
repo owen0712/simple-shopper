@@ -102,7 +102,7 @@ $("form").submit(function(e){
     let description = $("#description").val();
     let default_add=$("#default_checked").prop('checked');
     let id=addressesArr.length+1;
-    let markup = `<div class="address">
+    let markup = `<div class="address shadow p-3 mb-5 bg-white rounded">
                     <label class='id'>${id}</label>
                     <button class="btn btn-danger delete" >Delete</button>
                     <button class="btn btn-info edit" onclick="editForm()" id="edit_btn">Edit</button>
