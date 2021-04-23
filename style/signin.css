@@ -105,7 +105,10 @@
 
 .btn:hover{
   color: rgb(0, 0, 0);
-  background-color: #38c1d3;
+  background-color: #ffffff;
+  border-radius: 6px;
+  border-color: rgb(38, 126, 209);
+  transition-duration: 0.4s;
 }
 
 .form-signin hr{
