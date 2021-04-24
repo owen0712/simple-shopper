@@ -54,36 +54,40 @@ function search(){
     const urlParam= new URLSearchParams(currentURL);
     var searchName=urlParam.get('search');
 
-
-    var input, filter,shopctg, card, target, txtValue, ctgvalue;
+    var input, filter, card, target, txtValue;
     input = document.getElementById("search");
     input.value=searchName;
     filter = input.value.toUpperCase();
-    shopctg = document.getElementsByClassName("shopctg");
-    for(var i = 0;i<shopctg.length;i++)
-    {
-        card = shopctg[i].getElementsByClassName("card");
-        ctgvalue = 0;
-        for(var j = 0;j<card.length;j++)
+    card = document.getElementsByClassName("row mx-auto")[0].getElementsByClassName("col");
+    for(var i = 0;i<card.length;i++)
         {
-            target = card[j].getElementsByClassName("card-title")[0];
+            target = card[i].getElementsByClassName("card-text")[0];
             txtValue = target.textContent || target.innerText;
             if(txtValue.toUpperCase().indexOf(filter)>-1)
             {
-                card[j].style.display = "";
+                card[i].classList.remove("hide");
             }else{
-                card[j].style.display = "none";
-                ctgvalue++;
+                card[i].classList.add("hide");
             }
         }
-        if(ctgvalue == card.length)
-        {
-            shopctg[i].style.display = "none";
-        }else{shopctg[i].style.display = "";}
-    }
 }
 
-
+function filter(input)
+{
+    var ctg, target, card;
+    card = document.getElementsByClassName("row mx-auto")[0].getElementsByClassName("col");
+    for(var i = 0;i<card.length;i++)
+    {
+        ctg = card[i].getElementsByClassName("card-category")[0];
+        target = ctg.textContent || target.innerText;
+        if(target == input)
+        {
+            card[i].classList.remove("hide");
+        }else{
+            card[i].classList.add("hide");
+        }
+    }
+}
 
 function wcqib_refresh_quantity_increments() {
     jQuery("div.quantity:not(.buttons_added), td.quantity:not(.buttons_added)").each(function(a, b) {

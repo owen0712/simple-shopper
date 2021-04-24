@@ -16,7 +16,8 @@ div .editor {
 /* Style the header */
 
 .header {
-    background-color: rgb(211, 211, 211);
+    background-color: lightblue;
+    border-radius: 3px;
     padding: 30px 40px;
     color: black;
     text-align: center;
@@ -210,6 +211,10 @@ tr {
 
 .accordion-item {
     background: none;
+}
+
+.accordion-item-list {
+    background-color: rgba(211, 211, 211, 0.9);
 }
 
 .backIndex:hover {
