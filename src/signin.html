@@ -17,6 +17,10 @@
     
     <!-- Custom styles for this template -->
     <link href="../style/signin.css" rel="stylesheet">
+     
+    <!-- sweetalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   </head>
 <header>
   <nav class="navbar navbar-expand-lg navbar-light border-bottom mb-5" style="background-color: rgb(243, 243, 243);">
@@ -67,7 +71,7 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
           <br>
-          <select class="custom-select custom-select-sm" style="width: 120px; height:40px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
+          <select class="custom-select custom-select-sm" id="status" style="width: 120px; height:40px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
             <option value="Male">Customer</option>
             <option value="Female">Administrator</option>
           </select>
@@ -121,6 +125,7 @@
       const form = document.getElementById('form');
       const phone_email = document.getElementById('phone_email');
       const password = document.getElementById('myInput');
+      const status=document.querySelector('#status')
 
       form.addEventListener('submit', (e) =>{
         e.preventDefault();
@@ -131,6 +136,14 @@
       function checkInputs(){
         const phone_emailValue = phone_email.value.trim();
         const passwordValue = password.value.trim();
+        var statusValue ='';
+
+        if(status.value==='Customer'){
+          statusValue='user'
+        }
+        else if(status.value==='Administrator'){
+          statusValue='admin'
+        }
 
         if(!validateEmail(phone_emailValue) && !validatePhone(phone_emailValue)){
           setErrorFor(phone_email, 'Mandatory');
@@ -153,8 +166,46 @@
         if(phone_emailValue !== '' && passwordValue !== ''){
           linkToMainPage();
         }
+
+        var type='';
+        if(validateEmail(phone_emailValue)){
+          type='email';
+        }
+        else if(validatePhone(phone_emailValue)){
+          type='phone'
+        }
+
+        if(phone_emailValue !== '' && passwordValue !== ''){
+          if(signIn(phone_emailValue,type,passwordValue,statusValue)){
+            swal("Login Success", "Welcome to simple shopper", "success");
+            setTimeout(function(){window.location.href='index.html'}, 1000);
+          }
+          else{
+            swal("Login Failed", "Please try again", "error");
+          }
+        }
+
       }
 
+      function signIn(input,type,password,status){
+        const users=JSON.parse(localStorage.getItem('users')||[]);
+        var check='';
+        if(type==='email'){
+            check='email';
+        }
+        else if(type==='phone'){
+            check='phone';
+        }
+        for(var user of users){
+            if(user[check]===input&&user['password']===password&&user['status']===status){
+                localStorage.setItem('user',JSON.stringify(user));
+                localStorage.setItem('users',JSON.stringify(users));
+                return true;
+            }
+        }
+        return false;
+      }
+      
       function validateEmail(email){
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email); 

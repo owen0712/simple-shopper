@@ -6,6 +6,7 @@ const password2 = document.getElementById('password2');
 const email = document.getElementById('email');
 const phone = document.getElementById('phone');
 const birth = document.getElementById('birthdaytime');
+const gender = document.querySelector('#gender')
 
 form.addEventListener('submit', (e) =>{
     e.preventDefault();
@@ -22,7 +23,8 @@ function checkInputs(){
     const emailValue = email.value.trim();
     const phoneValue = phone.value.trim();
     const birthValue = birth.value.trim();
-    
+    const genderValue = gender.value
+
     if(name1Value === ''){
         // show error
         // add error class
@@ -88,10 +90,48 @@ function checkInputs(){
     
     if(name1Value !=='' && name2Value !== '' && passwordValue !== '' && password2Value !== '' &&
         emailValue !== '' && phoneValue !== '' && birthValue !== ''){
-            linkToLoginPage();
+        if(signUp(name2Value+name1Value,emailValue,phoneValue,password2Value,birthValue,genderValue)){
+            swal("Sign Up Success", "Please go to login page", "success");
+            setTimeout(function(){window.location.href='signin.html'}, 1000);
+        }
+        else{
+            swal("User existed", "Please register using other email and phone number", "error");
+        }
     }
 }
 
+function signUp(name,email,phone,password,dob,gender){
+    const users=JSON.parse(localStorage.getItem('users')||[]);
+    var new_user={
+        password:password,
+        status:'user',
+        name:name,
+        email:email,
+        phone:phone,
+        gender:gender,
+        dob:dob,
+        addressesArr:[]
+    }
+    var exist=false;
+    if(!checkExistUser(email,phone,users)){
+        users.push(new_user)
+        localStorage.setItem('users',JSON.stringify(users));
+        return true
+    }
+    else{
+        return false;
+    }
+    
+}
+
+function checkExistUser(email,phone,users){
+    for(var user of users){
+        if(user['email']===email||user['phone']===phone){
+            return true;
+        }
+        return false;
+    }
+}
 
 function setErrorFor(input, message){
     const col_md_3 = input.parentElement; //col-md-3

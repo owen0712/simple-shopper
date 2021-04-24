@@ -10,6 +10,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../style/signUp.css" rel="stylesheet">
 
+    <!-- sweetalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <style>
         select {
           font-family: 'FontAwesome', 'sans-serif';
@@ -130,7 +133,7 @@
         <div class="form-row" style="margin-left: auto; margin-bottom: 30px; justify-content: center;" >
             <input type="date" id="birthdaytime" name="birthdaytime" 
             style="padding-right: auto; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; color:#aaa; border: none; outline: none; height:45px;">
-            <select class="custom-select custom-select-sm" style="width: 150px; margin-left:60px; height:45px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
+            <select class="custom-select custom-select-sm" id='gender' style="width: 150px; margin-left:60px; height:45px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
                 <option value="Male" id ="male">&#xf183;&nbsp;&nbsp;Male</option>
                 <option value="Female" id ="female">&#xf182;&nbsp;&nbsp;Female</option>
             </select>
