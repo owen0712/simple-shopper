@@ -155,66 +155,66 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
         e = a.attr("step");
     b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d || (d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(this).is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d && b <= d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
 });
-// When the user scrolls the page, execute myFunction
-window.onscroll = function() { myFunction() };
+// // When the user scrolls the page, execute myFunction
+// window.onscroll = function() { myFunction() };
 
-// Get the header
-var header = document.getElementById("fixedScreen");
+// // Get the header
+// var header = document.getElementById("fixedScreen");
 
-// Get the offset position of the navbar
-var sticky = header.offsetTop;
+// // Get the offset position of the navbar
+// var sticky = header.offsetTop;
 
-// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-    if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-    } else {
-        header.classList.remove("sticky");
-    }
-}
-$(document).ready(function() {
-    var mokData = [
-        { category: "Material", id: '1', name: 'Brakedown of machine' },
-        { category: "Material", id: '2', name: 'Brakedown of machine' },
-        { category: "Tool", id: '3', name: 'Brakedown of machine' },
-        { category: "Tool", id: '4', name: 'Brakedown of line' },
-        { category: "Tool", id: '5', name: 'Brakedown of machine' },
-        { category: "Tool", id: '6', name: 'Brakedown of line' },
-        { category: "Tool", id: '7', name: 'Brakedown of machine' },
-        { category: "Tool", id: '8', name: 'Brakedown of line' }
-    ];
-    /*<img src="Paper product/Paper Product-9.jpg" class="card-img-top" alt="Wax Paper" height="auto" width="auto">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Reynolds</h5>
-                                            <p class="card-text">Reynolds Wax Paper Sandwich Bag 50pcs</p>
-                                            <p style="font-size: small; float: right;"> RM 6.99/each</p>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="quantity buttons_added" style="float: left;">
-                                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                                                    value="+" class="plus">
-                                            </div>
-                                            <button type="button" class="btn btn-success" style="float: right;">Add to cart</button>
-                                        </div>*/
+// // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+// function myFunction() {
+//     if (window.pageYOffset > sticky) {
+//         header.classList.add("sticky");
+//     } else {
+//         header.classList.remove("sticky");
+//     }
+// }
+// $(document).ready(function() {
+//     var mokData = [
+//         { category: "Material", id: '1', name: 'Brakedown of machine' },
+//         { category: "Material", id: '2', name: 'Brakedown of machine' },
+//         { category: "Tool", id: '3', name: 'Brakedown of machine' },
+//         { category: "Tool", id: '4', name: 'Brakedown of line' },
+//         { category: "Tool", id: '5', name: 'Brakedown of machine' },
+//         { category: "Tool", id: '6', name: 'Brakedown of line' },
+//         { category: "Tool", id: '7', name: 'Brakedown of machine' },
+//         { category: "Tool", id: '8', name: 'Brakedown of line' }
+//     ];
+//     /*<img src="Paper product/Paper Product-9.jpg" class="card-img-top" alt="Wax Paper" height="auto" width="auto">
+//                                         <div class="card-body">
+//                                             <h5 class="card-title">Reynolds</h5>
+//                                             <p class="card-text">Reynolds Wax Paper Sandwich Bag 50pcs</p>
+//                                             <p style="font-size: small; float: right;"> RM 6.99/each</p>
+//                                         </div>
+//                                         <div class="card-body">
+//                                             <div class="quantity buttons_added" style="float: left;">
+//                                                 <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+//                                                     value="+" class="plus">
+//                                             </div>
+//                                             <button type="button" class="btn btn-success" style="float: right;">Add to cart</button>
+//                                         </div>*/
 
-    $.each(mokData, function(i) {
+//     $.each(mokData, function(i) {
 
-        //var templateString = '<article class="card"><h2>' + mokData[i].category + '</h2><p>' + mokData[i].name + '</p><p>' + mokData[i].id + '</p><button id="tes">Start</button></article>';
-        //$('#test12').append(templateString);
+//         //var templateString = '<article class="card"><h2>' + mokData[i].category + '</h2><p>' + mokData[i].name + '</p><p>' + mokData[i].id + '</p><button id="tes">Start</button></article>';
+//         //$('#test12').append(templateString);
 
-    })
+//     })
 
-    for (var i = 0; i < 3; i++) {
+//     for (var i = 0; i < 3; i++) {
 
-        for (j = 0; j < 4; j++) {
-            var templateString = '<div class="card"><img src="Paper product/Paper Product-9.jpg" class="card-img-top" alt="Wax Paper" height="auto" width="auto"> <div class="card-body"> <h5 class="card-title">Reynolds</h5><p class="card-text">Reynolds Wax Paper Sandwich Bag 50pcs</p><p style="font-size: small; float: right;"> RM 6.99/each</p></div><div class="card-body"><div class="quantity buttons_added" style="float: left;"><input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"value="+" class="plus"></div><button type="button" class="btn btn-success" style="float: right;">Add to cart</button></div></div>';
-            $('#test12').append(templateString + '&nbsp');
-        }
+//         for (j = 0; j < 4; j++) {
+//             var templateString = '<div class="card"><img src="Paper product/Paper Product-9.jpg" class="card-img-top" alt="Wax Paper" height="auto" width="auto"> <div class="card-body"> <h5 class="card-title">Reynolds</h5><p class="card-text">Reynolds Wax Paper Sandwich Bag 50pcs</p><p style="font-size: small; float: right;"> RM 6.99/each</p></div><div class="card-body"><div class="quantity buttons_added" style="float: left;"><input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"value="+" class="plus"></div><button type="button" class="btn btn-success" style="float: right;">Add to cart</button></div></div>';
+//             $('#test12').append(templateString + '&nbsp');
+//         }
 
-    }
+//     }
 
-    $("#test12");
-});
+//     $("#test12");
+// });
 
 // list functionality
 
