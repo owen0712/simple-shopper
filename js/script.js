@@ -16,6 +16,7 @@ for (var i = 0; i < editorlist.length; i++) {
     ev.target.style.backgroundColor = "red";
 }*/
 
+
 function toggleEditor(ev) {
     var subject = ev.target.innerHTML;
     ev.target.nextElementSibling.children[0].value = subject;
@@ -69,7 +70,16 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
 
 var list = ["Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
 
+var addList = document.getElementById("myInput");
+addList.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        newElement();
+    }
+});
+
 function newElement() {
+
     if (list.length == 10) {
         $("#accordionExample").children().remove();
     }
@@ -96,7 +106,7 @@ function newElement() {
         let markup = `        
         <div class="accordion-item">
             <h2 class="accordion-header" id="heading${number}">
-                <button class="accordion-button collapsed" style="background-color: lightblue;" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${number}" aria-expanded="false" aria-controls="collapse${number}">
+                <button class="accordion-button collapsed accordion-item-list" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${number}" aria-expanded="false" aria-controls="collapse${number}">
                     <p type="button" class="btn btn-outline-danger deleteList" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-trash-fill" viewBox="0 0 16 16">                                
                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
