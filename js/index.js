@@ -2,51 +2,95 @@ AOS.init();
 window.load=doShowAll();
 window.onload=search();
 
-const ele = document.getElementsByClassName('side-scroll');
-ele.scrollTop = 100;
-ele.scrollLeft = 150;
+document.addEventListener('DOMContentLoaded', function() {
+    const ele = document.getElementById('side-scroll');
+    ele.style.cursor = 'grab';
 
-let pos = { top: 0, left: 0, x: 0, y: 0 };
+    let pos = { top: 0, left: 0, x: 0, y: 0 };
 
-const mouseMoveHandler = function(e) {
-    // How far the mouse has been moved
-    const dx = e.clientX - pos.x;
-    const dy = e.clientY - pos.y;
+    const mouseDownHandler = function(e) {
+        ele.style.cursor = 'grabbing';
+        ele.style.userSelect = 'none';
 
-    // Scroll the element
-    ele.scrollTop = pos.top - dy;
-    ele.scrollLeft = pos.left - dx;
-};
+        pos = {
+            left: ele.scrollLeft,
+            top: ele.scrollTop,
+            // Get the current mouse position
+            x: e.clientX,
+            y: e.clientY,
+        };
+
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+    };
+
+    const mouseMoveHandler = function(e) {
+        // How far the mouse has been moved
+        const dx = e.clientX - pos.x;
+        const dy = e.clientY - pos.y;
+
+        // Scroll the element
+        ele.scrollTop = pos.top - dy;
+        ele.scrollLeft = pos.left - dx;
+    };
+
+    const mouseUpHandler = function() {
+        ele.style.cursor = 'grab';
+        ele.style.removeProperty('user-select');
+
+        document.removeEventListener('mousemove', mouseMoveHandler);
+        document.removeEventListener('mouseup', mouseUpHandler);
+    };
+
+    // Attach the handler
+    ele.addEventListener('mousedown', mouseDownHandler);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const ele = document.getElementById('side-scroll2');
+    ele.style.cursor = 'grab';
+
+    let pos = { top: 0, left: 0, x: 0, y: 0 };
+
+    const mouseDownHandler = function(e) {
+        ele.style.cursor = 'grabbing';
+        ele.style.userSelect = 'none';
+
+        pos = {
+            left: ele.scrollLeft,
+            top: ele.scrollTop,
+            // Get the current mouse position
+            x: e.clientX,
+            y: e.clientY,
+        };
+
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+    };
+
+    const mouseMoveHandler = function(e) {
+        // How far the mouse has been moved
+        const dx = e.clientX - pos.x;
+        const dy = e.clientY - pos.y;
+
+        // Scroll the element
+        ele.scrollTop = pos.top - dy;
+        ele.scrollLeft = pos.left - dx;
+    };
+
+    const mouseUpHandler = function() {
+        ele.style.cursor = 'grab';
+        ele.style.removeProperty('user-select');
+
+        document.removeEventListener('mousemove', mouseMoveHandler);
+        document.removeEventListener('mouseup', mouseUpHandler);
+    };
+
+    // Attach the handler
+    ele.addEventListener('mousedown', mouseDownHandler);
+});
 
 //search function
-
-// document.getElementById("searchButton").addEventListener("click", function() {
-//     var input, filter,shopctg, card, target, txtValue, ctgvalue;
-//     input = document.getElementById("search");
-//     filter = input.value.toUpperCase();
-//     shopctg = document.getElementsByClassName("shopctg");
-//     for(var i = 0;i<shopctg.length;i++)
-//     {
-//         card = shopctg[i].getElementsByClassName("card");
-//         ctgvalue = 0;
-//         for(var j = 0;j<card.length;j++)
-//         {
-//             target = card[j].getElementsByClassName("card-title")[0];
-//             txtValue = target.textContent || target.innerText;
-//             if(txtValue.toUpperCase().indexOf(filter)>-1)
-//             {
-//                 card[j].style.display = "";
-//             }else{
-//                 card[j].style.display = "none";
-//                 ctgvalue++;
-//             }
-//         }
-//         if(ctgvalue == card.length)
-//         {
-//             shopctg[i].style.display = "none";
-//         }else{shopctg[i].style.display = "";}
-//     }
-// });
 
 
 function search(){
