@@ -140,7 +140,7 @@
   .i_check i{
     position: absolute;
     top: 55px;
-    right: 50px;
+    right: 40px;
     visibility:hidden;
   }
 
@@ -185,9 +185,9 @@
 
 .i_check2 i{
   position:absolute;
-  right: 46px;
+  right: 36px;
   top: 10px;
-  visibility:hidden;
+  visibility:visible;
 }
 
 .i_check2 small{
@@ -230,6 +230,6 @@
 .eye{
   position: absolute;
   top: 55px;
-  right: 22px;
-  color:#aaa;
+  right: 20px;
+  color:rgb(0, 0, 0);
 }
