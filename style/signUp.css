@@ -39,7 +39,7 @@
     background-color: #f0f0f0;
     height: 50px;
     border-radius: 20px;
-    padding: 0 0.2rem;
+    padding: 0 0.4rem;
     position:relative;
     outline: none;
     border: none;
@@ -140,7 +140,7 @@
   .i_check i{
     position: absolute;
     top: 55px;
-    right: 10px;
+    right: 50px;
     visibility:hidden;
   }
 
@@ -217,4 +217,19 @@
   border-radius: 6px;
   border-color: rgb(38, 126, 209);
   transition-duration: 0.4s;
+}
+
+#hide1{
+  display: none;
+}
+
+#hide3{
+  display: none;
+}
+
+.eye{
+  position: absolute;
+  top: 55px;
+  right: 22px;
+  color:#aaa;
 }

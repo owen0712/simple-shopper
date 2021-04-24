@@ -92,6 +92,10 @@
            <div class="col-md-3 mb-3" >
             <label style="margin-top: 10px;">Password*</label>
              <input type="password" class="form-type"  placeholder= "Minumum 8 characters" id="password" >
+             <span class="eye" onclick="myFunction()">
+              <i id = "hide1" class="bi bi-eye-fill"></i>
+              <i id = "hide2" class="bi bi-eye-slash-fill"></i>
+             </span>
              <div class = "i_check">
               <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
               <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
@@ -103,6 +107,10 @@
           <div class="col-md-3 mb-3">
             <label style="margin-top: 10px;">Confirm Password*</label>
             <input type="password" class="form-type" placeholder= "Confirm your password" id = "password2" >
+            <span class="eye" onclick="myFunction2()">
+              <i id = "hide3" class="bi bi-eye-fill"></i>
+              <i id = "hide4" class="bi bi-eye-slash-fill"></i>
+            </span>
             <div class = "i_check">
               <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
               <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
@@ -230,8 +238,45 @@
         today = yyyy + '-' + mm + '-' + dd;
         var temp = document.querySelector("#birthdaytime");
         temp.setAttribute("value", today);
-
     </script>
+    <script>
+        function myFunction(){
+           var x = document.getElementById("password")
+           var y = document.getElementById("hide1")
+           var z = document.getElementById("hide2")
+          
+           if(x.type === 'password'){
+                 x.type = "text";
+                 y.style.display = "block";
+                 z.style.display = "none";
+             }
+             else{
+               x.type = "password";
+               y.style.display = "none";
+               z.style.display = "block";
+             }
+        }
+      </script>
+      
+      <script>
+          function myFunction2(){
+            var x = document.getElementById("password2")
+            var y = document.getElementById("hide3")
+            var z = document.getElementById("hide4")
+              
+            if(x.type === 'password'){
+                  x.type = "text";
+                  y.style.display = "block";
+                  z.style.display = "none";
+              }
+              else{
+                x.type = "password";
+                y.style.display = "none";
+                z.style.display = "block";
+              }
+            }
+      </script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </body>
