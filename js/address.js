@@ -3,16 +3,7 @@ const title=document.querySelector('#title');
 var editing=0;
 var editing_address=null;
 
-var addressesArr=[{
-    id:1,
-    name:'Sim Ple Kid',
-    phone:'0123456789',
-    postal_code:'50603',
-    state:'Kuala Lumpur',
-    area:'Wilayah Persekutuan',
-    description:'Universiti Malaya,Jalan University',
-    default_checked:true
-}];
+var addressesArr=JSON.parse(localStorage.getItem('user'))['addressesArr'];
 
 function showForm(){
     addressForm.style.display='flex';
@@ -72,15 +63,16 @@ function addNewAddress(n_id,n_name,n_phone,n_postal_code,n_state,n_area,n_descri
                 element['default_checked']=false;
             }
         }
-        for(attr in element){
-            //got bug for duplicate address with different id
-            if(element[attr]===new_address[attr]){
-                exist=true;
-            }
-            else{
-                exist=false;
-                break;
-            }
+        if(element['name']===n_name&&
+        element['phone']===n_phone&&
+        element['postal_code']===n_postal_code&&
+        element['state']===n_state&&
+        element['description']===n_description
+        ){
+            exist=true;
+        }
+        else{
+            exist=false;
         }
     })
     if(!exist){addressesArr.push(new_address);}
