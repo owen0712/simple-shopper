@@ -7,15 +7,6 @@ for (var i = 0; i < thetextlist.length; i++) {
 for (var i = 0; i < editorlist.length; i++) {
     editorlist[i].children[1].addEventListener('click', doEdit);
 }
-/*for (var i = 0; i < removeitem.length; i++) {
-    removeitem[i].addEventListener('click', removeFromCart);
-}
-
-/*function myFunction(ev) {
-    console.log(ev.target.tagName);
-    ev.target.style.backgroundColor = "red";
-}*/
-
 
 function toggleEditor(ev) {
     var subject = ev.target.innerHTML;
@@ -37,8 +28,11 @@ function doEdit(ev) {
     if (subject == ev.target.parentElement.previousElementSibling.textContent)
         accept = true;
     if (!accept) {
-        alert("Shopping List Name" + subject + " is duplicate. Please reenter.");
+        swal("Shopping List Name" + subject + " is duplicate. Please reenter.");
     } else {
+        swal("The list name is successfully edited!", {
+            icon: "success",
+        });
         ev.target.parentElement.previousElementSibling.innerHTML = subject;
         ev.target.parentElement.previousElementSibling.style.display = 'inline';
         ev.target.parentElement.style.display = 'none';
@@ -84,7 +78,7 @@ function newElement() {
         $("#accordionExample").children().remove();
     }
     if (list[0] == null) {
-        alert("You can have only have maximum 10 list.");
+        swal("You can have only have maximum 10 list.");
         return;
     }
 
@@ -97,9 +91,9 @@ function newElement() {
         }
     }
     if (inputValue === '') {
-        alert("You must write something!");
+        swal("You must write something!");
     } else if (!accept) {
-        alert("Shopping List Name is duplicated, please reenter");
+        swal("\"" + inputValue + "\" is duplicated, please reenter!");
         return;
     } else {
         var number = list.pop(0);
@@ -130,6 +124,11 @@ function newElement() {
             </div>
         </div><br>`;
         $("#accordionExample").append(markup);
+        swal({
+            title: "Added Succesfully",
+            text: "\"" + inputValue + "\" is added succesfully.",
+            icon: "success",
+        });
         thetextlist = document.getElementsByClassName("thetext");
         editorlist = document.getElementsByClassName("editor");
         thetextlist[thetextlist.length - 1].addEventListener('dblclick', toggleEditor);
@@ -152,36 +151,63 @@ function addListId(targetId) {
 }
 
 $('body').on('click', '.deleteList', function() {
-    var decision = confirm("Are you sure you want to delete the entire \"" + $(this).next().text() + "\" list?");
-    if (decision == false)
-        return;
-    let parent = $(this).parent().parent().parent().parent();
-    addListId($(this).parent().parent().attr("id"));
-    $(this).parent().parent().parent().next().remove();
-    $(this).parent().parent().parent().remove();
-    if (list.length == 10) {
-        parent.append(`<h1 class="text-center">Create a new list and manage it.</h1>`);
-    }
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, \"" + $(this).next().text() + "\" will not able to be recovered!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("Your \"" + $(this).next().text() + "\" list has been deleted!", {
+                    icon: "success",
+                });
+                let parent = $(this).parent().parent().parent().parent();
+                addListId($(this).parent().parent().attr("id"));
+                $(this).parent().parent().parent().next().remove();
+                $(this).parent().parent().parent().remove();
+                if (list.length == 10) {
+                    parent.append(`<h1 class="text-center">Create a new list and manage it.</h1>`);
+                }
+            } else {
+                return;
+            }
+        });
+
 });
 
 $('main').on('click', '.remove', function() {
-    var decision = confirm("Are you sure you want to delete this item?");
-    if (decision == false)
-        return;
-
-    let grandParent = $(this).parent().parent().parent().parent().parent().parent();
-    let parentRow = $(this).parent().parent().parent().parent();
-    let PreviousRow = $(this).parent().parent().parent().parent().prev();
-    let priceText = parentRow.children().last().text();
-    let price = parseFloat(priceText.substr(3, priceText.length - 1)) * -1;
-    calculate(grandParent.parent(), price);
-    parentRow.remove();
-    if (PreviousRow.parent().children().length == 1) {
-        PreviousRow.parent().parent().next().remove();
-        PreviousRow.parent().remove();
-        grandParent.append(`<h3 class="text-center"> It is an Empty Shopping List </h3>
+    swal({
+            title: "Are you sure?",
+            text: "Are you sure you want to delete this item?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("The item has been deleted!", {
+                    icon: "success",
+                });
+                let grandParent = $(this).parent().parent().parent().parent().parent().parent();
+                let parentRow = $(this).parent().parent().parent().parent();
+                let PreviousRow = $(this).parent().parent().parent().parent().prev();
+                let priceText = parentRow.children().last().text();
+                let price = parseFloat(priceText.substr(3, priceText.length - 1)) * -1;
+                calculate(grandParent.parent(), price);
+                parentRow.remove();
+                if (PreviousRow.parent().children().length == 1) {
+                    PreviousRow.parent().parent().next().remove();
+                    PreviousRow.parent().remove();
+                    grandParent.append(`<h3 class="text-center"> It is an Empty Shopping List </h3>
         <p class="text-muted text-center">Add item from <a class="backIndex" style="text-decoration:none;" href="./index.html"> HOME</a> page.</p>`);
-    }
+                }
+            } else {
+                return;
+            }
+        });
+
 });
 
 $('main').on('change', '.qty', function() {
@@ -228,8 +254,3 @@ function calculate(parent, price) {
     var total = parseFloat(totalText.substr(3, totalText.length - 1));
     totalTag.html("RM " + (price + total).toFixed(2));
 }
-
-/*
-function removeFromCart(ev) {
-    ev.target.parentElement.parentElement.parentElement.parentElement.remove;
-}*/

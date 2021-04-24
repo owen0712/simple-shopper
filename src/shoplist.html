@@ -13,9 +13,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="../style/design.css">
-    <link href="../style/signUp.css" rel="stylesheet">
-    <link href="../style/signin.css" rel="stylesheet">
+    <link href="../style/footer.css" rel="stylesheet">
 
     <title>Simple Shopper | Grocery </title>
 
@@ -26,17 +26,23 @@
             <span class="navbar-toggler-icon"></span>            
         </button>
         <!----a class="nav-link" href="../src/index.html" style="color: white;"----->
-        <img src="../assets/Logo/SSLogo2-outlined.png" height="50mm"></a>
+        <a class="nav-link" href="../src/index.html"><img src="../assets/Logo/SSLogo2.png" height="50mm"></a>
+        <div class="col mr-auto px-0">
+            <a class="nav-link" href="../src/index.html"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+              </svg></a>
+        </div>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="/src/administrator.html">Administrator</a>
+                    <a class="nav-link" href="../src/administrator.html">Administrator</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="#">Sign Up</a>
+                    <a class="nav-link" href="../src/sign.html">Sign Up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="#">Log in</a>
+                    <a class="nav-link" href="../src/signin.html">Log in</a>
                 </li>
             </ul>
         </div>
@@ -50,7 +56,7 @@
             My Shopping List
         </h2>
         <input onsubmit="newElement()" type="text" id="myInput" placeholder="New Shopping List...">
-        <span onclick="newElement()" class="addBtn btn" style="background-color: #364f6b; color: white; ">Add</span>
+        <span onclick="newElement()" class="addBtn btn">Add</span>
     </div>
     <main class="container" style="margin-top: 50px; margin-bottom: 50px;">
         <div class="accordion" id="accordionExample">
@@ -66,9 +72,8 @@
                     <h6 class="thetext" >Shopping List 1</h6>
                         <div class="editor">
                             <input class="ta1" name="ta1" style="margin-bottom: 5px; border-radius: 3px; width:150px;">
-                            <input style="padding: none;" name="submit" id="submit" type="button" value="Edit List Name"  />
+                            <input style="padding: none;" name="submit" id="submit" type="button" value="Edit"  />
                         </div>
-
                         </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -77,13 +82,13 @@
                             <table>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Quantity</th>
+                                    <th style="padding-left: 29px;">Quantity</th>
                                     <th>Subtotal</th>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Beverage-1" src="../assets/Image/Beverage/Beverage-1.jpg">
+                                            <img id="Beverage-1" src="../assets/Image/Beverage/Beverage-1.png">
                                             <div>
                                                 <p>Coca-Cola Original 235ml</p>
                                                 <small>Price: 2.99</small>
@@ -103,7 +108,7 @@
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Beverage-2" src="../assets/Image/Beverage/Beverage-2.jpg">
+                                            <img id="Beverage-2" src="../assets/Image/Beverage/Beverage-2.png">
                                             <div>
                                                 <p>100-plus Original 235ml</p>
                                                 <small>Price: 2.99</small>
@@ -123,7 +128,7 @@
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Beverage-3" src="../assets/Image/Beverage/Beverage-3.jpg">
+                                            <img id="Beverage-3" src="../assets/Image/Beverage/Beverage-3.png">
                                             <div>
                                                 <p>7-up Original 235ml</p>
                                                 <small>Price: 2.99</small>
@@ -165,7 +170,7 @@
                         <h6 class="thetext" >Shopping List 2</h6>
                         <div class="editor">
                             <input class="ta1" name="ta1" style="margin-bottom: 5px; border-radius: 3px; width:150px;">
-                            <input style="padding: none;" name="submit" id="submit" type="button" value="Edit List Name"  />
+                            <input style="padding: none;" name="submit" id="submit" type="button" value="Edit"  />
                         </div>
                 </button>
                 </h2>
@@ -175,13 +180,13 @@
                             <table>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Quantity</th>
+                                    <th style="padding-left: 29px;">Quantity</th>
                                     <th>Subtotal</th>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Paper_Product-1" src="../assets/Image/Paper product/Paper Product-1.jfif">
+                                            <img id="Paper_Product-1" src="../assets/Image/Paper Product/Paper_Product-1.png">
                                             <div>
                                                 <p>Premier Facial Soft Box Tissue 2ply x 100pcs</p>
                                                 <small>Price: 2.99</small>
@@ -201,7 +206,7 @@
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Papar_Produxt-2" src="../assets/Image/Paper product/Paper Product-2.jfif">
+                                            <img id="Papar_Produxt-2" src="../assets/Image/Paper Product/Paper_Product-2.png">
                                             <div>
                                                 <p>Premier Wet Tissue 50pcs</p>
                                                 <small>Price: 6.99</small>
@@ -221,7 +226,7 @@
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Paper_Product-3" src="../assets/Image/Paper product/Paper Product-3.jfif">
+                                            <img id="Paper_Product-3" src="../assets/Image/Paper Product/Paper_Product-3.png">
                                             <div>
                                                 <p>Compact toilet paper 10 rolls</p>
                                                 <small>Price: 14.99</small>
@@ -241,7 +246,7 @@
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Paper_Product-4" src="../assets/Image/Paper product/Paper Product-4.jfif">
+                                            <img id="Paper_Product-4" src="../assets/Image/Paper Product/Paper_Product-4.png">
                                             <div>
                                                 <p>Scott Kitchen Paper Towel 2Rolls x60s</p>
                                                 <small>Price: 5.80</small>
@@ -282,7 +287,7 @@
                         <h6 class="thetext" style="color:black;" >Shopping List 3</h6>
                         <div class="editor">
                             <input class="ta1" name="ta1" style="margin-bottom: 5px; border-radius: 3px; width:150px;">
-                            <input style="padding: none;" name="submit" id="submit" type="button" value="Edit List Name"  />
+                            <input style="padding: none;" name="submit" id="submit" type="button" value="Edit"  />
                         </div>
                 </button>
                 </h2>
@@ -292,16 +297,16 @@
                             <table>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Quantity</th>
+                                    <th style="padding-left: 29px;">Quantity</th>
                                     <th>Subtotal</th>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Beverage-1" src="../assets/Image/Beverage/Beverage-1.jpg">
+                                            <img id="Baby-6" src="../assets/Image/Baby/baby-6.png">
                                             <div>
-                                                <p>Coca-Cola Original 235ml</p>
-                                                <small>Price: 2.99</small>
+                                                <p>Koopers Pago Red Car Seat</p>
+                                                <small>Price: 499.00</small>
                                                 <br>
                                                 <a type="button" class="remove">Remove</a>
                                             </div>
@@ -313,15 +318,15 @@
                                                 value="+" class="plus">
                                         </div>
                                     </td>
-                                    <td>RM 2.99</td>
+                                    <td>RM 499.00</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Beverage-2" src="../assets/Image/Beverage/Beverage-2.jpg">
+                                            <img id="Baby-8" src="../assets/Image/Baby/baby-8.png">
                                             <div>
-                                                <p>100-plus Original 235ml</p>
-                                                <small>Price: 2.99</small>
+                                                <p>Mam Premium Glass Bottle (9OZ) Single Pack</p>
+                                                <small>Price: 79.10</small>
                                                 <br>
                                                 <a type="button" class="remove">Remove</a>
                                             </div>
@@ -333,15 +338,15 @@
                                                 value="+" class="plus">
                                         </div>
                                     </td>
-                                    <td>RM 2.99</td>
+                                    <td>RM 79.10</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img id="Beverage-3" src="../assets/Image/Beverage/Beverage-3.jpg">
+                                            <img id="Baby-9" src="../assets/Image/Baby/baby-9.png">
                                             <div>
-                                                <p>7-up Original 235ml</p>
-                                                <small>Price: 2.99</small>
+                                                <p>Sweetheart Paris BW1001 – Orange</p>
+                                                <small>Price: 229.00</small>
                                                 <br>
                                                 <a type="button" class="remove">Remove</a>
                                             </div>
@@ -353,13 +358,13 @@
                                                 value="+" class="plus">
                                         </div>
                                     </td>
-                                    <td>RM 2.99</td>
+                                    <td>RM 229.00</td>
                                 </tr>
                             </table>
                             <div class="total-price">
                                 <table>
                                     <td>Total</td>
-                                    <td class="totalItemPrice">RM 8.97</td>
+                                    <td class="totalItemPrice">RM 807.10</td>
                                 </table>
                             </div>
                         </div>
@@ -370,22 +375,22 @@
         </div>
     </main>
 
-    <div class="footer" style="background-color: #364f6b">
+    <div class="footer">
         <div class="container">
             <div class="row">
                 <div class="footer-col-1">
                     <h4>Download Our App</h4>
                     <p>Download App for Android and ios mobile phone.</p>
                     <div class="app-logo">
-                        <img src="../testing/sign-in/img/play-store.png">
-                        <img src="../testing/sign-in/img/app-store.png">
+                        <img src="../assets/footer/play-store.png">
+                        <img src="../assets/footer/app-store.png">
                     </div>
                 </div>
                 <div class="footer-col-2">
                     <h4>Payment</h4>
-                    <img src="../testing/sign-in/img/Visa+Brand+Mark+-+Blue+-+900x291.jpg">
-                    <img src="../testing/sign-in/img/300px-Mastercard_2019_logo.svg.png" style="background-color: white;">
-                    <img src="../testing/sign-in/img/FPX-Logo-1.png" style="background-color: white;">
+                    <img src="../assets/footer/Visa+Brand+Mark+-+Blue+-+900x291.jpg">
+                    <img src="../assets/footer/300px-Mastercard_2019_logo.svg.png" style="background-color: white;">
+                    <img src="../assets/footer/FPX-Logo-1.png" style="background-color: white;">
                     <br>
                     <h4 style="margin-top: 20px;">Contact Us</h4>
                     <ul>
