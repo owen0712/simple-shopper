@@ -7,6 +7,7 @@
     <title>Simple Shopper Administrator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/administrator.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 </head>
 <body>
@@ -23,10 +24,10 @@
                               <a class="nav-link" href="../src/index.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../sign-in/sign.html">Sign Up</a>
+                                <a class="nav-link" href="../src/sign.html">Sign Up</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../sign-in/index.html">Log in</a>
+                                <a class="nav-link" href="../src/signin.html">Log in</a>
                             </li>
                         </ul>
                     </div>
@@ -38,34 +39,42 @@
               <div class="col col-auto">
                 <a class="navbar-brand" href="#"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
               </div>
+              <div class="col col-auto">
+                <a class="nav-link" href="../src/administrator.html"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                  </svg></a>
+              </div>
               <div class="col col-6 collapse navbar-collapse" id="navbarSupportedContent">
                 <ul>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle btn-lg" href="#" id="navbarDropdown" role="Button" data-toggle="dropdown">Product List</a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="../src/administrator.html">Bath and Body</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('All')">All</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../src/instantFood.html">Instant Food</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Bath and Body')">Bath and Body</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../src/cannedFood.html">Canned&Packed Food</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Instant Food')">Instant Food</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../src/baby.html">Baby Product</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Canned&Packed Food')">Canned&Packed Food</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Household Supply</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Baby Product')">Baby Product</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Pet</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Household Supply')">Household Supply</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Cooking Ingredient</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Pet')">Pet</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Cereal</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Cooking Ingredient')">Cooking Ingredient</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Baking Supplies</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Cereal')">Cereal</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Snack</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Baking Supplies')">Baking Supplies</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Beverage</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Snack')">Snack</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Paper Product</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Beverage')">Beverage</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Paper Product')">Paper Product</a>
                       </div>
                     </li>
                   </ul>
@@ -73,7 +82,6 @@
             </div>
         </nav>
         <main class="container">
-            <h2>Bath and Body</h2>
             <table id="productTable" class="mb-4">
                 <thead>
                     <tr>
@@ -89,7 +97,7 @@
                 <tbody>
                     <tr>
                         <td><input type="checkbox" name="record"></td>
-                        <td><img src="../assets/Image/Bath/bath-1.jfif" alt="bath-1" height="100" width="100"></td>
+                        <td><img src="../assets/Image/Bath/bath-1.png" alt="bath-1" height="100" width="100"></td>
                         <td>Renew Repair Argan Oil of Morocco Shampoo 400ml</td>
                         <td>Bath and Body</td>
                         <td>10</td>
@@ -98,7 +106,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="record"></td>
-                        <td><img src="../assets/Image/Bath/bath-2.jfif" alt="bath-2" height="100" width="100"></td>
+                        <td><img src="../assets/Image/Bath/bath-2.png" alt="bath-2" height="100" width="100"></td>
                         <td>Rejoice Shampoo 900ml Rich Soft Smooth</td>
                         <td>Bath and Body</td>
                         <td>10</td>
@@ -107,7 +115,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="record"></td>
-                        <td><img src="../assets/Image/Bath/bath-3.jpg" alt="bath-3" height="100" width="100"></td>
+                        <td><img src="../assets/Image/Bath/bath-3.png" alt="bath-3" height="100" width="100"></td>
                         <td>Dove Nutritive Solutions Shampoo 680ml</td>
                         <td>Bath and Body</td>
                         <td>10</td>
@@ -116,7 +124,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="record"></td>
-                        <td><img src="../assets/Image/Bath/bath-4.jpg" alt="bath-4" height="100" width="100"></td>
+                        <td><img src="../assets/Image/Bath/bath-4.png" alt="bath-4" height="100" width="100"></td>
                         <td>Sunsilk Shampoo 650ml</td>
                         <td>Bath and Body</td>
                         <td>10</td>
@@ -125,7 +133,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="record"></td>
-                        <td><img src="../assets/Image/Bath/bath-5.jfif" alt="bath-5" height="100" width="100"></td>
+                        <td><img src="../assets/Image/Bath/bath-5.png" alt="bath-5" height="100" width="100"></td>
                         <td>Lifebuoy Total 10 Antibacterial Shower Gel 950ml</td>
                         <td>Bath and Body</td>
                         <td>10</td>
@@ -134,7 +142,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="record"></td>
-                        <td><img src="../assets/Image/Bath/bath-6.jfif" alt="bath-6" height="100" width="100"></td>
+                        <td><img src="../assets/Image/Bath/bath-6.png" alt="bath-6" height="100" width="100"></td>
                         <td>Shokubutsu Clean Fresh Shower Foam 650ml</td>
                         <td>Bath and Body</td>
                         <td>10</td>
@@ -152,7 +160,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="record"></td>
-                        <td><img src="../assets/Image/Bath/bath-8.jfif" alt="bath-8" height="100" width="100"></td>
+                        <td><img src="../assets/Image/Bath/bath-8.png" alt="bath-8" height="100" width="100"></td>
                         <td>Follow Me Green Tea Shampoo 6 in 1 650ml</td>
                         <td>Bath and Body</td>
                         <td>10</td>
@@ -161,7 +169,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="record"></td>
-                        <td><img src="../assets/Image/Bath/bath-9.jfif" alt="bath-9" height="100" width="100"></td>
+                        <td><img src="../assets/Image/Bath/bath-9.png" alt="bath-9" height="100" width="100"></td>
                         <td>Lux Shower Gel - Magical Spell 950ml</td>
                         <td>Bath and Body</td>
                         <td>10</td>
@@ -170,11 +178,1001 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="record"></td>
-                        <td><img src="../assets/Image/Bath/bath-10.jfif" alt="bath-10" height="100" width="100"></td>
+                        <td><img src="../assets/Image/Bath/bath-10.png" alt="bath-10" height="100" width="100"></td>
                         <td>Pantene Micellar Shampoo 500ml</td>
                         <td>Bath and Body</td>
                         <td>10</td>
                         <td>RM17.95</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-1.png" alt="instant-1" height="100" width="100"></td>
+                        <td>Mi Sedap Instant Noodle original flavour 5 packets x 91g</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM3.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-2.png" alt="instant-2" height="100" width="100"></td>
+                        <td>Mama Mee 5 packets x60G</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM5.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-3.png" alt="instant-3" height="100" width="100"></td>
+                        <td>Samyang Spicy Korean Ramen</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM19.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-4.png" alt="instant-4" height="100" width="100"></td>
+                        <td>Nongshim Shin Ramyun Korea Ramen 5 Pack</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM10.50</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-5.png" alt="instant-5" height="100" width="100"></td>
+                        <td>A1 Bak Kut Teh Mee (90g x 4packs)</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM7.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-6.png" alt="instant-6" height="100" width="100"></td>
+                        <td>Maggi curry flavour</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM4.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-7.png" alt="instant-7" height="100" width="100"></td>
+                        <td>Cintan Instant Noodles - Assorted Flavour (75g x 5's)</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM3.20</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-8.png" alt="instant-8" height="100" width="100"></td>
+                        <td>Mamee Chef Instant Noodle - Creamy Tom Yam Flavour (4 x 80g)</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM5.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-9.png" alt="instant-9" height="100" width="100"></td>
+                        <td>IndoMie Instant Fried Noodle 85g x5</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM4.85</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Instant/Instant-10.png" alt="instant-10" height="100" width="100"></td>
+                        <td>San Remo Dry Pasta - Spirals (500g)</td>
+                        <td>Instant Food</td>
+                        <td>10</td>
+                        <td>RM4.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned 1.png" alt="canned-1" height="100" width="100"></td>
+                        <td>Ayam Brand Sardines in Tomato Sauce 230g</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM5.70</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned-2.png" alt="canned-2" height="100" width="100"></td>
+                        <td>Ayam Brand Processed Peas 425g</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM3.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned-3.png" alt="canned-3" height="100" width="100"></td>
+                        <td>Ayam Brand Tuna Light Chunks in Olive Oil (150g)</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM6.85</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned-4.png" alt="canned-4" height="100" width="100"></td>
+                        <td>Ayam Brand Deli Spread Tuna 160g</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM6.40</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned-5.png" alt="canned-5" height="100" width="100"></td>
+                        <td>Yeos Kacang Panggang 425G</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM4.29</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned-6.png" alt="canned-6" height="100" width="100"></td>
+                        <td>Rex Curry Beef 160GM</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM4.49</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned-7.png" alt="canned-7" height="100" width="100"></td>
+                        <td>Pineapple Chunks in Syrup 425g</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM4.89</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned-8.png" alt="canned-8" height="100" width="100"></td>
+                        <td>Ayam Brand Mushrooms 420G</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM6.05</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned-9.png" alt="canned-9" height="100" width="100"></td>
+                        <td>Kimball Tomato Soup 425G</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM4.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Canned food/canned-10.png" alt="canned-10" height="100" width="100"></td>
+                        <td>Ayam Brand Coconut Milk</td>
+                        <td>Canned&Packed Food</td>
+                        <td>10</td>
+                        <td>RM2.79</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-1.png" alt="baby-1" height="100" width="100"></td>
+                        <td>Pureen Baby Bath with Vitamin E</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM15.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-2.png" alt="baby-2" height="100" width="100"></td>
+                        <td>Pureen Baby Oil with Vitamin E</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM11.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-3.png" alt="baby-3" height="100" width="100"></td>
+                        <td>Pureen Baby Cornstarch Powder</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM10.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-4.png" alt="baby-4" height="100" width="100"></td>
+                        <td>Joielle Baby Top To Toe (250ml)</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM27.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-5.png" alt="baby-5" height="100" width="100"></td>
+                        <td>Pureen Baby Napkin (Colourful)</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM20.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-6.png" alt="baby-6" height="100" width="100"></td>
+                        <td>Koopers Pago Red Car Seat</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM499.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-7.png" alt="baby-7" height="100" width="100"></td>
+                        <td>Pigeon Baby Wipes Water Base 30s x 2</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM13.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-8.png" alt="baby-8" height="100" width="100"></td>
+                        <td>Mam Premium Glass Bottle (9OZ) Single Pack</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM79.10</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-9.png" alt="baby-9" height="100" width="100"></td>
+                        <td>Sweetheart Paris BW1001 – Orange</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM229.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baby/baby-10.png" alt="baby-10" height="100" width="100"></td>
+                        <td>Teether and Rattles</td>
+                        <td>Baby Product</td>
+                        <td>10</td>
+                        <td>RM22.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-1.png" alt="household-1" height="100" width="100"></td>
+                        <td>Sunlight Dishwash Liquid Extra Nature 900ml</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM5.60</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-2.png" alt="household-2" height="100" width="100"></td>
+                        <td>scoot multi-purpose towel 8 rolls</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM11.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-3.png" alt="household-3" height="100" width="100"></td>
+                        <td>Wooden Fry Turner with hole(35cm)</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM9.60</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-4.png" alt="household-4" height="100" width="100"></td>
+                        <td>cs kochsysteme steak/ pizza knife set</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM42.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-5.png" alt="household-5" height="100" width="100"></td>
+                        <td>UHU glue 20ml</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM5.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-6.png" alt="household-6" height="100" width="100"></td>
+                        <td>Precision Scissors</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM17.50</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-7.png" alt="household-7" height="100" width="100"></td>
+                        <td>staples 1000pcs 1unit</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM0.29</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-8.png" alt="household-8" height="100" width="100"></td>
+                        <td>Faber-Caster Blue Ball Pen 0.5</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM3.60</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-9.png" alt="household-9" height="100" width="100"></td>
+                        <td>Faber-Caster Black Ball Pen 0.5</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM3.60</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Household supply/Household-10.png" alt="household-10" height="100" width="100"></td>
+                        <td>Eve Clear Transparent Tape 48mm x 40m</td>
+                        <td>Household Supply</td>
+                        <td>10</td>
+                        <td>RM3.44</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-1.png" alt="pet-1" height="100" width="100"></td>
+                        <td>Pedigree Adult Dog Lamb and Vegetables Flavored Dog Food 3kg</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM27.50</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-2.png" alt="pet-2" height="100" width="100"></td>
+                        <td>Whiskas Canned Tuna 400g</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM4.91</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-3.png" alt="pet-3" height="100" width="100"></td>
+                        <td>Whiskas Adult Cat Dry Food Tuna Flavour 480g</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM7.17</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-4.png" alt="pet-4" height="100" width="100"></td>
+                        <td>Cesar Chicken & Cheese 100g x 3</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM9.34</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-5.png" alt="pet-5" height="100" width="100"></td>
+                        <td>Catsan Clumping Cat Litter 5L</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM14.58</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-6.png" alt="pet-6" height="100" width="100"></td>
+                        <td>Sheba Tender Chicken and Fine Flakes Wet Food 85g</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM3.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-7.png" alt="pet-7" height="100" width="100"></td>
+                        <td>Cesar Beef Dog Food 100g</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM3.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-8.png" alt="pet-8" height="100" width="100"></td>
+                        <td>Kitty City Cozy Bed</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM128.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-9.png" alt="pet-9" height="100" width="100"></td>
+                        <td>Auto Food Water Dispenser</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM33.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Pet/pet-10.png" alt="pet-10" height="100" width="100"></td>
+                        <td>Foldable Cat Cage 2/3/4 Tier with Free Tier Cushion and Hammock - Instock Black or White</td>
+                        <td>Pet</td>
+                        <td>10</td>
+                        <td>RM75.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-1.png" alt="cs-1" height="100" width="100"></td>
+                        <td>Knife Cooking oil (5kg)</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM26.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-2.png" alt="cs-2" height="100" width="100"></td>
+                        <td>Naturel extra virgin olive oil (250ml)</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM13.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-3.png" alt="cs-3" height="100" width="100"></td>
+                        <td>Fine granulated sugar (1kg)</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM2.95</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-4.png" alt="cs-4" height="100" width="100"></td>
+                        <td>Lee Kum Kee selected light soy sauce (500ml)</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM6.25</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-5.png" alt="cs-5" height="100" width="100"></td>
+                        <td>Lee Kum Kee Panda brand Oyster sauce (770g)	</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM7.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-6.png" alt="cs-6" height="100" width="100"></td>
+                        <td>Ajinomoto (500g)</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM7.19</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-7.png" alt="cs-7" height="100" width="100"></td>
+                        <td>McCormick Paprika Smoked Ground (37g)</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM11.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-8.png" alt="cs-8" height="100" width="100"></td>
+                        <td>Cerebos Iodised Table Salt (700g)</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM10.10</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-9.png" alt="cs-9" height="100" width="100"></td>
+                        <td>Campbells Real Stock Chicken (500ml)</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM17.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Cooking supplies/CS-10.png" alt="cs-10" height="100" width="100"></td>
+                        <td>Gochujang (500g)</td>
+                        <td>Cooking Ingredient</td>
+                        <td>10</td>
+                        <td>RM20.50</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-1.png" alt="cereal-1" height="100" width="100"></td>
+                        <td>KokoKrunch (330g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM8.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-2.png" alt="cereal-2" height="100" width="100"></td>
+                        <td>Honey Stars (300g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM8.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-3.png" alt="cereal-3" height="100" width="100"></td>
+                        <td>Cookie Crisps (330g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM10.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-4.png" alt="cereal-4" height="100" width="100"></td>
+                        <td>Fitness cereal (fruits) (390g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM13.95</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-5.png" alt="cereal-5" height="100" width="100"></td>
+                        <td>Froot Loops (300g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM9.70</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-6.png" alt="cereal-6" height="100" width="100"></td>
+                        <td>Corn Flakes (275g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM6.56</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-7.png" alt="cereal-7" height="100" width="100"></td>
+                        <td>Special K (oats and honey) (375g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM12.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-8.png" alt="cereal-8" height="100" width="100"></td>
+                        <td>Honey Crunch (360g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM11.33</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-9.png" alt="cereal-9" height="100" width="100"></td>
+                        <td>Cheerios (272g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM21.50</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/cereal/Cereal-10.png" alt="cereal-10" height="100" width="100"></td>
+                        <td>Milo cereal (330g)</td>
+                        <td>Cereal</td>
+                        <td>10</td>
+                        <td>RM8.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-1.PNG" alt="baking-1" height="100" width="100"></td>
+                        <td>Non-stick High Quality Pizza Pan Baking Pan Round Bakeware Nonstick Round Pan Pizza Making Kitchen Supplies Pan Easy to Clean</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM25.12</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-2.PNG" alt="baking-2" height="100" width="100"></td>
+                        <td>Cake Decorating Supplies Cake Turntable Decorating Rotating Stand Revolving Stand Baking Tools</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM12.65</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-3.PNG" alt="baking-3" height="100" width="100"></td>
+                        <td>Local Ready Stock 52Pcs/set Bakeware Cake Decorating Supplies Cake Turntable Nozzle Cake Spatula Scraper Smoother Piping Bag</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM38.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-4.PNG" alt="baking-4" height="100" width="100"></td>
+                        <td>【CHEFMADE】Authorization HELLO KITTY DIY Silicone Donut/Cake Mold Baking Tools Learn Cooking Kitchen Supplies Bakeware</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM36.30</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-5.PNG" alt="baking-5" height="100" width="100"></td>
+                        <td>READY STOCK TWICELOVE 2pcs Adjustable Height Fondant Cream Cake Trowel Scraper Smoother Surface Baking Tool Bakeware</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM4.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-6.PNG" alt="baking-6" height="100" width="100"></td>
+                        <td>Kitchen Loaf Tin Cake Mold / Aluminum Alloy Rectangular Toast Bread mold / Bread Loaf Muffin Baking Mold DIY Bakeware Supplies</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM2.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-7.PNG" alt="baking-7" height="100" width="100"></td>
+                        <td>JULYFIDT 9 Inches Round Dish Deep Pizza Pan Non-stick Baking Pan Pizza Making Kitchen Supplies Bakeware Easy to Clean</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM7.12</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-8.PNG" alt="baking-8" height="100" width="100"></td>
+                        <td>4Pcs\/Set Stainless Steel Dinosaur Biscuit Cutter Pastry Fondant Cake Mould Diy Baking Tool Kitchen Supplies</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM3.66</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-9.PNG" alt="baking-9" height="100" width="100"></td>
+                        <td>home supplies 3Pcs/Pack Christmas Plastic Dough Icing Fondant Scraper Cake Decorating Pastry Baking Tools</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM2.26</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Baking supplies/baking supplies-10.PNG" alt="baking-10" height="100" width="100"></td>
+                        <td>READY STOCK TWICELOVE 3pcs Plastic Dough Icing Fondant Scraper Cake Decorating Baking Tool</td>
+                        <td>Baking Supplies</td>
+                        <td>10</td>
+                        <td>RM2.60</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-1.PNG" alt="snack-1" height="100" width="100"></td>
+                        <td>Ready Stock BUY 3 GET FREE GIFT Super Baiwei Yuanqi Mochi Strawberry Mango 180g</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM7.52</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-2.PNG" alt="snack-2" height="100" width="100"></td>
+                        <td>GPR Popcorn 280g Golden Caramel / Barbecue / Super Cheese / Chocolate Flavor</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM18.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-3.PNG" alt="snack-3" height="100" width="100"></td>
+                        <td>{RM0.38 / pc} Small twist snack packaged separately</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM0.38</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-4.PNG" alt="snack-4" height="100" width="100"></td>
+                        <td>Ready Stock WuZiWei Snacks Buy 3 free 1 (14g)</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM0.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-5.PNG" alt="snack-5" height="100" width="100"></td>
+                        <td>China Weilong Special Spicy Snacks</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM4.55</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-6.PNG" alt="snack-6" height="100" width="100"></td>
+                        <td>Thailand Lays Lay's Lay Potato Chips 46 - 52g Snack Keropok Kerepek Salted Egg Yolk Chips Halal</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM4.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-7.PNG" alt="snack-7" height="100" width="100"></td>
+                        <td>{RM 1.19 / pc} Fruity Banana Mango Durian Cheese Cake snacks</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM1.19</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-8.PNG" alt="snack-8" height="100" width="100"></td>
+                        <td>Munchy's Oat Krunch Biscuit (416g)</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM7.29</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-9.PNG" alt="snack-9" height="100" width="100"></td>
+                        <td>Haidilao Snack 20g</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM1.79</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Snack/snack-10.PNG" alt="snack-10" height="100" width="100"></td>
+                        <td>Yam Chip Famous Potato Chip</td>
+                        <td>Snack</td>
+                        <td>10</td>
+                        <td>RM5.50</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-1.png" alt="beverage-1" height="100" width="100"></td>
+                        <td>Coca-Cola Original 320ml</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM1.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-2.png" alt="beverage-2" height="100" width="100"></td>
+                        <td>100 plus Original 320ml</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM1.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-3.png" alt="beverage-3" height="100" width="100"></td>
+                        <td>7up Lemon & Lime Carbonated Drink 320ml	</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM1.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-4.png" alt="beverage-4" height="100" width="100"></td>
+                        <td>Tropicana Twister Orange Drink 350ml</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM2.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-5.png" alt="beverage-5" height="100" width="100"></td>
+                        <td>Nescafe Original 240ml</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM2.60</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-6.png" alt="beverage-6" height="100" width="100"></td>
+                        <td>Nestlé Milo Chocolate Malt Drink 200ml</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM2.00</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-7.png" alt="beverage-7" height="100" width="100"></td>
+                        <td>Farm Fresh Original Yogurt Drink 700ml</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM4.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-8.png" alt="beverage-8" height="100" width="100"></td>
+                        <td>GoodDay Full Cream Fresh Milk 500ml</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM5.20</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-9.png" alt="beverage-9" height="100" width="100"></td>
+                        <td>Homesoy Soya Milk Original 250ml</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM1.20</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Beverage/Beverage-10.png" alt="beverage-10" height="100" width="100"></td>
+                        <td>Oishi Original Green Tea Drink 380ml</td>
+                        <td>Beverage</td>
+                        <td>10</td>
+                        <td>RM1.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-1.png" alt="paper-1" height="100" width="100"></td>
+                        <td>Premier Facial Soft Box Tissue 2ply x 100pcs</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM2.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-2.png" alt="paper-2" height="100" width="100"></td>
+                        <td>Premier Wet Tissue 50pcs</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM6.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-3.png" alt="paper-3" height="100" width="100"></td>
+                        <td>Compact toilet paper 10 rolls</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM14.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-4.png" alt="paper-4" height="100" width="100"></td>
+                        <td>Scott Kitchen Paper Towel 2Rolls x60s</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM5.80</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-5.png" alt="paper-5" height="100" width="100"></td>
+                        <td>Kleenex Skincare 3ply Facial Tissue 44sx4</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM5.90</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-6.png" alt="paper-6" height="100" width="100"></td>
+                        <td>Sampling Paper Cup 50pcs/set</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM4.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-7.png" alt="paper-7" height="100" width="100"></td>
+                        <td>Diamond Cooking & Baking Paper 8mx30cm</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM9.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-8.png" alt="paper-8" height="100" width="100"></td>
+                        <td>MOMO Coffee Filter Paper 100pcs</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM3.50</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-9.png" alt="paper-9" height="100" width="100"></td>
+                        <td>Reynolds Wax Paper Sandwich Bag 50pcs</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM6.99</td>
+                        <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="record"></td>
+                        <td><img src="../assets/Image/Paper Product/Paper_Product-10.png" alt="paper-10" height="100" width="100"></td>
+                        <td>Brown Paper Bag 20pcs</td>
+                        <td>Paper Product</td>
+                        <td>10</td>
+                        <td>RM2.80</td>
                         <td><button class="btn btn-lg btn-info edit-row">Edit</button></td>
                     </tr>
                 </tbody>
@@ -249,7 +1247,7 @@
                     <label for="name"><span class="red">*</span>Name:</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="category" aria-label="Floating label select example" required disabled> 
+                    <select class="form-select" id="category" aria-label="Floating label select example" required> 
                         <option value="Bath and Body">Bath and Body</option>
                         <option value="Instant Food">Instant Food</option>
                         <option value="Canned&Packed Food">Canned&Packed Food</option>
@@ -281,5 +1279,6 @@
     <script src="../js/administrator.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
