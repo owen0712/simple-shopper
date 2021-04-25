@@ -169,7 +169,7 @@
   min-height: 70px;
 }
 
-.btn-success{
+.btn-success:hover{
   border: #3e8e41 solid 1px;
   background: #fff;
   color: #3e8e41;
