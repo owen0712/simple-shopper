@@ -51,8 +51,8 @@ div .editor {
 /* Style the "Add" button */
 
 .addBtn {
-    padding: 8px;
-    padding-bottom: 5px;
+    padding: 9px;
+    padding-bottom: 8px;
     width: 15%;
     float: left;
     text-align: center;
@@ -60,18 +60,18 @@ div .editor {
     cursor: pointer;
     transition: 0.3s;
     border-radius: 0;
-    border: 4px solid #32793a;
+    border: 2px solid #32793a;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    background-color: white;
-    color: #32793a;
+    color: white;
+    background-color: #32793a;
     font-weight: bolder;
     transition-duration: 0.4s;
 }
 
 .addBtn:hover {
-    color: white;
-    background-color: #32793a;
+    background-color: white;
+    color: #32793a;
 }
 
 
