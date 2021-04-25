@@ -121,3 +121,9 @@ function searchFunc(){
     // newURL=encodeURIComponent(newURL); should have encoding but it doesn't work yet
     window.location.href=newURL;
 }
+
+document.getElementById("search").addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        searchFunc();
+    }
+});
