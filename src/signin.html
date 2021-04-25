@@ -22,21 +22,35 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   </head>
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light border-bottom mb-5" style="background-color: rgb(243, 243, 243);">
+  <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
     <div class="container-fluid">
-      <div class="col col-auto px-0">
-        <a class="navbar-brand" href="#"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
-      </div>
-      <div class="col mr-auto px-0">
-        <a class="nav-link" href="../src/index.html"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16" style="position: absolute; left:10px; top:-13px">
-            <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-          </svg></a>
-      </div>
-    </div>  
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../src/index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id='admin' href="../src/administrator.html"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id='sign-up' href="../src/sign.html">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id='sign-in' href="../src/signin.html">Log in</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </header>
+  <nav class="navbar navbar-expand-lg navbar-light border-bottom mb-5" style="background-color: rgb(243, 243, 243);">
+  <div class="container-fluid">
+    <div class="col col-auto px-0">
+    <a class="navbar-brand" href="#"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
+  </div>
   </nav>
-</header>
   <body class="text-center">  
     <form class="form-signin" id="form">
         <h5>Welcome to Simple Shopper!</h5>
@@ -102,6 +116,56 @@
           </div>
           <br>
     </form>
+    </div>
+    <div class = "footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col-1">
+            <h4>Download Our App</h4>
+            <p>Download App for Android and ios mobile phone.</p>
+            <div class="app-logo">
+              <img src="../assets/footer/play-store.png">
+              <img src="../assets/footer/app-store.png" >
+            </div>
+          </div>
+          <div class="footer-col-2">
+            <h4>Payment</h4>
+              <img src="../assets/footer/Visa+Brand+Mark+-+Blue+-+900x291.jpg">
+              <img src="../assets/footer/300px-Mastercard_2019_logo.svg.png" style="background-color: white;">
+              <img src="../assets/footer/FPX-Logo-1.png"  style="background-color: white;">
+              <br>
+            <div class="footer-col-2">
+              <h4 style="margin-top: 20px;">Contact Us</h4>
+              <ul>
+                <li><a href="#" style="color:#ffffff;">Help Center</a></li>
+                <li><a href="#" style="color:#ffffff;">Shipping & Delivery</a></li>
+                <li><a href="#" style="color:#ffffff;">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer-col-4">
+            <h4>Simple Shopper</h4>
+            <ul>
+              <li><a href="#" style="color:#ffffff;">About Simple Shopper</a></li>
+              <li><a href="#" style="color:#ffffff;">Terms & Conditions</a></li>
+              <li><a href="#" style="color:#ffffff;">Privacy Policy</a></li>
+              <li><a href="#" style="color:#ffffff;">Corporate&nbsp;Voucher&nbsp;Purchase</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-3">
+            <h4>Follow us</h4>
+            <ul>
+              <li><i class="bi bi-facebook" style="margin-right: 6px; color: #A2D5F2; padding-left: 40px;"></i>Facebook</li>
+              <li><i class="bi bi-linkedin" style="margin-right: 6px; color: #A2D5F2; padding-left: 40px;"></i>Linkedin</li>
+              <li><i class="bi bi-twitter" style="margin-right: 6px; color: #A2D5F2; padding-left: 40px;"></i>Twitter</li>
+              <li><i class="bi bi-instagram" style="margin-right: 6px; color: #A2D5F2; padding-left: 40px;"></i>Instagram</li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+        <p class="copyright">Copyright&copy; 2021 Simple Shopper</p>
+      </div>
     </div>
   <script>
       function myFunction(){
