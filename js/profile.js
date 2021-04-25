@@ -1,5 +1,3 @@
-const user=JSON.parse(localStorage.getItem('user'))
-
 $('#username').val(user['username']);
 $('#name').val(user['name']);
 $('#email').val(user['email']);
