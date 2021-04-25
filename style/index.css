@@ -165,6 +165,10 @@
   cursor: default;
 }
 
+.card-text{
+  min-height: 70px;
+}
+
 .btn-success{
   border: #3e8e41 solid 1px;
   background: #fff;
