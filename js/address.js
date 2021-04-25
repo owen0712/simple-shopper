@@ -3,7 +3,8 @@ const title=document.querySelector('#title');
 var editing=0;
 var editing_address=null;
 
-var addressesArr=JSON.parse(localStorage.getItem('user'))['addressesArr'];
+var accessed_user=JSON.parse(localStorage.getItem('user'))
+var addressesArr=accessed_user['addressesArr'];
 
 function showForm(){
     addressForm.style.display='flex';
@@ -55,7 +56,7 @@ function addNewAddress(n_id,n_name,n_phone,n_postal_code,n_state,n_area,n_descri
         state:n_state,
         area:n_area,
         description:n_description,
-        n_default_add
+        default_checked:n_default_add
     }
     addressesArr.forEach(element=>{
         if(n_default_add){
@@ -75,7 +76,14 @@ function addNewAddress(n_id,n_name,n_phone,n_postal_code,n_state,n_area,n_descri
             exist=false;
         }
     })
-    if(!exist){addressesArr.push(new_address);}
+    if(!exist){
+        if(n_default_add){ 
+            addressesArr.unshift(new_address);
+        }
+        else{
+            addressesArr.push(new_address);
+        }
+    }
     else{alert("The address is exist");}
     return exist;
 }
@@ -94,39 +102,15 @@ $("form").submit(function(e){
     let description = $("#description").val();
     let default_add=$("#default_checked").prop('checked');
     let id=addressesArr.length+1;
-    let markup = `<div class="address shadow p-3 mb-5 bg-white rounded">
-                    <label class='id'>${id}</label>
-                    <button class="btn btn-danger delete" >Delete</button>
-                    <button class="btn btn-info edit" onclick="editForm()" id="edit_btn">Edit</button>
-                    <table>
-                        <tr>
-                            <td>Full Name</td>
-                            <td class="name">${name}</td>
-                        </tr>
-                        <tr>
-                            <td>Phone</td>
-                            <td>+6${phone}</td>
-                        </tr>
-                        <tr>
-                            <td>Address</td>
-                            <td>${description},${postal_code},${area},${state}</td>
-                        </tr>
-                    </table>
-                </div>`;
     if(editing==0){
-        if(!addNewAddress(id,name,phone,postal_code,state,area,description,default_add)){
-            if (default_add) {
-                $("#addresses").prepend(markup);
-            }
-            else{
-                $("#addresses").append(markup);
-            }
-        }
+        addNewAddress(id,name,phone,postal_code,state,area,description,default_add)
     }
     else{
         editAddress(name,phone,postal_code,state,area,description,default_add);
         editing=0;
     }
+    localStorage.setItem('user',JSON.stringify(accessed_user))
+    render()
     hideForm();
 });
 
@@ -146,3 +130,55 @@ $('body').on('click', '.edit', function(){
     showEditForm();
     title.innerHTML="Edit Address";
 });
+
+$(document).ready(render())
+
+function render(){
+    var addressSection=document.querySelector('#addresses')
+    var content=''
+    for(var add of addressesArr){
+        content += add['default_checked']==true?`<div class="address shadow p-3 mb-5 bg-white rounded">
+                    <label class='id'>${add['id']}</label>
+                    <button class="btn btn-danger delete"><i class="bi bi-trash"></i> Delete</button>
+                    <button class="btn btn-info edit" id="edit_btn"><i class="bi bi-pencil-square"></i> Edit</button>
+                    <table>
+                        <tr>
+                            <td colspan="2"><strong>Default Address</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Full Name</td>
+                            <td class="name">${add['name']}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td>+6${add['phone']}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>${add['description']},${add['postal_code']},${add['area']},${add['state']}</td>
+                        </tr>
+                    </table>
+                </div>`:
+                `<div class="address shadow p-3 mb-5 bg-white rounded">
+                    <label class='id'>${add['id']}</label>
+                    <button class="btn btn-danger delete"><i class="bi bi-trash"></i> Delete</button>
+                    <button class="btn btn-info edit" id="edit_btn"><i class="bi bi-pencil-square"></i> Edit</button>
+                    <table>
+                        <tr>
+                            <td>Full Name</td>
+                            <td class="name">${add['name']}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td>+6${add['phone']}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>${add['description']},${add['postal_code']},${add['area']},${add['state']}</td>
+                        </tr>
+                    </table>
+                </div>`;
+    }
+    console.log(content)
+    addressSection.innerHTML=content
+}

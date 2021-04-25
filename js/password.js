@@ -1,5 +1,3 @@
-const user=JSON.parse(localStorage.getItem('user'))
-
 function showCurrentPassword(){
     let x = document.querySelector("#current_password")
     let y = document.querySelector("#hide1")
@@ -54,12 +52,13 @@ function showConfirmPassword(){
 const o_password = document.querySelector('#current_password')
 const n_password = document.querySelector('#new_password')
 const c_password = document.querySelector('#confirm_password')
-const form = document.querySelector('form')
-form.addEventListener('submit', (e) =>{
+const confirm_btn = document.querySelector('#confirm')
+confirm_btn.addEventListener('click', (e) =>{
     e.preventDefault();
     if(checkCurrentPassword()&&checkNewPassword()&&checkConfirmPassword()){
         swal("Successfully!", "Password Modified", "success");
         user['password']=c_password.value.trim();
+        localStorage.setItem('user',JSON.stringify(user))
     }
 })
 

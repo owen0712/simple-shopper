@@ -23,8 +23,26 @@ main{
     min-height: 500px;
 }
 
-.main-content{
-    background
+.btn-primary,.btn-info,.btn-danger{
+    transition-duration: 0.2s;
+}
+
+.btn-primary:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid #0275d8; 
+}
+
+.btn-info:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid #5bc0de; 
+}
+
+.btn-danger:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid #d9534f; 
 }
 
 .footer{
