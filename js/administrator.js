@@ -115,7 +115,6 @@ $(document).ready(function(){
     
     $('body').on('click', '.edit-row', function(){
         old_img = this.parentElement.parentElement.querySelector("img");
-        console.log(old_img);
         var image = $(this).parents('tr').find('td:eq(1)').text();
         var name = $(this).parents('tr').find('td:eq(2)').text();
         var category = $(this).parents('tr').find('td:eq(3)').text();
