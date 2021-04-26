@@ -71,29 +71,32 @@ $(document).ready(function(){
         var category = $("#category").val();
         var amount = $("#amount").val();
         var price = $("#price").val();
-        var markup = "<tr><td><input type='checkbox' name='record'></td><td><img id='new_img' height='100' width='100'/></td><td>" + name + "</td><td>" + category + "</td><td>" + amount + "</td><td>" + "RM" + price + "</td><td><button class='btn btn-lg btn-info edit-row'>Edit</button></td></tr>";
-        if (name != ''&& category != '' && amount != '' && price != '') {
-            $("#productTable tbody").prepend(markup);
-        }
-
+        //new code
+        var src='';
         var new_img = document.querySelector('#new_img');
         var image = document.querySelector('#image');
-        var reader = new FileReader();
-            reader.onload = function (e) {
-            new_img.src = e.target.result;
-        }
-        reader.readAsDataURL(image.files[0]);
-        new_img.id='';
-        
-        table.row.add( [
-            "<input type='checkbox' name='record'>",
-            new_img,
-            name,
-            category,
-            amount,
-            "RM" + price,
-            "<button class='btn btn-lg btn-info edit-row'>Edit</button>"
-        ] ).draw();
+        function readImageSrc(img) {//use promise to access src value
+            return new Promise(function(resolve, reject) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    src=e.target.result
+                    resolve(src);
+                };
+                reader.readAsDataURL(img.files[0]);
+            });
+        };
+        readImageSrc(image).then(function(src){
+            //draw table inside here
+            table.row.add( [
+                "<input type='checkbox' name='record'>",
+                "<img id='new_img' height='100' width='100' src='"+src+"'/>",
+                name,
+                category,
+                amount,
+                "RM" + price,
+                "<button class='btn btn-lg btn-info edit-row'>Edit</button>"
+            ] ).draw();
+        });
     });
     
     $(".delete-row").click(function(){
