@@ -55,7 +55,7 @@ function filter(input)
     for(var i = 0;i<card.length;i++)
     {
         ctg = card[i].getElementsByClassName("card-category")[0];
-        target = ctg.textContent || target.innerText;
+        target = ctg.textContent || ctg.innerText;
         if(target == input)
         {
             card[i].classList.remove("hide");
