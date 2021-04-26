@@ -103,6 +103,7 @@ function checkInputs(){
 function signUp(name,email,phone,password,dob,gender){
     const users=JSON.parse(localStorage.getItem('users')||[]);
     var new_user={
+        id:users.length+1,
         password:password,
         status:'user',
         name:name,
@@ -110,7 +111,8 @@ function signUp(name,email,phone,password,dob,gender){
         phone:phone,
         gender:gender,
         dob:dob,
-        addressesArr:[]
+        addressesArr:[],
+        profile:''
     }
     var exist=false;
     if(!checkExistUser(email,phone,users)){
