@@ -118,7 +118,6 @@ function searchFunc(){
     var search= input.value;
     console.log(search);
     var newURL="../src/search.html?search="+search;
-    // newURL=encodeURIComponent(newURL); should have encoding but it doesn't work yet
     window.location.href=newURL;
 }
 
