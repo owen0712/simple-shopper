@@ -126,3 +126,58 @@ document.getElementById("search").addEventListener("keyup", function(event) {
         searchFunc();
     }
 });
+
+function addtocart()
+{
+    swal("Do you want to add this item?",{
+        buttons:{
+            customise: {
+                text: "Add to cart",
+                value: "customise",
+            },
+            cancel: "cancel",
+        },
+    }).then((value) => {
+        switch(value){
+            case "customise":
+                swal("Choose your cart",{
+                    buttons:{
+                        1: {
+                            text: "Cart 1",
+                            value: "1",
+                        },
+                        2: {
+                            text: "Cart 2",
+                            value: "2",
+                        },
+                        3: {
+                            text: "Cart 3",
+                            value: "3",
+                        },
+                        cancel: "cancel",
+                    }
+                }).then((value) =>{
+                    switch(value){
+                        case "1":
+                            swal('Your item has been added to cart '+ value,"Take me home!", "success");
+                            break;
+
+                        case "2":
+                            swal('Your item has been added to cart '+ value,"Take me home!", "success");
+                            break;
+
+                        case "3":
+                            swal('Your item has been added to cart '+ value,"Take me home!", "success");
+                            break;
+                        
+                        default:
+                            swal("See you next time :)");
+                    }
+                });
+                break;
+            
+            default: 
+                swal("See you next time :)");
+        }
+    });
+}
