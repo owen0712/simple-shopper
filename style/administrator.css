@@ -72,6 +72,11 @@ input:focus, select:focus {
   background-color: white;
 }
 
+.update-row:hover{
+  color: #0dcaf0;
+  background-color: white;
+}
+
 #add_btn:hover{
   color: #198754;
   background-color: white;
