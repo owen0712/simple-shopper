@@ -102,7 +102,11 @@ $(document).ready(function(){
     $(".delete-row").click(function(){
         $("#productTable tbody").find('input[name="record"]').each(function(){
             if($(this).is(":checked")){
-                $(this).parents("tr").remove();
+                $(this).parents("tr").addClass("selected");
+                var rows = table
+                    .rows( '.selected' )
+                    .remove()
+                    .draw();
             }
         });
     });
