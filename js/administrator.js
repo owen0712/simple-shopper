@@ -5,24 +5,7 @@ document.getElementById("add_btn").addEventListener("click", function(){
 document.getElementById("close").addEventListener("click", function(){
     document.querySelector(".popup").style.display = "none";
 })
-/*
-function filter(input){
-    $('table > tbody  > tr').each(function(index, tr) {
-        var target = $(this).find('td:eq(3)').text();
-        if(input == "All"){
-            $(this).show();
-        }
-        else{
-            if(target == input){
-                $(this).show();
-            }
-            else{
-                $(this).hide();
-            }
-        }
-     });
-}
-*/
+
 var table = "";
 
 $(document).ready(function() {
@@ -31,38 +14,6 @@ $(document).ready(function() {
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ]
     } );
 } );
-
-/*
-$(document).ready(function() {
-    table = $('#productTable').DataTable();
- 
-    var alphabet = $('<div class="alphabet"/>').append( 'Category: ' );
-
-    var temp = ["Bath and Body", "Instant Food", "Canned&Packed Food", "Baby Product", "Household Supply", "Pet", "Cooking Ingredient", "Cereal", "Baking Supplies", "Snack", "Beverage", "Paper Product"];
- 
-    $('<span class="clear active"/>')
-        .data( 'letter', '' )
-        .html( 'All categories' )
-        .appendTo( alphabet );
- 
-    for ( var i=0 ; i<temp.length ; i++ ) {
-        $('<span/>')
-        .data( 'letter', temp[i] )
-        .html( temp[i] )
-        .appendTo( alphabet );
-    }
- 
-    alphabet.insertBefore( table.table().container() );
- 
-    alphabet.on( 'click', 'span', function () {
-        alphabet.find( '.active' ).removeClass( 'active' );
-        $(this).addClass( 'active' );
- 
-        _alphabetSearch = $(this).data('letter');
-        table.draw();
-    } );
-} );
-*/
 
 $(document).ready(function(){
     $("form").submit(function(e){
