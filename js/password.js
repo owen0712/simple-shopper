@@ -59,6 +59,7 @@ confirm_btn.addEventListener('click', (e) =>{
         swal("Successfully!", "Password Modified", "success");
         user['password']=c_password.value.trim();
         localStorage.setItem('user',JSON.stringify(user))
+        updateStorage(user)
     }
 })
 

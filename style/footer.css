@@ -1,88 +1,91 @@
-.footer {
-    background: #364F6B;
-    color: #ffffff;
+.footer{
+    background:#364F6B; 
+    color:#ffffff ;
     font-size: 14px;
+    margin-top: 50px;
     padding: 30px 0 10px;
     width: 100%;
     justify-content: center;
 }
 
-.footer .row {
+.footer .row{
     justify-content: center;
 }
 
-.footer p {
+.footer p{
     color: #ffffff;
 }
 
-.footer h4 {
+.footer h4{
     color: rgb(0, 243, 182);
     margin-bottom: 12px;
 }
 
-.footer-col-1,
-.footer-col-2,
-.footer-col-3,
-.footer-col-4 {
+.footer-col-1, .footer-col-2, .footer-col-3,.footer-col-4{
     text-align: center;
     min-width: 250px;
 }
 
-.footer-col-1 {
+.footer-col-1{
     align-items: center;
-    flex-basis: 30%;
+    flex-basis:30%;
 }
 
-.footer-col-2 {
+.footer-col-2{
     text-align: center;
     flex-basis: 20%;
     justify-content: center;
 }
 
-.footer-col-2 img {
+.footer-col-2 img{
     width: 70px;
     height: 32px;
 }
 
-.footer-col-3 {
+.footer-col-3{
     flex-basis: 10%;
     text-align: center;
 }
 
-.footer-col-4 {
+.footer-col-4{
     flex-basis: 5%;
     text-align: center;
 }
 
-ul {
+.footer ul{
     list-style-type: none;
-    text-align: justify;
+    text-align:justify;
     justify-content: center;
 }
 
-.footer-col-2 ul {
+.footer-col-2 ul{
     padding-left: 60px;
 }
 
-li {
-    color: #ffffff;
+.footer a{
+    color:#ffffff;
+    text-decoration: none;
 }
 
-.app-logo {
+.footer a:hover{
+    text-decoration: underline;
+}
+
+.app-logo{
     margin-top: 20px;
 }
 
-.app-logo img {
+.app-logo img{
     width: 140px;
 }
 
-.footer hr {
+.footer hr{
     border: none;
     background: #3fc1c9;
     height: 1px;
     margin: 20px 0;
 }
 
-.copyright {
+.copyright{
     text-align: center;
 }

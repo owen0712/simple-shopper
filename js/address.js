@@ -1,9 +1,9 @@
 const addressForm=document.getElementById('add_address');
 const title=document.querySelector('#title');
+const accessed_user=JSON.parse(localStorage.getItem('user'))
 var editing=0;
 var editing_address=null;
 
-var accessed_user=JSON.parse(localStorage.getItem('user'))
 var addressesArr=accessed_user['addressesArr'];
 
 function showForm(){
@@ -44,6 +44,13 @@ function editAddress(n_name,n_phone,n_postal_code,n_state,n_area,n_description,n
     editing_address["area"]=n_area;
     editing_address["description"]=n_description;
     editing_address["default_checked"]=n_default_add;
+    addressesArr.forEach(element=>{
+        if(n_default_add&&element!==editing_address){
+            if(element['default_checked']){
+                element['default_checked']=false;
+            }
+        }
+    })
 }
 
 function addNewAddress(n_id,n_name,n_phone,n_postal_code,n_state,n_area,n_description,n_default_add){
@@ -68,6 +75,7 @@ function addNewAddress(n_id,n_name,n_phone,n_postal_code,n_state,n_area,n_descri
         element['phone']===n_phone&&
         element['postal_code']===n_postal_code&&
         element['state']===n_state&&
+        element['area']===n_area&&
         element['description']===n_description
         ){
             exist=true;
@@ -89,7 +97,12 @@ function addNewAddress(n_id,n_name,n_phone,n_postal_code,n_state,n_area,n_descri
 }
 
 function removeAddress(target_id){
-    addressesArr=addressesArr.filter(element=>element['id']!==target_id);
+    addressesArr=addressesArr.filter(function(element){ 
+        return element['id']!=target_id;
+    });
+    accessed_user['addressesArr']=addressesArr
+    localStorage.setItem('user',JSON.stringify(accessed_user))
+    updateStorage(accessed_user)
 }
 
 $("form").submit(function(e){
@@ -110,16 +123,18 @@ $("form").submit(function(e){
         editing=0;
     }
     localStorage.setItem('user',JSON.stringify(accessed_user))
+    updateStorage(accessed_user)
     render()
     hideForm();
 });
 
 $('body').on('click', '.delete', function(){
     removeAddress($(this).parent().find('.id').text())
-    $(this).parent().remove();
+    render()
 });
 
 $('body').on('click', '.btn-close', function(){
+    console.log('Im in')
     hideForm();
     $("form")[0].reset();
     editing=0;
@@ -179,6 +194,5 @@ function render(){
                     </table>
                 </div>`;
     }
-    console.log(content)
     addressSection.innerHTML=content
 }
