@@ -43,10 +43,12 @@ $('form').on('submit',function(e){
             img_preview.src=src;
             img_icon.src=src;
             user['profile']=src;
-            console.log(user)
+            localStorage.setItem('user',JSON.stringify(user));
         });
     }
-    localStorage.setItem('user',JSON.stringify(user));
+    else{
+        localStorage.setItem('user',JSON.stringify(user));
+    }
     updateStorage(user)
 })
 
