@@ -110,7 +110,7 @@ function newElement() {
                     <h6 class="thetext" >${inputValue}</h6>
                     <div class="editor">
                         <input class="ta1" name="ta1" style="margin-bottom: 5px; border-radius: 3px; width:150px;">
-                        <input style="padding: none;" name="submit" id="submit" type="button" value="Edit List Name"  />
+                        <input style="padding: none;" name="submit" id="submit" type="button" value="Edit"  />
                     </div>
             </button>
             </h2>
