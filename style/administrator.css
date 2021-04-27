@@ -32,10 +32,6 @@ td{
   border-left: 1px solid #CBD2D8;
 }
 
-td:hover{
-  background-color: gold;
-}
-
 fieldset{
   width: 500px;
   margin-top: 20px;
