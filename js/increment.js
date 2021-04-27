@@ -23,7 +23,9 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
 
 function addtocart()
 {
-    if(user===null){
+    const login=JSON.parse(localStorage.getItem('user'));
+    if(login===null){
+	console.log('not work')
         swal("You have to sign in first", "It will switch to sign in page in 2 seconds");
         setTimeout(function(){window.location.href='signin.html'}, 2000);
     }
