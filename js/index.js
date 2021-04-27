@@ -143,15 +143,15 @@ function addtocart()
                 swal("Choose your cart",{
                     buttons:{
                         1: {
-                            text: "Cart 1",
+                            text: "Shopping List 1",
                             value: "1",
                         },
                         2: {
-                            text: "Cart 2",
+                            text: "Shopping List 2",
                             value: "2",
                         },
                         3: {
-                            text: "Cart 3",
+                            text: "Shopping List 3",
                             value: "3",
                         },
                         cancel: "cancel",
@@ -159,15 +159,15 @@ function addtocart()
                 }).then((value) =>{
                     switch(value){
                         case "1":
-                            swal('Your item has been added to cart '+ value,"Take me home!", "success");
+                            swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
                             break;
 
                         case "2":
-                            swal('Your item has been added to cart '+ value,"Take me home!", "success");
+                            swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
                             break;
 
                         case "3":
-                            swal('Your item has been added to cart '+ value,"Take me home!", "success");
+                            swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
                             break;
                         
                         default:
