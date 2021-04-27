@@ -45,7 +45,7 @@ $(document).ready(function(){
                 category,
                 amount,
                 "RM" + price,
-                "<button class='btn btn-lg btn-info edit-row'>Edit</button>"
+                "<button class='btn btn-lg btn-info edit-row' style='width: 100px;'><i class='bi bi-pencil-square'></i> Edit</button>"
             ] ).draw();
         });
         $("#image").val("");
@@ -76,11 +76,11 @@ $(document).ready(function(){
         var amount = $(this).parents('tr').find('td:eq(4)').text();
         var price = $(this).parents('tr').find('td:eq(5)').text().substring(2);
         $(this).parents('tr').find('td:eq(1)').html("<input name='edit_image' id='edit_img' type='file' accept='image/*' style='width: 200px;' value='" + image + "'>");
-        $(this).parents('tr').find('td:eq(2)').html("<input name='edit_name' type='text' style='width: 100px;' value='" + name + "'>");
+        $(this).parents('tr').find('td:eq(2)').html("<input name='edit_name' type='text' style='width: 300px;' value='" + name + "'>");
         //$(this).parents('tr').find('td:eq(3)').html("<select name='edit_category' value='" + category + "'><option value='Bath and Body'>Bath and Body</option><option value='Instant Food'>Instant Food</option><option value='Canned&Packed Food'>Canned&Packed Food</option><option value='Baby Product'>Baby Product</option><option value='Household Supply'>Household Supply</option><option value='Pet'>Pet</option><option value='Cooking Ingredient'>Cooking Ingredient</option><option value='Cereal'>Cereal</option><option value='Baking Supplies'>Baking Supplies</option><option value='Snack'>Snack</option><option value='Beverage'>Beverage</option><option value='Paper Product'>Paper Product</option></select>");
         $(this).parents('tr').find('td:eq(4)').html("<input name='edit_amount' type='number' style='width: 80px;' step='1' value='" + amount + "'>");
         $(this).parents('tr').find('td:eq(5)').html("<input name='edit_price' type='number' style='width: 80px;' step='0.01' value='" + price + "'>");
-        $(this).parents('tr').find('td:eq(6)').prepend("<button type='button' class='btn btn-lg btn-info update-row'>Update</button>");
+        $(this).parents('tr').find('td:eq(6)').prepend("<button type='button' class='btn btn-lg btn-info update-row' style='width: 130px;'><i class='bi bi-check2-square'></i> Update</button>");
         $(this).hide()
     });
 
