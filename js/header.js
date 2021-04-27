@@ -1,5 +1,11 @@
 function shoppingListClick(){
-    window.location.href="../src/shoplist.html";
+    const login=JSON.parse(localStorage.getItem('user'));
+    if(login===null){
+	window.location.href='../src/signin.html';
+    }
+    else{
+    	window.location.href="../src/shoplist.html";
+    }
 }
 
 function searchFunc(){
