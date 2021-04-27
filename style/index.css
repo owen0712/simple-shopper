@@ -253,3 +253,11 @@ body::-webkit-scrollbar-thumb {
   margin-left: 100px;
   margin-right: 100px;
 }
+
+li a{
+  color: black;
+}
+
+li a:hover{
+  color: black;
+}
