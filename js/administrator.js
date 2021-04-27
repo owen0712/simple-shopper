@@ -48,6 +48,10 @@ $(document).ready(function(){
                 "<button class='btn btn-lg btn-info edit-row'>Edit</button>"
             ] ).draw();
         });
+        $("#image").val("");
+        $("#name").val("");
+        $("#amount").val("");
+        $("#price").val("");
     });
     
     $(".delete-row").click(function(){
