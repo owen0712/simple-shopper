@@ -28,22 +28,24 @@ $('form').on('submit',function(e){
     }
     var src=''
     user['dob']=$('#dob').val();
-    console.log(img_upload.value)
-    function readImageSrc(img) {//use promise to access src value
-        return new Promise(function(resolve, reject) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                src=e.target.result
-                resolve(src);
-            };
-            reader.readAsDataURL(img.files[0]);
+    if(img_upload.value){
+        function readImageSrc(img) {//use promise to access src value
+            return new Promise(function(resolve, reject) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    src=e.target.result
+                    resolve(src);
+                };
+                reader.readAsDataURL(img.files[0]);
+            });
+        };
+        readImageSrc(img_upload).then(function(src){
+            img_preview.src=src;
+            img_icon.src=src;
+            user['profile']=src;
+            console.log(user)
         });
-    };
-    readImageSrc(img_upload).then(function(src){
-        img_preview.src=src;
-        img_icon.src=src;
-        user['profile']=src;
-    });
+    }
     localStorage.setItem('user',JSON.stringify(user));
     updateStorage(user)
 })
