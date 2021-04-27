@@ -23,55 +23,61 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
 
 function addtocart()
 {
-    swal("Do you want to add this item?",{
-        buttons:{
-            customise: {
-                text: "Add to cart",
-                value: "customise",
+    if(user===null){
+        swal("You have to sign in first", "It will switch to sign in page in 2 seconds");
+        setTimeout(function(){window.location.href='signin.html'}, 2000);
+    }
+    else{
+        swal("Do you want to add this item?",{
+            buttons:{
+                customise: {
+                    text: "Add to cart",
+                    value: "customise",
+                },
+                cancel: "cancel",
             },
-            cancel: "cancel",
-        },
-    }).then((value) => {
-        switch(value){
-            case "customise":
-                swal("Choose your cart",{
-                    buttons:{
-                        1: {
-                            text: "Shopping List 1",
-                            value: "1",
-                        },
-                        2: {
-                            text: "Shopping List 2",
-                            value: "2",
-                        },
-                        3: {
-                            text: "Shopping List 3",
-                            value: "3",
-                        },
-                        cancel: "cancel",
-                    }
-                }).then((value) =>{
-                    switch(value){
-                        case "1":
-                            swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
-                            break;
+        }).then((value) => {
+            switch(value){
+                case "customise":
+                    swal("Choose your cart",{
+                        buttons:{
+                            1: {
+                                text: "Shopping List 1",
+                                value: "1",
+                            },
+                            2: {
+                                text: "Shopping List 2",
+                                value: "2",
+                            },
+                            3: {
+                                text: "Shopping List 3",
+                                value: "3",
+                            },
+                            cancel: "cancel",
+                        }
+                    }).then((value) =>{
+                        switch(value){
+                            case "1":
+                                swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
+                                break;
 
-                        case "2":
-                            swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
-                            break;
+                            case "2":
+                                swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
+                                break;
 
-                        case "3":
-                            swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
-                            break;
-                        
-                        default:
-                            swal("See you next time :)");
-                    }
-                });
-                break;
-            
-            default: 
-                swal("See you next time :)");
-        }
-    });
+                            case "3":
+                                swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
+                                break;
+                            
+                            default:
+                                swal("See you next time :)");
+                        }
+                    });
+                    break;
+                
+                default: 
+                    swal("See you next time :)");
+            }
+        });
+    }
 }
