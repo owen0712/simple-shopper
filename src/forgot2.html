@@ -64,13 +64,14 @@
         
         function autojump_keyUp()
         {
+          console.log(this.value.length);
         if (
           (this == downStrokeField) && 
           (this.value.length > this.beforeLength) && 
           (this.value.length >= this.maxLength)
           )
           this.nextField.focus();
-        downStrokeField=null;
+          downStrokeField=null;
         }
       </SCRIPT>
    </head>
@@ -156,9 +157,9 @@
             <p class="text-center text-muted" style="margin-top: 20px;" id="changingText">Please wait until <strong><span id="changing" style=" color: #3fc1c9;">60</span></strong>s to resend</p>
        </form>
        <SCRIPT TYPE="text/javascript">
-            autojump('ssn_1', 'ssn_2', 1);
-            autojump('ssn_2', 'ssn_3', 1);
-            autojump('ssn_3', 'ssn_4', 1);
+            autojump('ssn_1', 'ssn_2', 0);
+            autojump('ssn_2', 'ssn_3', 0);
+            autojump('ssn_3', 'ssn_4', 0);
         </SCRIPT>
      </div>
      <div class = "footer" style="margin-top: 50px;">
@@ -243,10 +244,9 @@
                btnShow.disabled =  true;
              }
        })
-
      </script>
-     
-     <script>
+   
+   <script>
         function btnFunction(){
             window.location.href= 'forgot1.html';
        }
