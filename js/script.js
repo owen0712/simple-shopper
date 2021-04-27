@@ -212,11 +212,19 @@ $('main').on('click', '.remove', function() {
 
 $('main').on('change', '.qty', function() {
     var qty = parseInt($(this).val());
+    if (isNaN(qty)) {
+        swal("Please input a value!!!!!");
+        $(this).val(1);
+        return;
+    }
+    if (qty == 0) {
+        $(this).val(1);
+        swal("Please click remove button to delete the item.");
+        return;
+    }
     var priceText = $(this).parent().parent().prev().find("small").text();
     var price = parseFloat(priceText.substr(7, priceText.length - 1));
     var parent = $(this).parent().parent().parent().parent().parent().next();
-    if (qty == 0)
-        return;
     var previousPriceText = $(this).parent().parent().next().html();
     var previousPrice = parseFloat(previousPriceText.substr(3, previousPriceText.length - 1));
     var totalAddedPrice = (qty * price) - previousPrice;
