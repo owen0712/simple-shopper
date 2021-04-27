@@ -72,12 +72,12 @@ $(document).ready(function(){
         old_img = this.parentElement.parentElement.querySelector("img");
         var image = $(this).parents('tr').find('td:eq(1)').text();
         var name = $(this).parents('tr').find('td:eq(2)').text();
-        var category = $(this).parents('tr').find('td:eq(3)').text();
+        //var category = $(this).parents('tr').find('td:eq(3)').text();
         var amount = $(this).parents('tr').find('td:eq(4)').text();
         var price = $(this).parents('tr').find('td:eq(5)').text().substring(2);
         $(this).parents('tr').find('td:eq(1)').html("<input name='edit_image' id='edit_img' type='file' accept='image/*' style='width: 200px;' value='" + image + "'>");
         $(this).parents('tr').find('td:eq(2)').html("<input name='edit_name' type='text' style='width: 100px;' value='" + name + "'>");
-        $(this).parents('tr').find('td:eq(3)').html("<select name='edit_category' value='" + category + "'><option value='Bath and Body'>Bath and Body</option><option value='Instant Food'>Instant Food</option><option value='Canned&Packed Food'>Canned&Packed Food</option><option value='Baby Product'>Baby Product</option><option value='Household Supply'>Household Supply</option><option value='Pet'>Pet</option><option value='Cooking Ingredient'>Cooking Ingredient</option><option value='Cereal'>Cereal</option><option value='Baking Supplies'>Baking Supplies</option><option value='Snack'>Snack</option><option value='Beverage'>Beverage</option><option value='Paper Product'>Paper Product</option></select>");
+        //$(this).parents('tr').find('td:eq(3)').html("<select name='edit_category' value='" + category + "'><option value='Bath and Body'>Bath and Body</option><option value='Instant Food'>Instant Food</option><option value='Canned&Packed Food'>Canned&Packed Food</option><option value='Baby Product'>Baby Product</option><option value='Household Supply'>Household Supply</option><option value='Pet'>Pet</option><option value='Cooking Ingredient'>Cooking Ingredient</option><option value='Cereal'>Cereal</option><option value='Baking Supplies'>Baking Supplies</option><option value='Snack'>Snack</option><option value='Beverage'>Beverage</option><option value='Paper Product'>Paper Product</option></select>");
         $(this).parents('tr').find('td:eq(4)').html("<input name='edit_amount' type='number' style='width: 80px;' step='1' value='" + amount + "'>");
         $(this).parents('tr').find('td:eq(5)').html("<input name='edit_price' type='number' style='width: 80px;' step='0.01' value='" + price + "'>");
         $(this).parents('tr').find('td:eq(6)').prepend("<button type='button' class='btn btn-lg btn-info update-row'>Update</button>");
@@ -87,19 +87,19 @@ $(document).ready(function(){
     $('body').on('click', '.update-row', function(){
         var image = $(this).parents('tr').find("input[name='edit_image']").val();
         var name = $(this).parents('tr').find("input[name='edit_name']").val();
-        var category = $(this).parents('tr').find("select[name='edit_category']").val();
+        //var category = $(this).parents('tr').find("select[name='edit_category']").val();
         var amount = $(this).parents('tr').find("input[name='edit_amount']").val();
         var price = $(this).parents('tr').find("input[name='edit_price']").val();
         if (name != ''&& category != '' && amount != '' && price != '') {
             if(image == ''){
                 $(this).parents('tr').find('td:eq(1)').prepend(old_img);
                 $(this).parents('tr').find('td:eq(2)').text(name);
-                $(this).parents('tr').find('td:eq(3)').text(category);
+                //$(this).parents('tr').find('td:eq(3)').text(category);
                 $(this).parents('tr').find('td:eq(4)').text(amount);
                 $(this).parents('tr').find('td:eq(5)').text("RM" + price);
 
                 $(this).parents('tr').attr('name', name);
-                $(this).parents('tr').attr('category', category);
+                //$(this).parents('tr').attr('category', category);
                 $(this).parents('tr').attr('amount', amount);
                 $(this).parents('tr').attr('price', price);
 
@@ -111,12 +111,12 @@ $(document).ready(function(){
             else{
                 $(this).parents('tr').find('td:eq(1)').prepend("<img id='new_img' height='100' width='100'/>");
                 $(this).parents('tr').find('td:eq(2)').text(name);
-                $(this).parents('tr').find('td:eq(3)').text(category);
+                //$(this).parents('tr').find('td:eq(3)').text(category);
                 $(this).parents('tr').find('td:eq(4)').text(amount);
                 $(this).parents('tr').find('td:eq(5)').text("RM" + price);
 
                 $(this).parents('tr').attr('name', name);
-                $(this).parents('tr').attr('category', category);
+                //$(this).parents('tr').attr('category', category);
                 $(this).parents('tr').attr('amount', amount);
                 $(this).parents('tr').attr('price', price);
 
