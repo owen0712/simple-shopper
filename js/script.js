@@ -28,7 +28,7 @@ function doEdit(ev) {
     if (subject == ev.target.parentElement.previousElementSibling.textContent)
         accept = true;
     if (!accept) {
-        swal("Shopping List Name \"" + subject + "\" is duplicate. Please reenter.");
+        swal("Shopping List Name" + subject + " is duplicate. Please reenter.");
     } else {
         swal("The list name is successfully edited!", {
             icon: "success",
