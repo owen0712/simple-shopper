@@ -24,6 +24,8 @@
     <script src="../js/header.js" defer></script>
     
   </head>
+
+  <!-- header -->
   <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,6 +35,9 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
                 </li>
                 <li class="nav-item" id='admin' style="display: none;">
                     <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
@@ -73,7 +78,9 @@
         </div>
     </div>
 </header>
+ <!-- body -->
   <body class="text-center">  
+    <!-- form -->
     <form class="form-signin" id="form">
         <h5>Welcome to Simple Shopper!</h5>
         <p class="text-muted">Please Log in.</p>
@@ -91,10 +98,12 @@
         <div class = "input-field" style="width:350px; margin-top: 30px; margin-bottom: 20px;">
           <i class="bi bi-lock-fill"></i>
           <input type="password" placeholder="Password" id = "myInput"/>
+          <!-- eye icon -->
           <span class="eye" onclick="myFunction()">
               <i id = "hide1" class="bi bi-eye-fill"></i>
               <i id = "hide2" class="bi bi-eye-slash-fill"></i>
           </span>
+          <!-- Icons and message that will be shown if got error or success-->
           <div class="i_check">
             <i class="bi bi-check-circle-fill" id="bi-check-circle-fill" ></i>
             <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
@@ -102,22 +111,26 @@
           </div>
         </div>
         
+         <!--checkbox for user to choose whether want remember the account and password or not-->
         <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
           <br>
+          <!--login through customer or administrator -->
           <select class="custom-select custom-select-sm" id="status" style="width: 120px; height:40px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
             <option value="Customer">Customer</option>
             <option value="Administrator">Administrator</option>
           </select>
         </div>
+         <!--If user forgor password then can press the forgor password in order to link to forgot password page -->
         <div id = "signInsection">
             <i class="bi bi-arrow-right-circle-fill"></i>
             <a href="../src/forgot3.html" style="color:rgb(38, 126, 209);">Forgot password?</a>
             <button type="submit" id = "submit" class="btn btn-primary" style="border-radius: 55px; margin-left: 10px; width: 100px;">Login</button>
         </div>
         <hr>
+         <!--User can login with social media platform -->
         <p class="social-media">Or <strong><span id="sign_text">&nbsp;login</span></strong>&nbsp;with social social platforms</p> </span>
           <div class="social-media">
             <a hred="#" class="social-icon">
@@ -131,6 +144,7 @@
             </a>
           </div>
           <br>
+          <!-- if user has/have not any account yet, then he/she can press the sign up here link in order to sign up page -->
           <div class="row" style="justify-content: center;">
             <label class="text-muted">New to Simple Shopper?&nbsp;&nbsp;&nbsp;</label>
             <i class="bi bi-arrow-right-circle-fill"></i>
@@ -139,6 +153,7 @@
           <br>
     </form>
     </div>
+    <!-- footer -->
     <div class = "footer">
       <div class="container">
         <div class="row">

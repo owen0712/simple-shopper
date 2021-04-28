@@ -37,5 +37,5 @@ function isEmail(email){
 }
 
 function linkTo(){
-    window.location.href = '../src/forgot2.html';
+    window.location.href = 'otp.html';
 }

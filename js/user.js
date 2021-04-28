@@ -1,48 +1,51 @@
-//used when no local storage
-/*const users=[{
-    id:1,
-    password:'simplekid123',
-    status:'user',
-    name:"Sim Ple Kid",
-    email:"simplekid@gmail.com",
-    phone:"0123456789",
-    gender:'male',
-    dob:"2021-04-14",
-    addressesArr:[{
+const user_database=JSON.parse(localStorage.getItem('users'))
+//setting local storage
+if(user_database===null){
+    const users=[{
         id:1,
-        name:'Sim Ple Kid',
-        phone:'0123456789',
-        postal_code:'50603',
-        state:'Kuala Lumpur',
-        area:'Wilayah Persekutuan',
-        description:'Universiti Malaya,Jalan University',
-        default_checked:true
-    }],
-    profile:'../assets/profile.png'
-},
-{
-    id:2,
-    password:'admin123',
-    status:'admin',
-    name:"AdminUser",
-    email:"admin@gmail.com",
-    phone:"0123456789",
-    gender:'male',
-    dob:"2021-04-21",
-    addressesArr:[{
-        id:1,
-        name:'Admin',
-        phone:'0123456789',
-        postal_code:'50603',
-        state:'Kuala Lumpur',
-        area:'Wilayah Persekutuan',
-        description:'Universiti Malaya,Jalan University',
-        default_checked:true
-    }],
-    profile:'../assets/profile.png'
-}]
+        password:'simplekid123',
+        status:'user',
+        name:"Sim Ple Kid",
+        email:"simplekid@gmail.com",
+        phone:"0123456789",
+        gender:'male',
+        dob:"2021-04-14",
+        addressesArr:[{
+            id:1,
+            name:'Sim Ple Kid',
+            phone:'0123456789',
+            postal_code:'50603',
+            state:'Kuala Lumpur',
+            area:'Wilayah Persekutuan',
+            description:'Universiti Malaya,Jalan University',
+            default_checked:true
+        }],
+        profile:'../assets/profile.png'
+    },
+    {
+        id:2,
+        password:'admin123',
+        status:'admin',
+        name:"AdminUser",
+        email:"admin@gmail.com",
+        phone:"0123456789",
+        gender:'male',
+        dob:"2021-04-21",
+        addressesArr:[{
+            id:1,
+            name:'Admin',
+            phone:'0123456789',
+            postal_code:'50603',
+            state:'Kuala Lumpur',
+            area:'Wilayah Persekutuan',
+            description:'Universiti Malaya,Jalan University',
+            default_checked:true
+        }],
+        profile:'../assets/profile.png'
+    }]
 
-localStorage.setItem('users',JSON.stringify(users))*/
+    localStorage.setItem('users',JSON.stringify(users))
+}
 
 function updateStorage(current_user){
     var user_list=JSON.parse(localStorage.getItem('users'))
@@ -55,12 +58,9 @@ function updateStorage(current_user){
     localStorage.setItem('users',JSON.stringify(user_list))
 }
 
-
-
+//set the header if user logged in
 var user=JSON.parse(localStorage.getItem('user')||{})
-//admin section
 const admin_anchor=document.querySelector('#admin')
-
 const signin_anchor=document.querySelector('#sign-in')
 const user_section=document.querySelector('.user')
 if(user){

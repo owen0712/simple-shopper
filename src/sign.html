@@ -25,6 +25,7 @@
 
     <title>Simple Shopper Sign Up</title>
 
+    <!-- header -->
     <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
       <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +35,9 @@
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
                       <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
                   </li>
                   <li class="nav-item" id='admin' style="display: none;">
                       <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
@@ -74,37 +78,49 @@
           </div>
       </div>
   </header>
+
+<!-- body -->
 <body>
     <h5 class="h5 mb-3 text-center">Welcome to Simple Shopper!</h5>
     <p class = "text-center">Please sign up!</p>
+    <!-- container -->
     <div class="container">
+          <!-- form -->
           <form  id="form" class="form">
-            
+            <!-- first form-row that consist of 2 input fields which are First name and Last Name -->
             <div class="form-row" style="justify-content: center;">
     
               <div class="col-md-3 mb-3">
                 <label style="margin-top: 10px;">First name*</label>
                 <input type="text" class="form-type"  placeholder="First name" id = "name1" >
+                
+                <!-- Icons and message that will be shown if got error or success-->
                 <div class = "i_check">
                   <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
                   <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
                   <small>Error Message</small>
                 </div>
+              
               </div>
     
               <div class="col-md-3 mb-3">
                 <label style="margin-top: 10px;">Last name*</label>
                   <input type="text" class="form-type" placeholder = "Last Name" id ="name2" >
+                  
+                  <!-- Icons and message that will be shown if got error or success-->
                   <div  class = "i_check">
                     <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
                     <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
                     <small>Error Message</small>
                   </div>
+            
               </div>
     
              </div>
 
+          <!-- Second form-row that consist of 2 input fields which are Email and Phone number-->
           <div class="form-row"  style="justify-content: center;">
+
               <div class="col-md-3 mb-3"> 
                <label style="margin-top: 10px;">Email*</label>
                 <input type="text" class="form-type" placeholder= "Please enter email" id = "email" >
@@ -114,6 +130,7 @@
                   <small>Error Message</small>
                 </div>
               </div>
+
               <div class="col-md-3 mb-3"> 
                <label style="margin-top: 10px;">Phone number*</label>
                 <input type="tel" class="form-type" placeholder= "Please enter phone number" id = "phone" >
@@ -123,8 +140,10 @@
                   <small>Error Message</small>
                 </div>
               </div>
+
           </div>
-    
+          
+        <!-- Third form-row that consist of 2 input fields which are password and confirm password -->
          <div class="form-row"  style="justify-content: center;">
     
            <div class="col-md-3 mb-3" >
@@ -157,7 +176,8 @@
          </div>
 
         </div>
-        
+
+        <!-- Last form-row that consist of 2 input fields which are Birthday and Gender -->
         <div>
           <div class="form-row"  style="justify-content:center">
            <label class="form-label" style="margin-right: 160px; margin-top:10px;">Birthday</label>
@@ -169,13 +189,14 @@
             <input type="date" id="birthdaytime" name="birthdaytime" 
             style="padding-right: auto; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; color:#aaa; border: none; outline: none; height:45px;">
             <select class="custom-select custom-select-sm" id='gender' style="width: 150px; margin-left:60px; height:45px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
-                <option value="Male" id ="male">&#xf183;&nbsp;&nbsp;Male</option>
-                <option value="Female" id ="female">&#xf182;&nbsp;&nbsp;Female</option>
+                <option value="Male" id ="male">&#xf183;&nbsp;&nbsp;Male</option> <!-- &#xf183 is the icon code -->
+                <option value="Female" id ="female">&#xf182;&nbsp;&nbsp;Female</option> <!-- &#xf182 is the icon code -->
             </select>
         </div>
 
+            <!--User can sign up with social media platform -->
             <hr style="color: rgb(2, 41, 59); height: 4px;">
-            <p class="social-media">Or<strong><span id="sign_text">&nbsp;sign up</span></strong>&nbsp;with social social platforms</p> </span>
+            <p class="social-media">Or<strong><span id="sign_text">&nbsp;sign up</span></strong>&nbsp;with social media platforms</p> </span>
             <div class="social-media">
               <a hred="#" class="social-icon">
                 <i class="bi bi-facebook" id = "Facebook"></i>
@@ -187,7 +208,8 @@
                 <i class="bi bi-linkedin" id = "Linkedin"></i>
               </a>
              </div>
-
+          
+          <!--Membership agreement -->
           <hr style="height: 4px;">
           <a></a>
           <div class="d-flex justify-content-center">
@@ -203,10 +225,12 @@
               <strong><a href="#" style="margin-left: 20px;">Privacy Policy</a></strong>
           </div>
 
+          <!--sign up button -->
           <div class="d-flex justify-content-center">
             <button type="submit" id = "submit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;">Sign up</button>
           </div>
 
+          <!--If user had already had account, then can press log in here link to login page -->
           <div class="d-flex justify-content-center">
             <div class="row">
               <p class="text-muted" style="margin-top: 10px;">Have an account?</p>
@@ -216,7 +240,8 @@
           </div>
         </form>
     </div>
-    
+
+    <!-- footer -->
     <div class = "footer">
       <div class="container">
         <div class="row">
@@ -267,16 +292,21 @@
         <p class="copyright">Copyright&copy; 2021 Simple Shopper</p>
       </div>
     </div>
+
+    <!-- js part -->
+    <!-- js that used to get the current date -->
     <script>
         var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
+        var dd = String(today.getDate()).padStart(2, '0'); 
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
 
-        today = yyyy + '-' + mm + '-' + dd;
+        today = yyyy + '-' + mm + '-' + dd; //need to fulfill this format yyyy-mm-dd just can set attribute
         var temp = document.querySelector("#birthdaytime");
         temp.setAttribute("value", today);
     </script>
+
+    <!-- js that enable the eye icon to be pressed to see the password, this part for password -->
     <script>
         function myFunction(){
            var x = document.getElementById("password")
@@ -295,7 +325,8 @@
              }
         }
       </script>
-      
+
+      <!-- js that enable the eye icon to be pressed to see the password, this part for confirm password -->
       <script>
           function myFunction2(){
             var x = document.getElementById("password2")

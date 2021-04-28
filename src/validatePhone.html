@@ -12,6 +12,8 @@
     <link href="../style/forgot.css" rel="stylesheet">
     <script src="../js/header.js" defer></script>
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
+   
+    <!-- css that edit the button hover -->
     <style>
       select {
         font-family: 'FontAwesome', 'sans-serif';
@@ -28,21 +30,10 @@
     </style>
     
     <title>Simple Shopper</title>
-    <style>
-      select {
-        font-family: 'FontAwesome', 'sans-serif';
-      }
-
-      .btn:hover{
-        color: rgb(0, 0, 0);
-        background-color: #ffffff;
-        border-radius: 6px;
-        border-color: rgb(38, 126, 209);
-        transition-duration: 0.4s;
-      }
-    </style>
 
    </head>
+   
+   <!-- Header -->
    <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,6 +43,9 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
                 </li>
                 <li class="nav-item" id='admin' style="display: none;">
                     <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
@@ -92,19 +86,25 @@
         </div>
     </div>
 </header>
+
+<!-- body -->
    <body>
      <div class="container">
+
+      <!-- form -->
        <form id="form" class="form">
           <h4 style="margin-top: 20px;"><a href="signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
           </svg></a><strong>Forgot password</strong></h4>
     
           <div class = "d-flex" style="justify-content: center;">
+            <!-- image -->
             <img src="../assets/ForgotPassword/New message-bro.png" style="max-width: 260px; max-height: 460px;">
           </div>
           <p class="text-center">Please enter your registered email ID/Phone.</p>
           <p class="text-center text-muted">We will send a verification code to your registerd Phone number.</p>
           
+          <!-- form-type -->
           <div class = "form-type" style="width:350px">
             <i class="bi bi-phone-vibrate-fill"></i>
             <input type="tel" placeholder="Phone Number" id = "phoneSMS"/>
@@ -115,12 +115,15 @@
             </div>
           </div>
           
+          <!-- Next button -->
           <div class="d-flex justify-content-center">
             <button type="submit" id = "submit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 20px;">Next</button>
           </div>
       
         </form>
      </div>
+
+     <!-- Footer -->
      <div class = "footer" style="margin-top: 50px;">
       <div class="container">
           <div class="row justify-content-center">
@@ -168,6 +171,8 @@
           <p class="copyright">Copyright&copy; 2021 Simple Shopper</p>
       </div>
   </div>
+
+  <!-- js part -->
     <script>
       const form = document.getElementById('form');
       const phone = document.getElementById('phoneSMS'); 
@@ -181,6 +186,7 @@
       function checkInputs(){
         const phoneValue = phone.value.trim()
         
+        // check phone number format
         if(phoneValue === ''){
           setErrorFor(phone, 'Phone number cannot be blank');
         }else if(!validatePhoneNumber(phoneValue)){
@@ -192,16 +198,19 @@
         }
       }
 
+      // function that validate the phone number format is correct or not
       function validatePhoneNumber(input_str) {
           var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
           return re.test(input_str);
       }
 
+      // press the button to link the page to otp page
       function linkTo(){
-          window.location.href = 'forgot2.html'
+          window.location.href = 'otp.html'
       }
 
+      // set new class for error. If got error, then add class named error into the class name
       function setErrorFor(input, message){
           const form_type = input.parentElement;
           const small = form_type.querySelector('small');

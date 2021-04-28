@@ -43,7 +43,7 @@ function checkInputs(){
         setSuccessFor(name2);
     }
 
-
+    //check the email format
     if(emailValue === ''){
         setErrorFor(email, 'Email cannot be blank');
     }else if(!isEmail(emailValue)){
@@ -52,6 +52,7 @@ function checkInputs(){
         setSuccessFor(email);
     }
 
+    //check the password format
     if(passwordValue === ''){
         setErrorFor(password, 'Password cannot be blank');
     }
@@ -64,6 +65,7 @@ function checkInputs(){
         setSuccessFor(password)
     }
 
+    //check the confirm password whether correct or not
     if(password2Value === ''){
         setErrorFor(password2, 'Password cannot be blank');
     }else if(password2Value.length >15){
@@ -78,6 +80,8 @@ function checkInputs(){
         setSuccessFor(password2)
     }
 
+
+    // check the phone number format correct or not
     if(phoneValue === ''){
         setErrorFor(phone, 'Phone number cannot be blank');
     }else if(!validatePhoneNumber(phoneValue)){
@@ -86,22 +90,23 @@ function checkInputs(){
     else{
         setSuccessFor(phone)
     }
-
-    if(!Date.parse(birthValue)){
-        setErrorForDate(birth, 'Birthday cannot be blank');
-    }
     
+    //check all condition, whether user had fill up all and in correct format or not?
     if(name1Value !=='' && name2Value !== '' && passwordValue !== '' && password2Value !== '' &&
-        emailValue !== '' && phoneValue !== '' && birthValue !== ''){
+       emailValue !== '' && phoneValue !== '' && birthValue !== '' && validatePhoneNumber(phoneValue) && isEmail(emailValue) &&
+       7 < passwordValue.length < 16 &&  7 < password2Value.length && passwordValue === password2Value){
         if(signUp(name2Value+name1Value,emailValue,phoneValue,password2Value,birthValue,genderValue)){
+            //if correct then will pop up sign up success message
             swal("Sign Up Success", "Please go to login page", "success");
             setTimeout(function(){window.location.href='signin.html'}, 1000);
         }
         else{
+            //if the account already in the local storage then user existed message will be pop up
             swal("User existed", "Please register using other email and phone number", "error");
         }
     }
 }
+
 
 function signUp(name,email,phone,password,dob,gender){
     const users=JSON.parse(localStorage.getItem('users')||[]);
@@ -138,30 +143,22 @@ function checkExistUser(email,phone,users){
     }
 }
 
+// set new class for error. If got error, then add class named error into the class name
 function setErrorFor(input, message){
     const col_md_3 = input.parentElement; //col-md-3
-    const small = col_md_3.querySelector('small');
+    const small = col_md_3.querySelector('small'); // access the small tag
 
     // add error message inside small
     small.innerText = message;
 
-    // add error class
+    // add error class    (new class name)
     col_md_3.className = 'col-md-3 mb-3 error';
 }
 
-function setErrorForDate(input, message){
-    const col_md_2 = input.parentElement; 
-    const small = col_md_2.querySelector('small');
-
-    // add error message inside small
-    small.innerText = message;
-
-    // add error class
-    col_md_2.className = 'col-md-2 error';
-}
-
+// set new class for success. If got success, then add class named success into the class name
 function setSuccessFor(input){
     const col_md_3 = input.parentElement; //col-md-3
+    // set the success class  (new class name)
     col_md_3.className = 'col-md-3 mb-3 success';
 }
 
@@ -169,10 +166,12 @@ function linkToLoginPage(){
     window.location.href = "signin.html"
 }
 
+//check the email format input by user is correct or not
 function isEmail(email){
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
 
+//check the phone number format input by user is correct or not
 function validatePhoneNumber(input_str) {
     var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 

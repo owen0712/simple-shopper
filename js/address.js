@@ -84,6 +84,7 @@ function addNewAddress(n_id,n_name,n_phone,n_postal_code,n_state,n_area,n_descri
             exist=false;
         }
     })
+    //check exist and default to decide the position of address
     if(!exist){
         if(n_default_add){ 
             addressesArr.unshift(new_address);
@@ -128,11 +129,13 @@ $("form").submit(function(e){
     hideForm();
 });
 
+//set delete function
 $('body').on('click', '.delete', function(){
     removeAddress($(this).parent().find('.id').text())
     render()
 });
 
+//set close form function
 $('body').on('click', '.btn-close', function(){
     console.log('Im in')
     hideForm();
@@ -140,6 +143,7 @@ $('body').on('click', '.btn-close', function(){
     editing=0;
 });
 
+//set edit function
 $('body').on('click', '.edit', function(){
     editing=$(this).parent().find('.id').text();
     showEditForm();
@@ -148,6 +152,7 @@ $('body').on('click', '.edit', function(){
 
 $(document).ready(render())
 
+//output all address stored
 function render(){
     var addressSection=document.querySelector('#addresses')
     var content=''

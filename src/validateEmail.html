@@ -12,6 +12,8 @@
     <script src="../js/forgot.js" defer></script>
     <script src="../js/header.js" defer></script>
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
+    
+    <!-- css that edit the button hover -->
     <style>
       select {
         font-family: 'FontAwesome', 'sans-serif';
@@ -29,17 +31,9 @@
     
     <title>Simple Shopper</title>
     
-    <style>
-      .btn:hover{
-        color: rgb(0, 0, 0);
-        background-color: #ffffff;
-        border-radius: 6px;
-        border-color: rgb(38, 126, 209);
-        transition-duration: 0.4s;
-      }
-    </style>
-    
    </head>
+
+   <!-- Header -->
    <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,6 +43,9 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
                 </li>
                 <li class="nav-item" id='admin' style="display: none;">
                     <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
@@ -89,21 +86,30 @@
         </div>
     </div>
 </header>
+
+<!-- Body -->
    <body>
+     <!-- container -->
      <div class="container">
+       <!-- Form -->
       <form  id="form" class="form">
+        <!-- user can press the arrow button back to the login page -->
         <h4 style="margin-top: 20px;"><a href="signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
         </svg></a><strong>Forgot password</strong></h4>
 
+        <!-- use the d-flex class and justify-content:center to align them to center -->
         <div class = "d-flex" style="justify-content: center;">
+          <!-- image -->
           <img src="../assets/ForgotPassword/Forgot password-cuate.png" style="max-width: 260px; max-height: 460px;">
         </div>
         <p class="text-center">Please enter your registered email ID/Phone.</p>
         <p class="text-center text-muted">We will send a verification code to your registerd email ID.</p>
-      
+        
+        <!-- form-type -->
         <div class = "form-type" style="width:350px">
           <i class="bi bi-envelope-fill"></i>
+          <!-- user can input email -->
           <input type="text" placeholder="Email" id = "email"/>
           <div  class = "i_check">
             <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
@@ -111,12 +117,15 @@
             <small>Error Message</small>
           </div>
         </div>
-      
+        
+        <!-- Next button to proceed to next page -->
         <div class="d-flex justify-content-center" style="margin-top:20px;">
           <button type="submit" id = "submit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;">Next</button>
         </div>
       </form>
      </div>
+
+     <!-- footer -->
      <div class = "footer" style="margin-top: 50px;">
       <div class="container">
           <div class="row justify-content-center">
