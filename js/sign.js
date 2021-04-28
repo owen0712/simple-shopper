@@ -92,7 +92,8 @@ function checkInputs(){
     }
     
     if(name1Value !=='' && name2Value !== '' && passwordValue !== '' && password2Value !== '' &&
-        emailValue !== '' && phoneValue !== '' && birthValue !== ''){
+       emailValue !== '' && phoneValue !== '' && birthValue !== '' && validatePhoneNumber(phoneValue) && isEmail(emailValue) &&
+       7 < passwordValue.length < 16 &&  7 < password2Value.length && passwordValue === password2Value){
         if(signUp(name2Value+name1Value,emailValue,phoneValue,password2Value,birthValue,genderValue)){
             swal("Sign Up Success", "Please go to login page", "success");
             setTimeout(function(){window.location.href='signin.html'}, 1000);
