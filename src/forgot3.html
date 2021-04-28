@@ -31,6 +31,7 @@
     <title>Simple Shopper</title>
 
    </head>
+
    <!-- Header -->
    <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
     <div class="container-fluid">
@@ -84,24 +85,32 @@
         </div>
     </div>
 </header>
+
+<!-- body -->
    <body>
+       <!-- Container -->
      <div class="container">
       <h4 style="margin-top: 20px;"><a href="signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
       </svg></a><strong>Forgot password</strong></h4>
 
+      <!-- use the d-flex class and justify-content:center to align them to center -->
       <div class = "d-flex" style="justify-content: center;">
         <img src="../assets/ForgotPassword/Authentication-rafiki.png" style="max-width: 260px; max-height: 460px;">
       </div>
       <p class="text-center">To protect your account security, we need to verify your identity.</p>
       <p class="text-center text-muted">Please choose a way to verify.</p>
       <div class="d-flex justify-content-center">
+      <!-- User can press this button in order to verify through Email -->
         <a href="validateEmail.html"><button type="submit" id = "submit" style="border-radius: 55px; width: 220px; margin-top: 10px; color:coral; background-color: rgb(228, 222, 222);"><i class="bi bi-envelope-fill"></i>&nbsp;Verify through Email</button></a>
       </div>
+
+      <!-- User can press this button in order to verify through SMS code -->
       <div class="d-flex justify-content-center">
         <a href="validatePhone.html"><button type="submit" id = "submit" style="border-radius: 55px; width: 220px; margin-top: 10px; color:white; background-color: coral; justify-content:center;"><i class="bi bi-phone-vibrate-fill"></i><small>&nbsp;Verify through SMS Code</small></button></a>
       </div>
      </div>
+     <!-- Footer -->
      <div class = "footer" style="margin-top: 50px;">
       <div class="container">
           <div class="row justify-content-center">
