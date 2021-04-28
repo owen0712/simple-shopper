@@ -1,3 +1,4 @@
+//set the value of user details
 $('#username').val(user['username']);
 $('#name').val(user['name']);
 $('#email').val(user['email']);
@@ -13,6 +14,7 @@ else{
 $('#dob').val(user['dob']); 
 img_preview.src=user['profile']
 
+//set submit function
 $('form').on('submit',function(e){
     e.preventDefault();
     swal("Good job!", "Profile Updated", "success");
@@ -68,6 +70,7 @@ function preview(){
     });
 }
 
+//set delete account function
 $('.btn-danger').on('click',function(e){
     e.preventDefault()
     swal({

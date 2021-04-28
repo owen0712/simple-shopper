@@ -1,4 +1,5 @@
 const user_database=JSON.parse(localStorage.getItem('users'))
+//setting local storage
 if(user_database===null){
     const users=[{
         id:1,
@@ -57,10 +58,9 @@ function updateStorage(current_user){
     localStorage.setItem('users',JSON.stringify(user_list))
 }
 
+//set the header if user logged in
 var user=JSON.parse(localStorage.getItem('user')||{})
-//admin section
 const admin_anchor=document.querySelector('#admin')
-
 const signin_anchor=document.querySelector('#sign-in')
 const user_section=document.querySelector('.user')
 if(user){
