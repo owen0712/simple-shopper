@@ -50,7 +50,7 @@
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle btn-lg" href="#" id="navbarDropdown" role="Button" data-toggle="dropdown">Product List</a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="Javascript:filterCategory('All')">All</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('All')">All</a>    <!--link to js to use the filter function-->
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="Javascript:filterCategory('Bath and Body')">Bath and Body</a>
                         <div class="dropdown-divider"></div>
@@ -82,7 +82,7 @@
             </div>
         </nav>
         <main class="container">
-            <table id="productTable" class="mb-4">
+            <table id="productTable" class="mb-4">    <!--add the products inside a table-->
                 <thead>
                     <tr>
                         <th>Select</th>
@@ -1180,8 +1180,8 @@
 
                 </tfoot>
             </table>
-            <button id="add_btn" class="btn btn-success btn-lg"><i class="bi bi-plus-square"></i> Add product</button> &nbsp;
-            <button type="button" class="delete-row btn btn-danger btn-lg"><i class="bi bi-trash"></i> Delete product</button>
+            <button id="add_btn" class="btn btn-success btn-lg"><i class="bi bi-plus-square"></i> Add product</button> &nbsp;    <!--add product button-->
+            <button type="button" class="delete-row btn btn-danger btn-lg"><i class="bi bi-trash"></i> Delete product</button>   <!--delete product button-->
         </main>
         <footer>
             <div class = "footer mt-5">
@@ -1234,7 +1234,7 @@
         </footer>
     </div>
     <div class="popup">
-        <form action="" method="POST">
+        <form action="" method="POST">    <!--create a form for user to add new product-->
             <fieldset>
                 <legend>Add New Product</legend>
                 <button id="close" type="button" class="btn-close btn-lg" aria-label="Close"></button>
