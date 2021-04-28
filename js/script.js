@@ -1,13 +1,22 @@
+//To store the shopping list name's text edit area element
 var thetextlist = document.getElementsByClassName("thetext");
 var editorlist = document.getElementsByClassName("editor");
-var removeitem = document.getElementsByClassName("remove");
+
+//add event listener of toggleEditor() and doEdit() for every shopping list.
 for (var i = 0; i < thetextlist.length; i++) {
     thetextlist[i].addEventListener('dblclick', toggleEditor);
 }
 for (var i = 0; i < editorlist.length; i++) {
     editorlist[i].children[1].addEventListener('click', doEdit);
+    editorlist[i].children[0].addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            event.target.nextElementSibling.dispatchEvent(new CustomEvent("click", { "detail": "doEdit" }));
+        }
+    });
 }
 
+//toggle the edit shopping list text area for editing
 function toggleEditor(ev) {
     var subject = ev.target.innerHTML;
     ev.target.nextElementSibling.children[0].value = subject;
@@ -15,6 +24,7 @@ function toggleEditor(ev) {
     ev.target.nextElementSibling.style.display = 'inline';
 }
 
+//edit the shopping list name and turn back to its original layout
 function doEdit(ev) {
     var subject = ev.target.previousElementSibling.value;
     var accept = true;
@@ -28,7 +38,7 @@ function doEdit(ev) {
     if (subject == ev.target.parentElement.previousElementSibling.textContent)
         accept = true;
     if (!accept) {
-        swal("Shopping List Name" + subject + " is duplicate. Please reenter.");
+        swal("Shopping List Name \"" + subject + "\" is duplicate. Please reenter.");
     } else {
         swal("The list name is successfully edited!", {
             icon: "success",
@@ -39,6 +49,7 @@ function doEdit(ev) {
     }
 }
 
+//control the quantity "add" button, "minus button" and the input number area shown
 function wcqib_refresh_quantity_increments() {
     jQuery("div.quantity:not(.buttons_added), td.quantity:not(.buttons_added)").each(function(a, b) {
         var c = jQuery(b);
@@ -62,9 +73,14 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
     b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d || (d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(this).is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d && b <= d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
 });
 
+//control the entire shopping lists to have a maximum 10 shopping lists.
+//user will hard to manage the shopping list when it goes too much.
 var list = ["Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
 
+//get the value of user input on the "add shopping list" input area.
 var addList = document.getElementById("myInput");
+
+//add the enter key for the "add" button that add shopping list.
 addList.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
         event.preventDefault();
@@ -72,8 +88,8 @@ addList.addEventListener("keyup", function(event) {
     }
 });
 
+//add shopping list function
 function newElement() {
-
     if (list.length == 10) {
         $("#accordionExample").children().remove();
     }
@@ -129,27 +145,23 @@ function newElement() {
             text: "\"" + inputValue + "\" is added succesfully.",
             icon: "success",
         });
+        //add event listener to the new shopping list element
         thetextlist = document.getElementsByClassName("thetext");
         editorlist = document.getElementsByClassName("editor");
         thetextlist[thetextlist.length - 1].addEventListener('dblclick', toggleEditor);
         editorlist[editorlist.length - 1].children[1].addEventListener('click', doEdit);
+        editorlist[editorlist.length - 1].children[0].addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                event.target.nextElementSibling.dispatchEvent(new CustomEvent("click", { "detail": "doEdit" }));
+            }
+        });
     }
+    //set back the input area value to ""
     document.getElementById("myInput").value = "";
-
-
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
-        }
-    }
-
 }
 
-function addListId(targetId) {
-    list.push(targetId.substring(7, targetId.length));
-}
-
+//delete the shopping list when trash at the shopping list icon is clicked
 $('body').on('click', '.deleteList', function() {
     swal({
             title: "Are you sure?",
@@ -174,9 +186,14 @@ $('body').on('click', '.deleteList', function() {
                 return;
             }
         });
-
 });
 
+//add the shopping list id when the shopping list is deleted
+function addListId(targetId) {
+    list.push(targetId.substring(7, targetId.length));
+}
+
+//delete the respective product item in the shopping list is deleted when "remove" is clicked
 $('main').on('click', '.remove', function() {
     swal({
             title: "Are you sure?",
@@ -210,7 +227,9 @@ $('main').on('click', '.remove', function() {
 
 });
 
-$('main').on('change', '.qty', function() {
+//automatically change the subtotal price and total price in the shopping list
+//when user change the quantity in the input number area
+$('main').on('change', '.qty', function(e) {
     var qty = parseInt($(this).val());
     if (isNaN(qty)) {
         swal("Please input a value!!!!!");
@@ -228,12 +247,12 @@ $('main').on('change', '.qty', function() {
     var previousPriceText = $(this).parent().parent().next().html();
     var previousPrice = parseFloat(previousPriceText.substr(3, previousPriceText.length - 1));
     var totalAddedPrice = (qty * price) - previousPrice;
-
-
     $(this).parent().parent().next().html("RM " + (qty * price).toFixed(2));
     calculate(parent, totalAddedPrice);
 });
 
+//automatically change the subtotal price and total price in the shopping list
+//when user click on "minus" button on the left of input number area
 $('main').on('click', '.minus', function() {
     var qty = parseInt($(this).next().val()) - 1;
     var priceText = $(this).parent().parent().prev().find("small").text();
@@ -245,6 +264,8 @@ $('main').on('click', '.minus', function() {
     calculate(parent, -price);
 });
 
+//automatically change the subtotal price and total price in the shopping list
+//when user click on "plus" button on the right of input number area
 $('main').on('click', '.plus', function() {
     var qty = parseInt($(this).prev().val()) + 1;
     var priceText = $(this).parent().parent().prev().find("small").text();
@@ -256,6 +277,7 @@ $('main').on('click', '.plus', function() {
     calculate(parent, price);
 });
 
+//automatically re-calculate the total price when the quantity is change
 function calculate(parent, price) {
     var totalTag = parent.find(".totalItemPrice");
     var totalText = totalTag.text();

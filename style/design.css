@@ -1,6 +1,11 @@
+/*initial shopping lists' name's editor style*/
+
 div .editor {
     display: none;
 }
+
+
+/*Allow item in the shopping list scrollable */
 
 .scroll-section {
     margin-top: 5px;
@@ -10,10 +15,10 @@ div .editor {
 }
 
 
-/*----------------Create List-------------------*/
+/*----------------Create New Shopping List-------------------*/
 
 
-/* Style the header */
+/* Style the header class of the add shopping list area  */
 
 .header {
     background-color: lightblue;
@@ -82,12 +87,19 @@ table {
     border-collapse: collapse;
 }
 
+
+/*remove list trash button*/
+
 .bi-trash-fill:hover {
     fill: darkred;
 }
 
+
+/*remove item button*/
+
 .remove {
     color: red;
+    margin: -4px;
     text-decoration: none;
     padding: 2px 5px 2px 5px;
     font-size: 12px;
@@ -100,6 +112,9 @@ table {
     border-radius: 5px;
     font-weight: bold;
 }
+
+
+/*area of the items in the shopping list*/
 
 .cart-info {
     display: flex;
@@ -130,6 +145,9 @@ td img {
     margin-right: 10px;
 }
 
+
+/*area of the total price in a single shopping list*/
+
 .total-price {
     display: flex;
     justify-content: flex-end;
@@ -140,6 +158,9 @@ td img {
     width: 100%;
     max-width: 440px;
 }
+
+
+/*align last column to right*/
 
 td:last-child {
     text-align: right;
@@ -155,11 +176,42 @@ tr {
 }
 
 
-/* -- quantity box -- */
+/*status of the product item when available*/
+
+.available {
+    font-size: 10px;
+    margin: 0 0 3px;
+    color: white;
+    padding: 2px;
+    width: fit-content;
+    font-weight: bolder;
+    background: #19875493;
+    border-radius: 5px;
+}
+
+
+/*status of the product item when out of stock*/
+
+.outStock {
+    font-size: 10px;
+    margin: 0 0 3px;
+    color: white;
+    padding: 2px;
+    width: fit-content;
+    font-weight: bolder;
+    background: #dc35467e;
+    border-radius: 5px;
+}
+
+
+/* ------- quantity box -------- */
 
 .quantity {
     display: inline-block;
 }
+
+
+/*quantity input area*/
 
 .quantity .input-text.qty {
     width: 35px;
@@ -171,6 +223,9 @@ tr {
     border-left: none;
 }
 
+
+/*style the button for the "+" and "-" */
+
 .quantity.buttons_added {
     text-align: left;
     position: relative;
@@ -178,12 +233,18 @@ tr {
     vertical-align: top;
 }
 
+
+/*style the "+" and "-" text in the button */
+
 .quantity.buttons_added input {
     display: inline-block;
     margin: 0;
     vertical-align: top;
     box-shadow: none;
 }
+
+
+/*style both of the "+" and "-" button */
 
 .quantity.buttons_added .minus,
 .quantity.buttons_added .plus {
@@ -203,6 +264,9 @@ tr {
     border-left: 0;
 }
 
+
+/*style both of the "+" and "-" button when hover*/
+
 .quantity.buttons_added .minus:hover,
 .quantity.buttons_added .plus:hover {
     background: #eeeeee;
@@ -220,13 +284,12 @@ tr {
     outline: none;
 }
 
-.accordion-item {
-    background: none;
-}
-
 .accordion-item-list {
     background-color: rgba(211, 211, 211, 0.9);
 }
+
+
+/*----Home button in the shopping list when the shopping list is empty-------*/
 
 .backIndex:hover {
     padding: 4px;
@@ -235,6 +298,9 @@ tr {
     background: rgba(173, 216, 230, 0.4);
     font-weight: bolder;
 }
+
+
+/*---------Style the scroll bar of the entire pages------------*/
 
 body::-webkit-scrollbar {
     width: 7px;
