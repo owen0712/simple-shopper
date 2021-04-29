@@ -1,13 +1,3 @@
-/* GLOBAL STYLES
--------------------------------------------------- */
-/* Padding below the footer and lighter body text */
-
-
-
-
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
-
 /* Carousel base class */
 .carousel {
   margin-bottom: 4rem;
@@ -33,8 +23,7 @@
 
 
 
-/* RESPONSIVE CSS
--------------------------------------------------- */
+/* Responsive CSS for the carousel */
 
 @media (min-width: 40em) {
   /* Bump up size of carousel content */
@@ -55,11 +44,10 @@
   }
 }
 
-
+/* Spinner to show that an item is loading */
 .spinner {
   display: block;
   position: fixed;
-  z-index: 1031; /* High z-index so it is on top of the page */
   top: 50%;
   right: 50%; /* or: left: 50%; */
   margin-top: 100px; /* half of the elements height */
@@ -70,7 +58,7 @@
   margin-bottom: 15px;
 }
 
-/*Card css stuff*/
+/*Card css like the card body, the quantity adjsutment, etc*/
 .quantity {
   display: inline-block;
 }
@@ -212,26 +200,30 @@
   display: none;
 }
 
-
+/* A spacer to put some space between different contents */
 .spacer{
   padding: 10mm;
 }
 
+/* adjusting the color foor the cutery icon for the category in search page */
 .cutlery{
   color: white;
   -webkit-text-stroke-width: 1.2px;
   -webkit-text-stroke-color: black;
 }
 
+/* the >> after the see more on the bottom of the main page. This is just to inrease the thickness */
 .bi-chevron-double-right{
   -webkit-text-stroke-width: 1.5px;
 }
-
+/* See more anchor tag for the main page */
 .seeMore{
   text-decoration: none;
   color: inherit;
 }
 
+
+/* CSS for the scrollbar */
 body::-webkit-scrollbar {
   width: 7px;               /* width of the entire scrollbar */
 }
@@ -245,6 +237,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;       /* roundness of the scroll thumb */
 }
 
+/* CSS for alert so that buttons are centered */
 .swal-footer {
   text-align: center;
 }
@@ -254,6 +247,7 @@ body::-webkit-scrollbar-thumb {
   margin-right: 100px;
 }
 
+/* CSS for the category anchor tags so that they are black instead of blue */
 li a{
   color: black;
 }

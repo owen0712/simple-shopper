@@ -50,7 +50,7 @@
     <script src="../js/increment.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
-
+    <!-- The first nav bar that is not stuck on top. This is for less frequently used buttons like login and sign up -->
     <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,6 +77,7 @@
             </div>
         </div>   
     </header>
+    <!-- Second navbar that is always on top of the page with the search and the shopping cart button -->
     <header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <div class="col col-auto">
@@ -104,7 +105,7 @@
         </div>
     </header>
 
-
+    <!-- Carousel  -->
       <div id="myCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -138,27 +139,37 @@
         </button>
       </div>
 
+      <!-- Main container for the page -->
       <div class="container">
+          <!-- Featured category -->
         <div >
           <h1>Featured Items</h1>
           <p class="lead">Have a look at what everyone is buying right now.</p>
         </div>
         <div class="row mx-auto">
           <div class="col">
+              <!-- Card for each of the product, almost same for every product -->
             <div class="card">
+                <!-- Image of the product -->
             <img src="../assets/Image/Beverage/Beverage-5.png" class="mx-auto product-image" alt="Nescafe" height="auto" width="auto">
             <div class="card-body">
+                <!-- name of the product -->
                 <h5 class="card-title">Nescafe
+                    <!-- Category of the product -->
                     <p class="card-category">Beverage</p>
                 </h5>
+                <!-- Description of the product -->
                 <p class="card-text">Nescafe Original Drink 240ml <br> </p>
+                <!-- Price of the product -->
                 <p style="font-size: small; float: right;"> RM 2.60/each</p>
             </div>
             <div class="card-body">
+                <!-- Quantity buttons  -->
                 <div class="quantity buttons_added" style="float: left;">
                     <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
                         value="+" class="plus">
                 </div>
+                <!-- Add to cart button -->
                 <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtocart()">Add to cart</button>
             </div>
             </div>
@@ -306,8 +317,10 @@
 
         </div>
 
-        <div class="spacer"></div>
+        <!-- Spacer to have spacing between the content -->
+        <div class="spacer"></div> 
 
+        <!-- Side Scrolling category (Drink) -->
         <div class="shopctg">
           <div>
             <h1>Drinks</h1>
@@ -520,6 +533,7 @@
 
         <div class="spacer"></div>
         
+        <!-- Side Scrolling category (Instant Noodle) -->
         <div class="shopctg">
           <div >
             <h1>Instant noodle</h1>
@@ -731,6 +745,7 @@
 
       <div class="spacer"></div>
 
+      <!-- See more button in the bottom of the page with the chevron -->
       <div class="d-flex justify-content-center">
         <a href="../src/search.html" class="seeMore">
             <h3>See all products<i class="bi bi-chevron-double-right"></i></h3>

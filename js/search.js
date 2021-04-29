@@ -1,5 +1,6 @@
 window.onload=search();
 
+//display only relevant products to the serach term based on their names or description
 function search(){
     const currentURL=window.location.search;
     const urlParam= new URLSearchParams(currentURL);
@@ -23,8 +24,7 @@ function search(){
         }
 }
 
-//search function
-
+//Fiter function that only displays the products in the category
 function filter(input)
 {
     var ctg, target, card;
@@ -42,6 +42,7 @@ function filter(input)
     }
 }
 
+//function to pass serach variable to the new page
 function searchFunc(){
     input = document.getElementById("search");
     var search= input.value;

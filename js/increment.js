@@ -1,3 +1,4 @@
+//increment function that increases or decreases the number in the product cards and allows for user input
 function wcqib_refresh_quantity_increments() {
     jQuery("div.quantity:not(.buttons_added), td.quantity:not(.buttons_added)").each(function(a, b) {
         var c = jQuery(b);
@@ -21,11 +22,14 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
     b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d || (d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(this).is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d && b <= d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
 });
 
+//function that pops up the allert when adding items to the shopping list. Also redirects to the log in page if the user is not logged in
+//currently the buttons are fixed but will be adjusted once connected to a database
 function addtocart()
 {
     const login=JSON.parse(localStorage.getItem('user'));
     if(login===null){
 	console.log('not work')
+        //delay before redirecting
         swal("You have to sign in first", "It will switch to sign in page in 2 seconds");
         setTimeout(function(){window.location.href='signin.html'}, 2000);
     }
