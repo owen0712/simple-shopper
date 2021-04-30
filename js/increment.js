@@ -24,7 +24,7 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
 
 //function that pops up the allert when adding items to the shopping list. Also redirects to the log in page if the user is not logged in
 //currently the buttons are fixed but will be adjusted once connected to a database
-function addtocart()
+function addtolist()
 {
     const login=JSON.parse(localStorage.getItem('user'));
     if(login===null){
