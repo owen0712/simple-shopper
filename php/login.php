@@ -1,3 +1,5 @@
+<?php require './fb-init.php'; ?>
+<a href="<?php echo $login_url; ?>">Login With facebook</a>
 <!doctype html>
 <html lang="en">
   <head>
@@ -130,11 +132,12 @@
             <button type="submit" id = "submit" class="btn btn-primary" style="border-radius: 55px; margin-left: 10px; width: 100px;">Login</button>
         </div>
         <hr>
+
          <!--User can login with social media platform -->
         <p class="social-media">Or <strong><span id="sign_text">&nbsp;login</span></strong>&nbsp;with social social platforms</p> </span>
           <div class="social-media">
-            <a hred="#" class="social-icon">
-              <i class="bi bi-facebook" id = "Facebook" style="background-image: url(Facebook_icon.png);"></i>
+            <a href="#" class="social-icon">
+              <i class="bi bi-facebook" id = "Facebook"></i>
             </a>
             <a hred="#" class="social-icon">
                 <i class="bi bi-google" id="Google"></i>
@@ -338,3 +341,6 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+
