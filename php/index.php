@@ -126,7 +126,7 @@
                     <?php
                         if(!empty($data['given_name']))
                         {
-                            echo '<li class = nav-item"><a class="nav-link" href="../src/profile.html style="color: white; margin-top:5px;">'.$_SESSION['user_first_name'].'</a>';   
+                            echo '<li class = nav-item"><a class="nav-link" id="sign-in" href="../src/profile.html" style="color: white;">'.$_SESSION['user_first_name'].'</a>';   
                             echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="logout.php" style="color:white;">Logout</a>'; 
                         }
                          else{
