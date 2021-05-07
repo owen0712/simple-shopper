@@ -120,16 +120,14 @@
                     <li class="nav-item" id='admin' style="display: none;">
                         <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
                     </li>
-                    <li class="nav-item user">
-                        <a class="nav-link" id='sign-up' href="../src/sign.html" style="color: white;">Sign Up</a>
-                    </li>
                     <?php
                         if(!empty($data['given_name']))
                         {
-                            echo '<li class = nav-item"><a class="nav-link" id="sign-in" href="../src/profile.html" style="color: white;">'.$_SESSION['user_first_name'].'</a>';   
-                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="logout.php" style="color:white;">Logout</a>'; 
+                            echo '<li class = nav-item"><a class="nav-link" href="../src/profile.html" style="color: white;">'.$_SESSION['user_first_name'].'</a>';   
+                            echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
                         }
                          else{
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="../src/sign.html" style="color:white;">Sign Up</a>';
                             echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="../php/login.php" style="color:white;">Log in</a>';
                          }
                     ?>
