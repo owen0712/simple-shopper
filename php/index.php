@@ -1,3 +1,56 @@
+<?php
+    include ('config.php');
+    $login_button = '';
+
+    //This $_GET["code"] variable value received after user has login into their Google Account redirct to PHP script then this variable value has been received
+    if(isset($_GET["code"]))
+    {
+    //It will Attempt to exchange a code for an valid authentication token.
+    $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
+
+    //This condition will check there is any error occur during geting authentication token. If there is no any error occur then it will execute if block of code/
+    if(!isset($token['error']))
+    {
+    //Set the access token used for requests
+    $google_client->setAccessToken($token['access_token']);
+
+    //Store "access_token" value in $_SESSION variable for future use.
+    $_SESSION['access_token'] = $token['access_token'];
+
+    //Create Object of Google Service OAuth 2 class
+    $google_service = new Google_Service_Oauth2($google_client);
+
+    //Get user profile data from google
+    $data = $google_service->userinfo->get();
+
+    //Below you can find Get profile data and store into $_SESSION variable
+    if(!empty($data['given_name']))
+    {
+    $_SESSION['user_first_name'] = $data['given_name'];
+    }
+
+    if(!empty($data['family_name']))
+    {
+    $_SESSION['user_last_name'] = $data['family_name'];
+    }
+
+    if(!empty($data['email']))
+    {
+    $_SESSION['user_email_address'] = $data['email'];
+    }
+
+    if(!empty($data['gender']))
+    {
+    $_SESSION['user_gender'] = $data['gender'];
+    }
+
+    if(!empty($data['picture']))
+    {
+    $_SESSION['user_image'] = $data['picture'];
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +112,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
+                        <a class="nav-link" href="../php/index.php" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
@@ -70,9 +123,16 @@
                     <li class="nav-item user">
                         <a class="nav-link" id='sign-up' href="../src/sign.html" style="color: white;">Sign Up</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id='sign-in' href="../php/login.php" style="color: white;">Log in</a>
-                    </li>
+                    <?php
+                        if(!empty($data['given_name']))
+                        {
+                            echo '<li class = nav-item"><a class="nav-link" href="../src/profile.html style="color: white; margin-top:5px;">'.$_SESSION['user_first_name'].'</a>';   
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="logout.php" style="color:white;">Logout</a>'; 
+                        }
+                         else{
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="../php/login.php" style="color:white;">Log in</a>';
+                         }
+                    ?>
                 </ul>
             </div>
         </div>   

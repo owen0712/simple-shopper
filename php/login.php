@@ -1,8 +1,24 @@
-<?php require './fb-init.php'; ?>
-<a href="<?php echo $login_url; ?>">Login With facebook</a>
-<!doctype html>
+<?php
+
+//index.php
+
+//Include Configuration File
+include('config.php');
+
+$login_button = '';
+
+//This is for check user has login into system by using Google account, if User not login into system then it will execute if block of code and make code for display Login link for Login using Google account.
+if(!isset($_SESSION['access_token']))
+{
+ //Create a URL to obtain user authorization
+ $login_button = '<a href="'.$google_client->createAuthUrl().'" class="social-icon"><i class="bi bi-google" id="Google" /></i></a>';
+}
+
+?>
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -22,7 +38,7 @@
     <link href="../style/signin.css" rel="stylesheet">
      
     <!-- sweetalert -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=tXcrjbddiLtZ3VxJ7RX9HsyHwnGFCJ8pXfkD3RuEb_E-PEd0aXkjVIwwkEiQXRZ96NLpW502b9d1CSFlzns-jg" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="http://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cDovL2xvY2FsaG9zdC9zaW1wbGUtc2hvcHBlci9waHAvbG9naW4ucGhw"/><script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/header.js" defer></script>
     
   </head>
@@ -36,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
+                    <a class="nav-link" href="../php/index.php" style="color: white;">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
@@ -132,23 +148,28 @@
             <button type="submit" id = "submit" class="btn btn-primary" style="border-radius: 55px; margin-left: 10px; width: 100px;">Login</button>
         </div>
         <hr>
-
          <!--User can login with social media platform -->
         <p class="social-media">Or <strong><span id="sign_text">&nbsp;login</span></strong>&nbsp;with social social platforms</p> </span>
-          <div class="social-media">
+        <div class="social-media">
             <a href="#" class="social-icon">
-              <i class="bi bi-facebook" id = "Facebook"></i>
+              <i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i>
             </a>
-            <a hred="#" class="social-icon">
-                <i class="bi bi-google" id="Google"></i>
-            </a>
-            <a hred="#" class="social-icon">
-              <i class="bi bi-linkedin" id = "Linkedin"></i>
-            </a>
-          </div>
-          <br>
+            <?php
+              if($login_button == '')
+              {
+                echo '<a href="'.$google_client->createAuthUrl().'" class="social-icon"><i class="bi bi-google" id="Google" /></i></a>';
+              }
+              else
+              {
+                echo $login_button;
+              }
+             ?>
+           <a href="#" class="social-icon">
+            <i class="bi bi-instagram" id="instagram"></i>
+          </a>
+         </div>
           <!-- if user has/have not any account yet, then he/she can press the sign up here link in order to sign up page -->
-          <div class="row" style="justify-content: center;">
+          <div class="row" style="justify-content: center; margin-top:5px">
             <label class="text-muted">New to Simple Shopper?&nbsp;&nbsp;&nbsp;</label>
             <i class="bi bi-arrow-right-circle-fill"></i>
             <a href="../src/sign.html" style="color:rgb(38, 126, 209); margin-left: 4px;">Sign up here</a>
@@ -341,6 +362,4 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
   </body>
 </html>
-
-
 

@@ -1,6 +1,10 @@
 <?php
 
-include './fb-init.php';
+include('config.php');
+
+$google_client->revokeToken();
+
 session_destroy();
-unset($_SESSION['access_token']);
-header("Location:index.php");
+
+header('location:login.php');
+?>
