@@ -54,7 +54,6 @@ function updateStorage(current_user){
             user_list[i]=current_user;
         }
     }
-    console.log(user_list)
     localStorage.setItem('users',JSON.stringify(user_list))
 }
 

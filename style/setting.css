@@ -18,8 +18,8 @@ nav ul{
 
 main{
     float: left;
-    padding-top: 50px;
-    padding-left: 150px;
+    padding-top: 25px;
+    padding-left: 100px;
     min-height: 500px;
     width: 80vw;
 }
@@ -44,4 +44,10 @@ main{
     background-color: white;
     color: black;
     border: 2px solid #d9534f; 
+}
+
+.btn-success:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid #5cb85c; 
 }

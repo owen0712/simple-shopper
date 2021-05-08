@@ -2,7 +2,7 @@ const addressForm=document.getElementById('add_address');
 const title=document.querySelector('#title');
 const accessed_user=JSON.parse(localStorage.getItem('user'))
 var editing=0;
-var editing_address=null;
+var editing_card=null;
 
 var addressesArr=accessed_user['addressesArr'];
 
@@ -24,28 +24,28 @@ function showEditForm(){
     showForm();
     addressesArr.forEach(element=>{
         if(element['id']==editing){
-            editing_address=element;
+            editing_card=element;
         }
     })
-    $("#name").val(editing_address['name']);
-    $("#phone").val(editing_address['phone']);
-    $("#postal_code").val(editing_address['postal_code']);
-    $("#state").val(editing_address['state']);
-    $("#area").val(editing_address['area']);
-    $("#description").val(editing_address['description']);
-    $("#default_checked").prop('checked',editing_address['default_checked']);
+    $("#name").val(editing_card['name']);
+    $("#phone").val(editing_card['phone']);
+    $("#postal_code").val(editing_card['postal_code']);
+    $("#state").val(editing_card['state']);
+    $("#area").val(editing_card['area']);
+    $("#description").val(editing_card['description']);
+    $("#default_checked").prop('checked',editing_card['default_checked']);
 }
 
 function editAddress(n_name,n_phone,n_postal_code,n_state,n_area,n_description,n_default_add){
-    editing_address["name"]=n_name;
-    editing_address["phone"]=n_phone;
-    editing_address["postal_code"]=n_postal_code;
-    editing_address["state"]=n_state;
-    editing_address["area"]=n_area;
-    editing_address["description"]=n_description;
-    editing_address["default_checked"]=n_default_add;
+    editing_card["name"]=n_name;
+    editing_card["phone"]=n_phone;
+    editing_card["postal_code"]=n_postal_code;
+    editing_card["state"]=n_state;
+    editing_card["area"]=n_area;
+    editing_card["description"]=n_description;
+    editing_card["default_checked"]=n_default_add;
     addressesArr.forEach(element=>{
-        if(n_default_add&&element!==editing_address){
+        if(n_default_add&&element!==editing_card){
             if(element['default_checked']){
                 element['default_checked']=false;
             }
@@ -136,12 +136,11 @@ $('body').on('click', '.delete', function(){
 });
 
 //set close form function
-$('body').on('click', '.btn-close', function(){
-    console.log('Im in')
+function closeForm(){
     hideForm();
     $("form")[0].reset();
     editing=0;
-});
+}
 
 //set edit function
 $('body').on('click', '.edit', function(){
