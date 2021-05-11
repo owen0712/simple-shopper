@@ -13,4 +13,7 @@
     }catch(PDOException $e){
         throw new PDOException($e->getMessage());
     }
+
+    require_once 'user.php';
+    $user=new User($pdo);
 ?>

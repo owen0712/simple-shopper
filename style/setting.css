@@ -22,6 +22,7 @@ main{
     padding-left: 100px;
     min-height: 500px;
     width: 80vw;
+    border-left: 1px solid lightgray;
 }
 
 .btn-primary,.btn-info,.btn-danger{

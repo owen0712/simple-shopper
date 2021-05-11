@@ -1,0 +1,24 @@
+<?php
+    require_once '../db/conn.php';
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        $name=$_POST['name'];
+        $phone=$_POST['phone'];
+        $postal_code=$_POST['postal_code'];
+        $state=$_POST['state'];
+        $area=$_POST['area'];
+        $description=$_POST['description'];
+        if(empty($_POST['default_status'])){
+            $default_status=0;
+        }
+        else{
+            $default_status=1;
+        }
+        $user_id=$_POST['user_id'];
+        $address_id=$_POST['address_id'];
+        $user->updateDefault($user_id,$default_status);
+        $result=$user->editAddress($address_id,$name,$phone,$postal_code,$state,$area,$description,$default_status);
+        if($result){
+            header('Location:address.php');
+        }
+    }
+?>

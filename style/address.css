@@ -2,7 +2,7 @@ label, input,select{
     margin: 5px;
 }
 
-button{
+.edit,button{
     float:right;
     margin: 5px;
 }

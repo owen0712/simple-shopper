@@ -52,27 +52,16 @@ function showConfirmPassword(){
 const o_password = document.querySelector('#current_password')
 const n_password = document.querySelector('#new_password')
 const c_password = document.querySelector('#confirm_password')
-const confirm_btn = document.querySelector('#confirm')
-confirm_btn.addEventListener('click', (e) =>{
-    e.preventDefault();
-    if(checkCurrentPassword()&&checkNewPassword()&&checkConfirmPassword()){
-        swal("Successfully!", "Password Modified", "success");
-        user['password']=c_password.value.trim();
-        localStorage.setItem('user',JSON.stringify(user))
-        updateStorage(user)
-    }
-})
 
 function checkCurrentPassword(){
     const currentPasswordValue = o_password.value.trim();
+    console.log(o_password)
 
     if(currentPasswordValue === ''){
         setErrorFor(o_password,'Password cannot be blank');
         return false;
-    }else if(currentPasswordValue!== user['password']){
-        setErrorFor(o_password,'Different password');
-        return false;
-    }else{
+    }
+    else{
         setSuccessFor(o_password);
         return true;
     }
@@ -121,11 +110,4 @@ function setSuccessFor(input){
     const small = form_type.querySelector('small');
     small.innerText = '';
     form_type.className = 'valid_section success';
-}
-
-function clear(){
-    const form_type = input.parentElement;
-    const small = form_type.querySelector('small');
-    small.innerText = '';
-    form_type.className = '';
 }
