@@ -22,6 +22,19 @@ class User{
         }
     }
 
+    public function deleteUser($id){
+        try{
+            $sql = "DELETE FROM `user` where user_id=:id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindparam(':id',$id);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
     public function updateProfileWithPic($id,$name,$email,$phone,$gender,$dob,$profile){
         try{
             $sql="UPDATE `user` SET `name`=:name,`email`=:email,`phone`=:phone,`gender`=:gender,`dob`=:dob,`profile`=:profile WHERE user_id=:id";

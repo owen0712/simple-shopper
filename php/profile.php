@@ -45,8 +45,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
     <!--custom javascript-->
-    <script src="../js/user.js" defer></script>
-    <script src="../js/profile.js" defer></script>
     <script src="../js/header.js" defer></script>
     <!--sweetalert-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -172,10 +170,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" align="center">
-                                    
-                                    <form action='delete.php?id=<?php echo $result['user_id']?>' method='GET'>
-                                        <button class="btn btn-danger" id="delete">Delete</button>
-                                    
+                                    <input type='submit' class="btn btn-danger" id="delete" value='Delete'></input>
                                 </td>
                             </tr>
                         </table>
@@ -232,5 +227,40 @@
             <p class="copyright">Copyright&copy; 2021 Simple Shopper</p>
         </div>
     </div>
+    <script>
+    //set delete account function
+    $('.btn-danger').on('click',function(e){
+        e.preventDefault()
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this account!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("Enter your password to delete your account:", {
+                    content: "input"
+                })
+                .then((value) => {
+                    if(value=="<?php echo $result['password'];?>"){
+                        swal("Your account has been deleted!", {
+                            icon: "success",
+                        });
+                        setTimeout(function(){window.location.href='deleteAccount.php?id=<?php echo $result['user_id'];?>'}, 1000);
+                    }
+                    else{
+                        swal("Wrong password entered!", {
+                            icon: "error",
+                        });
+                    }
+                });
+            } else {
+                swal("Your account still exist!");
+            }
+        });
+    })
+    </script>
 </body>
 </html>
