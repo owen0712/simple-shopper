@@ -87,20 +87,20 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="../style/index.css" rel="stylesheet">
-    <link href="../style/footer.css" rel="stylesheet">
+    <link href="style/index.css" rel="stylesheet">
+    <link href="style/footer.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-    <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
+    <link rel="shortcut icon" type="image/jpg" href="assets/Logo/favicon-32x32.png"/>
     
 </head>
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/index.js" defer></script>
-    <script src="../js/user.js" defer></script>
-    <script src="../js/header.js" defer></script>
-    <script src="../js/increment.js" defer></script>
+    <script src="js/index.js" defer></script>
+    <script src="js/user.js" defer></script>
+    <script src="js/header.js" defer></script>
+    <script src="js/increment.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <!-- The first nav bar that is not stuck on top. This is for less frequently used buttons like login and sign up -->
@@ -112,23 +112,23 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../php/index.php" style="color: white;">Home</a>
+                        <a class="nav-link" href="php/index.php" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
+                        <a class="nav-link" href="src/search.html" style="color: white;">Product</a>
                     </li>
                     <li class="nav-item" id='admin' style="display: none;">
-                        <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
+                        <a class="nav-link" href="src/administrator.html" style="color: white;">Administrator</a>
                     </li>
                     <?php
                         if(!empty($data['given_name']))
                         {
-                            echo '<li class = nav-item"><a class="nav-link" href="../src/profile.html" style="color: white;"><img src="'.$_SESSION['user_image'].'" height="30mm;">'.$_SESSION['user_first_name'].'</a>';   
+                            echo '<li class = nav-item"><a class="nav-link" href="src/profile.html" style="color: white;"><img src="'.$_SESSION['user_image'].'" height="30mm;">'.$_SESSION['user_first_name'].'</a>';   
                             echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
                         }
                          else{
-                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="../src/sign.html" style="color:white;">Sign Up</a>';
-                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="../php/login.php" style="color:white;">Log in</a>';
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="src/sign.html" style="color:white;">Sign Up</a>';
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="php/login.php" style="color:white;">Log in</a>';
                          }
                     ?>
                 </ul>
@@ -139,7 +139,7 @@
     <header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <div class="col col-auto">
-                <a class="navbar-brand" href="index.html"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
+                <a class="navbar-brand" href="index.html"><img src="assets/Logo/SSLogo2.png" height="70mm"></a>
             </div>
 
             <div class="col col-6">
@@ -173,17 +173,17 @@
         <div class="carousel-inner">    
           <div class="carousel-item active bg-dark">
             <div class="d-flex h-100 align-items-center justify-content-center">
-                <img src="../assets/carousel/test.png" class="mx-auto">
+                <img src="assets/carousel/test.png" class="mx-auto">
             </div>
           </div>
           <div class="carousel-item bg-dark">
             <div class="d-flex h-100 align-items-center justify-content-center">
-                <img src="../assets/carousel/image4-01.png">
+                <img src="assets/carousel/image4-01.png">
             </div>
           </div>
           <div class="carousel-item bg-dark">   
             <div class="d-flex h-100 align-items-center justify-content-center">
-                <img src="../assets/carousel/image3.png">
+                <img src="assets/carousel/image3.png">
             </div>
           </div>
         </div>
@@ -209,7 +209,7 @@
               <!-- Card for each of the product, almost same for every product -->
             <div class="card">
                 <!-- Image of the product -->
-            <img src="../assets/Image/Beverage/Beverage-5.png" class="mx-auto product-image" alt="Nescafe" height="auto" width="auto">
+            <img src="assets/Image/Beverage/Beverage-5.png" class="mx-auto product-image" alt="Nescafe" height="auto" width="auto">
             <div class="card-body">
                 <!-- name of the product -->
                 <h5 class="card-title">Nescafe
@@ -235,7 +235,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="../assets/Image/Instant/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
+            <img src="assets/Image/Instant/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Samyang
                     <p class="card-category">Instant Noodle</p>
@@ -255,7 +255,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="../assets/Image/Instant/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
+            <img src="assets/Image/Instant/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Mamee Chef
                     <p class="card-category">Instant Noodle</p>
@@ -275,7 +275,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="../assets/Image/cereal/Cereal-2.png" class="mx-auto product-image" alt="Honey Stars" height="auto" width="auto">
+            <img src="assets/Image/cereal/Cereal-2.png" class="mx-auto product-image" alt="Honey Stars" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Honey Stars
                     <p class="card-category">Cereal</p>
@@ -295,7 +295,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="../assets/Image/cereal/Cereal-8.png" class="mx-auto product-image" alt="Honey Crunch" height="auto" width="auto">
+            <img src="assets/Image/cereal/Cereal-8.png" class="mx-auto product-image" alt="Honey Crunch" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Honey Crunch
                     <p class="card-category">Cereal</p>
@@ -315,7 +315,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="../assets/Image/Canned food/canned-3.png" class="mx-auto product-image" alt="Ayam Brand Tuna" height="auto" width="auto">
+            <img src="assets/Image/Canned food/canned-3.png" class="mx-auto product-image" alt="Ayam Brand Tuna" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Ayam Brand Tuna
                     <p class="card-category">Canned</p>
@@ -335,7 +335,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="../assets/Image/Cooking supplies/CS-1.png" class="mx-auto product-image" alt="Knife Cooking oil" height="auto" width="auto">
+            <img src="assets/Image/Cooking supplies/CS-1.png" class="mx-auto product-image" alt="Knife Cooking oil" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Knife Cooking oil
                     <p class="card-category">Cooking Supplies</p>
@@ -355,7 +355,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="../assets/Image/Cooking supplies/CS-4.png" class="mx-auto product-image" alt="Soy sauce" height="auto" width="auto">
+            <img src="assets/Image/Cooking supplies/CS-4.png" class="mx-auto product-image" alt="Soy sauce" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Soy sauce
                     <p class="card-category">Cooking Supplies</p>
@@ -387,7 +387,7 @@
           <div class="row row-flex flex-nowrap overflow-auto side-scroll" id="side-scroll">
             <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-1.png" class="mx-auto product-image" alt="Coca-cola" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-1.png" class="mx-auto product-image" alt="Coca-cola" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Coca-cola
                       <p class="card-category">Beverage</p>
@@ -407,7 +407,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-2.png" class="mx-auto product-image" alt="100 plus" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-2.png" class="mx-auto product-image" alt="100 plus" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">100 plus
                       <p class="card-category">Beverage</p>
@@ -427,7 +427,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-3.png" class="mx-auto product-image" alt="7up" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-3.png" class="mx-auto product-image" alt="7up" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">7up
                       <p class="card-category">Beverage</p>
@@ -447,7 +447,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-4.png" class="mx-auto product-image" alt="Tropicana" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-4.png" class="mx-auto product-image" alt="Tropicana" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Tropicana
                       <p class="card-category">Beverage</p>
@@ -467,7 +467,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-5.png" class="mx-auto product-image" alt="Nescafe" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-5.png" class="mx-auto product-image" alt="Nescafe" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Nescafe
                       <p class="card-category">Beverage</p>
@@ -487,7 +487,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-6.png" class="mx-auto product-image" alt="Nestlé Milo" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-6.png" class="mx-auto product-image" alt="Nestlé Milo" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Nestlé Milo
                       <p class="card-category">Beverage</p>
@@ -507,7 +507,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-7.png" class="mx-auto product-image" alt="Farm Fresh" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-7.png" class="mx-auto product-image" alt="Farm Fresh" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Farm Fresh
                       <p class="card-category">Beverage</p>
@@ -527,7 +527,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-8.png" class="mx-auto product-image" alt="GoodDay" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-8.png" class="mx-auto product-image" alt="GoodDay" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">GoodDay
                       <p class="card-category">Beverage</p>
@@ -547,7 +547,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-9.png" class="mx-auto product-image" alt="Homesoy" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-9.png" class="mx-auto product-image" alt="Homesoy" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Homesoy
                       <p class="card-category">Beverage</p>
@@ -567,7 +567,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Beverage/Beverage-10.png" class="mx-auto product-image" alt="Oishi" height="auto" width="auto">
+              <img src="assets/Image/Beverage/Beverage-10.png" class="mx-auto product-image" alt="Oishi" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Oishi
                       <p class="card-category">Beverage</p>
@@ -600,7 +600,7 @@
           <div class="row row-flex flex-nowrap overflow-auto side-scroll" id="side-scroll2">
             <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-1.png" class="mx-auto product-image" alt="Mi Sedap" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-1.png" class="mx-auto product-image" alt="Mi Sedap" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Mi Sedap
                       <p class="card-category">Instant Noodle</p>
@@ -620,7 +620,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-2.png" class="mx-auto product-image" alt="Mama Mee" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-2.png" class="mx-auto product-image" alt="Mama Mee" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Mama Mee
                       <p class="card-category">Instant Noodle</p>
@@ -640,7 +640,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Samyang
                       <p class="card-category">Instant Noodle</p>
@@ -660,7 +660,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-4.png" class="mx-auto product-image" alt="Nongshim Shin Ramyun" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-4.png" class="mx-auto product-image" alt="Nongshim Shin Ramyun" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Nongshim Shin Ramyun
                       <p class="card-category">Instant Noodle</p>
@@ -680,7 +680,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-5.png" class="mx-auto product-image" alt="A1 Bak Kut Teh Mee" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-5.png" class="mx-auto product-image" alt="A1 Bak Kut Teh Mee" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">A1 Bak Kut Teh Mee
                       <p class="card-category">Instant Noodle</p>
@@ -700,7 +700,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-6.png" class="mx-auto product-image" alt="Maggi curry" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-6.png" class="mx-auto product-image" alt="Maggi curry" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Maggi curry
                       <p class="card-category">Instant Noodle</p>
@@ -720,7 +720,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-7.png" class="mx-auto product-image" alt="Cintan" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-7.png" class="mx-auto product-image" alt="Cintan" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Cintan
                       <p class="card-category">Instant Noodle</p>
@@ -740,7 +740,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Mamee Chef
                       <p class="card-category">Instant Noodle</p>
@@ -760,7 +760,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-9.png" class="mx-auto product-image" alt="IndoMie" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-9.png" class="mx-auto product-image" alt="IndoMie" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">IndoMie
                       <p class="card-category">Instant Noodle</p>
@@ -780,7 +780,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="../assets/Image/Instant/Instant-10.png" class="mx-auto product-image" alt="San Remo" height="auto" width="auto">
+              <img src="assets/Image/Instant/Instant-10.png" class="mx-auto product-image" alt="San Remo" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">San Remo
                       <p class="card-category">Instant Noodle</p>
@@ -805,7 +805,7 @@
 
       <!-- See more button in the bottom of the page with the chevron -->
       <div class="d-flex justify-content-center">
-        <a href="../src/search.html" class="seeMore">
+        <a href="src/search.html" class="seeMore">
             <h3>See all products<i class="bi bi-chevron-double-right"></i></h3>
         </a>
       </div>
@@ -819,15 +819,15 @@
                 <h4>Download Our App</h4>
                 <p>Download App for Android and iOS mobile phone.</p>
                     <div class="app-logo">
-                        <img src="../assets/footer/play-store.png">
-                        <img src="../assets/footer/app-store.png" >
+                        <img src="assets/footer/play-store.png">
+                        <img src="assets/footer/app-store.png" >
                     </div>
                 </div>
                 <div class="footer-col-2">
                     <h4>Payment</h4>
-                        <img src="../assets/footer/Visa+Brand+Mark+-+Blue+-+900x291.jpg">
-                        <img src="../assets/footer/300px-Mastercard_2019_logo.svg.png" style="background-color: white;">
-                        <img src="../assets/footer/FPX-Logo-1.png"  style="background-color: white;">
+                        <img src="assets/footer/Visa+Brand+Mark+-+Blue+-+900x291.jpg">
+                        <img src="assets/footer/300px-Mastercard_2019_logo.svg.png" style="background-color: white;">
+                        <img src="assets/footer/FPX-Logo-1.png"  style="background-color: white;">
                         <br>
                         <h4 style="margin-top: 20px;">Contact Us</h4>
                         <ul>
