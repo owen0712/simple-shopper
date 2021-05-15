@@ -16,7 +16,7 @@ function searchFunc(){
     input = document.getElementById("search");
     var search= input.value;
     console.log(search);
-    var newURL="../src/search.html?search="+search;
+    var newURL="../php/search.php?search="+search;
     window.location.href=newURL;
 }
 
