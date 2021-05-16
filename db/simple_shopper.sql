@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2021 at 03:27 AM
+-- Generation Time: May 16, 2021 at 05:27 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -35,6 +35,7 @@ CREATE TABLE `address` (
   `state` varchar(15) NOT NULL,
   `area` varchar(1000) NOT NULL,
   `description` varchar(1000) DEFAULT NULL,
+  `default_status` tinyint(1) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -70,16 +71,30 @@ CREATE TABLE `order_list` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `otp`
+--
+
+CREATE TABLE `otp` (
+  `otp_id` int(11) NOT NULL,
+  `otp_email` varchar(100) NOT NULL,
+  `otp_phone` varchar(15) NOT NULL,
+  `otp_number` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
   `product_id` int(11) NOT NULL,
-  `product_image` blob NOT NULL,
+  `product_image` varchar(1000) NOT NULL,
   `product_name` varchar(1000) NOT NULL,
   `product_category` varchar(200) NOT NULL,
   `product_amount` int(11) DEFAULT NULL,
-  `product_price` float NOT NULL
+  `product_price` float NOT NULL,
+  `product_description` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -113,7 +128,8 @@ CREATE TABLE `shopping_cart` (
 
 CREATE TABLE `shopping_list` (
   `list_id` int(11) NOT NULL,
-  `list_name` varchar(1000) NOT NULL
+  `list_name` varchar(1000) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -136,7 +152,7 @@ CREATE TABLE `shopping_list_item` (
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `password` varchar(30) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `phone` varchar(15) NOT NULL,
@@ -147,6 +163,14 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `password`, `name`, `email`, `phone`, `gender`, `dob`, `profile`, `status`) VALUES
+(1, 'simplekid123', 'Sim Ple Kid', 'simplekid@gmail.com', '0123456789', 'male', '2012-07-12', '../assets/uploads/profile.png', 'user'),
+(2, 'admin123', 'Admin', 'admin@gmail.com', '0123456789', 'male', '2012-07-12', '../assets/uploads/profile.png', 'admin');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -154,25 +178,35 @@ CREATE TABLE `user` (
 -- Indexes for table `address`
 --
 ALTER TABLE `address`
-  ADD PRIMARY KEY (`address_id`);
+  ADD PRIMARY KEY (`address_id`),
+  ADD KEY `fk_user_id` (`user_id`);
 
 --
 -- Indexes for table `bank_card`
 --
 ALTER TABLE `bank_card`
-  ADD PRIMARY KEY (`card_id`);
+  ADD PRIMARY KEY (`card_id`),
+  ADD KEY `fk_card_user_id` (`user_id`);
 
 --
 -- Indexes for table `order_list`
 --
 ALTER TABLE `order_list`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `fk_order_user_id` (`user_id`);
+
+--
+-- Indexes for table `otp`
+--
+ALTER TABLE `otp`
+  ADD PRIMARY KEY (`otp_id`);
 
 --
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`);
+ALTER TABLE `product` ADD FULLTEXT KEY `prodcut_description` (`product_description`);
 
 --
 -- Indexes for table `product_ordered`
@@ -191,7 +225,8 @@ ALTER TABLE `shopping_cart`
 --
 ALTER TABLE `shopping_list`
   ADD PRIMARY KEY (`list_id`),
-  ADD UNIQUE KEY `list_name_unique` (`list_name`) USING HASH;
+  ADD UNIQUE KEY `list_name_unique` (`list_name`) USING HASH,
+  ADD KEY `fk_list_user_id` (`user_id`);
 
 --
 -- Indexes for table `shopping_list_item`
@@ -215,7 +250,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `bank_card`
@@ -228,6 +263,12 @@ ALTER TABLE `bank_card`
 --
 ALTER TABLE `order_list`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `otp`
+--
+ALTER TABLE `otp`
+  MODIFY `otp_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -245,7 +286,7 @@ ALTER TABLE `shopping_list`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -255,19 +296,19 @@ ALTER TABLE `user`
 -- Constraints for table `address`
 --
 ALTER TABLE `address`
-  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `bank_card`
 --
 ALTER TABLE `bank_card`
-  ADD CONSTRAINT `fk_card_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_card_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_list`
 --
 ALTER TABLE `order_list`
-  ADD CONSTRAINT `fk_order_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `fk_order_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `product_ordered`
@@ -281,6 +322,12 @@ ALTER TABLE `product_ordered`
 --
 ALTER TABLE `shopping_cart`
   ADD CONSTRAINT `fk_cart_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+
+--
+-- Constraints for table `shopping_list`
+--
+ALTER TABLE `shopping_list`
+  ADD CONSTRAINT `fk_list_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `shopping_list_item`
