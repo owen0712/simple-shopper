@@ -29,9 +29,9 @@
                         </svg>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../src/administrator.php"><i class="bi bi-handbag"></i> Product page</a>    
+                            <a class="dropdown-item" href="../php/administrator.php"><i class="bi bi-handbag"></i> Product page</a>    
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../src/order.php"><i class="bi bi-file-text"></i> Order page</a>
+                            <a class="dropdown-item" href="../php/order.php"><i class="bi bi-file-text"></i> Order page</a>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
                         </li>
                         <li class="nav-item" id='admin' style="display: none;">
-                            <a class="nav-link" href="../src/administrator.php" style="color: white;">Administrator</a>
+                            <a class="nav-link" href="../php/administrator.php" style="color: white;">Administrator</a>
                         </li>
                         <li class="nav-item user">
                             <a class="nav-link" id='sign-up' href="../src/sign.html" style="color: white;">Sign Up</a>
