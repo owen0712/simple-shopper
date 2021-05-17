@@ -3,25 +3,25 @@ $(document).ready(function() {  // create a data table
         "pagingType": "full_numbers",
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
         "processing":true,
-		"serverSide":true,
-		"order":[],
+	"serverSide":true,
+	"order":[],
         "ajax":{
-			url:"action.php",
-			type:"POST",
-			data:{action:'listProduct'},
-			dataType:"json"
+		url:"action.php",
+		type:"POST",
+		data:{action:'listProduct'},
+		dataType:"json"
+	},
+	"columnDefs":[
+		{
+			"targets":[1, 7, 8],
+			"orderable":false,
 		},
-		"columnDefs":[
-			{
-				"targets":[1, 7, 8],
-				"orderable":false,
-			},
-            {
-                "targets": [ 0 ],
-                "visible": false,
-                "searchable": false
-            }
-		]
+            	{
+                	"targets": [ 0 ],
+                	"visible": false,
+                	"searchable": false
+            	}
+	]
     } );
 
     $('#add_btn').click(function(){
