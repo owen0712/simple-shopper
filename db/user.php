@@ -200,6 +200,101 @@ class User{
             }
         }
     }
+
+    public function insertDetails($con,$Lname, $email, $phone, $pwd, $gender, $birth, $status)
+    {
+        $sql=" INSERT INTO user (password,name,email,phone,gender,dob,status)
+        VALUES(:psw,:Lname,:email,:phone,:gender,:dob,:status)";
+        $stmt = $this->db->prepare($sql);
+ 
+        $stmt-> bindParam(":psw",$pwd);
+        $stmt-> bindParam(":Lname",$Lname);
+        $stmt-> bindParam(":email",$email);
+        $stmt-> bindParam(":phone",$phone);
+        $stmt-> bindParam(":gender",$gender);
+        $stmt-> bindParam(":dob",$birth);
+        $stmt-> bindParam(":status",$status);
+ 
+        return $stmt->execute();
+    }
+ 
+    public function checkLoginEmail($con,$email,$pwd,$status)
+    {
+        $sql = "SELECT * FROM user WHERE email=:email AND password=:psw AND status=:status";
+        $stmt = $this->db->prepare($sql);
+        $stmt-> bindParam(":email",$email);
+        $stmt-> bindParam(":psw",$pwd);
+        $stmt-> bindParam(":status",$status);
+        $stmt->execute();
+    
+        //check how many rows
+    
+        if($stmt->rowCount() == 1)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+ 
+    public function checkLoginPhone($con,$email,$pwd,$status)
+    {   
+        $sql = "SELECT * FROM user WHERE phone=:phone,password=:psw AND status=:status";
+        $stmt = $this->db->prepare($sql);
+        $stmt-> bindParam(":phone",$email);
+        $stmt-> bindParam(":psw",$pwd);
+        $stmt-> bindParam(":status",$status);
+        echo "What happen".$status;
+        $stmt->execute();
+    
+        //check how many rows
+    
+        if($stmt->rowCount() == 1)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+ 
+    public function sanitizePassword($pwd)
+    {
+        $pwd = md5($pwd);
+ 
+        return $pwd;
+    }
+ 
+    public function checkEmailExist($con, $email)
+    {
+        $sql = "SELECT * FROM user WHERE email=:email";
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindParam(":email",$email);
+    
+        $stmt->execute();
+    
+        if($stmt-> rowCount() == 1)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function checkPhone($mobile)
+        {
+        return preg_match('/^[0-9]{10}+$/', $mobile);
+        }
+    
+        //check email format
+        function checkEmail($email)
+        {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return true;
+        } else {
+                return false;
+        }
+    }
 }
 
 ?>

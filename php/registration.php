@@ -102,7 +102,7 @@
    function checkLoginEmail($con,$email,$pwd,$status)
    {
      $query = $con->prepare("
-     SELECT * FROM user WHERE email=:email AND passwordU=:psw AND status=:status
+     SELECT * FROM user WHERE email=:email AND password=:psw AND status=:status
      ");
      $query-> bindParam(":email",$email);
      $query-> bindParam(":psw",$pwd);

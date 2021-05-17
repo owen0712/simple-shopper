@@ -17,7 +17,8 @@ if(!isset($_SESSION['access_token']))
 ?>
 
 <?php
-  include_once("conn.php");
+require_once '../db/conn.php';
+require_once('conn.php');
 ?>
 
 <!DOCTYPE html>
@@ -102,10 +103,44 @@ if(!isset($_SESSION['access_token']))
 </header>
  <!-- body -->
   <body class="text-center">  
-
-
     <!-- form -->
-    <form class="form-signin" id="form" method="post" action="login.php"> 
+
+    <div>
+      <?php
+          if(isset($_POST['btnLogin']))
+          {
+              $con = config::connect();
+              $email = $_POST['ph_email'];
+              $pwd = $user->sanitizePassword($_POST['pwdL']);
+              $status = $_POST['statusL'];
+       
+              if($email == "" || $pwd ==""){
+                  echo "email and password cannot be blank";
+                  return;
+              }
+       
+              //if user enter email
+             if($user->checkEmail($email))
+             {
+               if($user->checkLoginEmail($con,$email,$pwd,$status))
+               {
+                   header("Location: index.php");
+               }else{
+                   echo "The username and password are incorrect";
+               }
+             }else if($user->checkPhone($email))
+             {
+               if($user->checkLoginPhone($con,$email,$pwd,$status)){
+                   header("Location: index.php");
+               }
+             }else{
+                 echo "The username and password are incorrect";
+             }
+          }
+       
+      ?>
+    </div>
+    <form class="form-signin" id="form" action="registration.php" name = "form-login" method = "post"> 
         <h5>Welcome to Simple Shopper!</h5>
         <p class="text-muted">Please Log in.</p>
           <div class = "input-field" style="width:350px">
@@ -120,12 +155,14 @@ if(!isset($_SESSION['access_token']))
         
         <div class = "input-field" style="width:350px; margin-top: 30px; margin-bottom: 20px;">
           <i class="bi bi-lock-fill"></i>
+
           <input type="password" placeholder="Password" name="pwdL" id = "myInput"/>
           <!-- eye icon -->
           <span class="eye" onclick="myFunction()">
               <i id = "hide1" class="bi bi-eye-fill"></i>
               <i id = "hide2" class="bi bi-eye-slash-fill"></i>
           </span>
+
           <!-- Icons and message that will be shown if got error or success-->
           <div class="i_check">
             <i class="bi bi-check-circle-fill" id="bi-check-circle-fill" ></i>
@@ -152,6 +189,7 @@ if(!isset($_SESSION['access_token']))
             <a href="../php/forgotPassword.php" style="color:rgb(38, 126, 209);">Forgot password?</a>
             <button type="submit" id = "submit" name="btnLogin" class="btn btn-primary" style="border-radius: 55px; margin-left: 10px; width: 100px;">Login</button>
         </div>
+
         <hr>
          <!--User can login with social media platform -->
         <p class="social-media">Or <strong><span id="sign_text">&nbsp;login</span></strong>&nbsp;with social social platforms</p> </span>
@@ -159,6 +197,7 @@ if(!isset($_SESSION['access_token']))
             <a href="#" class="social-icon">
               <i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i>
             </a>
+
             <?php
               if($login_button == '')
               {
@@ -169,6 +208,7 @@ if(!isset($_SESSION['access_token']))
                 echo $login_button;
               }
              ?>
+
            <a href="#" class="social-icon">
             <i class="bi bi-instagram" id="instagram"></i>
           </a>
@@ -251,78 +291,15 @@ if(!isset($_SESSION['access_token']))
          }
       }
   </script>
- <script>
-      const form = document.getElementById('form');
-      const phone_email = document.getElementById('phone_email');
-      const password = document.getElementById('myInput');
-      const status=document.querySelector('#status')
+ 
+  
 
-      form.addEventListener('submit', (e) =>{
-        e.preventDefault();
-
-        checkInputs();
-      })
-
-      function checkInputs(){
-        const phone_emailValue = phone_email.value.trim();
-        const passwordValue = password.value.trim();
-        var statusValue ='';
-
-        if(status.value==='Customer'){
-          statusValue='user'
-        }
-        else if(status.value==='Administrator'){
-          statusValue='admin'
-        }
-
-        if(!validateEmail(phone_emailValue) && !validatePhone(phone_emailValue)){
-          setErrorFor(phone_email, 'Mandatory');
-        }else{
-          setSuccessFor(phone_email);
-        }
-
-        if(passwordValue === ''){
-            setErrorFor(password, 'Password cannot be blank');
-          }
-        else if(passwordValue.length>15){
-            setErrorFor(password, 'Password length cannot exceed 15 characters')
-          }
-        else if(passwordValue.length < 8){
-            setErrorFor(password, 'Password must at least 8 characters long');
-        }else{
-            setSuccessFor(password)
-          }
-
-      function validateEmail(email){
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email); 
-      }
-
-      function validatePhone(phone){
-        var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-        return re.test(phone);
-      }
-
-      function setErrorFor(input, message){
-        const input_field = input.parentElement;
-        const small = input_field.querySelector('small');
-
-        // add error message inside small
-        small.innerText = message;
-
-        // add error class
-        input_field.className = 'input-field error';
-      }
-      function setSuccessFor(input){
-        const input_field = input.parentElement;
-        input_field.className = 'input-field success'
-    }
-
-  </script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-  </body>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+</body>
 </html>
 

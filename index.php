@@ -1,5 +1,5 @@
 <?php
-    include ('config.php');
+    include ('../php/config.php');
     $login_button = '';
 
     //This $_GET["code"] variable value received after user has login into their Google Account redirct to PHP script then this variable value has been received
@@ -47,11 +47,6 @@
     if(!empty($data['picture']))
     {
     $_SESSION['user_image'] = $data['picture'];
-    }
-
-    if(!empty($data['password']))
-    {
-    $_SESSION['user_password'] = $data['password'];
     }
   }
 }
@@ -132,13 +127,8 @@
                             echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
                         }
                          else{
-<<<<<<< Updated upstream:index.php
-                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="src/sign.html" style="color:white;">Sign Up</a>';
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="php/signup.php" style="color:white;">Sign Up</a>';
                             echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="php/login.php" style="color:white;">Log in</a>';
-=======
-                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="../php/signup.php" style="color:white;">Sign Up</a>';
-                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="../php/login.php" style="color:white;">Log in</a>';
->>>>>>> Stashed changes:php/index.php
                          }
                     ?>
                 </ul>
