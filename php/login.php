@@ -18,7 +18,6 @@ if(!isset($_SESSION['access_token']))
 
 <?php
 require_once '../db/conn.php';
-require_once('conn.php');
 ?>
 
 <!DOCTYPE html>
@@ -108,20 +107,14 @@ require_once('conn.php');
       <?php
           if(isset($_POST['btnLogin']))
           {
-              $con = config::connect();
               $email = $_POST['ph_email'];
               $pwd = $user->sanitizePassword($_POST['pwdL']);
               $status = $_POST['statusL'];
        
-              if($email == "" || $pwd ==""){
-                  echo "email and password cannot be blank";
-                  return;
-              }
-       
               //if user enter email
              if($user->checkEmail($email))
              {
-               if($user->checkLoginEmail($con,$email,$pwd,$status))
+               if($user->checkLoginEmail($email,$pwd,$status))
                {
                    header("Location: index.php");
                }else{
@@ -129,7 +122,7 @@ require_once('conn.php');
                }
              }else if($user->checkPhone($email))
              {
-               if($user->checkLoginPhone($con,$email,$pwd,$status)){
+               if($user->checkLoginPhone($email,$pwd,$status)){
                    header("Location: index.php");
                }
              }else{
@@ -139,7 +132,7 @@ require_once('conn.php');
        
       ?>
     </div>
-    <form class="form-signin" id="form" action="registration.php" name = "form-login" method = "post"> 
+    <form class="form-signin" id="form" action="login.php" name = "form-login" method = "post"> 
         <h5>Welcome to Simple Shopper!</h5>
         <p class="text-muted">Please Log in.</p>
           <div class = "input-field" style="width:350px">
@@ -290,7 +283,86 @@ require_once('conn.php');
          }
       }
   </script>
- 
+  <script>
+      const form = document.getElementById('form');
+      const phone_email = document.getElementById('phone_email');
+      const password = document.getElementById('myInput');
+      const status=document.querySelector('#status')
+
+      form.addEventListener('submit', (e) =>{
+        e.preventDefault();
+
+        checkInputs();
+      })
+
+      function checkInputs(){
+        const phone_emailValue = phone_email.value.trim();
+        const passwordValue = password.value.trim();
+        var statusValue ='';
+
+        if(status.value==='Customer'){
+          statusValue='user'
+        }
+        else if(status.value==='Administrator'){
+          statusValue='admin'
+        }
+
+        if(!validateEmail(phone_emailValue) && !validatePhone(phone_emailValue)){
+          setErrorFor(phone_email, 'Mandatory');
+        }else{
+          setSuccessFor(phone_email);
+        }
+
+        if(passwordValue === ''){
+            setErrorFor(password, 'Password cannot be blank');
+          }
+        else if(passwordValue.length>15){
+            setErrorFor(password, 'Password length cannot exceed 15 characters')
+          }
+        else if(passwordValue.length < 8){
+            setErrorFor(password, 'Password must at least 8 characters long');
+        }else{
+            setSuccessFor(password)
+          }
+
+    
+        if(phone_emailValue !== '' && passwordValue !== ''){
+          if(signIn(phone_emailValue,type,passwordValue,statusValue)){
+            swal("Login Success", "Welcome to simple shopper", "success");
+            setTimeout(function(){window.location.href='index.html'}, 1000);
+          }
+          else{
+            swal("Login Failed", "Please try again", "error");
+          }
+        }
+
+      }
+      
+      function validateEmail(email){
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email); 
+      }
+
+      function validatePhone(phone){
+        var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        return re.test(phone);
+      }
+
+      function setErrorFor(input, message){
+        const input_field = input.parentElement;
+        const small = input_field.querySelector('small');
+
+        // add error message inside small
+        small.innerText = message;
+
+        // add error class
+        input_field.className = 'input-field error';
+      }
+      function setSuccessFor(input){
+        const input_field = input.parentElement;
+        input_field.className = 'input-field success'
+    }
+  </script>
   
 
  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

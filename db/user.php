@@ -201,7 +201,7 @@ class User{
         }
     }
 
-    public function insertDetails($con,$Lname, $email, $phone, $pwd, $gender, $birth, $status)
+    public function insertDetails($Lname, $email, $phone, $pwd, $gender, $birth, $status)
     {
         $sql=" INSERT INTO user (password,name,email,phone,gender,dob,status)
         VALUES(:psw,:Lname,:email,:phone,:gender,:dob,:status)";
@@ -218,7 +218,7 @@ class User{
         return $stmt->execute();
     }
  
-    public function checkLoginEmail($con,$email,$pwd,$status)
+    public function checkLoginEmail($email,$pwd,$status)
     {
         $sql = "SELECT * FROM user WHERE email=:email AND password=:psw AND status=:status";
         $stmt = $this->db->prepare($sql);
