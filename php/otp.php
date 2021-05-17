@@ -11,9 +11,9 @@
     <link href="../style/forgot.css" rel="stylesheet">
     <script src="../js/header.js" defer></script>
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
-    
-    <!-- css that edit the button hover -->
-    <style>
+   
+   <!-- css that edit the button hover -->
+   <style>
       select {
         font-family: 'FontAwesome', 'sans-serif';
       }
@@ -30,9 +30,43 @@
     
     <title>Simple Shopper</title>
 
+     <!-- Autojump js (when the user input in the first input field, it will automically jump to next input field) -->
+    <SCRIPT TYPE="text/javascript">
+        var downStrokeField;
+        function autojump(fieldName,nextFieldName,fakeMaxLength)
+        {
+        var myForm=document.forms[document.forms.length - 1];
+        var myField=myForm.elements[fieldName];
+        myField.nextField=myForm.elements[nextFieldName];
+        
+        if (myField.maxLength == null)
+          myField.maxLength=fakeMaxLength;
+        
+        myField.onkeydown=autojump_keyDown;
+        myField.onkeyup=autojump_keyUp;
+        }
+        
+        function autojump_keyDown()
+        {
+        this.beforeLength=this.value.length;
+        downStrokeField=this;
+        }
+        
+        function autojump_keyUp()
+        {
+          console.log(this.value.length);
+        if (
+          (this == downStrokeField) && 
+          (this.value.length > this.beforeLength) && 
+          (this.value.length >= this.maxLength)
+          )
+          this.nextField.focus();
+          downStrokeField=null;
+        }
+      </SCRIPT>
    </head>
 
-   <!-- Header -->
+    <!--header -->
    <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,32 +119,56 @@
         </div>
     </div>
 </header>
-
-<!-- body -->
+ <!-- body -->
    <body>
-       <!-- Container -->
+     <!-- container -->
      <div class="container">
-      <h4 style="margin-top: 20px;"><a href="signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-      </svg></a><strong>Forgot password</strong></h4>
+       <!-- form -->
+       <form class="form" id="form" method = "POST">
+            <h4><a href="../src/signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg></a><strong>Forgot password</strong></h4>
+            
+            <!-- use the d-flex class and justify-content:center to align them to center -->
+            <div class = "d-flex" style="justify-content: center;">
+              <img src="../assets/ForgotPassword/Account-amico.png" style="max-width: 260px; max-height: 460px;">
+            </div>
+            <p class="text-center">Please enter your verificatoin code.</p>
+            <p class="text-center text-muted">We have send a verification code to your registered email/phone ID.</p>
+            
+            <!-- use the d-flex class and justify-content:center to align them to center -->
+            <div class="d-flex justify-content-center">
+              <div class = "form-type" style="width: 55px; margin:10px;">
+                <input type="number" tabindex="1" NAME="ssn_1" style ="width:55px; border-radius: 20px;" id = "validate1" onload = "disInput()" onkeyup="jump(this,this.value)"/>
+              </div>
+              <div class = "form-type" style="width: 55px; margin:10px">
+                <input type="number" tabindex="2" NAME="ssn_2" style ="width:55px; border-radius: 20px;" id = "validate2" onload = "disInput()" onkeyup="jump(this,this.value)"/>
+              </div>
+              <div class = "form-type" style="width: 55px; margin:10px">
+                <input type="number" tabindex="3" NAME="ssn_3" style ="width:55px; border-radius: 20px;" id = "validate3" onload = "disInput()" onkeyup="jump(this,this.value)"/>
+              </div>
+              <div class = "form-type" style="width: 55px; margin:10px">
+                <input type="number" tabindex="4" NAME="ssn_4" style ="width:55px; border-radius: 20px;" id = "validate4" onload = "disInput()" onkeyup="jump(this,this.value)"/>
+              </div>
+            </div>
 
-      <!-- use the d-flex class and justify-content:center to align them to center -->
-      <div class = "d-flex" style="justify-content: center;">
-        <img src="../assets/ForgotPassword/Authentication-rafiki.png" style="max-width: 260px; max-height: 460px;">
-      </div>
-      <p class="text-center">To protect your account security, we need to verify your identity.</p>
-      <p class="text-center text-muted">Please choose a way to verify.</p>
-      <div class="d-flex justify-content-center">
-      <!-- User can press this button in order to verify through Email -->
-        <a href="../php/validateEmail.php"><button type="button" id = "submit" style="border-radius: 55px; width: 220px; margin-top: 10px; color:coral; background-color: rgb(228, 222, 222);"><i class="bi bi-envelope-fill"></i>&nbsp;Verify through Email</button></a>
-      </div>
+            <!-- Next button in disable condition, once user fill up all input field then button will be enable again. -->
+            <div class="d-flex justify-content-center">
+                <button type="button" id = "btnSubmit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;" disabled onclick="submit_otp()">Next</button>
+            </div>
+            <p class="text-center text-muted" style="margin-top: 20px;" id="changingText">Please wait until <strong><span id="changing" style=" color: #3fc1c9;">30</span></strong>s to resend</p>
+       </form>
 
-      <!-- User can press this button in order to verify through SMS code -->
-      <div class="d-flex justify-content-center">
-        <a href="validatePhone.html"><button type="submit" id = "submit" style="border-radius: 55px; width: 220px; margin-top: 10px; color:white; background-color: coral; justify-content:center;"><i class="bi bi-phone-vibrate-fill"></i><small>&nbsp;Verify through SMS Code</small></button></a>
-      </div>
+       <!-- pass value to autojump function -->
+       <SCRIPT TYPE="text/javascript">
+            autojump('ssn_1', 'ssn_2', 0);
+            autojump('ssn_2', 'ssn_3', 0);
+            autojump('ssn_3', 'ssn_4', 0);
+        </SCRIPT>
+
      </div>
-     <!-- Footer -->
+
+     <!-- footer -->
      <div class = "footer" style="margin-top: 50px;">
       <div class="container">
           <div class="row justify-content-center">
@@ -158,7 +216,73 @@
           <p class="copyright">Copyright&copy; 2021 Simple Shopper</p>
       </div>
   </div>
+
+     <script> 
+      // assign 30 to variable s
+      var s = 30;
+      // Function that executes every 1000 milliseconds 
+      var t = setInterval(function() { 
+        // Change the word in the span of words 
+        $('#changing').html(s);
+        s--;
+        // after 30s, the <p></p> will change to new content include resend link and try other method link
+        if(s == -1){
+          clearInterval(t);
+          document.getElementById('changingText').innerHTML = "<p>Did not receive the code?<br><a href=\"forgot2.html\">Resend</a> or <a href=\"forgot3.html\">try a different verification method</a></p>";
+        } 
+      }, 1000); 
+     </script>
+
+     <script>
+       let btnShow = document.getElementById('btnSubmit');
+       let validate1 = document.getElementById('validate1');
+       let validate2 = document.getElementById('validate2');
+       let validate3 = document.getElementById('validate3');
+       let validate4 = document.getElementById('validate4');
+       let form = document.getElementById('form');
+       
+       // to ensure that user press 1 number only, if more than 1 number in one input field then
+       // the button will be disable again.
+       form.addEventListener('keyup', (e)=>{
+          e.preventDefault();
+          if(validate1.value.length == 1 &&
+             validate2.value.length == 1 &&
+             validate3.value.length == 1 &&
+             validate4.value.length == 1){
+                btnShow.disabled = false;
+             }
+             else{
+                btnShow.disabled =  true;
+             }
+       });
+     </script>
+    <script>
+      function submit_otp(){
+        var otp=jQuery('#otp').val();
+        jQuery.ajax({
+          url:'check_otp.php',
+          type:'post',
+          data:'otp='+otp,
+          success:function(result){
+            if(result=='yes'){
+              btnFunction();
+            }
+            if(result=='not_exist'){
+              jQuery('#otp_error').html('Please enter valid otp');
+            }
+          }
+        });
+      }
+    </script>
+   <script>
+       // after press the button, the page will link to forgot1.html (reset password)
+        function btnFunction(){
+            window.location.href= 'resetPassword.html';
+       }
+   </script> 
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
   </body>
 </html>

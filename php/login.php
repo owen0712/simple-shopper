@@ -16,6 +16,10 @@ if(!isset($_SESSION['access_token']))
 
 ?>
 
+<?php
+  include_once("conn.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,14 +102,15 @@ if(!isset($_SESSION['access_token']))
 </header>
  <!-- body -->
   <body class="text-center">  
+
+
     <!-- form -->
-    <form class="form-signin" id="form">
+    <form class="form-signin" id="form" method="post" action="login.php"> 
         <h5>Welcome to Simple Shopper!</h5>
         <p class="text-muted">Please Log in.</p>
-        
-        <div class = "input-field" style="width:350px">
+          <div class = "input-field" style="width:350px">
           <i class="bi bi-person-circle"></i>
-          <input type="text" placeholder="Phone number or email" id = "phone_email"/>
+          <input type="text" placeholder="Phone number or email" name="ph_email" id = "phone_email"/>
           <div class="i_check">
             <i class="bi bi-check-circle-fill" id="bi-check-circle-fill" ></i>
             <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
@@ -115,7 +120,7 @@ if(!isset($_SESSION['access_token']))
         
         <div class = "input-field" style="width:350px; margin-top: 30px; margin-bottom: 20px;">
           <i class="bi bi-lock-fill"></i>
-          <input type="password" placeholder="Password" id = "myInput"/>
+          <input type="password" placeholder="Password" name="pwdL" id = "myInput"/>
           <!-- eye icon -->
           <span class="eye" onclick="myFunction()">
               <i id = "hide1" class="bi bi-eye-fill"></i>
@@ -136,16 +141,16 @@ if(!isset($_SESSION['access_token']))
           </label>
           <br>
           <!--login through customer or administrator -->
-          <select class="custom-select custom-select-sm" id="status" style="width: 120px; height:40px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
-            <option value="Customer">Customer</option>
-            <option value="Administrator">Administrator</option>
+          <select class="custom-select custom-select-sm" id="status" name="statusL" style="width: 120px; height:40px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
+            <option value="User">Customer</option>
+            <option value="Admin">Administrator</option>
           </select>
         </div>
          <!--If user forgor password then can press the forgor password in order to link to forgot password page -->
         <div id = "signInsection">
             <i class="bi bi-arrow-right-circle-fill"></i>
-            <a href="../src/forgot3.html" style="color:rgb(38, 126, 209);">Forgot password?</a>
-            <button type="submit" id = "submit" class="btn btn-primary" style="border-radius: 55px; margin-left: 10px; width: 100px;">Login</button>
+            <a href="../php/forgotPassword.php" style="color:rgb(38, 126, 209);">Forgot password?</a>
+            <button type="submit" id = "submit" name="btnLogin" class="btn btn-primary" style="border-radius: 55px; margin-left: 10px; width: 100px;">Login</button>
         </div>
         <hr>
          <!--User can login with social media platform -->
@@ -246,7 +251,7 @@ if(!isset($_SESSION['access_token']))
          }
       }
   </script>
-  <script>
+ <script>
       const form = document.getElementById('form');
       const phone_email = document.getElementById('phone_email');
       const password = document.getElementById('myInput');
@@ -288,45 +293,6 @@ if(!isset($_SESSION['access_token']))
             setSuccessFor(password)
           }
 
-        var type='';
-        if(validateEmail(phone_emailValue)){
-          type='email';
-        }
-        else if(validatePhone(phone_emailValue)){
-          type='phone'
-        }
-
-        if(phone_emailValue !== '' && passwordValue !== ''){
-          if(signIn(phone_emailValue,type,passwordValue,statusValue)){
-            swal("Login Success", "Welcome to simple shopper", "success");
-            setTimeout(function(){window.location.href='index.html'}, 1000);
-          }
-          else{
-            swal("Login Failed", "Please try again", "error");
-          }
-        }
-
-      }
-
-      function signIn(input,type,password,status){
-        const users=JSON.parse(localStorage.getItem('users')||[]);
-        var check='';
-        if(type==='email'){
-            check='email';
-        }
-        else if(type==='phone'){
-            check='phone';
-        }
-        for(var user of users){
-            if(user[check]===input&&user['password']===password&&user['status']===status){
-                localStorage.setItem('user',JSON.stringify(user));
-                localStorage.setItem('users',JSON.stringify(users));
-                return true;
-            }
-        }
-        return false;
-      }
-      
       function validateEmail(email){
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email); 
@@ -352,9 +318,6 @@ if(!isset($_SESSION['access_token']))
         input_field.className = 'input-field success'
     }
 
-      function linkToMainPage(){
-        window.location.href = "index.html"
-      }
   </script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

@@ -98,7 +98,6 @@ function checkInputs(){
         if(signUp(name2Value+name1Value,emailValue,phoneValue,password2Value,birthValue,genderValue)){
             //if correct then will pop up sign up success message
             swal("Sign Up Success", "Please go to login page", "success");
-            setTimeout(function(){window.location.href='signin.html'}, 1000);
         }
         else{
             //if the account already in the local storage then user existed message will be pop up
@@ -160,10 +159,6 @@ function setSuccessFor(input){
     const col_md_3 = input.parentElement; //col-md-3
     // set the success class  (new class name)
     col_md_3.className = 'col-md-3 mb-3 success';
-}
-
-function linkToLoginPage(){
-    window.location.href = "signin.html"
 }
 
 //check the email format input by user is correct or not

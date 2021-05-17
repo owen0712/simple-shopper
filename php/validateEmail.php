@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link href="../style/forgot.css" rel="stylesheet">
-    <script src="../js/header.js" defer></script>
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
     
     <!-- css that edit the button hover -->
@@ -29,7 +28,7 @@
     </style>
     
     <title>Simple Shopper</title>
-
+    
    </head>
 
    <!-- Header -->
@@ -86,31 +85,100 @@
     </div>
 </header>
 
-<!-- body -->
+<!-- Body -->
    <body>
-       <!-- Container -->
+     <!-- container -->
      <div class="container">
-      <h4 style="margin-top: 20px;"><a href="signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-      </svg></a><strong>Forgot password</strong></h4>
+       <!-- Form -->
+      <form  id="form" class="form" method="POST" action="../php/validateEmail.php">
+        <!-- user can press the arrow button back to the login page -->
+        <h4 style="margin-top: 20px;"><a href="signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg></a><strong>Forgot password</strong></h4>
 
-      <!-- use the d-flex class and justify-content:center to align them to center -->
-      <div class = "d-flex" style="justify-content: center;">
-        <img src="../assets/ForgotPassword/Authentication-rafiki.png" style="max-width: 260px; max-height: 460px;">
-      </div>
-      <p class="text-center">To protect your account security, we need to verify your identity.</p>
-      <p class="text-center text-muted">Please choose a way to verify.</p>
-      <div class="d-flex justify-content-center">
-      <!-- User can press this button in order to verify through Email -->
-        <a href="../php/validateEmail.php"><button type="button" id = "submit" style="border-radius: 55px; width: 220px; margin-top: 10px; color:coral; background-color: rgb(228, 222, 222);"><i class="bi bi-envelope-fill"></i>&nbsp;Verify through Email</button></a>
-      </div>
-
-      <!-- User can press this button in order to verify through SMS code -->
-      <div class="d-flex justify-content-center">
-        <a href="validatePhone.html"><button type="submit" id = "submit" style="border-radius: 55px; width: 220px; margin-top: 10px; color:white; background-color: coral; justify-content:center;"><i class="bi bi-phone-vibrate-fill"></i><small>&nbsp;Verify through SMS Code</small></button></a>
-      </div>
+        <!-- use the d-flex class and justify-content:center to align them to center -->
+        <div class = "d-flex" style="justify-content: center;">
+          <!-- image -->
+          <img src="../assets/ForgotPassword/Forgot password-cuate.png" style="max-width: 260px; max-height: 460px;">
+        </div>
+        <p class="text-center">Please enter your registered email ID/Phone.</p>
+        <p class="text-center text-muted">We will send a verification code to your registerd email ID.</p>
+        
+        <!-- form-type -->
+        <div class = "form-type" style="width:350px">
+          <i class="bi bi-envelope-fill"></i>
+          <!-- user can input email -->
+          <input type="text" placeholder="Email" id = "email"/>
+          <div  class = "i_check">
+            <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
+            <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
+            <small>Error Message</small>
+          </div>
+        </div>
+        
+        <!-- Next button to proceed to next page -->
+        <div class="d-flex justify-content-center" style="margin-top:20px;">
+          <button type="button" id = "submit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;">Next</button>
+        </div>
+      </form>
      </div>
-     <!-- Footer -->
+     <script>
+        const email1 = document.getElementById('email');
+        const form = document.getElementById('form');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            checkInputs();
+        })
+
+        function checkInputs(){
+        const emailValue = email1.value.trim()
+
+        if(emailValue === ''){
+            setErrorFor(email, 'Email cannot be blank');
+        }else if(!isEmail(emailValue)){
+            setErrorFor(email, 'Email is not valid');
+        }else{
+            setSuccessFor(email);
+        }
+        }
+
+        function setErrorFor(input, message){
+            const form_type = input.parentElement;
+            const small = form_type.querySelector('small');
+            
+            small.innerText = message;
+
+            form_type.className = 'form-type error';
+        }
+
+        function setSuccessFor(input){
+            send_otp();
+        }
+
+        function isEmail(email){
+            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+        }
+
+        function send_otp(){
+        var email=jQuery('#email').val();
+        jQuery.ajax({
+            url:'sendOtp.php',
+            type:'post',
+            data:'email='+email,
+            success:function(result){
+                if(result=='yes'){
+                    header('location:otp.php');
+                }
+                if(result=='not_exist'){
+                    jQuery('#email_error').html('Please enter valid email');
+                }
+            }
+        });
+    }
+     </script>
+     <!-- footer -->
      <div class = "footer" style="margin-top: 50px;">
       <div class="container">
           <div class="row justify-content-center">
@@ -158,7 +226,7 @@
           <p class="copyright">Copyright&copy; 2021 Simple Shopper</p>
       </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
   </body>
 </html>
