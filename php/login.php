@@ -16,10 +16,6 @@ if(!isset($_SESSION['access_token']))
 
 ?>
 
-<?php
-  include_once("conn.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,7 +101,7 @@ if(!isset($_SESSION['access_token']))
 
 
     <!-- form -->
-    <form class="form-signin" id="form" method="post" action="login.php"> 
+    <form class="form-signin" id="form" method="post" action="registration.php"> 
         <h5>Welcome to Simple Shopper!</h5>
         <p class="text-muted">Please Log in.</p>
           <div class = "input-field" style="width:350px">
