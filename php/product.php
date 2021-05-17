@@ -110,7 +110,7 @@ class Product{
 					$stmt->execute();
 					move_uploaded_file($_FILES["image"]["tmp_name"], "../assets/upload_image/$image");
 				}
-				header("Location: ../src/administrator.php");
+				header("Location: ../php/administrator.php");
             	return true;	
 			}
 			catch (PDOException $e) {
@@ -140,7 +140,7 @@ class Product{
             	$stmt->execute();
 				move_uploaded_file($_FILES["image"]["tmp_name"], "../assets/upload_image/$image");
 
-				header("Location: ../src/administrator.php");
+				header("Location: ../php/administrator.php");
 				return true;
 			}
 			catch (PDOException $e) {
