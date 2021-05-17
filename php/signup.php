@@ -147,7 +147,7 @@
     
            <div class="col-md-3 mb-3" >
             <label style="margin-top: 10px;">Password*</label>
-             <input type="password" class="form-type"  name="Upass" placeholder= "Minumum 8 characters" id="password" >
+             <input type="password" class="form-type" id='password' name="Upass" placeholder= "Minumum 8 characters" id="password" >
              <span class="eye" onclick="myFunction()">
               <i id = "hide1" class="bi bi-eye-fill"></i>
               <i id = "hide2" class="bi bi-eye-slash-fill"></i>
@@ -346,29 +346,33 @@
       </script>
       <script>
           const form = document.getElementById('form');
-          const phone_email = document.getElementById('phone_email');
-          const password = document.getElementById('myInput');
-          const status=document.querySelector('#status')
+          //const phone_email = document.getElementById('phone_email');
+          const phone = document.getElementById('phone');
+          const email = document.getElementById('email');
+          const password = document.getElementById('password');
+          // const status=document.querySelector('#status')
 
-          form.addEventListener('submit', (e) =>{
-            e.preventDefault();
+          form.addEventListener('change'/*submit*/, (e) =>{
+            //e.preventDefault();
 
             checkInputs();
           })
 
           function checkInputs(){
-            const phone_emailValue = phone_email.value.trim();
+            //const phone_emailValue = phone_email.value.trim();
+            const phone_Value = phone.value.trim();
+            const email_Value = phone.value.trim();
             const passwordValue = password.value.trim();
             var statusValue ='';
 
-            if(status.value==='Customer'){
-              statusValue='user'
-            }
-            else if(status.value==='Administrator'){
-              statusValue='admin'
-            }
+            // if(status.value==='Customer'){
+            //   statusValue='user'
+            // }
+            // else if(status.value==='Administrator'){
+            //   statusValue='admin'
+            // }
 
-            if(!validateEmail(phone_emailValue) && !validatePhone(phone_emailValue)){
+            if(!validateEmail(phone_Value) && !validatePhone(email_Value)){
               setErrorFor(phone_email, 'Mandatory');
             }else{
               setSuccessFor(phone_email);
@@ -394,15 +398,15 @@
               type='phone'
             }
 
-            if(phone_emailValue !== '' && passwordValue !== ''){
-              if(signIn(phone_emailValue,type,passwordValue,statusValue)){
-                swal("Login Success", "Welcome to simple shopper", "success");
-                setTimeout(function(){window.location.href='index.html'}, 1000);
-              }
-              else{
-                swal("Login Failed", "Please try again", "error");
-              }
-            }
+            // if(phone_emailValue !== '' && passwordValue !== ''){
+            //   if(signIn(phone_emailValue,type,passwordValue,statusValue)){
+            //     swal("Login Success", "Welcome to simple shopper", "success");
+            //     setTimeout(function(){window.location.href='index.html'}, 1000);
+            //   }
+            //   else{
+            //     swal("Login Failed", "Please try again", "error");
+            //   }
+            // }
 
           }
           

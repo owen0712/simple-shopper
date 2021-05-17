@@ -24,7 +24,7 @@
         echo "Email already been registered";
         return;
        }
-
+       
        if (insertDetails($con,$Lname, $email, $phone, $pwd, $gender, $birth, $status));
        {
            $_SESSION['Uemail'] = $email;

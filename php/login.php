@@ -42,7 +42,7 @@ require_once '../db/conn.php';
     <link href="../style/signin.css" rel="stylesheet">
      
     <!-- sweetalert -->
-    <script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=tXcrjbddiLtZ3VxJ7RX9HsyHwnGFCJ8pXfkD3RuEb_E-PEd0aXkjVIwwkEiQXRZ96NLpW502b9d1CSFlzns-jg" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="http://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cDovL2xvY2FsaG9zdC9zaW1wbGUtc2hvcHBlci9waHAvbG9naW4ucGhw"/><script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/header.js" defer></script>
     
   </head>
@@ -289,9 +289,8 @@ require_once '../db/conn.php';
       const password = document.getElementById('myInput');
       const status=document.querySelector('#status')
 
-      form.addEventListener('submit', (e) =>{
-        e.preventDefault();
-
+      form.addEventListener('change'/*'submit'*/, (e) =>{
+        //e.preventDefault();
         checkInputs();
       })
 
@@ -326,15 +325,15 @@ require_once '../db/conn.php';
           }
 
     
-        if(phone_emailValue !== '' && passwordValue !== ''){
-          if(signIn(phone_emailValue,type,passwordValue,statusValue)){
-            swal("Login Success", "Welcome to simple shopper", "success");
-            setTimeout(function(){window.location.href='index.html'}, 1000);
-          }
-          else{
-            swal("Login Failed", "Please try again", "error");
-          }
-        }
+        // if(phone_emailValue !== '' && passwordValue !== ''){
+        //   if(signIn(phone_emailValue,type,passwordValue,statusValue)){
+        //     swal("Login Success", "Welcome to simple shopper", "success");
+        //     setTimeout(function(){window.location.href='index.html'}, 1000);
+        //   }
+        //   else{
+        //     swal("Login Failed", "Please try again", "error");
+        //   }
+        // }
 
       }
       
