@@ -3,7 +3,7 @@
 }
 
 table{
-  width: 1000px;
+  width: 100%;
   padding-top: 20px;
 }
 
@@ -95,10 +95,6 @@ input:focus, select:focus {
   background-color: white;
   color: #842BD7;
   cursor: pointer;
-}
-
-#close{
-  position: fixed;
 }
 
 .popup{
