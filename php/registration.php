@@ -84,7 +84,7 @@
    function insertDetails($con,$Lname, $email, $phone, $pwd, $gender, $birth, $status)
    {
        $query = $con->prepare("
-       INSERT INTO user (passwordU,Fname,email,phone,gender,dob,status)
+       INSERT INTO user (password,name,email,phone,gender,dob,status)
        VALUES(:psw,:Lname,:email,:phone,:gender,:dob,:status)
        ");
 
@@ -122,7 +122,7 @@
    function checkLoginPhone($con,$email,$pwd,$status)
    {
      $query = $con->prepare("
-     SELECT * FROM user WHERE phone=:phone,passwordU=:psw AND status=:status
+     SELECT * FROM user WHERE phone=:phone,password=:psw AND status=:status
      ");
      $query-> bindParam(":phone",$email);
      $query-> bindParam(":psw",$pwd);

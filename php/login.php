@@ -104,7 +104,6 @@ require_once('conn.php');
  <!-- body -->
   <body class="text-center">  
     <!-- form -->
-
     <div>
       <?php
           if(isset($_POST['btnLogin']))
