@@ -118,7 +118,7 @@
                         <a class="nav-link" href="src/search.html" style="color: white;">Product</a>
                     </li>
                     <li class="nav-item" id='admin' style="display: none;">
-                        <a class="nav-link" href="src/administrator.html" style="color: white;">Administrator</a>
+                        <a class="nav-link" href="php/administrator.php" style="color: white;">Administrator</a>
                     </li>
                     <?php
                         if(!empty($data['given_name']))
