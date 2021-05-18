@@ -98,7 +98,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/index.js" defer></script>
-    <script src="js/user.js" defer></script>
     <script src="js/header.js" defer></script>
     <script src="js/increment.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -235,7 +234,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="assets/Image/Instant/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
+            <img src="assets/Image/Instant Food/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Samyang
                     <p class="card-category">Instant Noodle</p>
@@ -255,7 +254,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="assets/Image/Instant/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
+            <img src="assets/Image/Instant Food/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Mamee Chef
                     <p class="card-category">Instant Noodle</p>
@@ -315,7 +314,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="assets/Image/Canned food/canned-3.png" class="mx-auto product-image" alt="Ayam Brand Tuna" height="auto" width="auto">
+            <img src="assets/Image/Canned&Packed Food/canned-3.png" class="mx-auto product-image" alt="Ayam Brand Tuna" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Ayam Brand Tuna
                     <p class="card-category">Canned</p>
@@ -335,7 +334,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="assets/Image/Cooking supplies/CS-1.png" class="mx-auto product-image" alt="Knife Cooking oil" height="auto" width="auto">
+            <img src="assets/Image/Cooking Ingredient/CS-1.png" class="mx-auto product-image" alt="Knife Cooking oil" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Knife Cooking oil
                     <p class="card-category">Cooking Supplies</p>
@@ -355,7 +354,7 @@
 
           <div class="col">
             <div class="card">
-            <img src="assets/Image/Cooking supplies/CS-4.png" class="mx-auto product-image" alt="Soy sauce" height="auto" width="auto">
+            <img src="assets/Image/Cooking Ingredient/CS-4.png" class="mx-auto product-image" alt="Soy sauce" height="auto" width="auto">
             <div class="card-body">
                 <h5 class="card-title">Soy sauce
                     <p class="card-category">Cooking Supplies</p>
@@ -600,7 +599,7 @@
           <div class="row row-flex flex-nowrap overflow-auto side-scroll" id="side-scroll2">
             <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-1.png" class="mx-auto product-image" alt="Mi Sedap" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-1.png" class="mx-auto product-image" alt="Mi Sedap" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Mi Sedap
                       <p class="card-category">Instant Noodle</p>
@@ -620,7 +619,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-2.png" class="mx-auto product-image" alt="Mama Mee" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-2.png" class="mx-auto product-image" alt="Mama Mee" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Mama Mee
                       <p class="card-category">Instant Noodle</p>
@@ -640,7 +639,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Samyang
                       <p class="card-category">Instant Noodle</p>
@@ -660,7 +659,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-4.png" class="mx-auto product-image" alt="Nongshim Shin Ramyun" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-4.png" class="mx-auto product-image" alt="Nongshim Shin Ramyun" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Nongshim Shin Ramyun
                       <p class="card-category">Instant Noodle</p>
@@ -680,7 +679,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-5.png" class="mx-auto product-image" alt="A1 Bak Kut Teh Mee" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-5.png" class="mx-auto product-image" alt="A1 Bak Kut Teh Mee" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">A1 Bak Kut Teh Mee
                       <p class="card-category">Instant Noodle</p>
@@ -700,7 +699,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-6.png" class="mx-auto product-image" alt="Maggi curry" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-6.png" class="mx-auto product-image" alt="Maggi curry" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Maggi curry
                       <p class="card-category">Instant Noodle</p>
@@ -720,7 +719,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-7.png" class="mx-auto product-image" alt="Cintan" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-7.png" class="mx-auto product-image" alt="Cintan" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Cintan
                       <p class="card-category">Instant Noodle</p>
@@ -740,7 +739,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">Mamee Chef
                       <p class="card-category">Instant Noodle</p>
@@ -760,7 +759,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-9.png" class="mx-auto product-image" alt="IndoMie" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-9.png" class="mx-auto product-image" alt="IndoMie" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">IndoMie
                       <p class="card-category">Instant Noodle</p>
@@ -780,7 +779,7 @@
 
           <div class="col">
               <div class="card">
-              <img src="assets/Image/Instant/Instant-10.png" class="mx-auto product-image" alt="San Remo" height="auto" width="auto">
+              <img src="assets/Image/Instant Food/Instant-10.png" class="mx-auto product-image" alt="San Remo" height="auto" width="auto">
               <div class="card-body">
                   <h5 class="card-title">San Remo
                       <p class="card-category">Instant Noodle</p>
