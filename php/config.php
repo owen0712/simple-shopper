@@ -1,7 +1,7 @@
 <?php
 //config.php
 
-require_once '../vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 $google_client = new Google_Client();
 

@@ -1,5 +1,5 @@
 <?php
-    include ('../php/config.php');
+    include ('php/config.php');
     $login_button = '';
 
     //This $_GET["code"] variable value received after user has login into their Google Account redirct to PHP script then this variable value has been received
