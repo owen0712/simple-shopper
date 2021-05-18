@@ -361,7 +361,7 @@
           function checkInputs(){
             //const phone_emailValue = phone_email.value.trim();
             const phone_Value = phone.value.trim();
-            const email_Value = phone.value.trim();
+            const email_Value = email.value.trim();
             const passwordValue = password.value.trim();
             var statusValue ='';
 

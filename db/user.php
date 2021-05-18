@@ -237,7 +237,7 @@ class User{
         }
     }
  
-    public function checkLoginPhone($con,$email,$pwd,$status)
+    public function checkLoginPhone($email,$pwd,$status)
     {   
         $sql = "SELECT * FROM user WHERE phone=:phone,password=:psw AND status=:status";
         $stmt = $this->db->prepare($sql);
@@ -264,7 +264,7 @@ class User{
         return $pwd;
     }
  
-    public function checkEmailExist($con, $email)
+    public function checkEmailExist($email)
     {
         $sql = "SELECT * FROM user WHERE email=:email";
         $stmt = $this->db->prepare($sql);
