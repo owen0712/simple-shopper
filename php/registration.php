@@ -51,14 +51,14 @@
       {
         if(checkLoginEmail($con,$email,$pwd,$status))
         {
-            header("Location: index.php");
+            header("Location:./index.php");
         }else{
             echo "The username and password are incorrect";
         }
       }else if(checkPhone($email))
       {
         if(checkLoginPhone($con,$email,$pwd,$status)){
-            header("Location: index.php");
+            header("Location:./index.php");
         }
       }else{
           echo "The username and password are incorrect";
