@@ -38,7 +38,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
+                            <a class="nav-link" href="index.php" style="color: white;">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
