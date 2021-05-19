@@ -8,8 +8,8 @@ const phone = document.getElementById('phone');
 const birth = document.getElementById('birthdaytime');
 const gender = document.querySelector('#gender')
 
-form.addEventListener('submit', (e) =>{
-    e.preventDefault();
+form.addEventListener('change'/*'submit'*/, (e) =>{
+    //e.preventDefault();
 
     checkInputs();
 })
@@ -103,42 +103,6 @@ function checkInputs(){
             //if the account already in the local storage then user existed message will be pop up
             swal("User existed", "Please register using other email and phone number", "error");
         }
-    }
-}
-
-
-function signUp(name,email,phone,password,dob,gender){
-    const users=JSON.parse(localStorage.getItem('users')||[]);
-    var new_user={
-        id:users.length+1,
-        password:password,
-        status:'user',
-        name:name,
-        email:email,
-        phone:phone,
-        gender:gender,
-        dob:dob,
-        addressesArr:[],
-        profile:''
-    }
-    var exist=false;
-    if(!checkExistUser(email,phone,users)){
-        users.push(new_user)
-        localStorage.setItem('users',JSON.stringify(users));
-        return true
-    }
-    else{
-        return false;
-    }
-    
-}
-
-function checkExistUser(email,phone,users){
-    for(var user of users){
-        if(user['email']===email||user['phone']===phone){
-            return true;
-        }
-        return false;
     }
 }
 

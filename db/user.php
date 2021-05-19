@@ -203,6 +203,7 @@ class User{
 
     public function insertDetails($Lname, $email, $phone, $pwd, $gender, $birth, $status)
     {
+        $phone = str_replace("-", "", $phone);
         $sql=" INSERT INTO user (password,name,email,phone,gender,dob,status)
         VALUES(:psw,:Lname,:email,:phone,:gender,:dob,:status)";
         $stmt = $this->db->prepare($sql);
@@ -237,16 +238,16 @@ class User{
         }
     }
  
-    public function checkLoginPhone($email,$pwd,$status)
+    public function checkLoginPhone($phone,$pwd,$status)
     {   
-        $sql = "SELECT * FROM user WHERE phone=:phone,password=:psw AND status=:status";
+        $phone = str_replace("-", "", $phone);
+        echo $email;
+        $sql = "SELECT * FROM user WHERE phone=:phone AND password=:psw AND status=:status";
         $stmt = $this->db->prepare($sql);
-        $stmt-> bindParam(":phone",$email);
+        $stmt-> bindParam(":phone",$phone);
         $stmt-> bindParam(":psw",$pwd);
         $stmt-> bindParam(":status",$status);
-        echo "What happen".$status;
         $stmt->execute();
-    
         //check how many rows
     
         if($stmt->rowCount() == 1)
@@ -283,7 +284,7 @@ class User{
 
     public function checkPhone($mobile)
         {
-        return preg_match('/^[0-9]{10}+$/', $mobile);
+        return preg_match('/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im', $mobile);
         }
     
         //check email format
@@ -296,5 +297,4 @@ class User{
         }
     }
 }
-
 ?>

@@ -1,52 +1,25 @@
 <?php
+
+//index.php
+
+//Include Configuration File
+include('config.php');
+
+$login_button = '';
+
+//This is for check user has login into system by using Google account, if User not login into system then it will execute if block of code and make code for display Login link for Login using Google account.
+if(!isset($_SESSION['access_token']))
+{
+ //Create a URL to obtain user authorization
+ $login_button = '<a href="'.$google_client->createAuthUrl().'" class="social-icon"><i class="bi bi-google" id="Google" /></i></a>';
+}
+
+?>
+
+<?php
 require_once '../db/conn.php';
 ?>
-<?php
-  //index.php
-      
-  //Include Configuration File
-  include('config.php');
-      
-  $login_button = '';
 
-  //This is for check user has login into system by using Google account, if User not login into system then it will execute if block of code and make code for display Login link for Login using Google account.
-  if(!isset($_SESSION['access_token']))
-    {
-   //Create a URL to obtain user authorization
-    $login_button = '<a href="'.$google_client->createAuthUrl().'" class="social-icon"><i class="bi bi-google" id="Google" /></i></a>';
-    }
-?>
-<?php
-    if(isset($_POST['btnLogin']))
-       {
-          $email = $_POST['ph_email'];
-          $pwd = $user->sanitizePassword($_POST['pwdL']);
-          $status = $_POST['statusL'];
-
-        if($email == "" || $pwd ==""){
-            echo "email and password cannot be blank";
-            return;
-         }
-
-          //if user enter email
-        if($user->checkEmail($email))
-          {
-            if($user->checkLoginEmail($email,$pwd,$status))
-               {
-                header("Location:../index.php");
-            }else{
-
-            }
-         }else if($user->checkPhone($email))
-             {
-            if($user->checkLoginPhone($email,$pwd,$status)){
-               header("Location:../index.php");
-               }
-          }else{
-              echo "The username and password are incorrect";
-             }
-          }
-      ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,10 +65,10 @@ require_once '../db/conn.php';
                     <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
                 </li>
                 <li class="nav-item user">
-                    <a class="nav-link" id='sign-up' href="../src/sign.html" style="color: white;">Sign Up</a>
+                    <a class="nav-link" id='sign-up' href="../php/signup.php" style="color: white;">Sign Up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id='sign-in' href="../src/signin.html" style="color: white;">Log in</a>
+                    <a class="nav-link" id='sign-in' href="../php/login.php" style="color: white;">Log in</a>
                 </li>
             </ul>
         </div>
@@ -130,13 +103,89 @@ require_once '../db/conn.php';
  <!-- body -->
   <body class="text-center">  
     <!-- form -->
+    <div>
+    <script>
+        function swalSuccess(){
+          swal({
+            title: "Successfully",
+            text: "Login Successfully",
+            icon: "success",
+            buttons: true,
+            //dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../index.php'}, 1000);
+                }
+          });
+        }
+    </script>
+    <script>
+        function swalError(){
+          swal({
+            title: "Error",
+            text: "Email and password does not match",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/login.php'}, 1000);
+                }
+          });
+        }
+    </script>
+        <script>
+        function swalError2(){
+          swal({
+            title: "Error",
+            text: "Email and password does not match",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/login.php'}, 1000);
+                }
+          });
+        }
+    </script>
+      <?php
+          if(isset($_POST['btnLogin']))
+          {
+              $email = $_POST['ph_email'];
+              $pwd = $user->sanitizePassword($_POST['pwdL']);
+              $status = $_POST['statusL'];
 
+              //if user enter email
+             if($user->checkEmail($email))
+             {
+               if($user->checkLoginEmail($email,$pwd,$status))
+               {
+                  echo "<script>swalSuccess();</script>";
+               }else{
+                  echo "<script>swalError();</script>";
+               }
+             }else if($user->checkPhone($email))
+             {
+               if($user->checkLoginPhone($email,$pwd,$status)){
+                echo "<script>swalSuccess();</script>";
+               }
+             }else{
+                echo "<script>swalError2();</script>";
+             }
+          }
+       
+      ?>
+    </div>
     <form class="form-signin" id="form" action="login.php" name = "form-login" method = "post"> 
         <h5>Welcome to Simple Shopper!</h5>
         <p class="text-muted">Please Log in.</p>
           <div class = "input-field" style="width:350px">
           <i class="bi bi-person-circle"></i>
-          <input type="text" placeholder="Phone number or email" name="ph_email" id = "phone_email"/>
+          <input type="text" placeholder="Phone number or email" name="ph_email" value="<?php if(isset($_COOKIE["ph_email"])) { echo $_COOKIE["ph_email"]; } ?>" id = "phone_email"/>
           <div class="i_check">
             <i class="bi bi-check-circle-fill" id="bi-check-circle-fill" ></i>
             <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
@@ -162,10 +211,10 @@ require_once '../db/conn.php';
           </div>
         </div>
         
-         <!--checkbox for user to choose whether want remember the account and password or not-->
+        <!--checkbox for user to choose whether want remember the account and password or not-->
         <div class="checkbox mb-3">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me" name="remember" <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?>> Remember me
           </label>
           <br>
           <!--login through customer or administrator -->
@@ -361,7 +410,6 @@ require_once '../db/conn.php';
         input_field.className = 'input-field success'
     }
   </script>
-  
 
  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

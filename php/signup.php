@@ -1,3 +1,6 @@
+<?php
+require_once '../db/conn.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +13,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../style/signUp.css" rel="stylesheet">
     <script src="../js/header.js" defer></script>
+    
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
     
     <!-- sweetalert -->
@@ -21,7 +25,7 @@
         }
     </style>
 
-
+    <script src="../js/sign.js" defer></script>
     <title>Simple Shopper Sign Up</title>
 
     <!-- header -->
@@ -84,8 +88,88 @@
     <p class = "text-center">Please sign up!</p>
     <!-- container -->
     <div class="container">
+    <script>
+      function swalSuccess(){
+          swal({
+            title: "Successfully",
+            text: "Sign up Successfully",
+            icon: "success",
+            buttons: true,
+            //dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/login.php'}, 1000);
+                }
+          });
+        }
+    </script>
+    <script>
+        function swalError(){
+          swal({
+            title: "Error",
+            text: "Email already been registered",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/signup.php'}, 1000);
+                }
+          });
+        }
+    </script>
+    <script>
+        function swalError2(){
+          swal({
+            title: "Error",
+            text: "Please fill in all details correctly",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/signup.php'}, 1000);
+                }
+          });
+        }
+    </script>
+    <?php
+         if(isset($_POST['btnSign']))
+         {
+             $Lname = $_POST['lName'];
+             $email = $_POST['Uemail'];
+             $phone = $_POST['Uphone'];
+             $pwd = $user->sanitizePassword($_POST['Upass']);
+             $gender = $_POST['gender'];
+             $birth = $_POST['birthdaytime'];
+             $status = 'User';
+      
+             if($Lname =="" || $email == "" || $phone == "" || $pwd =="" ||
+             $gender =="" || $birth == ""){
+                echo "<script>swalError2();</script>";
+             }
+      
+             if($user->checkEmailExist($email))
+             {
+              echo "<script>swalError();</script>";
+             }
+             
+             if($Lname !="" && $email != "" && $phone != "" && $pwd !="" &&
+             $gender !="" && $birth != ""){
+                if ($user->insertDetails($Lname, $email, $phone, $pwd, $gender, $birth, $status));
+                {
+                    $_SESSION['Uemail'] = $email;
+                    echo "<script>swalSuccess();</script>";
+                }
+             }
+         }
+      
+    ?>
           <!-- form -->
-          <form  id="form" class="form" method="post" action="registration.php">
+          <form  id="form" class="form" method="post" action="signup.php">
             <!-- first form-row that consist of 2 input fields which are First name and Last Name -->
             <div class="form-row" style="justify-content: center;">
     
@@ -343,97 +427,6 @@
                 z.style.display = "block";
               }
             }
-      </script>
-      <script>
-          const form = document.getElementById('form');
-          //const phone_email = document.getElementById('phone_email');
-          const phone = document.getElementById('phone');
-          const email = document.getElementById('email');
-          const password = document.getElementById('password');
-          // const status=document.querySelector('#status')
-
-          form.addEventListener('change'/*submit*/, (e) =>{
-            //e.preventDefault();
-
-            checkInputs();
-          })
-
-          function checkInputs(){
-            //const phone_emailValue = phone_email.value.trim();
-            const phone_Value = phone.value.trim();
-            const email_Value = email.value.trim();
-            const passwordValue = password.value.trim();
-            var statusValue ='';
-
-            // if(status.value==='Customer'){
-            //   statusValue='user'
-            // }
-            // else if(status.value==='Administrator'){
-            //   statusValue='admin'
-            // }
-
-            if(!validateEmail(phone_Value) && !validatePhone(email_Value)){
-              setErrorFor(phone_email, 'Mandatory');
-            }else{
-              setSuccessFor(phone_email);
-            }
-
-            if(passwordValue === ''){
-                setErrorFor(password, 'Password cannot be blank');
-              }
-            else if(passwordValue.length>15){
-                setErrorFor(password, 'Password length cannot exceed 15 characters')
-              }
-            else if(passwordValue.length < 8){
-                setErrorFor(password, 'Password must at least 8 characters long');
-            }else{
-                setSuccessFor(password)
-              }
-
-            var type='';
-            if(validateEmail(phone_emailValue)){
-              type='email';
-            }
-            else if(validatePhone(phone_emailValue)){
-              type='phone'
-            }
-
-            // if(phone_emailValue !== '' && passwordValue !== ''){
-            //   if(signIn(phone_emailValue,type,passwordValue,statusValue)){
-            //     swal("Login Success", "Welcome to simple shopper", "success");
-            //     setTimeout(function(){window.location.href='index.html'}, 1000);
-            //   }
-            //   else{
-            //     swal("Login Failed", "Please try again", "error");
-            //   }
-            // }
-
-          }
-          
-          function validateEmail(email){
-            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(email); 
-          }
-
-          function validatePhone(phone){
-            var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-            return re.test(phone);
-          }
-
-          function setErrorFor(input, message){
-            const input_field = input.parentElement;
-            const small = input_field.querySelector('small');
-
-            // add error message inside small
-            small.innerText = message;
-
-            // add error class
-            input_field.className = 'input-field error';
-          }
-          function setSuccessFor(input){
-            const input_field = input.parentElement;
-            input_field.className = 'input-field success'
-        }
       </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
