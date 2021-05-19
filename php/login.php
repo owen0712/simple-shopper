@@ -3,7 +3,7 @@
 //index.php
 
 //Include Configuration File
-include('config.php');
+include('../php/config.php');
 
 $login_button = '';
 
@@ -185,7 +185,7 @@ require_once '../db/conn.php';
         <p class="text-muted">Please Log in.</p>
           <div class = "input-field" style="width:350px">
           <i class="bi bi-person-circle"></i>
-          <input type="text" placeholder="Phone number or email" name="ph_email" value="<?php if(isset($_COOKIE["ph_email"])) { echo $_COOKIE["ph_email"]; } ?>" id = "phone_email"/>
+          <input type="text" placeholder="Phone number or email" name="ph_email" id = "phone_email" value="<?php if(isset($_COOKIE['username'])){echo $_COOKIE['username'];};?>"/>
           <div class="i_check">
             <i class="bi bi-check-circle-fill" id="bi-check-circle-fill" ></i>
             <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
@@ -196,7 +196,7 @@ require_once '../db/conn.php';
         <div class = "input-field" style="width:350px; margin-top: 30px; margin-bottom: 20px;">
           <i class="bi bi-lock-fill"></i>
 
-          <input type="password" placeholder="Password" name="pwdL" id = "myInput"/>
+          <input type="password" placeholder="Password" name="pwdL" id = "myInput" value="<?php if(isset($_COOKIE['password'])){echo $_COOKIE['password'];};?>"/>
           <!-- eye icon -->
           <span class="eye" onclick="myFunction()">
               <i id = "hide1" class="bi bi-eye-fill"></i>
@@ -214,7 +214,7 @@ require_once '../db/conn.php';
         <!--checkbox for user to choose whether want remember the account and password or not-->
         <div class="checkbox mb-3">
           <label>
-            <input type="checkbox" value="remember-me" name="remember" <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?>> Remember me
+            <input type="checkbox" value="remember-me" name="remember"> Remember me
           </label>
           <br>
           <!--login through customer or administrator -->
