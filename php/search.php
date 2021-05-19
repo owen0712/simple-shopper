@@ -181,10 +181,19 @@
                                             <input type='button' value='-' class='minus'><input type='number' step='1' min='1' max='' name='quantity' value='1' title='Qty' class='input-text qty text' size='4' pattern='' inputmode=''><input type='button'
                                                 value='+' class='plus'>
                                         </div>
-                                        <button id='addBtn' type='button' class='btn btn-success' style='float: right;' onclick='addtolist()'>Add to list</button>
-                                    </div>
-                                    </div>
-                                </div>";
+                                        <button id='addBtn' type='button' class='btn btn-success' style='float: right;' onclick='addtolist()'";
+
+                                if ($row["product_amount"]=="0"){
+                                    echo"disabled>Add to list</button>
+                                        </div>
+                                        </div>
+                                    </div>";
+                                }else{
+                                    echo">Add to list</button>
+                                        </div>
+                                        </div>
+                                    </div>";
+                                }
                             }
                             /* free result set */
                             $result->free();

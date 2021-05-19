@@ -28,7 +28,6 @@ function addtolist()
 {
     const login=JSON.parse(localStorage.getItem('user'));
     if(login===null){
-	console.log('not work')
         //delay before redirecting
         swal("You have to sign in first", "It will switch to sign in page in 2 seconds");
         setTimeout(function(){window.location.href='signin.html'}, 2000);
