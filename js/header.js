@@ -4,25 +4,16 @@
 function shoppingListClick(){
     const login=JSON.parse(localStorage.getItem('user'));
     if(login===null){
-	window.location.href='../src/signin.html';
+	window.location.href='../php/signup.php';
     }
     else{
     	window.location.href="../src/shoplist.html";
     }
 }
 
-//Passes the search term to the search page 
-function searchFunc(){
-    input = document.getElementById("search");
-    var search= input.value;
-    console.log(search);
-    var newURL="../php/search.php?search="+search;
-    window.location.href=newURL;
-}
-
 //Search when enter key is pressed when in the search bar
 document.getElementById("search").addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
-        searchFunc();
+        document.getElementById("searchButton").onclick();
     }
 });
