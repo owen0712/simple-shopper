@@ -141,16 +141,16 @@
                 <a class="navbar-brand" href="index.html"><img src="assets/Logo/SSLogo2.png" height="70mm"></a>
             </div>
 
-            <div class="col col-6">
+            <form class="col col-6" method="GET" action="php/search.php">
                 <div class="input-group mx-auto">
-                    <input type="search" id="search" class="form-control form-control-lg mx-auto" placeholder="Search"/>
-                    <?php echo '<button type="button" id="searchButton" class="btn btn-primary" onclick="searchFunc('.$_SERVER['DOCUMENT_ROOT'].')">'; ?>
+                    <input type="search" id="search" name="keywords" class="form-control form-control-lg mx-auto" placeholder="Search"/>
+                    <button type="submit" id="searchButton" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                     </button>
                 </div>
-            </div>
+            </form>
 
             <div class="col col-auto justify-content-end dropdown">
                 <button type="button" id="dLabel"  class="btn btn-default" onclick="shoppingListClick()">
