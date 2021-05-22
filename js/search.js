@@ -43,10 +43,10 @@ function filter(input)
 }
 
 //function to pass serach variable to the new page
-function searchFunc(root){
+function searchFunc(){
     input = document.getElementById("search");
     var search= input.value;
     console.log(search);
-    var newURL=root+"simple-shopper/php/search.php?search="+search;
+    var newURL="../php/search.php?search="+search;
     window.location.href=newURL;
 }
