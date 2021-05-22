@@ -13,16 +13,10 @@
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
     <link href="../style/index.css" rel="stylesheet">
     <link href="../style/footer.css" rel="stylesheet">
-
-
-    
-
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/user.js" defer></script>
-    <script src="../js/search.js" defer></script>
     <script src="../js/increment.js" defer></script>
     <script src="../js/header.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -35,19 +29,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
+                        <a class="nav-link" href="../index.php" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
+                        <a class="nav-link" href="search.php" style="color: white;">Product</a>
                     </li>
                     <li class="nav-item" id='admin' style="display: none;">
-                        <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
+                        <a class="nav-link" href="administrator.php" style="color: white;">Administrator</a>
                     </li>
                     <li class="nav-item user">
-                        <a class="nav-link" id='sign-up' href="../src/sign.html" style="color: white;">Sign Up</a>
+                        <a class="nav-link" id='sign-up' href="signup.php" style="color: white;">Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id='sign-in' href="../src/signin.html" style="color: white;">Log in</a>
+                        <a class="nav-link" id='sign-in' href="login.php" style="color: white;">Log in</a>
                     </li>
                 </ul>
             </div>
@@ -59,16 +53,16 @@
                 <a class="navbar-brand" href="index.html"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
             </div>
 
-            <div class="col col-6">
+            <form class="col col-6" method="GET" action="search.php">
                 <div class="input-group mx-auto">
-                    <input type="search" id="search" class="form-control form-control-lg mx-auto" placeholder="Search"/>
-                    <button type="button" id="searchButton" class="btn btn-primary" onclick="searchFunc()">
+                    <input type="search" id="search" name="keywords" class="form-control form-control-lg mx-auto" placeholder="Search"/>
+                    <button type="submit" id="searchButton" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                     </button>
                 </div>
-            </div>
+            </form>
 
             <div class="col col-auto justify-content-end dropdown">
                 <button type="button" id="dLabel"  class="btn btn-default" onclick="shoppingListClick()">
@@ -92,19 +86,19 @@
                                 <i class="fa fa-cutlery fa-lg cutlery"></i> <span class="ms-1 d-none d-sm-inline">Food and beverage</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="Javascript:filter('Beverage')" class="nav-link px-0"> <span class="d-none d-sm-inline">Drinks</span>  </a>
+                                    <a href="search.php?category=Beverage" class="nav-link px-0"> <span class="d-none d-sm-inline">Beverage</span>  </a>
                                 </li>
                                 <li>
-                                    <a href="Javascript:filter('Instant Noodle')" class="nav-link px-0"> <span class="d-none d-sm-inline">Instant Noodle</span> </a>
+                                    <a href="search.php?category=Instant Food" class="nav-link px-0"> <span class="d-none d-sm-inline">Instant Food</span> </a>
                                 </li>
                                 <li>
-                                    <a href="Javascript:filter('Cereal')" class="nav-link px-0"> <span class="d-none d-sm-inline">Cereal</span>  </a>
+                                    <a href="search.php?category=cereal" class="nav-link px-0"> <span class="d-none d-sm-inline">Cereal</span>  </a>
                                 </li>
                                 <li>
-                                    <a href="Javascript:filter('Snacks')" class="nav-link px-0"> <span class="d-none d-sm-inline">Snacks</span>  </a>
+                                    <a href="search.php?category=Snack" class="nav-link px-0"> <span class="d-none d-sm-inline">Snacks</span>  </a>
                                 </li>
                                 <li>
-                                    <a href="Javascript:filter('Canned')" class="nav-link px-0"> <span class="d-none d-sm-inline">Canned Foods </span></a>
+                                    <a href="search.php?category=Canned and Packed Food" class="nav-link px-0"> <span class="d-none d-sm-inline">Canned and Packed Food</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -113,10 +107,10 @@
                                 <i class="fs-4 bi-egg"></i> <span class="ms-1 d-none d-sm-inline">Cooking & Baking</span></a>
                             <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="Javascript:filter('Cooking Supplies')" class="nav-link px-0"> <span class="d-none d-sm-inline">Cooking Supplies</span></a>
+                                    <a href="search.php?category=Cooking Ingredient" class="nav-link px-0"> <span class="d-none d-sm-inline">Cooking Ingredient</span></a>
                                 </li>
                                 <li>
-                                    <a href="Javascript:filter('Baking Items')" class="nav-link px-0"> <span class="d-none d-sm-inline">Baking Items</span></a>
+                                    <a href="search.php?category=Baking supplies" class="nav-link px-0"> <span class="d-none d-sm-inline">Baking Supplies</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -125,13 +119,13 @@
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Household Products</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="Javascript:filter('Paper Products')" class="nav-link px-0"> <span class="d-none d-sm-inline">Paper Products</span></a>
+                                    <a href="search.php?category=Paper Product" class="nav-link px-0"> <span class="d-none d-sm-inline">Paper Products</span></a>
                                 </li>
                                 <li>
-                                    <a href="Javascript:filter('Household Items')" class="nav-link px-0"> <span class="d-none d-sm-inline">Household Items</span></a>
+                                    <a href="search.php?category=household supply" class="nav-link px-0"> <span class="d-none d-sm-inline">Household Supply</span></a>
                                 </li>
                                 <li>
-                                    <a href="Javascript:filter('Hygiene')" class="nav-link px-0"> <span class="d-none d-sm-inline">Hygiene</span></a>
+                                    <a href="search.php?category=Bath and Body" class="nav-link px-0"> <span class="d-none d-sm-inline">Bath and Body</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -140,10 +134,10 @@
                                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Others</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="Javascript:filter('Baby Products')" class="nav-link px-0"> <span class="d-none d-sm-inline">Baby Products</span></a>
+                                    <a href="search.php?category=Baby Product" class="nav-link px-0"> <span class="d-none d-sm-inline">Baby Products</span></a>
                                 </li>
                                 <li>
-                                    <a href="Javascript:filter('Pet Items')" class="nav-link px-0"> <span class="d-none d-sm-inline">Pet Items</span></a>
+                                    <a href="search.php?category=pet" class="nav-link px-0"> <span class="d-none d-sm-inline">Pet</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -159,8 +153,17 @@
                         if($conn->connect_error){
                               die("Error failed to connect to MySQL: " . $conn->connect_error);
                         }
-
-                        $query="SELECT product_image, product_name,product_category,product_price,product_amount FROM product";
+                        if(isset($_GET['keywords']))
+                        {
+                            $keywords = $_GET['keywords'];
+                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product WHERE product_description LIKE '%$keywords%'";
+                        }else if(isset($_GET['category']))
+                        {
+                            $category = $_GET['category'];
+                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product WHERE product_category='$category'";
+                        }else{
+                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product";
+                        }
 
                         if ($result = $conn->query($query)) {
                             /* fetch associative array */
@@ -168,12 +171,12 @@
                                 echo "
                                 <div class='col'>
                                     <div class='card'>
-                                    <img src='data:image;base64,".base64_encode($row['product_image'])."' class='mx-auto product-image' alt='100 plus' height='auto' width='auto'>
+                                    <img src='data:image;base64,".base64_encode($row['product_image'])."' class='mx-auto product-image' alt='".$row['product_name']."' height='auto' width='auto'>
                                     <div class='card-body' style='padding-bottom:0px;' >
                                         <h5 class='card-title'>".$row["product_name"]."
                                             <p class='card-category'>".$row["product_category"]."</p>
                                         </h5>
-                                        <p class='card-text'>100 plus Carbonated Drink Original 320ml </p>
+                                        <p class='card-text'>".$row['product_description']."</p>
                                         <p class='card-text' style='font-size: small; text-align:right;'> RM ".$row["product_price"]."/each<br>".$row["product_amount"]." left</p>
                                     </div>
                                     <div class='card-body' style='padding-top:0px; padding-bottom:0px'>
@@ -190,6 +193,7 @@
                                     </div>";
                                 }else{
                                     echo">Add to list</button>
+                                    <a type='button' class='btn btn-success' style='float: right;' href=\"item.php?id=".$row['product_id']."\">View item</a>
                                         </div>
                                         </div>
                                     </div>";
@@ -198,7 +202,6 @@
                             /* free result set */
                             $result->free();
                         }
-
                         $conn->close();
                     ?>
 
@@ -259,12 +262,6 @@
             <hr>
             <p class="copyright">Copyright&copy; 2021 Simple Shopper</p>
         </div>
-    </div>
-
-
-
-
-
-      
+    </div>    
 </body>
 </html>
