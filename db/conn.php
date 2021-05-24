@@ -18,4 +18,6 @@
     $user=new User($pdo);
     require_once 'product.php';
     $product1 = new Product($pdo);
+    require_once 'shoppingList.php';
+    $shoppingList = new shoppingList($pdo);
 ?>
