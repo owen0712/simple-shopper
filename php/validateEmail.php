@@ -90,7 +90,7 @@
      <!-- container -->
      <div class="container">
        <!-- Form -->
-      <form  id="form" class="form" method="POST" action="../php/validateEmail.php">
+      <form  id="form" class="form" method = "post" action="sendOtp.php">
         <!-- user can press the arrow button back to the login page -->
         <h4 style="margin-top: 20px;"><a href="signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
@@ -108,7 +108,7 @@
         <div class = "form-type" style="width:350px">
           <i class="bi bi-envelope-fill"></i>
           <!-- user can input email -->
-          <input type="text" placeholder="Email" id = "email"/>
+          <input type="text" placeholder="Email" id = "email" name="email"/>
           <div  class = "i_check">
             <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
             <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
@@ -118,7 +118,7 @@
         
         <!-- Next button to proceed to next page -->
         <div class="d-flex justify-content-center" style="margin-top:20px;">
-          <button type="button" id = "submit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;">Next</button>
+          <button type="submit" id = "submit" name="btnSubmit1" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;">Next</button>
         </div>
       </form>
      </div>
@@ -126,8 +126,8 @@
         const email1 = document.getElementById('email');
         const form = document.getElementById('form');
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
+        form.addEventListener('change', (e) => {
+            //e.preventDefault();
 
             checkInputs();
         })
@@ -141,7 +141,7 @@
             setErrorFor(email, 'Email is not valid');
         }else{
             setSuccessFor(email);
-        }
+            }
         }
 
         function setErrorFor(input, message){
@@ -154,29 +154,14 @@
         }
 
         function setSuccessFor(input){
-            send_otp();
+            const form_type = input.parentElement;
+            form_type.className = 'form-type success';
         }
 
         function isEmail(email){
             return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
         }
 
-        function send_otp(){
-        var email=jQuery('#email').val();
-        jQuery.ajax({
-            url:'sendOtp.php',
-            type:'post',
-            data:'email='+email,
-            success:function(result){
-                if(result=='yes'){
-                    header('location:otp.php');
-                }
-                if(result=='not_exist'){
-                    jQuery('#email_error').html('Please enter valid email');
-                }
-            }
-        });
-    }
      </script>
      <!-- footer -->
      <div class = "footer" style="margin-top: 50px;">

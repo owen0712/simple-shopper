@@ -9,7 +9,7 @@ $google_client-> setClientId('458382258443-vs5h4p1lfsdgsf8iaeuor6ekq06s33js.apps
 
 $google_client->setClientSecret('A7_q3KeFYchFiakdfMP6zeDI');
 
-$google_client->setRedirectUri('http://localhost/simple-shopper/php/');
+$google_client->setRedirectUri('http://localhost/simple-shopper/');
 
 $google_client ->addScope('email');
 

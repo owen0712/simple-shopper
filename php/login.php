@@ -15,11 +15,9 @@ if(!isset($_SESSION['access_token']))
 }
 
 ?>
-
 <?php
 require_once '../db/conn.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,12 +150,13 @@ require_once '../db/conn.php';
           });
         }
     </script>
-      <?php
+<?php
           if(isset($_POST['btnLogin']))
           {
               $email = $_POST['ph_email'];
               $pwd = $user->sanitizePassword($_POST['pwdL']);
               $status = $_POST['statusL'];
+              $rem = $_POST['remember'];
 
               //if user enter email
              if($user->checkEmail($email))
@@ -178,14 +177,31 @@ require_once '../db/conn.php';
              }
           }
        
-      ?>
+?>
+<?php
+   if(isset($_POST['remember']))
+     {
+       $remember = $_POST['remember'];
+       //set cookie
+       setcookie('email',$_POST['ph_email'],time()+60*60*7);
+       setcookie('pass',$user->sanitizePassword($_POST['pwdL']), time()+60*60*7);
+     }
+      if(isset($_COOKIE['email']) and isset($_COOKIE['pass'])){
+        $em = $_COOKIE['email'];
+        $pass = $_COOKIE['pass'];
+        echo "<script>
+          document.getElementById('phone_email').value = '$em';
+          document.getElementById('myInput').value = '$pass';
+      </script>";
+      }
+?>
     </div>
     <form class="form-signin" id="form" action="login.php" name = "form-login" method = "post"> 
         <h5>Welcome to Simple Shopper!</h5>
         <p class="text-muted">Please Log in.</p>
           <div class = "input-field" style="width:350px">
           <i class="bi bi-person-circle"></i>
-          <input type="text" placeholder="Phone number or email" name="ph_email" id = "phone_email" value="<?php if(isset($_COOKIE['username'])){echo $_COOKIE['username'];};?>"/>
+          <input type="text" placeholder="Phone number or email" name="ph_email" id = "phone_email"  value="<?php if(isset($_COOKIE["email"])) { echo $_COOKIE["email"]; } ?>"/>
           <div class="i_check">
             <i class="bi bi-check-circle-fill" id="bi-check-circle-fill" ></i>
             <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
@@ -196,7 +212,7 @@ require_once '../db/conn.php';
         <div class = "input-field" style="width:350px; margin-top: 30px; margin-bottom: 20px;">
           <i class="bi bi-lock-fill"></i>
 
-          <input type="password" placeholder="Password" name="pwdL" id = "myInput" value="<?php if(isset($_COOKIE['password'])){echo $_COOKIE['password'];};?>"/>
+          <input type="password" placeholder="Password" name="pwdL" id = "myInput" value="<?php if(isset($_COOKIE['pass'])){echo $_COOKIE['pass'];};?>"/>
           <!-- eye icon -->
           <span class="eye" onclick="myFunction()">
               <i id = "hide1" class="bi bi-eye-fill"></i>
@@ -213,9 +229,9 @@ require_once '../db/conn.php';
         
         <!--checkbox for user to choose whether want remember the account and password or not-->
         <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" name="remember"> Remember me
-          </label>
+           <input type="checkbox" name="remember" id="remember"
+                <?php if(isset($_COOKIE["member_login"])) { ?> checked
+                <?php } ?> /> <label for="remember-me">Remember me</label>
           <br>
           <!--login through customer or administrator -->
           <select class="custom-select custom-select-sm" id="status" name="statusL" style="width: 120px; height:40px; border-radius: 20px; background-color: #f0f0f0; font-weight: 400; border: none; outline: none;">
@@ -416,3 +432,4 @@ require_once '../db/conn.php';
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 </html>
+

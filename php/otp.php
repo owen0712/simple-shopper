@@ -1,3 +1,7 @@
+<?php
+require_once '../db/conn.php';
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,9 +15,9 @@
     <link href="../style/forgot.css" rel="stylesheet">
     <script src="../js/header.js" defer></script>
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
-   
-   <!-- css that edit the button hover -->
-   <style>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- css that edit the button hover -->
+    <style>
       select {
         font-family: 'FontAwesome', 'sans-serif';
       }
@@ -124,7 +128,79 @@
      <!-- container -->
      <div class="container">
        <!-- form -->
-       <form class="form" id="form" method = "POST">
+       <script>
+          function swalError(){
+            swal('Opps!', 'OTP code incorrect!', 'error');
+          }
+       </script>
+      <script>
+          function swalError2(){
+            swal("Opps!", "OTP code expires!", "warning");
+          }
+      </script>
+      <script>
+          function linkTo(){
+            window.location.href='../php/resetPassword.php';
+          }
+      </script>
+       <?php
+          if($_SERVER['REQUEST_METHOD']=="GET"){
+            if(!empty($_GET['email'])){
+              $email = $_GET['email'];
+              $_SESSION['user_id'] = $user->getUserIdEmail($email);
+              if(!empty($user-> getUserInfoEmail($email)))
+              {
+                $result = $user-> getUserInfoEmail($email);
+                $result = $result ->fetch(PDO::FETCH_ASSOC);
+                $otp = $result['Otp'];
+                $_SESSION['Otp'] = $otp;
+                $expire = $result['Expire'];
+                $_SESSION['Expire'] = $expire;
+              }
+            }else{
+              $phone = $_GET['phone'];
+              if(!empty($user->getUserIdPhone($phone))){
+                 $stmt = $user->getUserIdPhone($phone);
+                 $stmt=$stmt->fetch(PDO::FETCH_ASSOC);
+                 $_SESSION['user_id'] = $stmt['user_id'];
+              }
+
+              if(!empty($user-> getUserInfoPhone($phone)))
+              {
+                $result = $user-> getUserInfoPhone($phone);
+                $result = $result ->fetch(PDO::FETCH_ASSOC);
+                $otp = $result['Otp'];
+                $_SESSION['Otp'] = $otp;
+                $expire = $result['Expire'];
+                $_SESSION['Expire'] = $expire;
+              }
+            }
+          }
+        ?>
+       <?php
+          if($_SERVER['REQUEST_METHOD']=="POST"){
+            if(isset($_POST['btnSubmit']))
+            {
+              $Uotp = array($_POST['ssn_1'], $_POST['ssn_2'], $_POST['ssn_3'], $_POST['ssn_4']);
+              $Uotp = join("",$Uotp); 
+              date_default_timezone_set("Asia/Kuala_Lumpur");
+              $time = new DateTime(date("Y-m-d h:i:sa"));
+              $time = $time->format('Y-m-d H:i');
+              if($time < $_SESSION['Expire'])
+              {
+                if($_SESSION['Otp'] ==  $Uotp)
+                {
+                  echo "<script>linkTo();</script>";
+                }else{
+                  echo "<script>swalError();</script>";
+                }
+              }else{
+                echo "<script>swalError2();</script>";
+              }
+            }
+        }
+       ?>
+       <form class="form" id="form" method = "post" action="otp.php">
             <h4><a href="../src/signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg></a><strong>Forgot password</strong></h4>
@@ -139,22 +215,22 @@
             <!-- use the d-flex class and justify-content:center to align them to center -->
             <div class="d-flex justify-content-center">
               <div class = "form-type" style="width: 55px; margin:10px;">
-                <input type="number" tabindex="1" NAME="ssn_1" style ="width:55px; border-radius: 20px;" id = "validate1" onload = "disInput()" onkeyup="jump(this,this.value)"/>
+                <input type="text" tabindex="1" name ="ssn_1" NAME="ssn_1" style ="width:55px; border-radius: 20px;" id = "validate1" onload = "disInput()" onkeyup="jump(this,this.value)"/>
               </div>
               <div class = "form-type" style="width: 55px; margin:10px">
-                <input type="number" tabindex="2" NAME="ssn_2" style ="width:55px; border-radius: 20px;" id = "validate2" onload = "disInput()" onkeyup="jump(this,this.value)"/>
+                <input type="text" tabindex="2" name ="ssn_2" NAME="ssn_2" style ="width:55px; border-radius: 20px;" id = "validate2" onload = "disInput()" onkeyup="jump(this,this.value)"/>
               </div>
               <div class = "form-type" style="width: 55px; margin:10px">
-                <input type="number" tabindex="3" NAME="ssn_3" style ="width:55px; border-radius: 20px;" id = "validate3" onload = "disInput()" onkeyup="jump(this,this.value)"/>
+                <input type="text" tabindex="3" name ="ssn_3" NAME="ssn_3" style ="width:55px; border-radius: 20px;" id = "validate3" onload = "disInput()" onkeyup="jump(this,this.value)"/>
               </div>
               <div class = "form-type" style="width: 55px; margin:10px">
-                <input type="number" tabindex="4" NAME="ssn_4" style ="width:55px; border-radius: 20px;" id = "validate4" onload = "disInput()" onkeyup="jump(this,this.value)"/>
+                <input type="text" tabindex="4" name ="ssn_4" NAME="ssn_4" style ="width:55px; border-radius: 20px;" id = "validate4" onload = "disInput()" onkeyup="jump(this,this.value)"/>
               </div>
             </div>
 
             <!-- Next button in disable condition, once user fill up all input field then button will be enable again. -->
             <div class="d-flex justify-content-center">
-                <button type="button" id = "btnSubmit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;" disabled onclick="submit_otp()">Next</button>
+                <button type="submit" id = "btnSubmit" name = "btnSubmit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;" disabled>Next</button>
             </div>
             <p class="text-center text-muted" style="margin-top: 20px;" id="changingText">Please wait until <strong><span id="changing" style=" color: #3fc1c9;">30</span></strong>s to resend</p>
        </form>
@@ -256,24 +332,6 @@
              }
        });
      </script>
-    <script>
-      function submit_otp(){
-        var otp=jQuery('#otp').val();
-        jQuery.ajax({
-          url:'check_otp.php',
-          type:'post',
-          data:'otp='+otp,
-          success:function(result){
-            if(result=='yes'){
-              btnFunction();
-            }
-            if(result=='not_exist'){
-              jQuery('#otp_error').html('Please enter valid otp');
-            }
-          }
-        });
-      }
-    </script>
    <script>
        // after press the button, the page will link to forgot1.html (reset password)
         function btnFunction(){

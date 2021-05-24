@@ -145,6 +145,15 @@ private static $installed = array (
       ),
       'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
     ),
+    'phpmailer/phpmailer' => 
+    array (
+      'pretty_version' => 'v6.4.1',
+      'version' => '6.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9256f12d8fb0cd0500f93b19e18c356906cbed3d',
+    ),
     'phpseclib/phpseclib' => 
     array (
       'pretty_version' => '3.0.8',
@@ -219,6 +228,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '120b605dfeb996808c31b6477290a714d356e822',
+    ),
+    'twilio/sdk' => 
+    array (
+      'pretty_version' => '6.24.0',
+      'version' => '6.24.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '110651d67940617e08557a7bac57edbd27b77d3e',
     ),
   ),
 );

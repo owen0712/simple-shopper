@@ -20,6 +20,10 @@ class ComposerStaticInit8e67a395a0ab19b8f530e90328f1a2e2
         array (
             'phpseclib3\\' => 11,
         ),
+        'T' => 
+        array (
+            'Twilio\\' => 7,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -27,6 +31,7 @@ class ComposerStaticInit8e67a395a0ab19b8f530e90328f1a2e2
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Cache\\' => 10,
             'ParagonIE\\ConstantTime\\' => 23,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -52,6 +57,10 @@ class ComposerStaticInit8e67a395a0ab19b8f530e90328f1a2e2
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
+        'Twilio\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twilio/sdk/src/Twilio',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
@@ -71,6 +80,10 @@ class ComposerStaticInit8e67a395a0ab19b8f530e90328f1a2e2
         'ParagonIE\\ConstantTime\\' => 
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Monolog\\' => 
         array (

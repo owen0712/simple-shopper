@@ -107,7 +107,7 @@
 
       <!-- User can press this button in order to verify through SMS code -->
       <div class="d-flex justify-content-center">
-        <a href="validatePhone.html"><button type="submit" id = "submit" style="border-radius: 55px; width: 220px; margin-top: 10px; color:white; background-color: coral; justify-content:center;"><i class="bi bi-phone-vibrate-fill"></i><small>&nbsp;Verify through SMS Code</small></button></a>
+        <a href="../php/validatePhone.php"><button type="submit" id = "submit" style="border-radius: 55px; width: 220px; margin-top: 10px; color:white; background-color: coral; justify-content:center;"><i class="bi bi-phone-vibrate-fill"></i><small>&nbsp;Verify through SMS Code</small></button></a>
       </div>
      </div>
      <!-- Footer -->

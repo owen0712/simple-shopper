@@ -242,7 +242,6 @@ class User{
     public function checkLoginPhone($phone,$pwd,$status)
     {   
         $phone = str_replace("-", "", $phone);
-        echo $email;
         $sql = "SELECT * FROM user WHERE phone=:phone AND password=:psw AND status=:status";
         $stmt = $this->db->prepare($sql);
         $stmt-> bindParam(":phone",$phone);
@@ -289,13 +288,112 @@ class User{
         }
     
         //check email format
-        function checkEmail($email)
+    public function checkEmail($email)
         {
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 return true;
         } else {
                 return false;
         }
+    }
+
+    public function getUserInfoEmail($email)
+    {
+        $sql = "SELECT * FROM otp WHERE email=:email";
+        $stmt = $this->db->prepare($sql);
+        $stmt-> bindParam(":email",$email);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 1)
+        {
+            return $stmt;
+        }else{
+            return "";
+        }
+    }
+
+    public function getUserInfoPhone($phone)
+    {
+        $sql = "SELECT * FROM `otp` WHERE phone=:phone";
+        $stmt = $this->db->prepare($sql);
+        $stmt -> bindParam(":phone",$phone);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 1)
+        {
+            return $stmt;
+        }else{
+            return "";
+        }
+    }
+
+    public function insertOtp($email,$otp, $expires)
+    {
+        $sql = "INSERT INTO otp (email,Otp,Expire) VALUES(:email,:otp,:expire)";
+		$stmt =  $this->db->prepare($sql);
+		$stmt -> bindParam(":email",$email);
+		$stmt -> bindParam(":otp",$otp);
+        $stmt -> bindParam(":expire",$expires);
+
+		$stmt -> execute();  
+    }
+
+    public function insertOtpPhone($phone, $otp, $expires)
+    {
+        $sql = "INSERT INTO otp (phone,Otp,Expire) VALUES(:phone,:otp,:expire)";
+		$stmt =  $this->db->prepare($sql);
+		$stmt -> bindParam(":phone",$phone);
+		$stmt -> bindParam(":otp",$otp);
+        $stmt -> bindParam(":expire",$expires);
+
+		$stmt -> execute();  
+    }
+
+    public function deletePreviousEmail($email)
+    {
+        $sql = "DELETE FROM `otp` where email=:email";
+        $stmt =  $this->db->prepare($sql);
+		$stmt -> bindParam(":email",$email);
+        $stmt -> execute();  
+    }
+
+    public function getUserIdEmail($email)
+    {
+        try{
+            $sql = "SELECT DISTINCT user_id FROM user WHERE email=:email";
+            $stmt = $this->db->prepare($sql);
+            $stmt-> bindParam(":email",$email);
+            $stmt->execute();
+            $result=$stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['user_id'];
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function getUserIdPhone($phone)
+    {
+
+        $sql = "SELECT * FROM `user` WHERE phone=$phone";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 1)
+        {
+            return $stmt;
+        }else{
+            return "";
+        }
+    }
+
+    public function deletePreviousPhone($phone)
+    {
+        $sql = "DELETE FROM `otp` where phone=:phone";
+        $stmt =  $this->db->prepare($sql);
+		$stmt -> bindParam(":phone",$phone);
+        $stmt -> execute();  
     }
 }
 ?>

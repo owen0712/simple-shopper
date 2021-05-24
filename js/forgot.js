@@ -29,26 +29,13 @@ function setErrorFor(input, message){
 }
 
 function setSuccessFor(input){
-    send_otp();
+    const col_md_3 = input.parentElement; //col-md-3
+    // set the success class  (new class name)
+    col_md_3.className = 'col-md-3 mb-3 success';
 }
 
 function isEmail(email){
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
 
-function send_otp(){
-	var email=jQuery('#email').val();
-	jQuery.ajax({
-		url:'sendOtp.php',
-		type:'post',
-		data:'email='+email,
-		success:function(result){
-			if(result=='yes'){
-				window.location.href = "otp.php"
-			}
-			if(result=='not_exist'){
-				jQuery('#email_error').html('Please enter valid email');
-			}
-		}
-	});
-}
+
