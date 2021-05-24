@@ -149,10 +149,7 @@
                 <div class="row mx-auto" >
 
                     <?php
-                        $conn = new mysqli("localhost", "root", "", "simple_shopper");
-                        if($conn->connect_error){
-                              die("Error failed to connect to MySQL: " . $conn->connect_error);
-                        }
+                        require_once '../db/conn.php';
                         if(isset($_GET['keywords']))
                         {
                             $keywords = $_GET['keywords'];
@@ -167,7 +164,7 @@
 
                         if ($result = $conn->query($query)) {
                             /* fetch associative array */
-                            while ($row = $result->fetch_assoc()) {
+                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                 echo "
                                 <div class='col'>
                                     <div class='card'>
@@ -200,9 +197,8 @@
                                 }
                             }
                             /* free result set */
-                            $result->free();
+                            $result = null;
                         }
-                        $conn->close();
                     ?>
 
                     
