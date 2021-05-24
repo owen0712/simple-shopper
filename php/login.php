@@ -363,9 +363,6 @@ require_once '../db/conn.php';
         if(passwordValue === ''){
             setErrorFor(password, 'Password cannot be blank');
           }
-        else if(passwordValue.length>15){
-            setErrorFor(password, 'Password length cannot exceed 15 characters')
-          }
         else if(passwordValue.length < 8){
             setErrorFor(password, 'Password must at least 8 characters long');
         }else{

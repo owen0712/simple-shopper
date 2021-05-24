@@ -233,19 +233,6 @@ class User{
         {
             $result=$stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['user_id'] = $result['user_id'];
-
-            if(!empty($_POST['remember']))
-            {
-                $remember = $_POST['remember'];
-
-                //set cookie
-                setcookie('email',$email,time()+3600*24*7);
-                setcookie('password',$pwd,time()+3600*24*7);
-            }else
-            {
-                setcookie('email',$email,30);
-                setcookie('password',$pwd,30);
-            }
             return true;
         }else{
             return false;
