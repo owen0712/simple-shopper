@@ -18,6 +18,36 @@ if(!isset($_SESSION['access_token']))
 <?php
 require_once '../db/conn.php';
 ?>
+<?php
+   if(isset($_POST['remember']))
+     {
+       $remember = $_POST['remember'];
+       //set cookie
+       $SECRETKEY ="mysecretkey1234";
+       setcookie('email',$_POST['ph_email'],time()+60*60*7);
+       setcookie('pass',openssl_encrypt($_POST['pwdL'],"AES-128-ECB", $SECRETKEY), time()+60*60*7);
+       setcookie('remember',$remember,time()+60*60*7);
+     }elseif (!isset($_POST['remember']))
+     {
+       if(isset($_COOKIE['email']) and isset($_COOKIE['pass']) and isset($_COOKIE['remember']))
+       {
+         $em = $_COOKIE['email'];
+         $pass = $_COOKIE['pass'];
+         $rem = $_COOKIE['remember'];
+         setcookie('email',$em,time()-1);
+         setcookie('pass',$pass, time()-1);
+         setcookie('remember', $rem, time()-1);
+       }  
+   }
+
+    if(isset($_COOKIE['email']) and isset($_COOKIE['pass']))
+    {
+        $em = $_COOKIE['email'];
+        $SECRETKEY ="mysecretkey1234";
+        $_SESSION['pass'] = $_COOKIE['pass'];
+    }
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,7 +143,7 @@ require_once '../db/conn.php';
             })
         .then((proceedLogin) => {
                 if (proceedLogin) {
-                  setTimeout(function(){window.location.href='../index.php'}, 1000);
+                  setTimeout(function(){window.location.href='../index.php'}, 900);
                 }
           });
         }
@@ -129,7 +159,7 @@ require_once '../db/conn.php';
             })
         .then((proceedLogin) => {
                 if (proceedLogin) {
-                  setTimeout(function(){window.location.href='../php/login.php'}, 1000);
+                  setTimeout(function(){window.location.href='../php/login.php'}, 900);
                 }
           });
         }
@@ -145,7 +175,7 @@ require_once '../db/conn.php';
             })
         .then((proceedLogin) => {
                 if (proceedLogin) {
-                  setTimeout(function(){window.location.href='../php/login.php'}, 1000);
+                  setTimeout(function(){window.location.href='../php/login.php'}, 900);
                 }
           });
         }
@@ -156,7 +186,6 @@ require_once '../db/conn.php';
               $email = $_POST['ph_email'];
               $pwd = $user->sanitizePassword($_POST['pwdL']);
               $status = $_POST['statusL'];
-              $rem = $_POST['remember'];
 
               //if user enter email
              if($user->checkEmail($email))
@@ -178,23 +207,6 @@ require_once '../db/conn.php';
           }
        
 ?>
-<?php
-   if(isset($_POST['remember']))
-     {
-       $remember = $_POST['remember'];
-       //set cookie
-       setcookie('email',$_POST['ph_email'],time()+60*60*7);
-       setcookie('pass',$user->sanitizePassword($_POST['pwdL']), time()+60*60*7);
-     }
-      if(isset($_COOKIE['email']) and isset($_COOKIE['pass'])){
-        $em = $_COOKIE['email'];
-        $pass = $_COOKIE['pass'];
-        echo "<script>
-          document.getElementById('phone_email').value = '$em';
-          document.getElementById('myInput').value = '$pass';
-      </script>";
-      }
-?>
     </div>
     <form class="form-signin" id="form" action="login.php" name = "form-login" method = "post"> 
         <h5>Welcome to Simple Shopper!</h5>
@@ -212,7 +224,7 @@ require_once '../db/conn.php';
         <div class = "input-field" style="width:350px; margin-top: 30px; margin-bottom: 20px;">
           <i class="bi bi-lock-fill"></i>
 
-          <input type="password" placeholder="Password" name="pwdL" id = "myInput" value="<?php if(isset($_COOKIE['pass'])){echo $_COOKIE['pass'];};?>"/>
+          <input type="password" placeholder="Password" name="pwdL" id = "myInput" value="<?php if(isset($_COOKIE['pass'])){echo openssl_decrypt($_SESSION['pass'], "AES-128-ECB", "mysecretkey1234");};?>"/>
           <!-- eye icon -->
           <span class="eye" onclick="myFunction()">
               <i id = "hide1" class="bi bi-eye-fill"></i>
@@ -230,7 +242,7 @@ require_once '../db/conn.php';
         <!--checkbox for user to choose whether want remember the account and password or not-->
         <div class="checkbox mb-3">
            <input type="checkbox" name="remember" id="remember"
-                <?php if(isset($_COOKIE["member_login"])) { ?> checked
+                <?php if(isset($_COOKIE["remember"])) { ?> checked
                 <?php } ?> /> <label for="remember-me">Remember me</label>
           <br>
           <!--login through customer or administrator -->
