@@ -94,7 +94,7 @@
                 }
                 if (!$duplicate){
                     $result=$shoppingList->addShoppingList($listname);
-                    echo "<script>alert('".$listname." list is added successfully');</script>";
+                    echo "<script>swal('".$listname." list is added successfully');</script>";
                 }
                 else{
                     echo "<script>alert('".$listname." is duplicated. Please reenter.');</script>";
@@ -158,8 +158,7 @@
     <main class="container" style="margin-top: 50px; margin-bottom: 50px;">
         <!-- Shopping List using bootstrap accordion element-->
         <div class="accordion" id="accordionExample">
-            <!-- Shopping List 1--> 
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11">swal("hhhhhhhhhhhhhhhhhhhhhhhhh");</script>            
+            <!-- Shopping List 1-->             
             <?php
                     $result=$shoppingList->getShoppingList();
                     while($r=$result->fetch(PDO::FETCH_ASSOC)){
@@ -224,7 +223,7 @@
                                         <form class="quantity buttons_added" style="float: left;" method="POST">
                                             <input type="hidden"name="ListID" value="<?php echo $r['list_id']; ?>"/>
                                             <input type="hidden" name="ProID" value="<?php echo $i['product_id']; ?>"/>
-                                            <input type="button" onclick=onsubmit value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="<?php echo $i['item_quantity'];?>" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input onclick=onsubmit type="button"
+                                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="<?php echo $i['item_quantity'];?>" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
                                                 value="+" class="plus">
                                         </form>
                                     </td>
