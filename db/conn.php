@@ -16,6 +16,6 @@
 
     require_once 'user.php';
     $user=new User($pdo);
-    require_once '../php/product.php';
+    require_once 'product.php';
     $product1 = new Product($pdo);
 ?>
