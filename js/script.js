@@ -102,6 +102,10 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
 //automatically change the subtotal price and total price in the shopping list
 //when user change the quantity in the input number area
 $('main').on('change', '.qty', function(e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+        return;
+    }
     var qty = parseInt($(this).val());
     if (isNaN(qty)) {
         swal("Please input a value!!!!!");
@@ -124,11 +128,11 @@ $('main').on('change', '.qty', function(e) {
     $(this).parent().parent().next().html("RM " + (qty * price).toFixed(2));
     calculate(parent, totalAddedPrice);
     $.ajax({
-        url: "editQuantity.php",
-        data: { quantitiy: qty, ListID: LID, ProID: PID, },
-        method: "post"
+        url: 'editQuantity.php',
+        data: { quantity: $(this).val(), ListID: LID, ProID: PID, },
+        method: "POST"
     }).done(function(response) {
-        console.log(qty);
+        console.log($(this).val());
         console.log(LID);
         console.log(PID);
         console.log(response);
