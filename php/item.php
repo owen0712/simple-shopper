@@ -5,6 +5,8 @@
       $sql = "SELECT * FROM product WHERE product_id=$id";  
       $result = $pdo->query($sql);
     }
+    session_start();
+    $_SESSION["id"] = $id;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,7 +126,7 @@
             </tbody>
           </table>
           <hr>
-          <form method="POST" action="tempadditemtocart.php?id=<?php echo $res['product_id']?>">
+          <form method="POST" action="tempadditemtocart.php">
           <div class="table-responsive mb-2">
             <table class="table table-sm table-borderless">
               <tbody>
