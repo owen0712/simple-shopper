@@ -127,7 +127,7 @@
                             $_SESSION['name'] = $result['name'];
                             $_SESSION['profile'] = $result['profile'];
                             echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img src="'.$_SESSION['profile'].'" height="30mm;">'.$_SESSION['name'].'</a>';   
-                            echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
+                            echo '<li class="nav-item"><a class="nav-link" href="php/logout.php" style="color:white;">Logout</a>'; 
                         }
                          else{
                             echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="php/signup.php" style="color:white;">Sign Up</a>';
