@@ -13,7 +13,7 @@ class User{
             $stmt=$this->db->prepare($sql);
             $stmt->bindparam(':id',$id);
             $stmt->execute();
-            $result=$stmt->fetch();
+            $result=$stmt->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
         catch(PDOException $e){

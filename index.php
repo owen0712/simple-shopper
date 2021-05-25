@@ -1,5 +1,6 @@
 <?php
     include ('php/config.php');
+    require_once 'db/conn.php';
     $login_button = '';
 
     //This $_GET["code"] variable value received after user has login into their Google Account redirct to PHP script then this variable value has been received
@@ -26,7 +27,7 @@
     //Below you can find Get profile data and store into $_SESSION variable
     if(!empty($data['given_name']))
     {
-    $_SESSION['user_first_name'] = $data['given_name'];
+    $_SESSION['name'] = $data['given_name'];
     }
 
     if(!empty($data['family_name']))
@@ -46,7 +47,7 @@
 
     if(!empty($data['picture']))
     {
-    $_SESSION['user_image'] = $data['picture'];
+    $_SESSION['profile'] = $data['picture'];
     }
   }
 }
@@ -120,9 +121,12 @@
                         <a class="nav-link" href="php/administrator.php" style="color: white;">Administrator</a>
                     </li>
                     <?php
-                        if(!empty($data['given_name']))
+                        if(!empty($_SESSION['user_id']))
                         {
-                            echo '<li class = nav-item"><a class="nav-link" href="src/profile.html" style="color: white;"><img src="'.$_SESSION['user_image'].'" height="30mm;">'.$_SESSION['user_first_name'].'</a>';   
+                            $result = $user-> getUser($_SESSION['user_id']);
+                            $_SESSION['name'] = $result['name'];
+                            $_SESSION['profile'] = $result['profile'];
+                            echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img src="'.$_SESSION['profile'].'" height="30mm;">'.$_SESSION['name'].'</a>';   
                             echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
                         }
                          else{
