@@ -74,7 +74,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="Javascript:filterCategory('Instant Food')">Instant Food</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Canned&Packed Food')">Canned&Packed Food</a>
+                        <a class="dropdown-item" href="Javascript:filterCategory('Canned and Packed Food')">Canned&Packed Food</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="Javascript:filterCategory('Baby Product')">Baby Product</a>
                         <div class="dropdown-divider"></div>
@@ -189,7 +189,7 @@
                             <select class="form-select" id="category" name="category" style="height: 60px;" aria-label="Floating label select example" required> 
                                 <option value="Bath and Body">Bath and Body</option>
                                 <option value="Instant Food">Instant Food</option>
-                                <option value="Canned&Packed Food">Canned&Packed Food</option>
+                                <option value="Canned and Packed Food">Canned and Packed Food</option>
                                 <option value="Baby Product">Baby Product</option>
                                 <option value="Household Supply">Household Supply</option>
                                 <option value="Pet">Pet</option>
