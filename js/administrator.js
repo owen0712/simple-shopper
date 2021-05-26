@@ -1,28 +1,44 @@
 $(document).ready(function() {  // create a data table
-    var table = $('#productTable').DataTable( {
-        "pagingType": "full_numbers",
-        "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-        "processing":true,
-	"serverSide":true,
-	"order":[],
-        "ajax":{
-		url:"action.php",
-		type:"POST",
-		data:{action:'listProduct'},
-		dataType:"json"
-	},
-	"columnDefs":[
-		{
-			"targets":[1, 7, 8],
-			"orderable":false,
-		},
-            	{
-                	"targets": [ 0 ],
-                	"visible": false,
-                	"searchable": false
-            	}
-	]
-    } );
+
+	load_data();
+
+	function load_data(is_category){
+		var table = $('#productTable').DataTable( {
+			"pagingType": "full_numbers",
+			"lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+			"processing":true,
+			"serverSide":true,
+			"order":[],
+			"ajax":{
+				url:"action.php",
+				type:"POST",
+				data:{is_category:is_category, action:'listProduct'},
+				dataType:"json"
+			},
+			"columnDefs":[
+				{
+					"targets":[1, 7, 8],
+					"orderable":false,
+				},
+				{
+					"targets": [ 0 ],
+					"visible": false,
+					"searchable": false
+				}
+			]
+		} );
+	}
+
+	$(document).on('change', '#selectedCategory', function(){
+		var category  = $(this).val();
+		$('#productTable').DataTable().destroy();
+		if(category != ''){
+			load_data(category);
+		}
+		else{
+			load_data();
+		}
+	});
 
     $('#add_btn').click(function(){
         $('#productModal').modal('show');
@@ -41,7 +57,7 @@ $(document).ready(function() {  // create a data table
 				method:"POST",
 				data:{productId:productId, action:action},
 				success:function(data) {					
-					table.ajax.reload();
+					$('#productTable').DataTable().ajax.reload();
 				}
 			})
 		} else {
