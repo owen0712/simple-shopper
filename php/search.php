@@ -162,7 +162,7 @@
                             $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product";
                         }
 
-                        if ($result = $conn->query($query)) {
+                        if ($result = $pdo->query($query)) {
                             /* fetch associative array */
                             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                 echo "
