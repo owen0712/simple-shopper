@@ -62,41 +62,21 @@
               <div class="col col-auto">
                 <a class="navbar-brand" href="../src/index.html"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
               </div>
-              <div class="col col-6 collapse navbar-collapse" id="navbarSupportedContent">
-                <ul>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle btn-lg" href="#" id="navbarDropdown" role="Button" data-toggle="dropdown">Product List</a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <!--link to js to use the filter function-->
-                        <a class="dropdown-item" href="Javascript:filterCategory('All')">All</a>    
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Bath and Body')">Bath and Body</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Instant Food')">Instant Food</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Canned and Packed Food')">Canned&Packed Food</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Baby Product')">Baby Product</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Household Supply')">Household Supply</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Pet')">Pet</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Cooking Ingredient')">Cooking Ingredient</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Cereal')">Cereal</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Baking Supplies')">Baking Supplies</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Snack')">Snack</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Beverage')">Beverage</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Javascript:filterCategory('Paper Product')">Paper Product</a>
-                      </div>
-                    </li>
-                  </ul>
-              </div>
+              <select name="selectedCategory" id="selectedCategory" class="form-control">
+                <option value="">Category Search</option>
+                <option value="Bath and Body">Bath and Body</option>
+                <option value="Instant Food">Instant Food</option>
+                <option value="Canned and Packed Food">Canned and Packed Food</option>
+                <option value="Baby Product">Baby Product</option>
+                <option value="Household Supply">Household Supply</option>
+                <option value="Pet">Pet</option>
+                <option value="Cooking Ingredient">Cooking Ingredient</option>
+                <option value="Cereal">Cereal</option>
+                <option value="Baking Supplies">Baking Supplies</option>
+                <option value="Snack">Snack</option>
+                <option value="Beverage">Beverage</option>
+                <option value="Paper Product">Paper Product</option>
+              </select>
             </div>
         </nav>
         <main class="container">
@@ -203,11 +183,11 @@
                             <label for="category"><span class="red">*</span>Category:</label>
                         </div>	 
 						<div class="form-floating mb-3">
-                            <input type="number" step="1" class="form-control" id="amount" name="amount" required>
+                            <input type="number" min="0" step="1" class="form-control" id="amount" name="amount" required>
                             <label for="amount"><span class="red">*</span>Total Amount:</label>
                         </div>
 						<div class="form-floating mb-3">
-                            <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+                            <input type="number" min="0" step="0.01" class="form-control" id="price" name="price" required>
                             <label for="price"><span class="red">*</span>Price:</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -219,7 +199,7 @@
     				<div class="modal-footer">
     					<input type="hidden" name="productId" id="productId" />
     					<input type="hidden" name="action" id="action" value="" />
-    					<input type="submit" name="save" id="save" class="btn btn-info" value="Save" />
+    					<input type="submit" name="save" id="save" class="btn formButton" value="Save" />
     					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     				</div>
     			</div>
