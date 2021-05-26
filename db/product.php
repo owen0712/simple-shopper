@@ -10,8 +10,19 @@ class Product{
     public function productList(){	
 		try{
 			$sqlQuery = "SELECT * FROM ".$this->productTable." ";
+			if(!empty($_POST["search"]["value"]) || isset($_POST["is_category"])){
+				$sqlQuery .= "WHERE ";
+			}
+			if(isset($_POST["is_category"])){
+				if(!empty($_POST["search"]["value"])){
+					$sqlQuery .= "product_category = '".$_POST["is_category"]."' AND ";
+				}
+				else{
+					$sqlQuery .= "product_category = '".$_POST["is_category"]."' ";
+				}
+			}
         	if(!empty($_POST["search"]["value"])){
-				$sqlQuery .= 'where(product_description LIKE "%'.$_POST["search"]["value"].'%" ';			
+				$sqlQuery .= '(product_description LIKE "%'.$_POST["search"]["value"].'%" ';			
 				$sqlQuery .= ' OR product_name LIKE "%'.$_POST["search"]["value"].'%" ';
 				$sqlQuery .= ' OR product_category LIKE "%'.$_POST["search"]["value"].'%" ';
             	$sqlQuery .= ' OR product_amount LIKE "%'.$_POST["search"]["value"].'%" ';
@@ -23,6 +34,12 @@ class Product{
 			} else {
 				$sqlQuery .= 'ORDER BY product_id DESC ';
 			}
+
+			$tempQuery = $sqlQuery;
+			$temp_stmt = $this->dbConnect->prepare($tempQuery);
+			$temp_stmt->execute();
+			$filter_row = $temp_stmt->rowCount();
+
 			if($_POST["length"] != -1){
 				$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
 			}
@@ -44,14 +61,14 @@ class Product{
 				$productRows[] = $product['product_amount'];	
 				$productRows[] = $product['product_price'];
 				$productRows[] = $product['product_description'];			
-				$productRows[] = '<button type="button" name="update" id="'.$product["product_id"].'" class="btn btn-warning btn-xs update">Update</button>';
+				$productRows[] = '<button type="button" name="update" id="'.$product["product_id"].'" class="btn btn-info btn-xs update">Update</button>';
 				$productRows[] = '<button type="button" name="delete" id="'.$product["product_id"].'" class="btn btn-danger btn-xs delete" >Delete</button>';
 				$productData[] = $productRows;
 			}
 			$output = array(
 				"draw"				=>	intval($_POST["draw"]),
 				"recordsTotal"  	=>  $numRows,
-				"recordsFiltered" 	=> 	$numRows,
+				"recordsFiltered" 	=> 	$filter_row,
 				"data"    			=> 	$productData
 			);
 			echo json_encode($output);
