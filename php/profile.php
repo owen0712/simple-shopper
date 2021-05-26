@@ -1,5 +1,6 @@
 <?php
     require_once '../db/conn.php';
+    session_start();
     if(isset($_POST['submit'])){
         $id=$_POST['id'];
         $name=$_POST['name'];
@@ -25,8 +26,7 @@
             $user->updateProfile($id,$name,$email,$phone,$gender,$dob);
         }
     }
-    //$result=$user->getUser($_SESSION['id']);
-    $result=$user->getUser(1);
+    $result=$user->getUser($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +51,8 @@
     <!--bootstrap js and jquery-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
     <title>Profile</title>
 </head>
 <body class="bg-white">
@@ -244,11 +246,11 @@
                     content: "input"
                 })
                 .then((value) => {
-                    if(value=="<?php echo $result['password'];?>"){
+                    if(CryptoJS.MD5(value).toString()=="<?php echo $result['password'];?>"){
                         swal("Your account has been deleted!", {
                             icon: "success",
                         });
-                        setTimeout(function(){window.location.href='deleteAccount.php?id=<?php echo $result['user_id'];?>'}, 1000);
+                        setTimeout(function(){window.location.href='deleteAccount.php'}, 1000);
                     }
                     else{
                         swal("Wrong password entered!", {

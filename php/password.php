@@ -1,5 +1,6 @@
 <?php
     require_once '../db/conn.php';
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -97,8 +98,27 @@
         <main>
         <?php
             if($_SERVER['REQUEST_METHOD']=='POST'){
-                $result=$user->getUser(1);
-                if($result['password']==$_POST['current_password']){
+                if(isset($_POST['confirm'])){
+                    $result=$user->getUser($_SESSION['user_id']);
+                    if($result['password']==md5($_POST['current_password'])){
+                        if($_POST['new_password']==$_POST['confirm_password']){
+                            if($user->updatePassword($result['user_id'],md5($_POST['new_password']))){
+                                echo "<script>swal('Successfully!', 'Password Modified', 'success');</script>";
+                            }
+                            else{
+                                echo "<div class='alert alert-danger' role='alert'>Operation encountered an error. Please retry!</div>";
+                            }
+                        }
+                        else{
+                            echo "<div class='alert alert-danger' role='alert'>The new password do not match. Please retry!</div>";
+                        }
+                    }
+                    else{
+                        echo "<div class='alert alert-danger' role='alert'>The original password is wrong. Please retry!</div>";
+                    }
+                }
+                else if(isset($_POST['create'])){
+                    $result=$user->getUser($_SESSION['user_id']);
                     if($_POST['new_password']==$_POST['confirm_password']){
                         if($user->updatePassword($result['user_id'],md5($_POST['new_password']))){
                             echo "<script>swal('Successfully!', 'Password Modified', 'success');</script>";
@@ -111,75 +131,120 @@
                         echo "<div class='alert alert-danger' role='alert'>The new password do not match. Please retry!</div>";
                     }
                 }
-                else{
-                    echo "<div class='alert alert-danger' role='alert'>The original password is wrong. Please retry!</div>";
-                }
             }
         ?>
             <div>
             <h2>Change Password</h2>
             <p>For your account's security, do not share your password with anyone else</p>
             </div>
-            <!--chage password section-->
-            <form action="password.php" method="post" class="form">
-                <table>
-                    <tr>
-                        <td><label for="current_password">Current Password</label></td>
-                        <td>
-                            <div class='valid_section'>
-                                <input type="password" id="current_password" name='current_password' class="form-control" onchange="checkCurrentPassword()">
-                                <span class="eye" onclick="showCurrentPassword()">
-                                    <i id = "hide1" class="bi bi-eye-fill"></i>
-                                    <i id = "hide2" class="bi bi-eye-slash-fill"></i>
-                                </span>
-                                <div class = "i_check">
-                                    <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
-                                    <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
-                                    <small>Error Message</small>
+            <!--change password section-->
+            <?php
+            $result=$user->getUser($_SESSION['user_id']);
+            if($result['password']){
+            echo "<form action='password.php' method='post' class='form'>
+                    <table>
+                        <tr>
+                            <td><label for='current_password'>Current Password</label></td>
+                            <td>
+                                <div class='valid_section'>
+                                    <input type='password' id='current_password' name='current_password' class='form-control' onchange='checkCurrentPassword()'>
+                                    <span class='eye' onclick='showCurrentPassword()'>
+                                        <i id = 'hide1' class='bi bi-eye-fill'></i>
+                                        <i id = 'hide2' class='bi bi-eye-slash-fill'></i>
+                                    </span>
+                                    <div class = 'i_check'>
+                                        <i class='bi bi-check-circle-fill' id='bi-check-circle-fill'></i>
+                                        <i class='bi bi-exclamation-circle-fill' id = 'bi-exclamation-circle-fill'></i>
+                                        <small>Error Message</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td ><a href='../src/forgot3.html' id='forgot'>Forget password?</a></td>
-                    </tr>
-                    <tr>
-                        <td><label for="new_password">New Password</label></td>
-                        <td>
-                            <div class='valid_section'>
-                                <input type="password" class="form-control" id="new_password" name='new_password' onchange="checkNewPassword()">
-                                <span class="eye" onclick="showNewPassword()">
-                                    <i id = "hide3" class="bi bi-eye-fill"></i>
-                                    <i id = "hide4" class="bi bi-eye-slash-fill"></i>
-                                </span>
-                                <div class = "i_check">
-                                    <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
-                                    <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
-                                    <small>Error Message</small>
+                            </td>
+                            <td ><a href='../src/forgot3.html' id='forgot'>Forget password?</a></td>
+                        </tr>
+                        <tr>
+                            <td><label for='new_password'>New Password</label></td>
+                            <td>
+                                <div class='valid_section'>
+                                    <input type='password' class='form-control' id='new_password' name='new_password' onchange='checkNewPassword()'>
+                                    <span class='eye' onclick='showNewPassword()'>
+                                        <i id = 'hide3' class='bi bi-eye-fill'></i>
+                                        <i id = 'hide4' class='bi bi-eye-slash-fill'></i>
+                                    </span>
+                                    <div class = 'i_check'>
+                                        <i class='bi bi-check-circle-fill' id='bi-check-circle-fill'></i>
+                                        <i class='bi bi-exclamation-circle-fill' id = 'bi-exclamation-circle-fill'></i>
+                                        <small>Error Message</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="confirm_password">Confirm Password</label></td>
-                        <td>
-                            <div class='valid_section'>
-                                <input type="password" class="form-control" id="confirm_password" name='confirm_password' onchange="checkConfirmPassword()">
-                                <span class="eye" onclick="showConfirmPassword()">
-                                    <i id = "hide5" class="bi bi-eye-fill"></i>
-                                    <i id = "hide6" class="bi bi-eye-slash-fill"></i>
-                                </span>
-                                <div class = "i_check">
-                                    <i class="bi bi-check-circle-fill" id="bi-check-circle-fill"></i>
-                                    <i class="bi bi-exclamation-circle-fill" id = "bi-exclamation-circle-fill"></i>
-                                    <small>Error Message</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for='confirm_password'>Confirm Password</label></td>
+                            <td>
+                                <div class='valid_section'>
+                                    <input type='password' class='form-control' id='confirm_password' name='confirm_password' onchange='checkConfirmPassword()'>
+                                    <span class='eye' onclick='showConfirmPassword()'>
+                                        <i id = 'hide5' class='bi bi-eye-fill'></i>
+                                        <i id = 'hide6' class='bi bi-eye-slash-fill'></i>
+                                    </span>
+                                    <div class = 'i_check'>
+                                        <i class='bi bi-check-circle-fill' id='bi-check-circle-fill'></i>
+                                        <i class='bi bi-exclamation-circle-fill' id = 'bi-exclamation-circle-fill'></i>
+                                        <small>Error Message</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" align="center"><input type="submit" value="Confirm" class="btn btn-primary" id="confirm"></td>
-                    </tr>
-                </table>
-            </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' align='center'><input type='submit' value='Confirm' name='confirm' class='btn btn-primary' id='confirm'></td>
+                        </tr>
+                    </table>
+                </form>";
+            }
+            else{
+                echo "<form action='password.php' method='post' class='form'>
+                        <table>
+                            <tr>
+                                <td><label for='new_password'>New Password</label></td>
+                                <td>
+                                    <div class='valid_section'>
+                                        <input type='password' class='form-control' id='new_password' name='new_password' onchange='checkNewPassword()'>
+                                        <span class='eye' onclick='showNewPassword()'>
+                                            <i id = 'hide3' class='bi bi-eye-fill'></i>
+                                            <i id = 'hide4' class='bi bi-eye-slash-fill'></i>
+                                        </span>
+                                        <div class = 'i_check'>
+                                            <i class='bi bi-check-circle-fill' id='bi-check-circle-fill'></i>
+                                            <i class='bi bi-exclamation-circle-fill' id = 'bi-exclamation-circle-fill'></i>
+                                            <small>Error Message</small>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for='confirm_password'>Confirm Password</label></td>
+                                <td>
+                                    <div class='valid_section'>
+                                        <input type='password' class='form-control' id='confirm_password' name='confirm_password' onchange='checkConfirmPassword()'>
+                                        <span class='eye' onclick='showConfirmPassword()'>
+                                            <i id = 'hide5' class='bi bi-eye-fill'></i>
+                                            <i id = 'hide6' class='bi bi-eye-slash-fill'></i>
+                                        </span>
+                                        <div class = 'i_check'>
+                                            <i class='bi bi-check-circle-fill' id='bi-check-circle-fill'></i>
+                                            <i class='bi bi-exclamation-circle-fill' id = 'bi-exclamation-circle-fill'></i>
+                                            <small>Error Message</small>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='3' align='center'><input type='submit' value='Create Password' name='create' class='btn btn-primary' id='confirm'></td>
+                            </tr>
+                        </table>
+                    </form>";
+            }
+            ?>
         </main>
     </div>
     <!--footer-->

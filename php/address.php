@@ -1,5 +1,6 @@
 <?php
     require_once '../db/conn.php';
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@
             <button type="button" class="btn-close" aria-label="Close" onclick="closeForm()"></button>
             <div class="container row">
                 <h3 id="title">Add A New Address</h3>
-                <input type='hidden' name='id' value='1'/>
+                <input type='hidden' name='id' value='<?php echo $_SESSION['user_id']?>'/>
                 <div class="form-floating mb-3 col-lg-6">
                     <input type="text" class="form-control" id="name" name='name' placeholder="Full Name" required>
                     <label class="text-label" for="name">Full Name</label>
@@ -159,7 +160,7 @@
             </div>
             <div id="addresses">
                 <?php
-                    $result=$user->getAddresses(1);
+                    $result=$user->getAddresses($_SESSION['user_id']);
                     while($r=$result->fetch(PDO::FETCH_ASSOC)){
                 ?>
                     <div class="address shadow p-3 mb-5 bg-white rounded">
