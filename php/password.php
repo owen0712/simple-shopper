@@ -100,7 +100,7 @@
                 $result=$user->getUser(1);
                 if($result['password']==$_POST['current_password']){
                     if($_POST['new_password']==$_POST['confirm_password']){
-                        if($user->updatePassword($result['user_id'],$_POST['new_password'])){
+                        if($user->updatePassword($result['user_id'],md5($_POST['new_password']))){
                             echo "<script>swal('Successfully!', 'Password Modified', 'success');</script>";
                         }
                         else{
