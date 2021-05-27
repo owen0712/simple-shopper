@@ -165,7 +165,7 @@ require_once '../db/conn.php';
           });
         }
     </script>
-        <script>
+    <script>
         function swalError2(){
           swal({
             title: "Error",

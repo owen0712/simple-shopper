@@ -15,7 +15,7 @@ session_start();
     <link href="../style/forgot.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
-    <script src="../js/user.js" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/header.js" defer></script>
     <style>
       select {
@@ -89,6 +89,102 @@ session_start();
 </header>
    <body>
      <div class="container" id = "checkPass">
+     <script>
+        function swalError(){
+          swal({
+            title: "Error",
+            text: "Password and confirm password cannot be blank",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/resetPassword.php'}, 900);
+                }
+          });
+        }
+    </script>
+     <script>
+        function swalError2(){
+          swal({
+            title: "Error",
+            text: "confirm password cannot be blank",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/resetPassword.php'}, 900);
+                }
+          });
+        }
+    </script>
+    <script>
+        function swalError3(){
+          swal({
+            title: "Error",
+            text: "Password cannot be blank",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/resetPassword.php'}, 900);
+                }
+          });
+        }
+    </script>
+    <script>
+        function swalSuccess(){
+          swal({
+            title: "Success",
+            text: "Password reset successfully",
+            icon: "success",
+            buttons: true,
+            //dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/login.php'}, 900);
+                }
+          });
+        }
+    </script>
+    <script>
+        function setSuccessForLink(){
+          document.getElementsByClassName("popup")[0].classList.add("active");
+      
+          document.getElementById("dismiss-popup-btn").addEventListener("click",function(){
+          document.getElementsByClassName("popup")[0].classList.remove("active");
+          window.location.href = "../php/login.php";
+          });
+      }
+    </script>
+<?php
+        if(isset($_POST['btnReset']))
+        {
+          if(!empty($_SESSION['user_id']))
+          {
+             if(!empty($_POST['password1']) && !empty($_POST['password2']))
+             {
+               $user->updatePassword($_SESSION['user_id'],$user->sanitizePassword($_POST['password1']));
+               echo "<script>swalSuccess();</script>";
+             }elseif(!empty($_POST['password1']) && empty($_POST['password2']))
+             {
+              echo "<script>swalError2();</script>";
+             }elseif(empty($_POST['password1']) && !empty($_POST['password2']))
+             {
+              echo "<script>swalError3();</script>";
+             }elseif(empty($_POST['password1']) && empty($_POST['password2']))
+             {
+              echo "<script>swalError();</script>";
+             }
+          } 
+        }
+?>
       <form class="form" id = "form" method = "post" action="resetPassword.php">
           <h4><a href="../src/signin.html" style="color: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
@@ -125,7 +221,7 @@ session_start();
             </div>
           </div>
           <div class="d-flex justify-content-center">
-            <button type="submit" id = "submitBtn" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 10px;">Reset</button>
+            <button type="submit" id = "submitBtn" class="btn btn-primary" name="btnReset" style="border-radius: 55px; width: 180px; margin-top: 10px;">Reset</button>
           </div>
           <div class="popup center">
             <div class="icon">
@@ -195,8 +291,8 @@ session_start();
        const password2 = document.getElementById('password2')
        const form = document.getElementById('form')
        
-       form.addEventListener('submit', (e) =>{
-         e.preventDefault();
+       form.addEventListener('change', (e) =>{
+         //e.preventDefault();
 
          checkInputs();
        })
@@ -215,9 +311,7 @@ session_start();
          else if(passwordValue !== password2Value){
           setErrorFor(password, 'Password and confirm password do not match'); 
          }
-         else{
-          setSuccessForLink(password);
-         }
+         
          if(password2Value === ''){
            setErrorFor(password2,'Confirm password cannot be blank');
         }else if(passwordValue !== password2Value){
@@ -226,7 +320,7 @@ session_start();
            setErrorFor(password2, 'Password must more than 8 characters'); 
         }
         else{
-          setSuccessForLink(password2);
+          setSuccessFor(password2);
         }
        }
 
@@ -245,8 +339,6 @@ session_start();
       }
 
       function setSuccessForLink(input){
-        const form_type = input.parentElement; 
-        form_type.className = 'form-type success';
         document.getElementsByClassName("popup")[0].classList.add("active");
       
         document.getElementById("dismiss-popup-btn").addEventListener("click",function(){

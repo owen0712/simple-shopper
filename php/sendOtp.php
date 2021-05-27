@@ -50,15 +50,17 @@ if(isset($_POST['btnSubmit1']))
 				)
 			);
 			$mail->Username   = "simpleshopper666@gmail.com";                                                      
-			$mail->Password   = 'xzcr itwv cfli ward';                        
+			$mail->Password   = 'dclb fdqh zupp duzn';                        
 			$mail->setFrom('no-reply@ss.org');           
 			$mail->addAddress($email);	                                 
 			$mail->Subject = 'OTP verification(Reset password)';
 			$mail->Body    = '<b>We received a password reset request. The otp number:'. $otp.'</b> ';
 			$mail->AltBody = 'If you did not make this request, you can ignore this email.';
 			$mail->send();
+			
 			header("Location: ../php/otp.php?email=$email");
 		} catch (Exception $e) {
+			echo "ASdasd";
 			header("Location: ../php/validateEmail.php");
 			exit();
 		}
