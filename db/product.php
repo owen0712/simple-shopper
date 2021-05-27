@@ -61,8 +61,8 @@ class Product{
 				$productRows[] = $product['product_amount'];	
 				$productRows[] = $product['product_price'];
 				$productRows[] = $product['product_description'];			
-				$productRows[] = '<button type="button" name="update" id="'.$product["product_id"].'" class="btn btn-info btn-xs update">Update</button>';
-				$productRows[] = '<button type="button" name="delete" id="'.$product["product_id"].'" class="btn btn-danger btn-xs delete" >Delete</button>';
+				$productRows[] = '<button type="button" name="update" id="'.$product["product_id"].'" class="btn btn-info btn-xs update" style="width: 100px;"><i class="bi bi-pencil-square"></i> Update</button>';
+				$productRows[] = '<button type="button" name="delete" id="'.$product["product_id"].'" class="btn btn-danger btn-xs delete" style="width: 100px;"><i class="bi bi-trash"></i> Delete</button>';
 				$productData[] = $productRows;
 			}
 			$output = array(
