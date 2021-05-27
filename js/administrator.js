@@ -43,7 +43,7 @@ $(document).ready(function() {  // create a data table
     $('#add_btn').click(function(){
         $('#productModal').modal('show');
         $('#productForm')[0].reset();
-        $('.modal-title').html("<i class='fa fa-plus'></i> Add Product");
+        $('.modal-title').html("Add Product");
         $('#action').val('addProduct');
         $('#save').val('Add');
     });
@@ -82,7 +82,7 @@ $(document).ready(function() {  // create a data table
 				$('#amount').val(data.product_amount);
 				$('#price').val(data.product_price);
                 $('#description').val(data.product_description);	
-				$('.modal-title').html("<i class='fa fa-plus'></i> Edit Product");
+				$('.modal-title').html("Edit Product");
 				$('#action').val('updateProduct');
 				$('#save').val('Save');
 			}
