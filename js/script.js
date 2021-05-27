@@ -132,7 +132,6 @@ $('main').on('change', '.qty', function(e) {
         data: { quantity: $(this).val(), ListID: LID, ProID: PID, },
         method: "POST"
     }).done(function(response) {
-        console.log($(this).val());
         console.log(LID);
         console.log(PID);
         console.log(response);

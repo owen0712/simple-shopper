@@ -20,6 +20,7 @@
     <link href="../style/footer.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png" />    
     <title>Shopping List </title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <!-- Header -->
@@ -94,14 +95,14 @@
                 }
                 if (!$duplicate){
                     $result=$shoppingList->addShoppingList($listname);
-                    echo "<script>swal('".$listname." list is added successfully');</script>";
+                    echo "<script>swal('".$listname." list is added successfully',{icon: \"success\",});</script>";
                 }
                 else{
-                    echo "<script>alert('".$listname." is duplicated. Please reenter.');</script>";
+                    echo "<script>swal('".$listname." is duplicated. Please reenter.',{icon: \"warning\",});</script>";
                 }
             }
             else {
-                echo "<script>alert('You must write something');</script>";
+                echo "<script>swal('You must write something',{icon: \"warning\",});</script>";
             }            
         }
         else if(isset($_POST['editListName'])){
@@ -121,18 +122,18 @@
                     }
                     if (!$duplicate){
                         $result=$shoppingList->updateShoppingList($id,$listname);
-                        echo "<script>alert('".$listname." list is edited successfully');</script>";
+                        echo "<script>swal('".$listname." list is edited successfully',{icon: \"success\",});</script>";
                     }
                     else{
-                        echo "<script>alert('".$listname." is duplicated. Please reenter.');</script>";
+                        echo "<script>swal('".$listname." is duplicated. Please reenter.',{icon: \"warning\",});</script>";
                     }
                 }
                 else {
-                    echo "<script>alert('You must write something');</script>";
+                    echo "<script>swal('You must write something',{icon: \"warning\",});</script>";
                 }
             }
             else{
-                echo "<script>alert('".$listname." list is edited successfully');</script>";
+                echo "<script>swal('".$listname." list is edited successfully');</script>";
             }
         }      
     }
@@ -144,7 +145,7 @@
 
 <body>
     <!-- Add new shopping list division -->
-    <form id="myDIV" class="header container" method="POST">
+    <form id="myDIV" class="header container" method="POST">    
         <h2>My Shopping List</h2>
         <!-- <input onsubmit="newElement()" type="text" id="myInput" placeholder="New Shopping List...">
         <span onclick="newElement()" class="addBtn btn">Add</span> -->
@@ -306,9 +307,8 @@
 
 
     <!-- Imported script-->        
-    <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../js/header.js" defer></script>    
+    <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
+    <script src="../js/header.js" ></script>    
     <script src="../js/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
