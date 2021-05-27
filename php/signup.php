@@ -1,4 +1,22 @@
 <?php
+
+//index.php
+
+//Include Configuration File
+include('../php/config.php');
+
+$login_button = '';
+
+//This is for check user has login into system by using Google account, if User not login into system then it will execute if block of code and make code for display Login link for Login using Google account.
+if(!isset($_SESSION['access_token']))
+{
+ //Create a URL to obtain user authorization
+ $login_button = '<a href="'.$google_client->createAuthUrl().'" class="social-icon"><i class="bi bi-google" id="Google" /></i></a>';
+}
+
+?>
+<?php
+include ('../php/fb-init.php');
 require_once '../db/conn.php';
 ?>
 <!DOCTYPE html>
@@ -281,15 +299,32 @@ require_once '../db/conn.php';
             <hr style="color: rgb(2, 41, 59); height: 4px;">
             <p class="social-media">Or<strong><span id="sign_text">&nbsp;sign up</span></strong>&nbsp;with social media platforms</p> </span>
             <div class="social-media">
-              <a hred="#" class="social-icon">
-                <i class="bi bi-facebook" id = "Facebook"></i>
-              </a>
-              <a hred="#" class="social-icon">
-                <i class="bi bi-google" id="Google"></i>
-              </a>
-              <a hred="#" class="social-icon">
-                <i class="bi bi-linkedin" id = "Linkedin"></i>
-              </a>
+            <?php
+              if(isset($_SESSION['fb_url']))
+              {
+                $facebook_helper = $facebook->getRedirectLoginHelper();
+                $facebook_permissions = ['email'];
+                echo '<a href="'. $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions).'" class="social-icon"><i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i></a>';
+              }else{
+                $facebook_helper = $facebook->getRedirectLoginHelper();
+                $facebook_permissions = ['email'];
+                echo '<a href="'. $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions).'" class="social-icon"><i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i></a>';
+              }
+            ?>
+            <!--<a href="#" class="social-icon">
+              <i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i>
+            </a>!-->
+
+            <?php
+              if($login_button == '')
+              {
+                echo '<a href="'.$google_client->createAuthUrl().'" class="social-icon"><i class="bi bi-google" id="Google" /></i></a>';
+              }
+              else
+              {
+                echo $login_button;
+              }
+             ?>
              </div>
           
           <!--Membership agreement -->

@@ -289,10 +289,6 @@ require_once '../db/conn.php';
                 echo $login_button;
               }
              ?>
-
-           <a href="#" class="social-icon">
-            <i class="bi bi-instagram" id="instagram"></i>
-          </a>
          </div>
           <!-- if user has/have not any account yet, then he/she can press the sign up here link in order to sign up page -->
           <div class="row" style="justify-content: center; margin-top:5px">

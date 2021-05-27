@@ -209,9 +209,6 @@ else
                     <li class="nav-item">
                         <a class="nav-link" href="src/search.html" style="color: white;">Product</a>
                     </li>
-                    <li class="nav-item" id='admin' style="display: none;">
-                        <a class="nav-link" href="php/administrator.php" style="color: white;">Administrator</a>
-                    </li>
                     <?php
                         if(!empty($_SESSION['user_id']))
                         {
@@ -221,8 +218,14 @@ else
                                 $_SESSION['name'] = $result['name'];
                                 $_SESSION['profile'] = $result['profile'];
                             }
-                            echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img src="'.$_SESSION['profile'].'" height="30mm;">'.$_SESSION['name'].'</a>';   
-                            echo '<li class="nav-item"><a class="nav-link" href="php/logout.php" style="color:white;">Logout</a>'; 
+                            if($_SESSION['status'] != "Admin"){
+                                echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img src="'.$_SESSION['profile'].'" height="30mm;">'.$_SESSION['name'].'</a>';   
+                                echo '<li class="nav-item"><a class="nav-link" href="php/logout.php" style="color:white;">Logout</a>'; 
+                            }else{
+                                echo '<li class="nav-item" id="admin"><a class="nav-link" href="php/administrator.php" style="color:white;">Administrator</a>';  
+                                echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img src="'.$_SESSION['profile'].'" height="30mm;">'.$_SESSION['name'].'</a>';   
+                                echo '<li class="nav-item"><a class="nav-link" href="php/logout.php" style="color:white;">Logout</a>';  
+                            }
                         }
                          else{
                             echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="php/signup.php" style="color:white;">Sign Up</a>';
