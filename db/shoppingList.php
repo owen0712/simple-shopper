@@ -7,10 +7,11 @@ class shoppingList{
         $this->db=$conn;
     }
 
-    public function getShoppingList(){
+    public function getShoppingList($userID){
         try{
-            $sql="SELECT * FROM `shopping_list`";
-            $stmt=$this->db->prepare($sql);            
+            $sql="SELECT * FROM `shopping_list` where user_id=:userId";
+            $stmt=$this->db->prepare($sql);
+            $stmt->bindparam(':userId',$userID);            
             $stmt->execute();
             $result=$stmt;
             return $result;
@@ -64,11 +65,12 @@ class shoppingList{
         }
     }
     
-    public function addShoppingList($listname){
+    public function addShoppingList($listname,$userId){
         try {
-            $sql = "INSERT INTO `shopping_list` (list_name) VALUES (:listname)";
+            $sql = "INSERT INTO `shopping_list` (list_name,user_id) VALUES (:listname,:userId)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindparam(':listname',$listname);                        
+            $stmt->bindparam(':userId',$userId);       
             $stmt->execute();
             return true;
         } catch (PDOException $e) {

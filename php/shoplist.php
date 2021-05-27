@@ -84,8 +84,9 @@
         //add new shopping list
         if(isset($_POST['addList'])){
             $listname=$_POST['listname'];
+            $userId=$_POST['userid'];//<!--remember change-->
             if ($listname!=''){
-                $temp=$shoppingList->getShoppingList();
+                $temp=$shoppingList->getShoppingList($userId);
                 $duplicate=FALSE;
                 while($r=$temp->fetch(PDO::FETCH_ASSOC)){
                     if ($r['list_name']==$listname){
@@ -94,7 +95,7 @@
                     }                     
                 }
                 if (!$duplicate){
-                    $result=$shoppingList->addShoppingList($listname);
+                    $result=$shoppingList->addShoppingList($listname,$userId);
                     echo "<script>swal('".$listname." list is added successfully',{icon: \"success\",});</script>";
                 }
                 else{
@@ -109,10 +110,9 @@
             $id = $_POST['listid'];        
             $listname=$_POST['listname'];        
             $current= $shoppingList->getCurrentShoppingList($id)->fetch(PDO::FETCH_ASSOC);
-            $temp = $shoppingList->getShoppingList();
+            $temp = $shoppingList->getShoppingList(2);
             if ($listname!=$current['list_name']){
-                if ($listname!=''){
-                    $temp=$shoppingList->getShoppingList();
+                if ($listname!=''){                    
                     $duplicate=FALSE;
                     while($r=$temp->fetch(PDO::FETCH_ASSOC)){
                         if ($r['list_name']==$listname){
@@ -149,6 +149,7 @@
         <h2>My Shopping List</h2>
         <!-- <input onsubmit="newElement()" type="text" id="myInput" placeholder="New Shopping List...">
         <span onclick="newElement()" class="addBtn btn">Add</span> -->
+        <input type='hidden' name='userid' value='<?php echo 2?>'/><!--remember change-->
         <input name="listname" type="text" id="myInput" placeholder="New Shopping List...">
         <input name="addList" value="Add" type="submit" class="addBtn btn">
         <!-- <input id="addBtn" type="submit" value="Add" > -->
@@ -161,7 +162,7 @@
         <div class="accordion" id="accordionExample">
             <!-- Shopping List 1-->             
             <?php
-                    $result=$shoppingList->getShoppingList();
+                    $result=$shoppingList->getShoppingList(2);
                     while($r=$result->fetch(PDO::FETCH_ASSOC)){
                 ?>                
             <div class="accordion-item">
