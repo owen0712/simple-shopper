@@ -16,6 +16,7 @@ if(!isset($_SESSION['access_token']))
 
 ?>
 <?php
+include ('../php/fb-init.php');
 require_once '../db/conn.php';
 ?>
 <?php
@@ -262,9 +263,21 @@ require_once '../db/conn.php';
          <!--User can login with social media platform -->
         <p class="social-media">Or <strong><span id="sign_text">&nbsp;login</span></strong>&nbsp;with social social platforms</p> </span>
         <div class="social-media">
-            <a href="#" class="social-icon">
+            <?php
+              if(isset($_SESSION['fb_url']))
+              {
+                $facebook_helper = $facebook->getRedirectLoginHelper();
+                $facebook_permissions = ['email'];
+                echo '<a href="'. $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions).'" class="social-icon"><i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i></a>';
+              }else{
+                $facebook_helper = $facebook->getRedirectLoginHelper();
+                $facebook_permissions = ['email'];
+                echo '<a href="'. $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions).'" class="social-icon"><i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i></a>';
+              }
+            ?>
+            <!--<a href="#" class="social-icon">
               <i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i>
-            </a>
+            </a>!-->
 
             <?php
               if($login_button == '')
@@ -285,7 +298,7 @@ require_once '../db/conn.php';
           <div class="row" style="justify-content: center; margin-top:5px">
             <label class="text-muted">New to Simple Shopper?&nbsp;&nbsp;&nbsp;</label>
             <i class="bi bi-arrow-right-circle-fill"></i>
-            <a href="../src/sign.html" style="color:rgb(38, 126, 209); margin-left: 4px;">Sign up here</a>
+            <a href="../php/signup.php" style="color:rgb(38, 126, 209); margin-left: 4px;">Sign up here</a>
           </div>
           <br>
     </form>
@@ -444,4 +457,3 @@ require_once '../db/conn.php';
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 </html>
-

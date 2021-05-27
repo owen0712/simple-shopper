@@ -318,7 +318,7 @@ require_once '../db/conn.php';
             <div class="row">
               <p class="text-muted" style="margin-top: 10px;">Have an account?</p>
               <i class="bi bi-arrow-right-circle-fill" style="margin-left: 20px; padding-top: 11px;"></i>
-              <a href="../src/signin.html" style="color:rgb(38, 126, 209); margin-left: 4px; padding-top: 11px;">Log in here</a>
+              <a href="../php/login.php" style="color:rgb(38, 126, 209); margin-left: 4px; padding-top: 11px;">Log in here</a>
             </div>
           </div>
         </form>

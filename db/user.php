@@ -218,7 +218,20 @@ class User{
  
         return $stmt->execute();
     }
- 
+    
+    public function insertDetailGoogle($name, $email, $gender, $profile)
+    {
+        $sql = "INSERT INTO user (name,email,gender,profile) VALUES(:name,:email,:gender,:profile)";
+        $stmt = $this->db->prepare($sql);
+
+        $stmt-> bindParam(":name",$name);
+        $stmt-> bindParam(":email",$email);
+        $stmt-> bindParam(":gender",$gender);
+        $stmt-> bindParam(":profile",$profile);
+
+        return $stmt->execute();
+    }
+
     public function checkLoginEmail($email,$pwd,$status)
     {
         $sql = "SELECT * FROM user WHERE email=:email AND password=:psw AND status=:status";
@@ -252,6 +265,8 @@ class User{
     
         if($stmt->rowCount() == 1)
         {
+            $result=$stmt->fetch(PDO::FETCH_ASSOC);
+            $_SESSION['user_id'] = $result['user_id'];
             return true;
         }else{
             return false;

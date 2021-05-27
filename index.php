@@ -1,11 +1,14 @@
 <?php
     include ('php/config.php');
     require_once 'db/conn.php';
-    $login_button = '';
 
-    //This $_GET["code"] variable value received after user has login into their Google Account redirct to PHP script then this variable value has been received
+    $login_button = '';
+    $loginStatus = '';
+
+    //This $_GET["code"] variable value received after user has login into their Google Account rediret to PHP script then this variable value has been received
     if(isset($_GET["code"]))
     {
+    $loginStatus = "Google";
     //It will Attempt to exchange a code for an valid authentication token.
     $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
 
@@ -23,11 +26,12 @@
 
     //Get user profile data from google
     $data = $google_service->userinfo->get();
+    
 
     //Below you can find Get profile data and store into $_SESSION variable
     if(!empty($data['given_name']))
     {
-    $_SESSION['name'] = $data['given_name'];
+    $_SESSION['user_first_name'] = $data['given_name'];
     }
 
     if(!empty($data['family_name']))
@@ -35,21 +39,109 @@
     $_SESSION['user_last_name'] = $data['family_name'];
     }
 
+    $_SESSION['name'] = $_SESSION['user_first_name'].$_SESSION['user_last_name'];
+
     if(!empty($data['email']))
     {
-    $_SESSION['user_email_address'] = $data['email'];
+    $_SESSION['email'] = $data['email'];
     }
 
     if(!empty($data['gender']))
     {
-    $_SESSION['user_gender'] = $data['gender'];
+    $_SESSION['gender'] = $data['gender'];
     }
 
     if(!empty($data['picture']))
     {
     $_SESSION['profile'] = $data['picture'];
     }
+
+    if($user->checkEmailExist($data['email']))
+    {
+        $id = $user->getUserIdEmail($data['email']);
+        $_SESSION['user_id'] = $id;
+    }else
+    {
+        if($user->insertDetailGoogle($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['profile']))
+        {
+            $id = $user->getUserIdEmail($data['email']);
+            $_SESSION['user_id'] = $id;
+        }
+    }
+
   }
+}
+?>
+<?php
+include ('php/fb-init.php');
+require_once 'db/conn.php';
+
+$facebook_helper = $facebook->getRedirectLoginHelper();
+$_SESSION['fb_url'] = '';
+if(isset($_GET['code']))
+{    
+ if(isset($_SESSION['access_token']))
+ {
+  $access_token = $_SESSION['access_token'];
+ }
+ else
+ {
+  $access_token = $facebook_helper->getAccessToken();
+
+  $_SESSION['access_token'] = $access_token;
+
+  $facebook->setDefaultAccessToken($_SESSION['access_token']);
+ }
+
+ $_SESSION['user_id'] = '';
+ $_SESSION['name'] = '';
+ $_SESSION['email'] = '';
+ $_SESSION['profile'] = '';
+ $_SESSION['gender'] = '';
+ $loginStatus = "Google";
+ $graph_response = $facebook->get("/me?fields=name,email,gender", $access_token);
+
+ $facebook_user_info = $graph_response->getGraphUser();
+
+ if(!empty($facebook_user_info['id']))
+ {
+  $_SESSION['profile'] = 'https://graph.facebook.com/'.$facebook_user_info['id'].'/picture?type=large&access_token='.$access_token;
+ }
+
+ if(!empty($facebook_user_info['name']))
+ {
+  $_SESSION['name'] = $facebook_user_info['name'];
+ }
+
+ if(!empty($facebook_user_info['email']))
+ {
+  $_SESSION['email'] = $facebook_user_info['email'];
+ }
+ if(!empty($facebook_user_info['gender']))
+ {
+     $_SESSION['gender'] = $facebook_user_info['gender'];
+ }
+ if($user->checkEmailExist($facebook_user_info['email']))
+ {
+     $id = $user->getUserIdEmail($facebook_user_info['email']);
+     $_SESSION['user_id'] = $id;
+ }else
+ {
+     if($user->insertDetailGoogle($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['profile']))
+     {
+         $id = $user->getUserIdEmail($data['email']);
+         $_SESSION['user_id'] = $id;
+     }
+ }
+}
+else
+{
+ // Get login url
+    $facebook_permissions = ['email']; // Optional permissions
+
+    $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions);
+    $_SESSION['fb_url'] = $facebook_login_url;
+    // Render Facebook login button
 }
 ?>
 <!DOCTYPE html>
@@ -124,8 +216,11 @@
                         if(!empty($_SESSION['user_id']))
                         {
                             $result = $user-> getUser($_SESSION['user_id']);
-                            $_SESSION['name'] = $result['name'];
-                            $_SESSION['profile'] = $result['profile'];
+                            if($loginStatus != "Google")
+                            {
+                                $_SESSION['name'] = $result['name'];
+                                $_SESSION['profile'] = $result['profile'];
+                            }
                             echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img src="'.$_SESSION['profile'].'" height="30mm;">'.$_SESSION['name'].'</a>';   
                             echo '<li class="nav-item"><a class="nav-link" href="php/logout.php" style="color:white;">Logout</a>'; 
                         }
