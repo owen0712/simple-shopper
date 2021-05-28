@@ -153,7 +153,13 @@
                         if(isset($_GET['keywords']))
                         {
                             $keywords = $_GET['keywords'];
-                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product WHERE product_description LIKE '%$keywords%'";
+                            if($keywords == null)
+                            {
+                                echo "<h2 class='text-center'>Seems like nothing here :)</h2>";
+                                $query = null;
+                            }else{
+                                $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product WHERE product_description LIKE '%$keywords%'";
+                            }
                         }else if(isset($_GET['category']))
                         {
                             $category = $_GET['category'];
@@ -161,14 +167,16 @@
                         }else{
                             $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product";
                         }
-
+                        if($query != null){
                         if ($result = $pdo->query($query)) {
                             /* fetch associative array */
                             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                 echo "
                                 <div class='col'>
                                     <div class='card'>
-                                    <img src='data:image;base64,".base64_encode($row['product_image'])."' class='mx-auto product-image' alt='".$row['product_name']."' height='auto' width='auto'>
+                                    <a href='item.php?id=".$row['product_id']."'>
+                                    <img src='".$row['product_image']."' class='mx-auto product-image' alt='".$row['product_name']."' height='auto' width='auto'>
+                                    </a>
                                     <div class='card-body' style='padding-bottom:0px;' >
                                         <h5 class='card-title'>".$row["product_name"]."
                                             <p class='card-category'>".$row["product_category"]."</p>
@@ -196,8 +204,10 @@
                                     </div>";
                                 }
                             }
-                            /* free result set */
-                            $result = null;
+                        }
+                        }
+                        /* free result set */
+                        $result = null;
                         }
                     ?>
 
