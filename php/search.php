@@ -208,7 +208,6 @@
                         }
                         /* free result set */
                         $result = null;
-                        }
                     ?>
 
                     
