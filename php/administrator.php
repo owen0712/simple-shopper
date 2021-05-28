@@ -62,21 +62,23 @@
               <div class="col col-auto">
                 <a class="navbar-brand" href="../src/index.html"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
               </div>
-              <select name="selectedCategory" id="selectedCategory" class="form-control">
-                <option value="">Category Search</option>
-                <option value="Bath and Body">Bath and Body</option>
-                <option value="Instant Food">Instant Food</option>
-                <option value="Canned and Packed Food">Canned and Packed Food</option>
-                <option value="Baby Product">Baby Product</option>
-                <option value="Household Supply">Household Supply</option>
-                <option value="Pet">Pet</option>
-                <option value="Cooking Ingredient">Cooking Ingredient</option>
-                <option value="Cereal">Cereal</option>
-                <option value="Baking Supplies">Baking Supplies</option>
-                <option value="Snack">Snack</option>
-                <option value="Beverage">Beverage</option>
-                <option value="Paper Product">Paper Product</option>
-              </select>
+              <div class="col col-10">
+                <select name="selectedCategory" id="selectedCategory">
+                    <option value="">Category Search</option>
+                    <option value="Bath and Body">Bath and Body</option>
+                    <option value="Instant Food">Instant Food</option>
+                    <option value="Canned and Packed Food">Canned and Packed Food</option>
+                    <option value="Baby Product">Baby Product</option>
+                    <option value="Household Supply">Household Supply</option>
+                    <option value="Pet">Pet</option>
+                    <option value="Cooking Ingredient">Cooking Ingredient</option>
+                    <option value="Cereal">Cereal</option>
+                    <option value="Baking Supplies">Baking Supplies</option>
+                    <option value="Snack">Snack</option>
+                    <option value="Beverage">Beverage</option>
+                    <option value="Paper Product">Paper Product</option>
+                </select>
+              </div>
             </div>
         </nav>
         <main class="container">
