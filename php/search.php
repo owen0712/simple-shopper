@@ -92,10 +92,10 @@
                                     <a href="search.php?category=Instant Food" class="nav-link px-0"> <span class="d-none d-sm-inline">Instant Food</span> </a>
                                 </li>
                                 <li>
-                                    <a href="search.php?category=cereal" class="nav-link px-0"> <span class="d-none d-sm-inline">Cereal</span>  </a>
+                                    <a href="search.php?category=cereal" class="nav-link px-0"> <span class="d-none d-sm-inline">cereal</span>  </a>
                                 </li>
                                 <li>
-                                    <a href="search.php?category=Snack" class="nav-link px-0"> <span class="d-none d-sm-inline">Snacks</span>  </a>
+                                    <a href="search.php?category=Snack" class="nav-link px-0"> <span class="d-none d-sm-inline">Snack</span>  </a>
                                 </li>
                                 <li>
                                     <a href="search.php?category=Canned and Packed Food" class="nav-link px-0"> <span class="d-none d-sm-inline">Canned and Packed Food</span></a>
@@ -110,7 +110,7 @@
                                     <a href="search.php?category=Cooking Ingredient" class="nav-link px-0"> <span class="d-none d-sm-inline">Cooking Ingredient</span></a>
                                 </li>
                                 <li>
-                                    <a href="search.php?category=Baking supplies" class="nav-link px-0"> <span class="d-none d-sm-inline">Baking Supplies</span></a>
+                                    <a href="search.php?category=Baking supplies" class="nav-link px-0"> <span class="d-none d-sm-inline">Baking supplies</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -119,10 +119,10 @@
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Household Products</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="search.php?category=Paper Product" class="nav-link px-0"> <span class="d-none d-sm-inline">Paper Products</span></a>
+                                    <a href="search.php?category=Paper Product" class="nav-link px-0"> <span class="d-none d-sm-inline">Paper Product</span></a>
                                 </li>
                                 <li>
-                                    <a href="search.php?category=household supply" class="nav-link px-0"> <span class="d-none d-sm-inline">Household Supply</span></a>
+                                    <a href="search.php?category=household supply" class="nav-link px-0"> <span class="d-none d-sm-inline">household supply</span></a>
                                 </li>
                                 <li>
                                     <a href="search.php?category=Bath and Body" class="nav-link px-0"> <span class="d-none d-sm-inline">Bath and Body</span></a>
@@ -134,10 +134,10 @@
                                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Others</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="search.php?category=Baby Product" class="nav-link px-0"> <span class="d-none d-sm-inline">Baby Products</span></a>
+                                    <a href="search.php?category=Baby Product" class="nav-link px-0"> <span class="d-none d-sm-inline">Baby Product</span></a>
                                 </li>
                                 <li>
-                                    <a href="search.php?category=pet" class="nav-link px-0"> <span class="d-none d-sm-inline">Pet</span></a>
+                                    <a href="search.php?category=pet" class="nav-link px-0"> <span class="d-none d-sm-inline">pet</span></a>
                                 </li>
                             </ul>
                         </li>
