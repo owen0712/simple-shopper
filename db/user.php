@@ -293,6 +293,9 @@ class User{
     
         if($stmt-> rowCount() == 1)
         {
+            $result=$stmt->fetch(PDO::FETCH_ASSOC);
+            $_SESSION['user_id'] = $result['user_id'];
+            $_SESSION['status'] = $result['status'];
             return true;
         }else{
             return false;

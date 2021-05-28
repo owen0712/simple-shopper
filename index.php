@@ -8,6 +8,7 @@
     //This $_GET["code"] variable value received after user has login into their Google Account rediret to PHP script then this variable value has been received
     if(isset($_GET["code"]))
     {
+    if($_SESSION['action']=='google'){
     $loginStatus = "Google";
     //It will Attempt to exchange a code for an valid authentication token.
     $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
@@ -71,77 +72,80 @@
 
   }
 }
+}
 ?>
 <?php
 include ('php/fb-init.php');
 require_once 'db/conn.php';
 
-$facebook_helper = $facebook->getRedirectLoginHelper();
-$_SESSION['fb_url'] = '';
-if(isset($_GET['code']))
-{    
- if(isset($_SESSION['access_token']))
- {
-  $access_token = $_SESSION['access_token'];
- }
- else
- {
-  $access_token = $facebook_helper->getAccessToken();
-
-  $_SESSION['access_token'] = $access_token;
-
-  $facebook->setDefaultAccessToken($_SESSION['access_token']);
- }
-
- $_SESSION['user_id'] = '';
- $_SESSION['name'] = '';
- $_SESSION['email'] = '';
- $_SESSION['profile'] = '';
- $_SESSION['gender'] = '';
- $loginStatus = "Google";
- $graph_response = $facebook->get("/me?fields=name,email,gender", $access_token);
-
- $facebook_user_info = $graph_response->getGraphUser();
-
- if(!empty($facebook_user_info['id']))
- {
-  $_SESSION['profile'] = 'https://graph.facebook.com/'.$facebook_user_info['id'].'/picture?type=large&access_token='.$access_token;
- }
-
- if(!empty($facebook_user_info['name']))
- {
-  $_SESSION['name'] = $facebook_user_info['name'];
- }
-
- if(!empty($facebook_user_info['email']))
- {
-  $_SESSION['email'] = $facebook_user_info['email'];
- }
- if(!empty($facebook_user_info['gender']))
- {
-     $_SESSION['gender'] = $facebook_user_info['gender'];
- }
- if($user->checkEmailExist($facebook_user_info['email']))
- {
-     $id = $user->getUserIdEmail($facebook_user_info['email']);
-     $_SESSION['user_id'] = $id;
- }else
- {
-     if($user->insertDetailGoogle($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['profile']))
+    $facebook_helper = $facebook->getRedirectLoginHelper();
+    $_SESSION['fb_url'] = '';
+    if(isset($_GET['code']))
+    { 
+     if($_SESSION['action']=='fb'){
+     if(isset($_SESSION['access_token']))
      {
-         $id = $user->getUserIdEmail($data['email']);
-         $_SESSION['user_id'] = $id;
+      $access_token = $_SESSION['access_token'];
      }
- }
-}
-else
-{
- // Get login url
-    $facebook_permissions = ['email']; // Optional permissions
-
-    $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions);
-    $_SESSION['fb_url'] = $facebook_login_url;
-    // Render Facebook login button
+     else
+     {
+      $access_token = $facebook_helper->getAccessToken();
+    
+      $_SESSION['access_token'] = $access_token;
+    
+      $facebook->setDefaultAccessToken($_SESSION['access_token']);
+     }
+    
+     $_SESSION['user_id'] = '';
+     $_SESSION['name'] = '';
+     $_SESSION['email'] = '';
+     $_SESSION['profile'] = '';
+     $_SESSION['gender'] = '';
+     $loginStatus = "Google";
+     $graph_response = $facebook->get("/me?fields=name,email,gender", $access_token);
+    
+     $facebook_user_info = $graph_response->getGraphUser();
+    
+     if(!empty($facebook_user_info['id']))
+     {
+      $_SESSION['profile'] = 'https://graph.facebook.com/'.$facebook_user_info['id'].'/picture?type=large&access_token='.$access_token;
+     }
+    
+     if(!empty($facebook_user_info['name']))
+     {
+      $_SESSION['name'] = $facebook_user_info['name'];
+     }
+    
+     if(!empty($facebook_user_info['email']))
+     {
+      $_SESSION['email'] = $facebook_user_info['email'];
+     }
+     if(!empty($facebook_user_info['gender']))
+     {
+         $_SESSION['gender'] = $facebook_user_info['gender'];
+     }
+     if($user->checkEmailExist($facebook_user_info['email']))
+     {
+         $id = $user->getUserIdEmail($facebook_user_info['email']);
+         $_SESSION['user_id'] = $id;
+     }else
+     {
+         if($user->insertDetailGoogle($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['profile']))
+         {
+             $id = $user->getUserIdEmail($data['email']);
+             $_SESSION['user_id'] = $id;
+         }
+     }
+    }
+    else
+    {
+     // Get login url
+        $facebook_permissions = ['email']; // Optional permissions
+    
+        $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions);
+        $_SESSION['fb_url'] = $facebook_login_url;
+        // Render Facebook login button
+    }
 }
 ?>
 <!DOCTYPE html>

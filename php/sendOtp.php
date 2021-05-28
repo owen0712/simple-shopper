@@ -60,7 +60,6 @@ if(isset($_POST['btnSubmit1']))
 			
 			header("Location: ../php/otp.php?email=$email");
 		} catch (Exception $e) {
-			echo "ASdasd";
 			header("Location: ../php/validateEmail.php");
 			exit();
 		}

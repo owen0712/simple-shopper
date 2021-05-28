@@ -184,7 +184,6 @@ require_once '../db/conn.php';
                 }
              }
          }
-      
     ?>
           <!-- form -->
           <form  id="form" class="form" method="post" action="signup.php">

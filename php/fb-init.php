@@ -1,4 +1,9 @@
 <?php
+
+if(!session_id()) {
+    session_start();
+}
+
 require_once ($_SERVER['DOCUMENT_ROOT'].'/simple-shopper/vendor/autoload.php');
 
 $facebook  = new \Facebook\Facebook ([
