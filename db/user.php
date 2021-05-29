@@ -203,74 +203,109 @@ class User{
 
     public function insertDetails($Lname, $email, $phone, $pwd, $gender, $birth, $status)
     {
-        $phone = str_replace("-", "", $phone);
-        $sql=" INSERT INTO user (password,name,email,phone,gender,dob,status)
-        VALUES(:psw,:Lname,:email,:phone,:gender,:dob,:status)";
-        $stmt = $this->db->prepare($sql);
+        try{
+            $phone = str_replace("-", "", $phone);
+            $sql=" INSERT INTO user (password,name,email,phone,gender,dob,status)
+            VALUES(:psw,:Lname,:email,:phone,:gender,:dob,:status)";
+            $stmt = $this->db->prepare($sql);
+    
+            $stmt-> bindParam(":psw",$pwd);
+            $stmt-> bindParam(":Lname",$Lname);
+            $stmt-> bindParam(":email",$email);
+            $stmt-> bindParam(":phone",$phone);
+            $stmt-> bindParam(":gender",$gender);
+            $stmt-> bindParam(":dob",$birth);
+            $stmt-> bindParam(":status",$status);
  
-        $stmt-> bindParam(":psw",$pwd);
-        $stmt-> bindParam(":Lname",$Lname);
-        $stmt-> bindParam(":email",$email);
-        $stmt-> bindParam(":phone",$phone);
-        $stmt-> bindParam(":gender",$gender);
-        $stmt-> bindParam(":dob",$birth);
-        $stmt-> bindParam(":status",$status);
- 
-        return $stmt->execute();
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
     }
     
-    public function insertDetailGoogle($name, $email, $gender, $profile)
+    public function insertDetailFacebook($name,$email,$gender,$profile,$status)
     {
-        $sql = "INSERT INTO user (name,email,gender,profile) VALUES(:name,:email,:gender,:profile)";
-        $stmt = $this->db->prepare($sql);
-
-        $stmt-> bindParam(":name",$name);
-        $stmt-> bindParam(":email",$email);
-        $stmt-> bindParam(":gender",$gender);
-        $stmt-> bindParam(":profile",$profile);
-
-        return $stmt->execute();
+        try{
+            $sql = "INSERT INTO user (name,email,gender,profile,status) VALUES(:name,:email,:gender,:profile,:status)";
+            $stmt = $this->db->prepare($sql);
+            $stmt-> bindParam(":name",$name);
+            $stmt-> bindParam(":email",$email);
+            $stmt-> bindParam(":gender",$gender);
+            $stmt-> bindParam(":profile",$profile);
+            $stmt-> bindParam(":status",$status);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+    
+    public function insertDetailGoogle($name,$email,$profile,$status)
+    {
+        try{
+            $sql = "INSERT INTO user (name,email,profile,status) VALUES(:name,:email,:profile,:status)";
+            $stmt = $this->db->prepare($sql);
+            $stmt-> bindParam(":name",$name);
+            $stmt-> bindParam(":email",$email);
+            $stmt-> bindParam(":profile",$profile);
+            $stmt-> bindParam(":status",$status);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
     }
 
     public function checkLoginEmail($email,$pwd,$status)
     {
-        $sql = "SELECT * FROM user WHERE email=:email AND password=:psw AND status=:status";
-        $stmt = $this->db->prepare($sql);
-        $stmt-> bindParam(":email",$email);
-        $stmt-> bindParam(":psw",$pwd);
-        $stmt-> bindParam(":status",$status);
-        $stmt->execute();
-    
-        //check how many rows
-        if($stmt->rowCount() == 1)
-        {
-            $result=$stmt->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['user_id'] = $result['user_id'];
-            $_SESSION['status'] = $result['status'];
-            return true;
-        }else{
+        try{
+            $sql = "SELECT * FROM user WHERE email=:email AND password=:psw AND status=:status";
+            $stmt = $this->db->prepare($sql);
+            $stmt-> bindParam(":email",$email);
+            $stmt-> bindParam(":psw",$pwd);
+            $stmt-> bindParam(":status",$status);
+            $stmt->execute();
+        
+            //check how many rows
+            if($stmt->rowCount() == 1)
+            {
+                $result=$stmt->fetch(PDO::FETCH_ASSOC);
+                $_SESSION['user_id'] = $result['user_id'];
+                $_SESSION['status'] = $result['status'];
+                return true;
+            }else{
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
             return false;
         }
     }
  
     public function checkLoginPhone($phone,$pwd,$status)
     {   
-        $phone = str_replace("-", "", $phone);
-        $sql = "SELECT * FROM user WHERE phone=:phone AND password=:psw AND status=:status";
-        $stmt = $this->db->prepare($sql);
-        $stmt-> bindParam(":phone",$phone);
-        $stmt-> bindParam(":psw",$pwd);
-        $stmt-> bindParam(":status",$status);
-        $stmt->execute();
-        //check how many rows
-    
-        if($stmt->rowCount() == 1)
-        {
-            $result=$stmt->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['user_id'] = $result['user_id'];
-            $_SESSION['status'] = $result['status'];
-            return true;
-        }else{
+        try{
+            $phone = str_replace("-", "", $phone);
+            $sql = "SELECT * FROM user WHERE phone=:phone AND password=:psw AND status=:status";
+            $stmt = $this->db->prepare($sql);
+            $stmt-> bindParam(":phone",$phone);
+            $stmt-> bindParam(":psw",$pwd);
+            $stmt-> bindParam(":status",$status);
+            $stmt->execute();
+            //check how many rows
+        
+            if($stmt->rowCount() == 1)
+            {
+                $result=$stmt->fetch(PDO::FETCH_ASSOC);
+                $_SESSION['user_id'] = $result['user_id'];
+                $_SESSION['status'] = $result['status'];
+                return true;
+            }else{
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
             return false;
         }
     }
@@ -284,20 +319,22 @@ class User{
  
     public function checkEmailExist($email)
     {
-        $sql = "SELECT * FROM user WHERE email=:email";
-        $stmt = $this->db->prepare($sql);
+        try{
+            $sql = "SELECT * FROM user WHERE email=:email";
+            $stmt = $this->db->prepare($sql);
 
-        $stmt->bindParam(":email",$email);
-    
-        $stmt->execute();
-    
-        if($stmt-> rowCount() == 1)
-        {
-            $result=$stmt->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['user_id'] = $result['user_id'];
-            $_SESSION['status'] = $result['status'];
-            return true;
-        }else{
+            $stmt->bindParam(":email",$email);
+        
+            $stmt->execute();
+            
+            if($stmt-> rowCount() == 1)
+            {
+                return true;
+            }else{
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
             return false;
         }
     }
@@ -334,47 +371,68 @@ class User{
 
     public function getUserInfoPhone($phone)
     {
-        $sql = "SELECT * FROM `otp` WHERE phone=:phone";
-        $stmt = $this->db->prepare($sql);
-        $stmt -> bindParam(":phone",$phone);
-        $stmt->execute();
+        try{
+            $sql = "SELECT * FROM `otp` WHERE phone=:phone";
+            $stmt = $this->db->prepare($sql);
+            $stmt -> bindParam(":phone",$phone);
+            $stmt->execute();
 
-        if($stmt->rowCount() == 1)
-        {
-            return $stmt;
-        }else{
-            return "";
+            if($stmt->rowCount() == 1)
+            {
+                return $stmt;
+            }else{
+                return "";
+            }
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
         }
     }
 
     public function insertOtp($email,$otp, $expires)
     {
-        $sql = "INSERT INTO otp (email,Otp,Expire) VALUES(:email,:otp,:expire)";
-		$stmt =  $this->db->prepare($sql);
-		$stmt -> bindParam(":email",$email);
-		$stmt -> bindParam(":otp",$otp);
-        $stmt -> bindParam(":expire",$expires);
+        try{
+            $sql = "INSERT INTO otp (email,Otp,Expire) VALUES(:email,:otp,:expire)";
+            $stmt =  $this->db->prepare($sql);
+            $stmt -> bindParam(":email",$email);
+            $stmt -> bindParam(":otp",$otp);
+            $stmt -> bindParam(":expire",$expires);
 
-		$stmt -> execute();  
+            $stmt -> execute();
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }  
     }
 
     public function insertOtpPhone($phone, $otp, $expires)
     {
-        $sql = "INSERT INTO otp (phone,Otp,Expire) VALUES(:phone,:otp,:expire)";
-		$stmt =  $this->db->prepare($sql);
-		$stmt -> bindParam(":phone",$phone);
-		$stmt -> bindParam(":otp",$otp);
-        $stmt -> bindParam(":expire",$expires);
+        try{
+            $sql = "INSERT INTO otp (phone,Otp,Expire) VALUES(:phone,:otp,:expire)";
+            $stmt =  $this->db->prepare($sql);
+            $stmt -> bindParam(":phone",$phone);
+            $stmt -> bindParam(":otp",$otp);
+            $stmt -> bindParam(":expire",$expires);
 
-		$stmt -> execute();  
+            $stmt -> execute();
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }  
     }
 
     public function deletePreviousEmail($email)
     {
-        $sql = "DELETE FROM `otp` where email=:email";
-        $stmt =  $this->db->prepare($sql);
-		$stmt -> bindParam(":email",$email);
-        $stmt -> execute();  
+        try{
+            $sql = "DELETE FROM `otp` where email=:email";
+            $stmt =  $this->db->prepare($sql);
+            $stmt -> bindParam(":email",$email);
+            $stmt -> execute(); 
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
     }
 
     public function getUserIdEmail($email)
@@ -395,7 +453,7 @@ class User{
 
     public function getUserIdPhone($phone)
     {
-
+        try{
         $sql = "SELECT * FROM `user` WHERE phone=$phone";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
@@ -406,14 +464,24 @@ class User{
         }else{
             return "";
         }
+      }
+      catch(PDOException $e){
+          echo $e->getMessage();
+          return false;
+      }
     }
 
     public function deletePreviousPhone($phone)
     {
-        $sql = "DELETE FROM `otp` where phone=:phone";
-        $stmt =  $this->db->prepare($sql);
-		$stmt -> bindParam(":phone",$phone);
-        $stmt -> execute();  
+        try{
+            $sql = "DELETE FROM `otp` where phone=:phone";
+            $stmt =  $this->db->prepare($sql);
+            $stmt -> bindParam(":phone",$phone);
+            $stmt -> execute();
+        }catch(PDOException $e){
+            echo $e-> getMessage();
+            return false;
+        }  
     }
 }
 ?>

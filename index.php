@@ -2,9 +2,9 @@
     include ('php/config.php');
     require_once 'db/conn.php';
 
-    $login_button = '';
+    $x = ' ';
     $loginStatus = '';
-
+    $_SESSION['status'] = '';
     //This $_GET["code"] variable value received after user has login into their Google Account rediret to PHP script then this variable value has been received
     if(isset($_GET["code"]))
     {
@@ -28,7 +28,6 @@
     //Get user profile data from google
     $data = $google_service->userinfo->get();
     
-
     //Below you can find Get profile data and store into $_SESSION variable
     if(!empty($data['given_name']))
     {
@@ -40,7 +39,7 @@
     $_SESSION['user_last_name'] = $data['family_name'];
     }
 
-    $_SESSION['name'] = $_SESSION['user_first_name'].$_SESSION['user_last_name'];
+    $_SESSION['name'] = $_SESSION['user_first_name'].$x.$_SESSION['user_last_name'];
 
     if(!empty($data['email']))
     {
@@ -56,6 +55,8 @@
     {
     $_SESSION['profile'] = $data['picture'];
     }
+    $_SESSION['status'] = "User";
+    $gpUserData['gender'] = !empty($data['gender'])?$data['gender']:''; 
 
     if($user->checkEmailExist($data['email']))
     {
@@ -63,15 +64,14 @@
         $_SESSION['user_id'] = $id;
     }else
     {
-        if($user->insertDetailGoogle($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['profile']))
+        if($user->insertDetailFacebook($_SESSION['name'],$_SESSION['email'],$gpUserData['gender'],$_SESSION['profile'], $_SESSION['status']))
         {
             $id = $user->getUserIdEmail($data['email']);
             $_SESSION['user_id'] = $id;
         }
     }
-
   }
-}
+ }
 }
 ?>
 <?php
@@ -101,6 +101,7 @@ require_once 'db/conn.php';
      $_SESSION['email'] = '';
      $_SESSION['profile'] = '';
      $_SESSION['gender'] = '';
+     $_SESSION['status'] = '';
      $loginStatus = "Google";
      $graph_response = $facebook->get("/me?fields=name,email,gender", $access_token);
     
@@ -124,19 +125,21 @@ require_once 'db/conn.php';
      {
          $_SESSION['gender'] = $facebook_user_info['gender'];
      }
+     $_SESSION['status'] = "User";
      if($user->checkEmailExist($facebook_user_info['email']))
      {
          $id = $user->getUserIdEmail($facebook_user_info['email']);
          $_SESSION['user_id'] = $id;
      }else
      {
-         if($user->insertDetailGoogle($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['profile']))
+         if($user->insertDetailFacebook($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['profile'],$_SESSION['status'] = "User"))
          {
              $id = $user->getUserIdEmail($data['email']);
              $_SESSION['user_id'] = $id;
          }
      }
     }
+}
     else
     {
      // Get login url
@@ -146,7 +149,6 @@ require_once 'db/conn.php';
         $_SESSION['fb_url'] = $facebook_login_url;
         // Render Facebook login button
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -217,6 +219,7 @@ require_once 'db/conn.php';
                         if(!empty($_SESSION['user_id']))
                         {
                             $result = $user-> getUser($_SESSION['user_id']);
+                            $_SESSION['status'] = $result['status'];
                             if($loginStatus != "Google")
                             {
                                 $_SESSION['name'] = $result['name'];
