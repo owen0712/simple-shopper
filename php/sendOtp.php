@@ -12,12 +12,7 @@ if(isset($_POST['btnSubmit1']))
    {
 	 if($user->checkEmailExist($email))
 	 {
-		//converts arbitary string length to hexadecimal values
-		$selector = bin2hex(random_bytes(8));
-		$token    = random_bytes(32);
-
-		$url      = "http://localhost/oars/create-new-password.php?selector=".$selector."&validator=".bin2hex($token);
-
+		
 		$otp=mt_rand(1000,9999);
 		date_default_timezone_set("Asia/Kuala_Lumpur");
 		$minutes_to_add = 4;

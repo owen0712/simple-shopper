@@ -134,7 +134,7 @@ require_once 'db/conn.php';
      {
          if($user->insertDetailFacebook($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['profile'],$_SESSION['status'] = "User"))
          {
-             $id = $user->getUserIdEmail($data['email']);
+             $id = $user->getUserIdEmail($facebook_user_info['email']);
              $_SESSION['user_id'] = $id;
          }
      }

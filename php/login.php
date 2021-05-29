@@ -20,7 +20,7 @@ include ('../php/fb-init.php');
 require_once '../db/conn.php';
 ?>
 <?php
-   if(isset($_POST['remember']))
+   if(!empty($_POST["remember"]))
      {
        $remember = $_POST['remember'];
        //set cookie
@@ -28,16 +28,16 @@ require_once '../db/conn.php';
        setcookie('email',$_POST['ph_email'],time()+60*60*7);
        setcookie('pass',openssl_encrypt($_POST['pwdL'],"AES-128-ECB", $SECRETKEY), time()+60*60*7);
        setcookie('remember',$remember,time()+60*60*7);
-     }elseif (!isset($_POST['remember']))
+     }elseif (empty($_POST['remember']))
      {
        if(isset($_COOKIE['email']) and isset($_COOKIE['pass']) and isset($_COOKIE['remember']))
        {
          $em = $_COOKIE['email'];
          $pass = $_COOKIE['pass'];
          $rem = $_COOKIE['remember'];
-         setcookie('email',$em,time()-1);
-         setcookie('pass',$pass, time()-1);
-         setcookie('remember', $rem, time()-1);
+         setcookie('email','');
+         setcookie('pass','');
+         setcookie('remember','');
        }  
    }
 
