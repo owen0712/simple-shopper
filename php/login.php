@@ -20,6 +20,7 @@ include ('../php/fb-init.php');
 require_once '../db/conn.php';
 ?>
 <?php
+   if($_SERVER['REQUEST_METHOD']=='POST'){
    if(!empty($_POST["remember"]))
      {
        $remember = $_POST['remember'];
@@ -47,7 +48,7 @@ require_once '../db/conn.php';
         $SECRETKEY ="mysecretkey1234";
         $_SESSION['pass'] = $_COOKIE['pass'];
     }
-    
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -225,7 +226,7 @@ require_once '../db/conn.php';
         <div class = "input-field" style="width:350px; margin-top: 30px; margin-bottom: 20px;">
           <i class="bi bi-lock-fill"></i>
 
-          <input type="password" placeholder="Password" name="pwdL" id = "myInput" value="<?php if(isset($_COOKIE['pass'])){echo openssl_decrypt($_SESSION['pass'], "AES-128-ECB", "mysecretkey1234");};?>"/>
+          <input type="password" placeholder="Password" name="pwdL" id = "myInput" value="<?php if(isset($_COOKIE['pass'])){echo openssl_decrypt($_COOKIE['pass'], "AES-128-ECB", "mysecretkey1234");};?>"/>
           <!-- eye icon -->
           <span class="eye" onclick="myFunction()">
               <i id = "hide1" class="bi bi-eye-fill"></i>
