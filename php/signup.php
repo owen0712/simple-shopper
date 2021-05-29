@@ -154,33 +154,41 @@ require_once '../db/conn.php';
           });
         }
     </script>
-    <?php
+<?php
          if(isset($_POST['btnSign']))
          {
              $Lname = $_POST['lName'];
              $email = $_POST['Uemail'];
              $phone = $_POST['Uphone'];
-             $pwd = $user->sanitizePassword($_POST['Upass']);
-             $gender = $_POST['gender'];
-             $birth = $_POST['birthdaytime'];
-             $status = 'User';
-      
-             if($Lname =="" || $email == "" || $phone == "" || $pwd =="" ||
-             $gender =="" || $birth == ""){
-                echo "<script>swalError2();</script>";
-             }
-      
-             if($user->checkEmailExist($email))
+             if(!isset($_POST['Upass']) or empty($_POST['Upass']))
              {
-              echo "<script>swalError();</script>";
-             }
-             
-             if($Lname !="" && $email != "" && $phone != "" && $pwd !="" &&
-             $gender !="" && $birth != ""){
-                if ($user->insertDetails($Lname, $email, $phone, $pwd, $gender, $birth, $status));
+              echo "<script>swalError2();</script>";
+             }else{
+                $pwd = $user->sanitizePassword($_POST['Upass']);
+                $gender = $_POST['gender'];
+                $birth = $_POST['birthdaytime'];
+                $status = 'User';
+        
+                if($Lname =="" || $email == "" || $phone == "" || $pwd =="" ||
+                $gender =="" || $birth == ""){
+                  echo "<script>swalError2();</script>";
+                }
+        
+                if($user->checkEmailExist($email))
                 {
-                    $_SESSION['Uemail'] = $email;
-                    echo "<script>swalSuccess();</script>";
+                echo "<script>swalError();</script>";
+                }
+                
+                if($Lname !="" && $email != "" && $phone != "" && $pwd !="" &&
+                $gender !="" && $birth != ""){
+                  if(!$user->checkEmailExist($email))
+                  {
+                    if ($user->insertDetails($Lname, $email, $phone, $pwd, $gender, $birth, $status));
+                    {
+                        $_SESSION['Uemail'] = $email;
+                        echo "<script>swalSuccess();</script>";
+                    }
+                  }
                 }
              }
          }

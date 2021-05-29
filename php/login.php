@@ -33,21 +33,11 @@ require_once '../db/conn.php';
      {
        if(isset($_COOKIE['email']) and isset($_COOKIE['pass']) and isset($_COOKIE['remember']))
        {
-         $em = $_COOKIE['email'];
-         $pass = $_COOKIE['pass'];
-         $rem = $_COOKIE['remember'];
          setcookie('email','');
          setcookie('pass','');
          setcookie('remember','');
        }  
    }
-
-    if(isset($_COOKIE['email']) and isset($_COOKIE['pass']))
-    {
-        $em = $_COOKIE['email'];
-        $SECRETKEY ="mysecretkey1234";
-        $_SESSION['pass'] = $_COOKIE['pass'];
-    }
   }
 ?>
 <!DOCTYPE html>
