@@ -155,7 +155,7 @@
                             $keywords = $_GET['keywords'];
                             if($keywords == null)
                             {
-                                echo "<h2 class='text-center'>Seems like nothing here :)</h2>";
+                                echo "<img src='../assets/Image/nothing.png' height='500'>";
                                 $query = null;
                             }else{
                                 $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product WHERE product_description LIKE '%$keywords%'";
