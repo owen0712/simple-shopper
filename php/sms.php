@@ -2,9 +2,9 @@
     require_once '../db/conn.php';
     require_once '../vendor/autoload.php';
     use Twilio\Rest\Client;
-
+    
     $AccountSid = "AC2afcafb499e46db279adf7b992616f2f";
-    $AuthToken = "ae801b1cbf4fdeec4677d6bf298c929c";
+    $AuthToken = "f2d463ec68820f1fa5c93e3b544693fc";
     $client = new Client($AccountSid, $AuthToken);
 
     $otp=mt_rand(1000,9999);
@@ -15,9 +15,17 @@
     $expires = $expires->format('Y-m-d H:i');
 
     $number=  $_POST['Number'];
+    $word="+6";
+    $word2="6";
+    $word3="-";
+    if(strpos($number, $word) === false)
+    {
+        $number = "+6".$number; 
+    }
+
     $client->messages->create(
         // the number you'd like to send the message to
-        $_POST['Number'],
+        $number,
         [
             // A Twilio phone number you purchased at twilio.com/console
             'from' => '+19284408537',
@@ -25,7 +33,8 @@
             'body' => "We received a password reset request. The otp number:$otp"
         ]
     );
-    
+
+
     $word="+6";
     $word2="6";
     $word3="-";
