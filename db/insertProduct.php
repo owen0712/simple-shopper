@@ -19,7 +19,7 @@
         $quantity=(int)$column[3];
         $price=(float)$column[4];
         $description=$column[5];
-        $sql="INSERT INTO `product` (product_image,product_name,product_category,product_amount,product_price,product_description) VALUES (:path,:name,:category,:amount,:price,:description)";
+        $sql="INSERT INTO `product` (product_image,product_name,category_id,product_amount,product_price,product_description) VALUES (:path,:name,:category,:amount,:price,:description)";
         $stmt=$pdo->prepare($sql);
         $stmt->bindparam(':path',$path);
         $stmt->bindparam(':name',$name);
