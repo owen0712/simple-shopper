@@ -101,16 +101,21 @@
                 if(isset($_POST['confirm'])){
                     $result=$user->getUser($_SESSION['user_id']);
                     if($result['password']==md5($_POST['current_password'])){
-                        if($_POST['new_password']==$_POST['confirm_password']){
-                            if($user->updatePassword($result['user_id'],md5($_POST['new_password']))){
-                                echo "<script>swal('Successfully!', 'Password Modified', 'success');</script>";
+                        if(preg_match('#^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$#',$_POST['new_password'])){
+                            if($_POST['new_password']==$_POST['confirm_password']){
+                                if($user->updatePassword($result['user_id'],md5($_POST['new_password']))){
+                                    echo "<script>swal('Successfully!', 'Password Modified', 'success');</script>";
+                                }
+                                else{
+                                    echo "<div class='alert alert-danger' role='alert'>Operation encountered an error. Please retry!</div>";
+                                }
                             }
                             else{
-                                echo "<div class='alert alert-danger' role='alert'>Operation encountered an error. Please retry!</div>";
+                                echo "<div class='alert alert-danger' role='alert'>The new password do not match. Please retry!</div>";
                             }
                         }
                         else{
-                            echo "<div class='alert alert-danger' role='alert'>The new password do not match. Please retry!</div>";
+                            echo "<div class='alert alert-danger' role='alert'>Password must have minimum eight characters, at least one letter, one number and one special character</div>";
                         }
                     }
                     else{
@@ -134,12 +139,19 @@
             }
         ?>
             <div>
-            <h2>Change Password</h2>
+            <?php $result=$user->getUser($_SESSION['user_id']);
+            if($result['password']){
+                echo "<h2>Change Password</h2>";
+            }
+            else{
+                echo "<h2>Create Password</h2>";
+            }
+            ?>
             <p>For your account's security, do not share your password with anyone else</p>
             </div>
             <!--change password section-->
             <?php
-            $result=$user->getUser($_SESSION['user_id']);
+            
             if($result['password']){
             echo "<form action='password.php' method='post' class='form'>
                     <table>
