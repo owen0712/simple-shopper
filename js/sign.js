@@ -56,23 +56,19 @@ function checkInputs(){
     if(passwordValue === ''){
         setErrorFor(password, 'Password cannot be blank');
     }
-    else if(passwordValue.length>15){
-        setErrorFor(password, 'Password length cannot exceed 15 characters')
-    }
-    else if(passwordValue.length < 8){
-        setErrorFor(password, 'Password must at least 8 characters long');
+    else if(!reg.test(passwordValue)){
+        setErrorFor(password, 'Password must have minimum eight characters, at least one letter, one number and one special character');
     }else{
         setSuccessFor(password)
     }
 
     //check the confirm password whether correct or not
+    var reg=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
     if(password2Value === ''){
         setErrorFor(password2, 'Password cannot be blank');
-    }else if(password2Value.length >15){
-        setErrorFor(password2, 'Password length cannot exceed 15 characters')
     }
-    else if(password2Value.length < 8){
-        setErrorFor(password2, 'Password must at least 8 characters long');
+    else if(!reg.test(password2Value)){
+        setErrorFor(password2, 'Password must have minimum eight characters, at least one letter, one number and one special character');
     }else if(passwordValue !== password2Value){
         setErrorFor(password2, 'Passwords does not match');
     }
