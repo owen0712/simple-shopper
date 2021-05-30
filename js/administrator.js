@@ -88,4 +88,25 @@ $(document).ready(function() {  // create a data table
 			}
 		})
 	});
+
+	$('#add_category').click(function(){
+		$('#categoryModal').modal('show');
+	});
 } );
+
+function addOption(newCategory) {
+	optionText = newCategory;
+	optionValue = newCategory;
+
+	if(newCategory == ""){
+		alert("The new category cannot be blank!");
+	}
+	else{
+		$('#category').append(`<option value="${optionValue}">
+							   ${optionText}
+						  </option>`);
+		alert(optionValue + " is added successfully!");
+	}
+
+	$('#newCategory').val("");
+}
