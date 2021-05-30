@@ -224,14 +224,15 @@ class User{
         }
     }
     
-    public function insertDetailFacebook($name,$email,$gender,$profile,$status)
+    public function insertDetailFacebook($name,$email,$gender,$dob,$profile,$status)
     {
         try{
-            $sql = "INSERT INTO user (name,email,gender,profile,status) VALUES(:name,:email,:gender,:profile,:status)";
+            $sql = "INSERT INTO user (name,email,gender,dob,profile,status) VALUES(:name,:email,:gender,:dob,:profile,:status)";
             $stmt = $this->db->prepare($sql);
             $stmt-> bindParam(":name",$name);
             $stmt-> bindParam(":email",$email);
             $stmt-> bindParam(":gender",$gender);
+            $stmt-> bindParam(":dob",$dob);
             $stmt-> bindParam(":profile",$profile);
             $stmt-> bindParam(":status",$status);
             return $stmt->execute();
