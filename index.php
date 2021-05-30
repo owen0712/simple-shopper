@@ -208,6 +208,67 @@ require_once 'db/conn.php';
     <script src="js/header.js" defer></script>
     <script src="js/increment.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>function addtolist(){
+                swal("Do you want to add this item?",{
+                    buttons:{
+                        customise: {
+                            text: "Add to cart",
+                            value: "customise",
+                        },
+                        cancel: "cancel",
+                    },
+                }).then((value) => {
+                    switch(value){
+                        case "customise":
+                            swal("Choose your cart",{
+                                buttons:{                
+    <?php
+        $x=1;
+        require_once 'db/conn.php';
+
+        $query="SELECT list_name, list_id FROM shopping_list ORDER BY list_id ASC";        
+        
+        if ($result = $pdo->query($query)) {
+            /* fetch associative array */
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                echo '                 '.$x.': {
+                                        text: "'.$row["list_name"].'",
+                                        value: "'.$x.'",
+                                    },
+                ';
+                $x=$x+1;
+            }
+        }
+    ?>
+                                   
+                                   cancel: "cancel",
+                                }
+                            }).then((value) =>{
+                                switch(value){
+                                    case "1":
+                                        swal("Your item has been added to Shopping List "+ value,"Take me home!", "success");
+                                        break;
+        
+                                    case "2":
+                                        swal("Your item has been added to Shopping List "+ value,"Take me home!", "success");
+                                        break;
+        
+                                    case "3":
+                                        swal("Your item has been added to Shopping List "+ value,"Take me home!", "success");
+                                        break;
+                                    
+                                    default:
+                                        swal("See you next time :)");
+                                }
+                            });
+                            break;
+                        
+                        default: 
+                            swal("See you next time :)");
+                    }
+                });
+            }
+        </script>
     
     <!-- The first nav bar that is not stuck on top. This is for less frequently used buttons like login and sign up -->
     <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
