@@ -58,6 +58,11 @@ input:focus, select:focus {
   background-color: white;
 }
 
+#add_category:hover{
+  color: #FFC30B;
+  background-color: white;
+}
+
 .delete:hover{
   color: #dc3545;
   background-color: white;
