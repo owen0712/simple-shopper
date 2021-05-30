@@ -1,3 +1,13 @@
+<?php
+    require_once('../db/conn.php');
+    $query = "SELECT DISTINCT product_category FROM product ORDER BY product_category ASC";
+    $query1 = $query;
+    $stmt = $pdo->prepare($query);
+    $stmt1 = $pdo->prepare($query1);
+    $stmt->execute();
+    $stmt1->execute();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,18 +75,11 @@
               <div class="col col-10">
                 <select name="selectedCategory" id="selectedCategory">
                     <option value="">Category Search</option>
-                    <option value="Bath and Body">Bath and Body</option>
-                    <option value="Instant Food">Instant Food</option>
-                    <option value="Canned and Packed Food">Canned and Packed Food</option>
-                    <option value="Baby Product">Baby Product</option>
-                    <option value="Household Supply">Household Supply</option>
-                    <option value="Pet">Pet</option>
-                    <option value="Cooking Ingredient">Cooking Ingredient</option>
-                    <option value="Cereal">Cereal</option>
-                    <option value="Baking Supplies">Baking Supplies</option>
-                    <option value="Snack">Snack</option>
-                    <option value="Beverage">Beverage</option>
-                    <option value="Paper Product">Paper Product</option>
+                    <?php
+                        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                            echo '<option value="'.$row["product_category"].'">'.$row["product_category"].'</option>';
+                        }
+                    ?>
                 </select>
               </div>
             </div>
@@ -98,6 +101,7 @@
                 </thead>
             </table>
             <button id="add_btn" class="btn btn-success btn-lg"><i class="bi bi-plus-square"></i> Add product</button> &nbsp;    <!--add product button-->
+            <button id="add_category" class="btn btn-warning btn-lg"><i class="bi bi-plus-square"></i> Add category</button> &nbsp;    <!--add new category button-->
         </main>
         <!--footer-->
         <footer>
@@ -155,8 +159,8 @@
     		<form method="post" id="productForm" action="action.php" enctype="multipart/form-data">
     			<div class="modal-content">
     				<div class="modal-header">
-					<h4 class="modal-title">Add Product</h4>
-    						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					    <h4 class="modal-title">Add Product</h4>
+    					<button type="button" class="close" data-dismiss="modal">&times;</button>
     				</div>
     				<div class="modal-body">
                         <div class="mb-3">
@@ -168,19 +172,12 @@
                             <label for="name"><span class="red">*</span>Name:</label>
                         </div>  	
 						<div class="form-floating mb-3">
-                            <select class="form-select" id="category" name="category" style="height: 60px;" aria-label="Floating label select example" required> 
-                                <option value="Bath and Body">Bath and Body</option>
-                                <option value="Instant Food">Instant Food</option>
-                                <option value="Canned and Packed Food">Canned and Packed Food</option>
-                                <option value="Baby Product">Baby Product</option>
-                                <option value="Household Supply">Household Supply</option>
-                                <option value="Pet">Pet</option>
-                                <option value="Cooking Ingredient">Cooking Ingredient</option>
-                                <option value="Cereal">Cereal</option>
-                                <option value="Baking Supplies">Baking Supplies</option>
-                                <option value="Snack">Snack</option>
-                                <option value="Beverage">Beverage</option>
-                                <option value="Paper Product">Paper Product</option>
+                            <select class="form-select" id="category" name="category" style="height: 60px;" aria-label="Floating label select example" required>
+                                <?php
+                                    while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
+                                        echo '<option value="'.$row["product_category"].'">'.$row["product_category"].'</option>';
+                                    }
+                                ?>
                             </select>
                             <label for="category"><span class="red">*</span>Category:</label>
                         </div>	 
@@ -206,6 +203,27 @@
     				</div>
     			</div>
     		</form>
+    	</div>
+    </div>
+    <div id="categoryModal" class="modal fade">
+    	<div class="modal-dialog">
+    		<div class="modal-content">
+    			<div class="modal-header">
+				    <h4 class="modal-title">Add New Category</h4>
+    				<button type="button" class="close" data-dismiss="modal">&times;</button>
+    			</div>
+    			<div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="newCategory" name="newCategory" required>
+                        <label for="newCategory"><span class="red">*</span>New category:</label>
+                    </div>
+                    <p><span class="red">*</span>Required</p>					
+    			</div>
+    			<div class="modal-footer">
+    				<button onclick="addOption(document.getElementById('newCategory').value)" class="btn formButton">Add</button>
+    				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    			</div>
+    		</div>
     	</div>
     </div>
     <!--link to js-->
