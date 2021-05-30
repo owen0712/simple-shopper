@@ -78,35 +78,20 @@ $(document).ready(function() {  // create a data table
 				$('#productId').val(data.product_id);
                 document.getElementById("image").required = false;
 				$('#name').val(data.product_name);
-				$('#category').val(data.product_category);				
+				$('#category').val(data.category_id);
 				$('#amount').val(data.product_amount);
 				$('#price').val(data.product_price);
                 $('#description').val(data.product_description);	
 				$('.modal-title').html("Edit Product");
 				$('#action').val('updateProduct');
-				$('#save').val('Save');
+				$('#save').val('Save');				
 			}
 		})
 	});
 
 	$('#add_category').click(function(){
 		$('#categoryModal').modal('show');
+		$('#categoryForm')[0].reset();
+		$('#actionCategory').val('addCategory');
 	});
 } );
-
-function addOption(newCategory) {
-	optionText = newCategory;
-	optionValue = newCategory;
-
-	if(newCategory == ""){
-		alert("The new category cannot be blank!");
-	}
-	else{
-		$('#category').append(`<option value="${optionValue}">
-							   ${optionText}
-						  </option>`);
-		alert(optionValue + " is added successfully!");
-	}
-
-	$('#newCategory').val("");
-}

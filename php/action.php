@@ -15,4 +15,7 @@ if(!empty($_POST['action']) && $_POST['action'] == 'updateProduct') {
 if(!empty($_POST['action']) && $_POST['action'] == 'productDelete') {
 	$product1->deleteProduct();
 }
+if(!empty($_POST['actionCategory']) && $_POST['actionCategory'] == 'addCategory') {
+	$product1->addCategory();
+}
 ?>

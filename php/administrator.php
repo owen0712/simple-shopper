@@ -1,6 +1,6 @@
 <?php
     require_once('../db/conn.php');
-    $query = "SELECT DISTINCT product_category FROM product ORDER BY product_category ASC";
+    $query = "SELECT * FROM categories";
     $query1 = $query;
     $stmt = $pdo->prepare($query);
     $stmt1 = $pdo->prepare($query1);
@@ -31,20 +31,6 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="col col-6 collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="nav-item dropdown">
-                        <a class="btn-lg" href="#" id="navbarDropdown" role="Button" data-toggle="dropdown">
-                        <svg xmlns="http://www.w3.org/2000/svg" style="color: white;" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../php/administrator.php"><i class="bi bi-handbag"></i> Product page</a>    
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../php/order.php"><i class="bi bi-file-text"></i> Order page</a>
-                        </div>
-                    </div>
-                </div>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -77,7 +63,7 @@
                     <option value="">Category Search</option>
                     <?php
                         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                            echo '<option value="'.$row["product_category"].'">'.$row["product_category"].'</option>';
+                            echo '<option value="'.$row["category_id"].'">'.$row["category_name"].'</option>';
                         }
                     ?>
                 </select>
@@ -175,7 +161,7 @@
                             <select class="form-select" id="category" name="category" style="height: 60px;" aria-label="Floating label select example" required>
                                 <?php
                                     while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
-                                        echo '<option value="'.$row["product_category"].'">'.$row["product_category"].'</option>';
+                                        echo '<option value="'.$row["category_id"].'">'.$row["category_name"].'</option>';
                                     }
                                 ?>
                             </select>
@@ -207,23 +193,26 @@
     </div>
     <div id="categoryModal" class="modal fade">
     	<div class="modal-dialog">
-    		<div class="modal-content">
-    			<div class="modal-header">
-				    <h4 class="modal-title">Add New Category</h4>
-    				<button type="button" class="close" data-dismiss="modal">&times;</button>
-    			</div>
-    			<div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="newCategory" name="newCategory" required>
-                        <label for="newCategory"><span class="red">*</span>New category:</label>
+            <form method="post" id="categoryForm" action="action.php">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Category</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <p><span class="red">*</span>Required</p>					
-    			</div>
-    			<div class="modal-footer">
-    				<button onclick="addOption(document.getElementById('newCategory').value)" class="btn formButton">Add</button>
-    				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    			</div>
-    		</div>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="newCategory" name="newCategory" required>
+                            <label for="newCategory"><span class="red">*</span>New category:</label>
+                        </div>
+                        <p><span class="red">*</span>Required</p>					
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="actionCategory" id="actionCategory" value="" />
+                        <input type="submit" name="saveCategory" id="saveCategory" class="btn formButton" value="Add" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
     	</div>
     </div>
     <!--link to js-->
