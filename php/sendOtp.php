@@ -12,7 +12,6 @@ if(isset($_POST['btnSubmit1']))
    {
 	 if($user->checkEmailExist($email))
 	 {
-		
 		$otp=mt_rand(1000,9999);
 		date_default_timezone_set("Asia/Kuala_Lumpur");
 		$minutes_to_add = 4;
@@ -45,7 +44,7 @@ if(isset($_POST['btnSubmit1']))
 				)
 			);
 			$mail->Username   = "simpleshopper666@gmail.com";                                                      
-			$mail->Password   = 'dclb fdqh zupp duzn';                        
+			$mail->Password   = 'eoog hwal ncus iyjc';                        
 			$mail->setFrom('no-reply@ss.org');           
 			$mail->addAddress($email);	                                 
 			$mail->Subject = 'OTP verification(Reset password)';
@@ -61,5 +60,4 @@ if(isset($_POST['btnSubmit1']))
 	 }
    }
 }
-
 ?>

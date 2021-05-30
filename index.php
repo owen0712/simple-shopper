@@ -101,9 +101,10 @@ require_once 'db/conn.php';
      $_SESSION['email'] = '';
      $_SESSION['profile'] = '';
      $_SESSION['gender'] = '';
+     $_SESSION['dob'] = '';
      $_SESSION['status'] = '';
      $loginStatus = "Google";
-     $graph_response = $facebook->get("/me?fields=name,email,gender", $access_token);
+     $graph_response = $facebook->get("/me?fields=name,email,gender,birthday", $access_token);
     
      $facebook_user_info = $graph_response->getGraphUser();
     
@@ -125,14 +126,21 @@ require_once 'db/conn.php';
      {
          $_SESSION['gender'] = $facebook_user_info['gender'];
      }
+
      $_SESSION['status'] = "User";
+     
+     if(!empty($$facebook_user_info['']))
+     {
+        $_SESSION['dob'] =  $facebook_user_info['birthday'];
+     }
+
      if($user->checkEmailExist($facebook_user_info['email']))
      {
          $id = $user->getUserIdEmail($facebook_user_info['email']);
          $_SESSION['user_id'] = $id;
      }else
      {
-         if($user->insertDetailFacebook($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['profile'],$_SESSION['status'] = "User"))
+         if($user->insertDetailFacebook($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['dob'],$_SESSION['profile'],$_SESSION['status'] = "User"))
          {
              $id = $user->getUserIdEmail($facebook_user_info['email']);
              $_SESSION['user_id'] = $id;
