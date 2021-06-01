@@ -46,17 +46,20 @@
             $_SESSION['email'] = $data['email'];
             }
 
-            if(!empty($data['gender']))
-            {
-            $_SESSION['gender'] = $data['gender'];
-            }
+            $_SESSION['gender'] = '';
 
             if(!empty($data['picture']))
             {
             $_SESSION['profile'] = $data['picture'];
             }
+
+            date_default_timezone_set("Asia/Kuala_Lumpur");
+            $date = new DateTime(date("Y-m-d"));
+            $date = $date->format('Y-m-d');
+            $_SESSION['dob'] = $date;
+
             $_SESSION['status'] = "User";
-            $gpUserData['gender'] = !empty($data['gender'])?$data['gender']:''; 
+
 
             if($user->checkEmailExist($data['email']))
             {
@@ -64,7 +67,7 @@
                 $_SESSION['user_id'] = $id;
             }else
             {
-                if($user->insertDetailFacebook($_SESSION['name'],$_SESSION['email'],$gpUserData['gender'],$_SESSION['profile'], $_SESSION['status']))
+                if($user->insertDetailFacebook($_SESSION['name'],$_SESSION['email'],$_SESSION['gender'],$_SESSION['dob'], $_SESSION['profile'], $_SESSION['status'] = "User"))
                 {
                     $id = $user->getUserIdEmail($data['email']);
                     $_SESSION['user_id'] = $id;
@@ -122,17 +125,13 @@ require_once 'db/conn.php';
      {
       $_SESSION['email'] = $facebook_user_info['email'];
      }
-     if(!empty($facebook_user_info['gender']))
-     {
-         $_SESSION['gender'] = $facebook_user_info['gender'];
-     }
 
      $_SESSION['status'] = "User";
-     
-     if(!empty($$facebook_user_info['']))
-     {
-        $_SESSION['dob'] =  $facebook_user_info['birthday'];
-     }
+     date_default_timezone_set("Asia/Kuala_Lumpur");
+     $date = new DateTime(date("Y-m-d"));
+     $date = $date->format('Y-m-d');
+
+     $_SESSION['dob'] = $date;
 
      if($user->checkEmailExist($facebook_user_info['email']))
      {
@@ -150,8 +149,8 @@ require_once 'db/conn.php';
 }
     else
     {
-     // Get login url
-        $facebook_permissions = ['email']; // Optional permissions
+        // Get login url
+        $facebook_permissions = ['email','user_gender']; // Optional permissions
     
         $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions);
         $_SESSION['fb_url'] = $facebook_login_url;
