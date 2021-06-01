@@ -93,7 +93,7 @@
 
       <!-- form -->
        <form id="form" class="form" method="post" action="sms.php">
-          <h4 style="margin-top: 20px;"><a href="signin.html" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
+          <h4 style="margin-top: 20px;"><a href="../php/login.php" style="color: black;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
           </svg></a><strong>Forgot password</strong></h4>
     
@@ -117,7 +117,7 @@
           
           <!-- Next button -->
           <div class="d-flex justify-content-center">
-            <button type="submit" id = "submit" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 20px;">Next</button>
+            <button type="submit" id = "submit" name="btnPhone" class="btn btn-primary" style="border-radius: 55px; width: 180px; margin-top: 20px;">Next</button>
           </div>
       
         </form>

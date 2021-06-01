@@ -288,6 +288,7 @@ class User{
     {   
         try{
             $phone = str_replace("-", "", $phone);
+            $phone = str_replace("+60", "", $phone);
             $sql = "SELECT * FROM user WHERE phone=:phone AND password=:psw AND status=:status";
             $stmt = $this->db->prepare($sql);
             $stmt-> bindParam(":phone",$phone);
@@ -325,6 +326,30 @@ class User{
             $stmt = $this->db->prepare($sql);
 
             $stmt->bindParam(":email",$email);
+        
+            $stmt->execute();
+            
+            if($stmt-> rowCount() == 1)
+            {
+                return true;
+            }else{
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function checkPhoneExist($phone)
+    {
+        try{
+            $phone = str_replace("-", "", $phone);
+            $phone = str_replace("+60", "", $phone);
+            $sql = "SELECT * FROM user WHERE phone=:phone";
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindParam(":phone",$phone);
         
             $stmt->execute();
             
