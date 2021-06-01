@@ -345,7 +345,7 @@ class User{
     {
         try{
             $phone = str_replace("-", "", $phone);
-            $phone = str_replace("+60", "", $phone);
+            $phone = str_replace("+6", "", $phone);
             $sql = "SELECT * FROM user WHERE phone=:phone";
             $stmt = $this->db->prepare($sql);
 

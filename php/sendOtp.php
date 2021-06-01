@@ -1,41 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-</head>
-<body>
-<script>
-        function swalError(){
-          swal({
-            title: "Error",
-            text: "Email does not match exist",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-        .then((proceedLogin) => {
-                if (proceedLogin) {
-                  setTimeout(function(){window.location.href='../php/forgotPassword.php'}, 900);
-                }
-          });
-        }
-</script>
-<script>
-        function swalError2(){
-          swal({
-            title: "Error",
-            text: "Email invalid",
-            icon: "error",
-            buttons: true,
-            dangerMode: true,
-            })
-        .then((proceedLogin) => {
-                if (proceedLogin) {
-                  setTimeout(function(){window.location.href='../php/forgotPassword.php'}, 900);
-                }
-          });
-        }
-</script>
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -96,12 +58,41 @@ if(isset($_POST['btnSubmit1']))
 			exit();
 		}
 	 }else{
-		 echo "<script>swalError()</script>";
+		 echo ".";
+		 echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
+		 echo '<script>
+		 swal({
+            title: "Error",
+            text: "Email does not match exist",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href="../php/forgotPassword.php"}, 900);
+                }
+          });
+		 </script>';
 	 }
    }else{
-		echo "<script>swalError2()</script>";
+	    echo ".";
+		echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
+		echo '<script>
+			swal({
+			  title: "Error",
+			  text: "Email invalid",
+			  icon: "error",
+			  buttons: true,
+			  dangerMode: true,
+			  })
+		  .then((proceedLogin) => {
+				  if (proceedLogin) {
+					setTimeout(function(){window.location.href="../php/forgotPassword.php"}, 900);
+				  }
+			});
+			</script>';
    }
 }
 ?>
-</body>
-</html>
+

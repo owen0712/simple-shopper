@@ -311,21 +311,20 @@ require_once '../db/conn.php';
               {
                 $facebook_helper = $facebook->getRedirectLoginHelper();
                 $facebook_permissions = ['email'];
-                echo '<a href="'. $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions).'" class="social-icon"><i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i></a>';
+                echo '<a href="loginAction.php?action=fb" class="social-icon"><i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i></a>';
               }else{
                 $facebook_helper = $facebook->getRedirectLoginHelper();
                 $facebook_permissions = ['email'];
-                echo '<a href="'. $facebook_helper->getLoginUrl('http://localhost/simple-shopper/', $facebook_permissions).'" class="social-icon"><i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i></a>';
+                echo '<a href="loginAction.php?action=fb" class="social-icon"><i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i></a>';
               }
             ?>
             <!--<a href="#" class="social-icon">
               <i class="bi bi-facebook" id="Facebook" style="background-image: url(Facebook_icon.png);"></i>
             </a>!-->
-
             <?php
               if($login_button == '')
               {
-                echo '<a href="'.$google_client->createAuthUrl().'" class="social-icon"><i class="bi bi-google" id="Google" /></i></a>';
+                echo '<a href="loginAction.php?action=google" class="social-icon"><i class="bi bi-google" id="Google"></i></a>';
               }
               else
               {
