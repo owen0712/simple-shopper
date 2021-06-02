@@ -84,7 +84,7 @@
         //add new shopping list
         if(isset($_POST['addList'])){
             $listname=$_POST['listname'];
-            $userId=$_POST['userid'];//<!--remember change-->
+            $userId=$_POST['userid'];
             if ($listname!=''){
                 $temp=$shoppingList->getShoppingList($userId);
                 $duplicate=FALSE;
@@ -96,21 +96,21 @@
                 }
                 if (!$duplicate){
                     $result=$shoppingList->addShoppingList($listname,$userId);
-                    echo "<script>swal('".$listname." list is added successfully',{icon: \"success\",});</script>";
+                    echo "<script>swal('".$listname." list is added successfully',{icon: \"success\"});</script>";
                 }
                 else{
-                    echo "<script>swal('".$listname." is duplicated. Please reenter.',{icon: \"warning\",});</script>";
+                    echo "<script>swal('".$listname." is duplicated. Please reenter.',{icon: \"warning\"});</script>";
                 }
             }
             else {
-                echo "<script>swal('You must write something',{icon: \"warning\",});</script>";
+                echo "<script>swal('You must write something',{icon: \"warning\"});</script>";
             }            
         }
         else if(isset($_POST['editListName'])){
             $id = $_POST['listid'];        
             $listname=$_POST['listname'];        
             $current= $shoppingList->getCurrentShoppingList($id)->fetch(PDO::FETCH_ASSOC);
-            $temp = $shoppingList->getShoppingList(2);
+            $temp = $shoppingList->getShoppingList(1);//<!--remember change-->
             if ($listname!=$current['list_name']){
                 if ($listname!=''){                    
                     $duplicate=FALSE;
@@ -122,18 +122,18 @@
                     }
                     if (!$duplicate){
                         $result=$shoppingList->updateShoppingList($id,$listname);
-                        echo "<script>swal('".$listname." list is edited successfully',{icon: \"success\",});</script>";
+                        echo "<script>swal('".$listname." list is edited successfully',{icon: \"success\"});</script>";
                     }
                     else{
-                        echo "<script>swal('".$listname." is duplicated. Please reenter.',{icon: \"warning\",});</script>";
+                        echo "<script>swal('".$listname." is duplicated. Please reenter.',{icon: \"warning\"});</script>";
                     }
                 }
                 else {
-                    echo "<script>swal('You must write something',{icon: \"warning\",});</script>";
+                    echo "<script>swal('You must write something',{icon: \"warning\"});</script>";
                 }
             }
             else{
-                echo "<script>swal('".$listname." list is edited successfully');</script>";
+                echo "<script>swal('".$listname." list is edited successfully',{icon: \"success\"});</script>";
             }
         }      
     }
@@ -149,7 +149,7 @@
         <h2>My Shopping List</h2>
         <!-- <input onsubmit="newElement()" type="text" id="myInput" placeholder="New Shopping List...">
         <span onclick="newElement()" class="addBtn btn">Add</span> -->
-        <input type='hidden' name='userid' value='<?php echo 2?>'/><!--remember change-->
+        <input type='hidden' name='userid' value='<?php echo 1?>'/><!--remember change-->
         <input name="listname" type="text" id="myInput" placeholder="New Shopping List...">
         <input name="addList" value="Add" type="submit" class="addBtn btn">
         <!-- <input id="addBtn" type="submit" value="Add" > -->
@@ -162,7 +162,7 @@
         <div class="accordion" id="accordionExample">
             <!-- Shopping List 1-->             
             <?php
-                    $result=$shoppingList->getShoppingList(2);
+                    $result=$shoppingList->getShoppingList(1);//<!--remember change-->
                     while($r=$result->fetch(PDO::FETCH_ASSOC)){
                 ?>                
             <div class="accordion-item">
@@ -170,7 +170,7 @@
                 <h2 class="accordion-header" id="heading<?php echo $r['list_id']; ?>">
                     <button class="accordion-button collapsed accordion-item-list" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $r['list_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $r['list_id']; ?>">
                         <!-- <p type="button" class="btn btn-outline-danger deleteList" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;"> -->
-                        <a onClick="javascript: return confirm('Are you sure you want to delete <?php echo $r['list_name']?> list.');" href='deleteShoppingList.php?id=<?php echo $r['list_id']?>' type="button" class="btn btn-outline-danger" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;">
+                        <a onClick='javascript: confirmDeleteList(<?php echo $r['list_id']?>,"<?php echo $r['list_name']?>");'  type="button" class="btn btn-outline-danger" style="border:none; padding: 0 5px 5px 5px; margin-bottom: 8px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-trash-fill" viewBox="0 0 16 16">                                
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                             </svg>                            
@@ -216,18 +216,19 @@
                                                     else
                                                         echo "<p class=\"outStock\">Out of Stock</p>";
                                                 ?>                                                
-                                                <a href="deleteShoppingList.php?Product_id=<?php echo $i['product_id']?>&List_id=<?php echo $r['list_id']?>" onClick="javascript: return confirm('Are you sure you want to delete item <?php echo $i['product_description']?> product.');" type="button" class="remove">Remove</a>
+                                                <a onclick='javascript: confirmDeleteItem(<?php echo $i["product_id"]?>,<?php echo $r["list_id"]?>,"<?php echo $i["product_description"]?>");'  type="button" class="remove">Remove</a>
                                             </div>
                                         </div>
                                     </td>
                                     <!-- Quantity box-->
                                     <td>
-                                        <form class="quantity buttons_added" style="float: left;" method="POST">
-                                            <input type="hidden"name="ListID" value="<?php echo $r['list_id']; ?>"/>
-                                            <input type="hidden" name="ProID" value="<?php echo $i['product_id']; ?>"/>
+                                        <div class="quantity buttons_added" style="float: left;">
+                                            <input type="hidden" class="ListID" value="<?php echo $r['list_id']; ?>"/>
+                                            <input type="hidden" class="ProID" value="<?php echo $i['product_id']; ?>"/>
+                                            <input type="hidden" class="ProDescription" value="<?php echo $i['product_description']; ?>"/>
                                             <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="<?php echo $i['item_quantity'];?>" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
                                                 value="+" class="plus">
-                                        </form>
+                                        </div>
                                     </td>
                                     <td>RM <?php $subtotal=$i['item_quantity']*$i['product_price'];echo number_format((float)$subtotal, 2);$total+=$subtotal;?></td>
                                 </tr>

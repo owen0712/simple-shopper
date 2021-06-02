@@ -38,103 +38,37 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
     b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d || (d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(this).is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d && b <= d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
 });
 
-//delete the shopping list when trash at the shopping list icon is clicked
-// $('body').on('click', '.deleteList', function() {
-//     swal({
-//             title: "Are you sure?",
-//             text: "Once deleted, \"" + $(this).next().text() + "\" will not able to be recovered!",
-//             icon: "warning",
-//             buttons: true,
-//             dangerMode: true,
-//         })
-//         .then((willDelete) => {
-//             if (willDelete) {
-//                 swal("Your \"" + $(this).next().text() + "\" list has been deleted!", {
-//                     icon: "success",
-//                 });
-//                 let parent = $(this).parent().parent().parent().parent();
-//                 addListId($(this).parent().parent().attr("id"));
-//                 $(this).parent().parent().parent().next().remove();
-//                 $(this).parent().parent().parent().remove();
-//                 if (list.length == 10) {
-//                     parent.append(`<h1 class="text-center">Create a new list and manage it.</h1>`);
-//                 }
-//             } else {
-//                 return;
-//             }
-//         });
-// });
-
-//delete the respective product item in the shopping list is deleted when "remove" is clicked
-// $('main').on('click', '.remove', function() {
-//     swal({
-//             title: "Are you sure?",
-//             text: "Are you sure you want to delete this item?",
-//             icon: "warning",
-//             buttons: true,
-//             dangerMode: true,
-//         })
-//         .then((willDelete) => {
-//             if (willDelete) {
-//                 swal("The item has been deleted!", {
-//                     icon: "success",
-//                 });
-//                 let grandParent = $(this).parent().parent().parent().parent().parent().parent();
-//                 let parentRow = $(this).parent().parent().parent().parent();
-//                 let PreviousRow = $(this).parent().parent().parent().parent().prev();
-//                 let priceText = parentRow.children().last().text();
-//                 let price = parseFloat(priceText.substr(3, priceText.length - 1)) * -1;
-//                 calculate(grandParent.parent(), price);
-//                 parentRow.remove();
-//                 if (PreviousRow.parent().children().length == 1) {
-//                     PreviousRow.parent().parent().next().remove();
-//                     PreviousRow.parent().remove();
-//                     grandParent.append(`<h3 class="text-center"> It is an Empty Shopping List </h3>
-//         <p class="text-muted text-center">Add item from <a class="backIndex" style="text-decoration:none;" href="./index.html"> HOME</a> page.</p>`);
-//                 }
-//             } else {
-//                 return;
-//             }
-//         });
-
-// });
-
-//automatically change the subtotal price and total price in the shopping list
-//when user change the quantity in the input number area
 $('main').on('change', '.qty', function(e) {
-    if (e.keyCode == 13) {
-        e.preventDefault();
-        return;
-    }
+    var PID = $(this).parent().find(".ProID").val();
+    var LID = $(this).parent().find(".ListID").val();
+    var product_description = $(this).parent().find(".ProDescription").val();
     var qty = parseInt($(this).val());
-    if (isNaN(qty)) {
-        swal("Please input a value!!!!!");
-        $(this).val(1);
-        return;
-    }
-    if (qty == 0) {
-        $(this).val(1);
-        swal("Please click remove button to delete the item.");
-        return;
-    }
-    var PID = $(this).prev().prev().val();
-    var LID = $(this).prev().prev().prev().val();
     var priceText = $(this).parent().parent().prev().find("small").text();
     var price = parseFloat(priceText.substr(7, priceText.length - 1));
     var parent = $(this).parent().parent().parent().parent().parent().next();
     var previousPriceText = $(this).parent().parent().next().html();
     var previousPrice = parseFloat(previousPriceText.substr(3, previousPriceText.length - 1));
     var totalAddedPrice = (qty * price) - previousPrice;
+    if (isNaN(qty)) {
+        swal("Please input a value!!!!!", { icon: "warning" });
+        qty = (previousPrice / price).toFixed(0);
+        $(this).val(qty);
+        return;
+    }
+    if (qty == 0) {
+        confirmDeleteItem(PID, LID, product_description);
+        qty = (previousPrice / price).toFixed(0);
+        $(this).val(qty);
+        return;
+    }
+
+
     $(this).parent().parent().next().html("RM " + (qty * price).toFixed(2));
     calculate(parent, totalAddedPrice);
     $.ajax({
         url: 'editQuantity.php',
         data: { quantity: $(this).val(), ListID: LID, ProID: PID, },
         method: "POST"
-    }).done(function(response) {
-        console.log(LID);
-        console.log(PID);
-        console.log(response);
     })
 });
 
@@ -170,4 +104,47 @@ function calculate(parent, price) {
     var totalText = totalTag.text();
     var total = parseFloat(totalText.substr(3, totalText.length - 1));
     totalTag.html("RM " + (price + total).toFixed(2));
+}
+
+function confirmDeleteList(Lid, Lname) {
+    console.log("Hello" + Lname);
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, \"" + Lname + "\" will not able to be recovered!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("Your \"" + Lname + "\" list has been deleted!", {
+                    icon: "success"
+                });
+                location.href = "deleteShoppingList.php?id=" + Lid;
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+}
+
+function confirmDeleteItem(Pid, Lid, product_description) {
+    swal({
+            title: "Are you sure?",
+            text: "Are you sure you want to delete " + product_description + " ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("The item has been deleted!", {
+                    icon: "success"
+                });
+                location.href = "deleteShoppingList.php?Product_id=" + Pid + "&List_id=" + Lid;
+            } else {
+                return;
+            }
+        });
 }
