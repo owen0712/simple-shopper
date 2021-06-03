@@ -72,6 +72,7 @@ class Product{
 				"data"    			=> 	$productData
 			);
 			echo json_encode($output);
+			$this->dbConnect = null;  //close PDO connection
 			return true;
 		} 
 		catch (PDOException $e) {
@@ -88,6 +89,8 @@ class Product{
 				$stmt->execute();
 				$row = $stmt->fetch(PDO::FETCH_ASSOC);
 				echo json_encode($row);
+				$this->dbConnect = null;  //close PDO connection
+				return true;
 			}
 			catch (PDOException $e) {
 				echo $e->getMessage();
@@ -128,6 +131,7 @@ class Product{
 					move_uploaded_file($_FILES["image"]["tmp_name"], "../assets/upload_image/$image");
 				}
 				header("Location: ../php/administrator.php");
+				$this->dbConnect = null;  //close PDO connection
             	return true;	
 			}
 			catch (PDOException $e) {
@@ -158,6 +162,7 @@ class Product{
 				move_uploaded_file($_FILES["image"]["tmp_name"], "../assets/upload_image/$image");
 
 				header("Location: ../php/administrator.php");
+				$this->dbConnect = null;  //close PDO connection
 				return true;
 			}
 			catch (PDOException $e) {
@@ -173,6 +178,7 @@ class Product{
 				$sqlDelete = "DELETE FROM ".$this->productTable." WHERE product_id = '".$_POST["productId"]."'";		
 				$stmt = $this->dbConnect->prepare($sqlDelete);
 				$stmt->execute();
+				$this->dbConnect = null;  //close PDO connection
 				return true;
 			}
 			catch (PDOException $e) {
@@ -192,6 +198,7 @@ class Product{
             	$stmt->execute();
 
 				header("Location: ../php/administrator.php");
+				$this->dbConnect = null;  //close PDO connection
 				return true;
 			}
 			catch (PDOException $e) {

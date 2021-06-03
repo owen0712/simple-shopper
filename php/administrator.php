@@ -37,16 +37,16 @@
                             <a class="nav-link" href="index.php" style="color: white;">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
+                            <a class="nav-link" href="../php/search.php" style="color: white;">Product</a>
                         </li>
                         <li class="nav-item" id='admin' style="display: none;">
                             <a class="nav-link" href="../php/administrator.php" style="color: white;">Administrator</a>
                         </li>
                         <li class="nav-item user">
-                            <a class="nav-link" id='sign-up' href="../src/sign.html" style="color: white;">Sign Up</a>
+                            <a class="nav-link" id='sign-up' href="../php/signup.php" style="color: white;">Sign Up</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id='sign-in' href="../src/signin.html" style="color: white;">Log in</a>
+                            <a class="nav-link" id='sign-in' href="../php/login.php" style="color: white;">Log in</a>
                         </li>
                     </ul>
                 </div>
@@ -163,6 +163,7 @@
                                     while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
                                         echo '<option value="'.$row["category_id"].'">'.$row["category_name"].'</option>';
                                     }
+                                    $pdo = null;  //close PDO connection
                                 ?>
                             </select>
                             <label for="category"><span class="red">*</span>Category:</label>
