@@ -50,7 +50,7 @@
     <header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <div class="col col-auto">
-                <a class="navbar-brand" href="../index.php"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
+                <a class="navbar-brand" href="../"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
             </div>
 
             <form class="col col-6" method="GET" action="search.php">
@@ -175,7 +175,7 @@
                                 <div class='col'>
                                     <div class='card'>
                                     <a href='item.php?id=".$row['product_id']."'>
-                                    <img src='".$row['product_image']."' class='mx-auto product-image' alt='".$row['product_name']."' height='auto' width='auto'>
+                                    <img src='../".$row['product_image']."' class='mx-auto product-image' alt='".$row['product_name']."' height='auto' width='auto'>
                                     </a>
                                     <div class='card-body' style='padding-bottom:0px;' >
                                         <h5 class='card-title'>".$row["product_name"]."
@@ -198,7 +198,6 @@
                                     </div>";
                                 }else{
                                     echo">Add to list</button>
-                                    <a type='button' class='btn btn-success' style='float: right;' href=\"item.php?id=".$row['product_id']."\">View item</a>
                                         </div>
                                         </div>
                                     </div>";

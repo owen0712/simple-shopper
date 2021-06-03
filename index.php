@@ -232,7 +232,7 @@ require_once 'db/conn.php';
             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                 echo '                 '.$x.': {
                                         text: "'.$row["list_name"].'",
-                                        value: "'.$x.'",
+                                        value: "'.$row["list_id"].'",
                                     },
                 ';
                 $x=$x+1;
@@ -244,18 +244,20 @@ require_once 'db/conn.php';
                                 }
                             }).then((value) =>{
                                 switch(value){
-                                    case "1":
-                                        swal("Your item has been added to Shopping List "+ value,"Take me home!", "success");
-                                        break;
+                                    <?php
+                                        $query="SELECT list_name, list_id FROM shopping_list ORDER BY list_id ASC";        
         
-                                    case "2":
-                                        swal("Your item has been added to Shopping List "+ value,"Take me home!", "success");
-                                        break;
-        
-                                    case "3":
-                                        swal("Your item has been added to Shopping List "+ value,"Take me home!", "success");
-                                        break;
-                                    
+                                        if ($result = $pdo->query($query)) {
+                                            /* fetch associative array */
+                                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                                echo '              case "'.$row["list_id"].'": 
+                                                                        swal("Your item has been added to '.$row["list_name"].'", "Take me home!","success");
+                                                                        break;
+                                                ';
+                                            }
+                                        }
+                                    ?>
+                                
                                     default:
                                         swal("See you next time :)");
                                 }
@@ -315,7 +317,7 @@ require_once 'db/conn.php';
     <header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <div class="col col-auto">
-                <a class="navbar-brand" href="index.html"><img src="assets/Logo/SSLogo2.png" height="70mm"></a>
+                <a class="navbar-brand" href=""><img src="assets/Logo/SSLogo2.png" height="70mm"></a>
             </div>
 
             <form class="col col-6" method="GET" action="php/search.php">
