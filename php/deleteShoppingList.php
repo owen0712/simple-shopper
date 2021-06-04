@@ -1,7 +1,6 @@
 <?php
     require_once '../db/conn.php';
-    if(isset($_GET['id'])){                
-        $result1=$shoppingList->deleteAllShoppingListItem($_GET['id']);
+    if(isset($_GET['id'])){                        
         $result=$shoppingList->deleteShoppingList($_GET['id']);
         if($result){            
             header('Location:shoplist.php');
