@@ -69,7 +69,7 @@
         });
     </script>
 
-    <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
+<header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -82,15 +82,30 @@
                     <li class="nav-item">
                         <a class="nav-link" href="search.php" style="color: white;">Product</a>
                     </li>
-                    <li class="nav-item" id='admin' style="display: none;">
-                        <a class="nav-link" href="administrator.php" style="color: white;">Administrator</a>
-                    </li>
-                    <li class="nav-item user">
-                        <a class="nav-link" id='sign-up' href="signup.php" style="color: white;">Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id='sign-in' href="login.php" style="color: white;">Log in</a>
-                    </li>
+                    <?php
+                        if(!empty($_SESSION['user_id']))
+                        {
+                            $result = $user-> getUser($_SESSION['user_id']);
+                            $_SESSION['status'] = $result['status'];
+                            if($loginStatus != "Google")
+                            {
+                                $_SESSION['name'] = $result['name'];
+                                $_SESSION['profile'] = $result['profile'];
+                            }
+                            if($_SESSION['status'] != "Admin"){
+                                echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img src="'.$_SESSION['profile'].'" height="30mm;">'.$_SESSION['name'].'</a>';   
+                                echo '<li class="nav-item"><a class="nav-link" href="php/logout.php" style="color:white;">Logout</a>'; 
+                            }else{
+                                echo '<li class="nav-item" id="admin"><a class="nav-link" href="php/administrator.php" style="color:white;">Administrator</a>';  
+                                echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img src="'.$_SESSION['profile'].'" height="30mm;">'.$_SESSION['name'].'</a>';   
+                                echo '<li class="nav-item"><a class="nav-link" href="php/logout.php" style="color:white;">Logout</a>';  
+                            }
+                        }
+                         else{
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="signup.php" style="color:white;">Sign Up</a>';
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="login.php" style="color:white;">Log in</a>';
+                         }
+                    ?>
                 </ul>
             </div>
         </div>   
