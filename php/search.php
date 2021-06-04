@@ -211,9 +211,7 @@
                                     echo "
                                     <div class='col'>
                                         <div class='card'>
-                                        <a href='item.php?id=".$row['product_id']."' class='text-center'>
-                                        <img src='../assets/Image/".$row['category_name']."/".$row['product_image']."' class='mx-auto product-image' alt='".$row['product_name']."' height='auto' width='auto'>
-                                        </a>
+                                        <img src='../assets/Image/".$row['category_name']."/".$row['product_image']."' class='mx-auto product-image' alt='".$row['product_name']."' height='auto' width='auto' onclick='imageClick(".$row['product_id'].",1)'>
                                         <div class='card-body' style='padding-bottom:0px;' >
                                             <h5 class='card-title'>".$row["product_name"]."
                                                 <p class='card-category'>".$row["category_name"]."</p>

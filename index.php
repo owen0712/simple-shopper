@@ -197,7 +197,7 @@ require_once 'db/conn.php';
     <link href="style/footer.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <link rel="shortcut icon" type="image/jpg" href="assets/Logo/favicon-32x32.png"/>
-    
+
 </head>
 
 <body>
@@ -223,7 +223,6 @@ require_once 'db/conn.php';
                                 buttons:{                
     <?php
         $x=1;
-        require_once 'db/conn.php';
 
         $query="SELECT list_name, list_id FROM shopping_list ORDER BY list_id ASC";        
         
@@ -385,14 +384,15 @@ require_once 'db/conn.php';
         <div class="row mx-auto">
 
           <?php
-            $query="SELECT product_id, product_name, product_image, product_category, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product_category=categories.category_id ORDER BY RAND() LIMIT 8";        
+            $query="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id ORDER BY RAND() LIMIT 8";        
             
             if ($result = $pdo->query($query)) {
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo'
                     <div class="col">
                         <div class="card">
-                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto">
+                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
+                        </a>
                         <div class="card-body">
                             <h5 class="card-title">'.$row["product_name"].'
                                 <p class="card-category">'.$row["category_name"].'</p>
@@ -435,14 +435,14 @@ require_once 'db/conn.php';
           </div>
           <div class="row row-flex flex-nowrap overflow-auto side-scroll" id="side-scroll">
           <?php
-            $query="SELECT product_id, product_name, product_image, product_category, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product_category=categories.category_id WHERE categories.category_name='Beverage'";        
+            $query="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id WHERE categories.category_name='Beverage'";        
             
             if ($result = $pdo->query($query)) {
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo'
                     <div class="col">
                         <div class="card">
-                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto">
+                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
                         <div class="card-body">
                             <h5 class="card-title">'.$row["product_name"].'
                                 <p class="card-category">'.$row["category_name"].'</p>
@@ -486,14 +486,14 @@ require_once 'db/conn.php';
           </div>
           <div class="row row-flex flex-nowrap overflow-auto side-scroll" id="side-scroll2">
           <?php
-            $query="SELECT product_id, product_name, product_image, product_category, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product_category=categories.category_id WHERE categories.category_name='Instant Food'";        
+            $query="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id WHERE categories.category_name='Instant Food'";        
             
             if ($result = $pdo->query($query)) {
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo'
                     <div class="col">
                         <div class="card">
-                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto">
+                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
                         <div class="card-body">
                             <h5 class="card-title">'.$row["product_name"].'
                                 <p class="card-category">'.$row["category_name"].'</p>
@@ -524,13 +524,80 @@ require_once 'db/conn.php';
           ?>
           </div>
         </div>
+
+        
+
+
+
+          <?php
+            $query="SELECT product.product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name, history.user_id, history.product_id, history.time FROM product INNER JOIN categories ON product.category_id=categories.category_id INNER JOIN history ON history.product_id=product.product_id ORDER BY history.time DESC LIMIT 8";        
+            $result = $pdo->query($query);
+            $num=$result->rowCount();
+            if($num!==0){
+                echo'
+                <div class="spacer"></div>
+                <div >
+                    <h2>Recently viewed items</h2>
+                </div>
+                <div class="row mx-auto">
+                ';
+                if ($result) {
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        echo'
+                        <div class="col">
+                            <div class="card">
+                            <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">'.$row["product_name"].'
+                                    <p class="card-category">'.$row["category_name"].'</p>
+                                </h5>
+                                <p class="card-text">'.$row["product_description"].'<br> </p>
+                                <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="quantity buttons_added" style="float: left;">
+                                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                        value="+" class="plus">
+                                </div>
+                                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                        ';
+                        if ($row["product_amount"]=="0"){
+                            echo"disabled>Add to list</button>
+                                </div>
+                                </div>
+                            </div>";
+                        }else{
+                            echo">Add to list</button>
+                                </div>
+                                </div>
+                            </div>";
+                        }
+                    }
+                }
+
+                if($num%4!==0){
+                    $temp=4-($num%4);
+                    for ($x = 0; $x < $temp ; $x++) {
+                        echo '<div class="col" style="visibility: hidden;"></div>
+                        ';
+                    }
+                }
+
+                echo'
+                    </div>
+                ';
+            }
+          ?>
+
+        
       </div>
 
       <div class="spacer"></div>
 
       <!-- See more button in the bottom of the page with the chevron -->
       <div class="d-flex justify-content-center">
-        <a href="src/search.html" class="seeMore">
+        <a href="php/search.php" class="seeMore">
             <h3>See all products<i class="bi bi-chevron-double-right"></i></h3>
         </a>
       </div>

@@ -1,10 +1,29 @@
 <?php
     require_once '../db/conn.php';
+
+    session_start();
+    $t=date("Y-m-d H:i:s");
+    $uid=$_SESSION['user_id'];
+    $product=$_GET['id'];
+    $query="SELECT product_id,user_id FROM history WHERE product_id=$product AND user_id=$uid";
+    $result = $pdo->query($query);
+    if ($result->rowCount() !== 0) {
+      $query="UPDATE history SET time='$t' WHERE product_id=$product AND user_id=$uid";
+    }else{
+      $query="INSERT INTO history(product_id,user_id,time) VALUES ($product,$uid,'$t')";
+    }
+
+    if ($result = $pdo->query($query)) {
+      echo'<script>console.log("Success")</script>';
+    }
+    
+
     if(isset($_GET['id'])){
       $id = $_GET['id'];
       $sql = "SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE product_id=$id";  
       $result = $pdo->query($sql);
     }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">

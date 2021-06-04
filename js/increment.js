@@ -22,5 +22,15 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
     b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d || (d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(this).is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d && b <= d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
 });
 
+
+function imageClick(id,page){
+    if(page==0){
+        window.location.href='php/item.php?id='+id;
+        console.log("this works")
+    }else{
+        window.location.href='../php/item.php?id='+id;
+    }
+    
+}
 //function that pops up the allert when adding items to the shopping list. Also redirects to the log in page if the user is not logged in
 //currently the buttons are fixed but will be adjusted once connected to a database
