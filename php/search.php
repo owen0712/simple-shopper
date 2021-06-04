@@ -1,3 +1,17 @@
+<?php 
+    require_once '../db/conn.php';
+    $min = 0;
+    $updatePriceLimit = $pdo->query("SELECT product_price FROM product WHERE product_price = (SELECT MAX(product_price) FROM product)");
+    $updateMax = $updatePriceLimit->fetch();
+    $max = $updateMax['product_price'];
+    if(isset($_POST['min_price'])){
+        $min = $_POST['min_price'];
+    }
+
+    if(isset($_POST['max_price'])){
+        $max = $_POST['max_price'];
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +27,22 @@
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
     <link href="../style/index.css" rel="stylesheet">
     <link href="../style/footer.css" rel="stylesheet">
+    <style>
+        #min{
+	        width: 50px;
+            padding: 5px 10px;
+            text-align: center;
+        }
+        #slider-range {
+	        width: 100%;
+        }
+        #max {
+	        float: right;   
+	        width: 50px;
+            padding: 5px 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
@@ -20,6 +50,24 @@
     <script src="../js/increment.js" defer></script>
     <script src="../js/header.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link rel="stylesheet"href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function(){$("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: <?= $updateMax['product_price']; ?>,
+            values: [<?= $min; ?>, <?= $max; ?>],
+            slide: function(event, ui) {
+                $("#amount").html("$" + ui.values[0] + " - $" + ui.values[1]);
+		        $("#min").val(ui.values[0]);
+		        $("#max").val(ui.values[1]);
+            }});
+            $("#amount").html("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+        });
+    </script>
 
     <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
         <div class="container-fluid">
@@ -50,7 +98,7 @@
     <header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <div class="col col-auto">
-                <a class="navbar-brand" href="../"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
+                <a class="navbar-brand" href="../index.php"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
             </div>
 
             <form class="col col-6" method="GET" action="search.php">
@@ -74,148 +122,140 @@
         </div>
     </header>
 
-      <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row flex-nowrap">
             <!-- Side bar with all the filters and all its side menu -->
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-default">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <span class="fs-5 d-none d-sm-inline" style="color: black;">Filter by</span>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" style="color: black;">
-                        <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fa fa-cutlery fa-lg cutlery"></i> <span class="ms-1 d-none d-sm-inline">Food and beverage</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="search.php?category=Beverage" class="nav-link px-0"> <span class="d-none d-sm-inline">Beverage</span>  </a>
-                                </li>
-                                <li>
-                                    <a href="search.php?category=Instant Food" class="nav-link px-0"> <span class="d-none d-sm-inline">Instant Food</span> </a>
-                                </li>
-                                <li>
-                                    <a href="search.php?category=cereal" class="nav-link px-0"> <span class="d-none d-sm-inline">cereal</span>  </a>
-                                </li>
-                                <li>
-                                    <a href="search.php?category=Snack" class="nav-link px-0"> <span class="d-none d-sm-inline">Snack</span>  </a>
-                                </li>
-                                <li>
-                                    <a href="search.php?category=Canned and Packed Food" class="nav-link px-0"> <span class="d-none d-sm-inline">Canned and Packed Food</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fs-4 bi-egg"></i> <span class="ms-1 d-none d-sm-inline">Cooking & Baking</span></a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="search.php?category=Cooking Ingredient" class="nav-link px-0"> <span class="d-none d-sm-inline">Cooking Ingredient</span></a>
-                                </li>
-                                <li>
-                                    <a href="search.php?category=Baking supplies" class="nav-link px-0"> <span class="d-none d-sm-inline">Baking supplies</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Household Products</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="search.php?category=Paper Product" class="nav-link px-0"> <span class="d-none d-sm-inline">Paper Product</span></a>
-                                </li>
-                                <li>
-                                    <a href="search.php?category=household supply" class="nav-link px-0"> <span class="d-none d-sm-inline">household supply</span></a>
-                                </li>
-                                <li>
-                                    <a href="search.php?category=Bath and Body" class="nav-link px-0"> <span class="d-none d-sm-inline">Bath and Body</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Others</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="search.php?category=Baby Product" class="nav-link px-0"> <span class="d-none d-sm-inline">Baby Product</span></a>
-                                </li>
-                                <li>
-                                    <a href="search.php?category=pet" class="nav-link px-0"> <span class="d-none d-sm-inline">pet</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+            <form method="POST" action="search.php">
+                <div class="px-3 pt-2">
+                    <span class="fs-5 d-none d-sm-inline" style="color: black;">Price range &nbsp;<button type="submit" class="btn btn-primary btn-sm">Search</button></span>
                 </div>
+                    <div>
+                    <span class="fs-5 d-none d-sm-inline" style="color: black;">RM </span>
+                    <input type="" id="min" name="min_price" value="<?= $min; ?>">
+                    <span class="fs-5 d-none d-sm-inline" style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;RM </span>
+                    <input type="" id="max" name="max_price" value="<?= $max; ?>"><br><br>
+                    <div id="slider-range"></div>
+                </div>
+            </form>
+            <hr>
+                <form action="" method="GET">
+                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                        <span class="fs-5 d-none d-sm-inline" style="color: black;">Filter by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary btn-sm">Search</button></span>
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" style="color: black;">
+                            <li>
+                                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                    <i class="fa fa-cutlery fa-lg cutlery"></i> <span class="ms-1 d-none d-sm-inline">Categories</span> </a>
+                                <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                    <?php
+                                        $sql = "SELECT * FROM categories";
+                                        if($ctg = $pdo->query($sql)){
+                                            while($ctgrow = $ctg->fetch(PDO::FETCH_ASSOC)){
+                                                $checked = [];
+                                                if(isset($_GET['category'])){
+                                                    $checked = $_GET['category'];
+                                                }
+                                                ?>
+                                                <li>
+                                                    <input type="checkbox" name="category[]" value="<?=$ctgrow['category_id'];?>"
+                                                        <?php if(in_array($ctgrow['category_id'], $checked)){echo "checked";}?>/>
+                                                    <span class="d-none d-sm-inline"><?= $ctgrow['category_name'];?></span>
+                                                </li>
+                                                <?php
+                                            }
+                                        }else{
+                                            echo "No category found";
+                                        }
+                                    ?>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
             </div>
             
             <div class="col-auto col-md-9 col-xl-10 px-sm-2 px-0 bg-light">
                 <div class="row mx-auto" >
-
                     <?php
-                        require_once '../db/conn.php';
                         if(isset($_GET['keywords']))
                         {
                             $keywords = $_GET['keywords'];
-                            if($keywords == null)
+                            if(empty($keywords))
                             {
-                                echo "<img src='../assets/Image/nothing.png' height='500'>";
-                                $query = null;
+                                $query="SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
+                                FROM product INNER JOIN categories ON product.category_id = categories.category_id";
                             }else{
-                                $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories ON product_category=categories.category_id WHERE product_description LIKE '%$keywords%'";
+                                $query = "SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
+                                FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE product_description LIKE '%$keywords%'";
                             }
-                        }else if(isset($_GET['category']))
+                        }
+                        else if(isset($_GET['category'])){
+                            $ctgid = [];
+                            $ctgid = $_GET['category'];
+                            $query = "SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
+                            FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE categories.category_id IN (".implode(',',$ctgid).")";
+                        }
+                        else if(isset($_POST['min_price']) || isset($_POST['max_price'])){
+                            $query = "SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
+                            FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE product_price BETWEEN '$min' AND '$max' ORDER BY product_price ASC";
+                        }
+                        else{
+                            $query = false;
+                        }
+                        if($query != false)
                         {
-                            $category = $_GET['category'];
-                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories ON product_category=categories.category_id WHERE categories.category_name='$category'";
-                        }else{
-                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories ON product_category=categories.category_id";
-                        }
-                        if($query != null){
-                        if ($result = $pdo->query($query)) {
-                            /* fetch associative array */
-                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                echo'
-                                <div class="col">
-                                    <div class="card">
-                                    <img src="../assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto">
-                                    <div class="card-body">
-                                        <h5 class="card-title">'.$row["product_name"].'
-                                            <p class="card-category">'.$row["category_name"].'</p>
-                                        </h5>
-                                        <p class="card-text">'.$row["product_description"].'<br> </p>
-                                        <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="quantity buttons_added" style="float: left;">
-                                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                                                value="+" class="plus">
+                            $result = $pdo->query($query);
+                            if ($result->rowCount() !== 0) {
+                                /* fetch associative array */
+                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "
+                                    <div class='col'>
+                                        <div class='card'>
+                                        <a href='item.php?id=".$row['product_id']."' class='text-center'>
+                                        <img src='../assets/Image/".$row['category_name']."/".$row['product_image']."' class='mx-auto product-image' alt='".$row['product_name']."' height='auto' width='auto'>
+                                        </a>
+                                        <div class='card-body' style='padding-bottom:0px;' >
+                                            <h5 class='card-title'>".$row["product_name"]."
+                                                <p class='card-category'>".$row["category_name"]."</p>
+                                            </h5>
+                                            <p class='card-text'>".$row['product_description']."</p>
+                                            <p class='card-text' style='font-size: small; text-align:right;'> RM ".$row["product_price"]."/each<br>".$row["product_amount"]." left</p>
                                         </div>
-                                        <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
-                                ';
-                                if ($row["product_amount"]=="0"){
-                                    echo"disabled>Add to list</button>
-                                        </div>
-                                        </div>
-                                    </div>";
-                                }else{
-                                    echo">Add to list</button>
-                                        </div>
-                                        </div>
-                                    </div>";
+                                        <div class='card-body' style='padding-top:0px; padding-bottom:0px'>
+                                            <div class='quantity buttons_added' style='float: left;'>
+                                                <input type='button' value='-' class='minus'><input type='number' step='1' min='1' max='' name='quantity' value='1' title='Qty' class='input-text qty text' size='4' pattern='' inputmode=''><input type='button'
+                                                    value='+' class='plus'>
+                                            </div>
+                                            <button id='addBtn' type='button' class='btn btn-success' style='float: right;' onclick='addtolist()'";
+
+                                    if ($row["product_amount"]=="0"){
+                                        echo"disabled>Add to list</button>
+                                            </div>
+                                            </div>
+                                        </div>";
+                                    }else{
+                                        echo">Add to list</button>
+                                            </div>
+                                            </div>
+                                        </div>";
+                                    }
                                 }
+                            }else{
+                                echo "<img src='../assets/Image/aa.png' style='margin-left: 470px; margin-top: 120px; height: 200px; width:300px;'>";
                             }
-                        }
+                        }else{
+                            echo "<img src='../assets/Image/aa.png' style='margin-left: 470px; margin-top: 120px; height: 200px; width:300px;'>";
                         }
                         /* free result set */
                         $result = null;
                     ?>
-
-                    
                     <div class="col" style="visibility: hidden;"></div>
                     <div class="col" style="visibility: hidden;"></div>
-
                 </div>
             </div>
         </div>
     </div>
-
+<!-- echo "<h4 class='mt-4 fw-light text-center'>Seems like nothing here...</h4>"; -->
     <div class="spacer"></div>
 
     <div class = "footer">
