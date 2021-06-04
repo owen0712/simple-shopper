@@ -13,14 +13,16 @@
     }
     $file=fopen('item.csv','r');
     while(($column=fgetcsv($file,10000,','))!==FALSE){
-        $path=$column[0];
-        $name=$column[1];
-        $category=$column[2];
-        $quantity=(int)$column[3];
-        $price=(float)$column[4];
-        $description=$column[5];
-        $sql="INSERT INTO `product` (product_image,product_name,category_id,product_amount,product_price,product_description) VALUES (:path,:name,:category,:amount,:price,:description)";
+        $id=$column[0];
+        $path=$column[1];
+        $name=$column[2];
+        $category=$column[3];
+        $quantity=(int)$column[4];
+        $price=(float)$column[5];
+        $description=$column[6];
+        $sql="INSERT INTO `product` (product_id,product_image,product_name,category_id,product_amount,product_price,product_description) VALUES (:id,:path,:name,:category,:amount,:price,:description)";
         $stmt=$pdo->prepare($sql);
+        $stmt->bindparam(':id',$id);
         $stmt->bindparam(':path',$path);
         $stmt->bindparam(':name',$name);
         $stmt->bindparam(':category',$category);

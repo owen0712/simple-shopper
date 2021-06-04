@@ -6,4 +6,5 @@ $google_client->revokeToken();
 
 session_destroy(); 
 header('location: ../php/login.php');
+$pdo=null;
 ?>

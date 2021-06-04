@@ -444,3 +444,6 @@ require_once '../db/conn.php';
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 </html>
+<?php
+  $pdo=null;
+?>
