@@ -11,7 +11,7 @@ $login_button = '';
 if(!isset($_SESSION['access_token']))
 {
  //Create a URL to obtain user authorization
- $login_button = '<a href="'.$google_client->createAuthUrl().'" class="social-icon"><i class="bi bi-google" id="Google" /></i></a>';
+ $login_button = '<a href="loginAction.php?action=google" class="social-icon"><i class="bi bi-google" id="Google" /></i></a>';
 }
 
 ?>

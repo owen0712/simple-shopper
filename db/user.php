@@ -370,7 +370,7 @@ class User{
         return preg_match('/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im', $mobile);
         }
     
-        //check email format
+    //check email format
     public function checkEmail($email)
         {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
