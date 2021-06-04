@@ -13,3 +13,6 @@
         header('Location:'.$google_client->createAuthUrl());
     }
 ?>
+<?php
+  $pdo=null;
+?>

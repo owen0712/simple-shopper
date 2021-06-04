@@ -111,4 +111,5 @@
                 </script>';
         }
     }
+$pdo=null;
 ?>
