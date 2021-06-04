@@ -21,4 +21,5 @@
             header('Location:address.php');
         }
     }
+    $pdo=null;
 ?>

@@ -149,7 +149,6 @@
                 <li class="nav-item"><a href="address.php" class="nav-link active">Addresses</a></li>
                 <li class="nav-item"><a href="password.php" class="nav-link link-dark">Change Password</a></li>
                 <li class="nav-item"><a href="bankcard.html" class="nav-link link-dark">Bank Card</a></li>
-                <li class="nav-item"><a href="order.html" class="nav-link link-dark">Order</a></li>
             </ul>
         </nav>
         <!--address section output using javascript-->
@@ -235,5 +234,6 @@
             <p class="copyright">Copyright&copy; 2021 Simple Shopper</p>
         </div>
     </div>
+    <?php $pdo=null; ?>
 </body>
 </html>

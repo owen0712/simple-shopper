@@ -117,7 +117,6 @@
                 <li class="nav-item"><a href="address.php" class="nav-link link-dark">Addresses</a></li>
                 <li class="nav-item"><a href="password.php" class="nav-link link-dark">Change Password</a></li>
                 <li class="nav-item"><a href="bankcard.html" class="nav-link link-dark">Bank Card</a></li>
-                <li class="nav-item"><a href="order.html" class="nav-link link-dark">Order</a></li>
             </ul>
         </nav>
 
@@ -132,7 +131,7 @@
                     <!--change profile pic section-->
                     <div class="col-md-4 image">
                         <img class="rounded-circle justify-content-center" id='img_preview' alt="profle_img" src="<?php echo $result['profile'];?>" data-holder-rendered="true">
-                        <input type="file" class=".form-control-file" id='img_upload' onchange="preview()" name='profile'>
+                        <input type="file" class=".form-control-file" id='img_upload' accept="image/*" onchange="preview()" name='profile'>
                     </div>
                     <!--change details-->
                     <div class="col-md-4">
@@ -155,9 +154,9 @@
                             <tr>
                                 <td><label for="gender">Gender</label></td>
                                 <td>
-                                    <input type="radio" id="male" name="male" <?php if($result['gender']=='male') echo 'checked'?>/>
+                                    <input type="radio" id="male" name="male" onclick='removeFemale()' <?php if($result['gender']=='male') echo 'checked'?>/>
                                     <label for="male">Male</label>
-                                    <input type="radio" id="female" name="female" <?php if($result['gender']=='female') echo 'checked'?>/>
+                                    <input type="radio" id="female" name="female" onclick='removeMale()' <?php if($result['gender']=='female') echo 'checked'?>/>
                                     <label for="female">Female</label>
                                 </td>
                             </tr>
@@ -167,7 +166,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" align="center">
-                                    <input type="submit" value="Save" name='submit' class="btn btn-primary">
+                                    <input type="submit" value="Save" name='submit' onclick='(e)=>{e.preventDefault()}' class="btn btn-primary">
                                 </td>
                             </tr>
                             <tr>
@@ -230,6 +229,32 @@
         </div>
     </div>
     <script>
+    function preview(){
+        function readImageSrc(img) {//use promise to access src value
+            return new Promise(function(resolve, reject) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    src=e.target.result
+                    resolve(src);
+                };
+                reader.readAsDataURL(img.files[0]);
+            });
+        };
+        readImageSrc(img_upload).then(function(src){
+            img_preview.src=src;
+        });
+    }
+    const maleBtn=document.querySelector('#male')
+    const femaleBtn=document.querySelector('#female')
+
+    function removeMale(){
+        maleBtn.checked=false
+    }
+
+    function removeFemale(){
+        femaleBtn.checked=false
+    }
+
     //set delete account function
     $('.btn-danger').on('click',function(e){
         e.preventDefault()
@@ -243,7 +268,13 @@
         .then((willDelete) => {
             if (willDelete) {
                 swal("Enter your password to delete your account:", {
-                    content: "input"
+                    content: {
+                        element: "input",
+                        attributes: {
+                        placeholder: "Type your password",
+                        type: "password",
+                        },
+                    },
                 })
                 .then((value) => {
                     if(CryptoJS.MD5(value).toString()=="<?php echo $result['password'];?>"){
@@ -264,5 +295,6 @@
         });
     })
     </script>
+    <?php $pdo=null;?>
 </body>
 </html>
