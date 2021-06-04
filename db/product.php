@@ -207,5 +207,98 @@ class Product{
 			}
 		}
 	}
+	public function updateProductMaximum(){
+        try{
+            $sql="SELECT product_price FROM product WHERE product_price = (SELECT MAX(product_price) FROM product)";
+            $stmt=$this->dbConnect->prepare($sql);          
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+	public function showCategory(){
+        try{
+            $sql="SELECT * FROM categories";
+            $stmt=$this->dbConnect->prepare($sql);         
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+	public function searchWhole(){
+        try{
+            $sql="SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
+			FROM product INNER JOIN categories ON product.category_id = categories.category_id";
+            $stmt=$this->dbConnect->prepare($sql);
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+	public function searchKeyword($keywords){
+        try{
+			$key = "%".$keywords."%";
+            $sql="SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
+			FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE product_description LIKE :key";
+            $stmt=$this->dbConnect->prepare($sql);
+			$stmt->bindparam(':key',$key);
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+	public function searchCategory($ctgid){
+        try{
+			$ctg = implode(',',$ctgid);
+            $sql="SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
+			FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE categories.category_id IN (:ctg)";
+            $stmt=$this->dbConnect->prepare($sql); 
+			$stmt->bindparam(':ctg',$ctg);
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+	public function searchPrice($min,$max){
+        try{
+            $sql="SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
+			FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE product_price BETWEEN :min AND :max ORDER BY product_price ASC";
+            $stmt=$this->dbConnect->prepare($sql);
+			$stmt->bindparam(':min',$min);
+			$stmt->bindparam(':max',$max);
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
 }
 ?>
