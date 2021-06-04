@@ -300,5 +300,19 @@ class Product{
             return false;
         }
     }
+	public function showProduct($id){
+        try{
+            $sql="SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE product_id=:id";
+            $stmt=$this->dbConnect->prepare($sql);
+			$stmt->bindparam(':id',$id);
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
 }
 ?>
