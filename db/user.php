@@ -201,16 +201,16 @@ class User{
         }
     }
 
-    public function insertDetails($Lname, $email, $phone, $pwd, $gender, $birth, $status)
+    public function insertDetails($name, $email, $phone, $pwd, $gender, $birth, $status)
     {
         try{
             $phone = str_replace("-", "", $phone);
             $sql=" INSERT INTO user (password,name,email,phone,gender,dob,status)
-            VALUES(:psw,:Lname,:email,:phone,:gender,:dob,:status)";
+            VALUES(:psw,:name,:email,:phone,:gender,:dob,:status)";
             $stmt = $this->db->prepare($sql);
     
             $stmt-> bindParam(":psw",$pwd);
-            $stmt-> bindParam(":Lname",$Lname);
+            $stmt-> bindParam(":name",$name);
             $stmt-> bindParam(":email",$email);
             $stmt-> bindParam(":phone",$phone);
             $stmt-> bindParam(":gender",$gender);

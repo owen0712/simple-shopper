@@ -58,7 +58,7 @@ if(isset($_POST['btnSubmit1']))
 			exit();
 		}
 	 }else{
-		 echo ".";
+		 echo "<br>";
 		 echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
 		 echo '<script>
 		 swal({
@@ -76,7 +76,7 @@ if(isset($_POST['btnSubmit1']))
 		 </script>';
 	 }
    }else{
-	    echo ".";
+		echo "<br>";
 		echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
 		echo '<script>
 			swal({
