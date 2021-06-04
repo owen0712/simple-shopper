@@ -197,7 +197,9 @@ require_once 'db/conn.php';
     <link href="style/footer.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <link rel="shortcut icon" type="image/jpg" href="assets/Logo/favicon-32x32.png"/>
-
+        <?php
+        echo '<script>console.log("'.$_SESSION['user_id'].'")</script>';
+        ?>
 </head>
 
 <body>
@@ -222,6 +224,7 @@ require_once 'db/conn.php';
                             swal("Choose your cart",{
                                 buttons:{                
     <?php
+        
         $x=1;
 
         $query="SELECT list_name, list_id FROM shopping_list ORDER BY list_id ASC";        
@@ -383,10 +386,9 @@ require_once 'db/conn.php';
         </div>
         <div class="row mx-auto">
 
-          <?php
-            $query="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id ORDER BY RAND() LIMIT 8";        
-            
-            if ($result = $pdo->query($query)) {
+          <?php        
+            $result = $product1->featuredProducts();
+            if ($result) {
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo'
                     <div class="col">
@@ -434,10 +436,9 @@ require_once 'db/conn.php';
             <p class="lead">Thirsty? Grab a drink right now :D</p>
           </div>
           <div class="row row-flex flex-nowrap overflow-auto side-scroll" id="side-scroll">
-          <?php
-            $query="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id WHERE categories.category_name='Beverage'";        
+          <?php   
             
-            if ($result = $pdo->query($query)) {
+            if ($result = $product1->getCategory("Beverage")) {
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo'
                     <div class="col">
@@ -485,10 +486,8 @@ require_once 'db/conn.php';
             <p class="lead">Grab a bite, you are just not you when you are hungry</p>
           </div>
           <div class="row row-flex flex-nowrap overflow-auto side-scroll" id="side-scroll2">
-          <?php
-            $query="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id WHERE categories.category_name='Instant Food'";        
-            
-            if ($result = $pdo->query($query)) {
+          <?php          
+            if ($result = $product1->getCategory("Instant Food")) {
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo'
                     <div class="col">
@@ -530,7 +529,9 @@ require_once 'db/conn.php';
 
 
           <?php
-            $query="SELECT product.product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name, history.user_id, history.product_id, history.time FROM product INNER JOIN categories ON product.category_id=categories.category_id INNER JOIN history ON history.product_id=product.product_id ORDER BY history.time DESC LIMIT 8";        
+            echo '<script>console.log("'.$_SESSION['user_id'].'")</script>';
+            $uid=$_SESSION["user_id"];
+            $query="SELECT product.product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name, history.user_id, history.product_id, history.time FROM product INNER JOIN categories ON product.category_id=categories.category_id INNER JOIN history ON history.product_id=product.product_id WHERE history.user_id=$uid ORDER BY history.time DESC LIMIT 8";        
             $result = $pdo->query($query);
             $num=$result->rowCount();
             if($num!==0){

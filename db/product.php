@@ -300,5 +300,51 @@ class Product{
             return false;
         }
     }
+
+	public function featuredProducts(){
+		try{
+            $sql="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id ORDER BY RAND() LIMIT 8";
+            $stmt=$this->dbConnect->prepare($sql);          
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+	}
+
+	public function getCategory($category){
+		try{
+			echo '<script>console.log("'.$category.'")</script>';
+            $sql="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id WHERE categories.category_name=:category";
+            $stmt=$this->dbConnect->prepare($sql);
+            $stmt->bindparam(':category',$category);
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+	}
+
+	public function getNumRecent($uid){
+		try{
+			echo '<script>console.log("'.$category.'")</script>';
+            $sql="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id WHERE categories.category_name=:category";
+            $stmt=$this->dbConnect->prepare($sql);
+            $stmt->bindparam(':category',$category);
+            $stmt->execute();
+            $result=$stmt;
+            return $result;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+	}
 }
 ?>
