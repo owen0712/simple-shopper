@@ -158,39 +158,37 @@
                                 echo "<img src='../assets/Image/nothing.png' height='500'>";
                                 $query = null;
                             }else{
-                                $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product WHERE product_description LIKE '%$keywords%'";
+                                $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories ON product_category=categories.category_id WHERE product_description LIKE '%$keywords%'";
                             }
                         }else if(isset($_GET['category']))
                         {
                             $category = $_GET['category'];
-                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product WHERE product_category='$category'";
+                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories ON product_category=categories.category_id WHERE categories.category_name='$category'";
                         }else{
-                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description FROM product";
+                            $query="SELECT product_id, product_image, product_name,product_category,product_price,product_amount, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories ON product_category=categories.category_id";
                         }
                         if($query != null){
                         if ($result = $pdo->query($query)) {
                             /* fetch associative array */
                             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                echo "
-                                <div class='col'>
-                                    <div class='card'>
-                                    <a href='item.php?id=".$row['product_id']."'>
-                                    <img src='../".$row['product_image']."' class='mx-auto product-image' alt='".$row['product_name']."' height='auto' width='auto'>
-                                    </a>
-                                    <div class='card-body' style='padding-bottom:0px;' >
-                                        <h5 class='card-title'>".$row["product_name"]."
-                                            <p class='card-category'>".$row["product_category"]."</p>
+                                echo'
+                                <div class="col">
+                                    <div class="card">
+                                    <img src="../assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">'.$row["product_name"].'
+                                            <p class="card-category">'.$row["category_name"].'</p>
                                         </h5>
-                                        <p class='card-text'>".$row['product_description']."</p>
-                                        <p class='card-text' style='font-size: small; text-align:right;'> RM ".$row["product_price"]."/each<br>".$row["product_amount"]." left</p>
+                                        <p class="card-text">'.$row["product_description"].'<br> </p>
+                                        <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
                                     </div>
-                                    <div class='card-body' style='padding-top:0px; padding-bottom:0px'>
-                                        <div class='quantity buttons_added' style='float: left;'>
-                                            <input type='button' value='-' class='minus'><input type='number' step='1' min='1' max='' name='quantity' value='1' title='Qty' class='input-text qty text' size='4' pattern='' inputmode=''><input type='button'
-                                                value='+' class='plus'>
+                                    <div class="card-body">
+                                        <div class="quantity buttons_added" style="float: left;">
+                                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                                value="+" class="plus">
                                         </div>
-                                        <button id='addBtn' type='button' class='btn btn-success' style='float: right;' onclick='addtolist()'";
-
+                                        <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                                ';
                                 if ($row["product_amount"]=="0"){
                                     echo"disabled>Add to list</button>
                                         </div>
