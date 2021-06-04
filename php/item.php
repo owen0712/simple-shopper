@@ -1,12 +1,29 @@
 <?php
     require_once '../db/conn.php';
+
+    session_start();
+    $t=date("Y-m-d H:i:s");
+    $uid=$_SESSION['user_id'];
+    $product=$_GET['id'];
+    $query="SELECT product_id,user_id FROM history WHERE product_id=$product AND user_id=$uid";
+    $result = $pdo->query($query);
+    if ($result->rowCount() !== 0) {
+      $query="UPDATE history SET time='$t' WHERE product_id=$product AND user_id=$uid";
+    }else{
+      $query="INSERT INTO history(product_id,user_id,time) VALUES ($product,$uid,'$t')";
+    }
+
+    if ($result = $pdo->query($query)) {
+      echo'<script>console.log("Success")</script>';
+    }
+    
+
     if(isset($_GET['id'])){
       $id = $_GET['id'];
-      $sql = "SELECT * FROM product WHERE product_id=$id";  
+      $sql = "SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE product_id=$id";  
       $result = $pdo->query($sql);
     }
-    session_start();
-    $_SESSION["id"] = $id;
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,8 +121,8 @@
             <div class="row product-gallery mx-1">
               <div class="col-12 mb-0">
                 <figure class="view overlay rounded z-depth-1">
-                  <a href="../assets/item-img/Beverage/Beverage-1.png" data-size="710x823">
-                    <img src="../assets/item-img/Beverage/Beverage-1.png" class="img-fluid z-depth-1 main-img">
+                  <a href="../assets/upload_image/<?= $res['product_image']?>" data-size="710x823">
+                    <img src="../assets/upload_image/<?= $res['product_image']?>" class="img-fluid z-depth-1 main-img">
                   </a>
                 </figure>
               </div>
@@ -113,20 +130,20 @@
           </div>
         </div>
         <div class="col-md-6">
-          <?php echo "<h5>".$res["product_name"]."</h5>"?>
-          <p class="mb-2 text-muted small"><?php echo $res['product_category']?></p>
-          <p><span class="mr-1"><strong><?php echo $res['product_price']?></strong></span></p>
-          <p class="pt-1"><?php echo $res['product_description']?></p>
+          <?= "<h5>".$res["product_name"]."</h5>"?>
+          <p class="mb-2 text-muted small"><?= $res['category_name']?></p>
+          <p><span class="mr-1"><strong><?= $res['product_price']?></strong></span></p>
+          <p class="pt-1"><?= $res['product_description']?></p>
           <table class="table table-sm table-borderless mb-0">
             <tbody>
               <tr>
                 <th class="pl-0 w-25" scope="row"><strong>Stock</strong></th>
-                <td><?php echo $res['product_amount']?></td>
+                <td><?= $res['product_amount']?></td>
               </tr>
             </tbody>
           </table>
           <hr>
-          <form method="POST" action="tempadditemtocart.php">
+          <form method="POST" action="tempadditemtocart.php?id=<?= $res['product_id'];?>">
           <div class="table-responsive mb-2">
             <table class="table table-sm table-borderless">
               <tbody>

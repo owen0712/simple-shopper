@@ -92,20 +92,7 @@ class shoppingList{
             echo $e->getMessage();
             return false;
         }
-    }
-    
-    public function deleteAllShoppingListItem($id){
-        try{
-            $sql = "DELETE FROM `shopping_list_item` where list_id=:id";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindparam(':id',$id);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }
-    }
+    }       
 
     public function deleteShoppingListItem($List_id,$Product_id){
         try{

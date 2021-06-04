@@ -243,6 +243,7 @@
         if(isset($_GET['id'])){
             echo "<script>document.querySelector('#add_address').style.display='flex';</script>";
         }
+        $pdo=null;
     ?>
 </body>
 </html>

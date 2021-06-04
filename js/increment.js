@@ -22,67 +22,15 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
     b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d || (d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(this).is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d && b <= d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
 });
 
+
+function imageClick(id,page){
+    if(page==0){
+        window.location.href='php/item.php?id='+id;
+        console.log("this works")
+    }else{
+        window.location.href='../php/item.php?id='+id;
+    }
+    
+}
 //function that pops up the allert when adding items to the shopping list. Also redirects to the log in page if the user is not logged in
 //currently the buttons are fixed but will be adjusted once connected to a database
-function addtolist()
-{
-    const login=JSON.parse(localStorage.getItem('user'));
-    if(login===null){
-        //delay before redirecting
-        swal("You have to sign in first", "It will switch to sign in page in 2 seconds");
-        setTimeout(function(){window.location.href='signin.html'}, 2000);
-    }
-    else{
-        swal("Do you want to add this item?",{
-            buttons:{
-                customise: {
-                    text: "Add to cart",
-                    value: "customise",
-                },
-                cancel: "cancel",
-            },
-        }).then((value) => {
-            switch(value){
-                case "customise":
-                    swal("Choose your cart",{
-                        buttons:{
-                            1: {
-                                text: "Shopping List 1",
-                                value: "1",
-                            },
-                            2: {
-                                text: "Shopping List 2",
-                                value: "2",
-                            },
-                            3: {
-                                text: "Shopping List 3",
-                                value: "3",
-                            },
-                            cancel: "cancel",
-                        }
-                    }).then((value) =>{
-                        switch(value){
-                            case "1":
-                                swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
-                                break;
-
-                            case "2":
-                                swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
-                                break;
-
-                            case "3":
-                                swal('Your item has been added to Shopping List '+ value,"Take me home!", "success");
-                                break;
-                            
-                            default:
-                                swal("See you next time :)");
-                        }
-                    });
-                    break;
-                
-                default: 
-                    swal("See you next time :)");
-            }
-        });
-    }
-}

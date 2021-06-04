@@ -91,7 +91,6 @@
                 <li class="nav-item"><a href="address.php" class="nav-link link-dark">Addresses</a></li>
                 <li class="nav-item"><a href="password.php" class="nav-link active">Change Password</a></li>
                 <li class="nav-item"><a href="bankcard.html" class="nav-link link-dark">Bank Card</a></li>
-                <li class="nav-item"><a href="order.html" class="nav-link link-dark">Order</a></li>
             </ul>
         </nav>
 
@@ -145,6 +144,7 @@
             }
             else{
                 echo "<h2>Create Password</h2>";
+                $pdo=null;
             }
             ?>
             <p>For your account's security, do not share your password with anyone else</p>
@@ -171,7 +171,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td ><a href='../src/forgot3.html' id='forgot'>Forget password?</a></td>
+                            <td ><a href='../php/forgotPassword.php' id='forgot'>Forget password?</a></td>
                         </tr>
                         <tr>
                             <td><label for='new_password'>New Password</label></td>
