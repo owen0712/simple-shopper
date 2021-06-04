@@ -383,173 +383,44 @@ require_once 'db/conn.php';
           <p class="lead">Have a look at what everyone is buying right now.</p>
         </div>
         <div class="row mx-auto">
-          <div class="col">
-              <!-- Card for each of the product, almost same for every product -->
-            <div class="card">
-                <!-- Image of the product -->
-            <img src="assets/Image/Beverage/Beverage-5.png" class="mx-auto product-image" alt="Nescafe" height="auto" width="auto">
-            <div class="card-body">
-                <!-- name of the product -->
-                <h5 class="card-title">Nescafe
-                    <!-- Category of the product -->
-                    <p class="card-category">Beverage</p>
-                </h5>
-                <!-- Description of the product -->
-                <p class="card-text">Nescafe Original Drink 240ml <br> </p>
-                <!-- Price of the product -->
-                <p style="font-size: small; float: right;"> RM 2.60/each</p>
-            </div>
-            <div class="card-body">
-                <!-- Quantity buttons  -->
-                <div class="quantity buttons_added" style="float: left;">
-                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                        value="+" class="plus">
-                </div>
-                <!-- Add to list button -->
-                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-            </div>
-            </div>
-          </div>
 
-          <div class="col">
-            <div class="card">
-            <img src="assets/Image/Instant Food/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
-            <div class="card-body">
-                <h5 class="card-title">Samyang
-                    <p class="card-category">Instant Noodle</p>
-                </h5>
-                <p class="card-text">Samyang Spicy Korean Ramen <br> </p>
-                <p style="font-size: small; float: right;"> RM 19.00/each</p>
-            </div>
-            <div class="card-body">
-                <div class="quantity buttons_added" style="float: left;">
-                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                        value="+" class="plus">
-                </div>
-                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-            </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card">
-            <img src="assets/Image/Instant Food/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
-            <div class="card-body">
-                <h5 class="card-title">Mamee Chef
-                    <p class="card-category">Instant Noodle</p>
-                </h5>
-                <p class="card-text">Mamee Chef Instant Noodle - Creamy Tom Yam Flavour (4 x 80g) <br> </p>
-                <p style="font-size: small; float: right;"> RM 5.90/each</p>
-            </div>
-            <div class="card-body">
-                <div class="quantity buttons_added" style="float: left;">
-                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                        value="+" class="plus">
-                </div>
-                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-            </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card">
-            <img src="assets/Image/cereal/Cereal-2.png" class="mx-auto product-image" alt="Honey Stars" height="auto" width="auto">
-            <div class="card-body">
-                <h5 class="card-title">Honey Stars
-                    <p class="card-category">Cereal</p>
-                </h5>
-                <p class="card-text">Honey Stars (300g) <br> </p>
-                <p style="font-size: small; float: right;"> RM 8.90/each</p>
-            </div>
-            <div class="card-body">
-                <div class="quantity buttons_added" style="float: left;">
-                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                        value="+" class="plus">
-                </div>
-                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-            </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card">
-            <img src="assets/Image/cereal/Cereal-8.png" class="mx-auto product-image" alt="Honey Crunch" height="auto" width="auto">
-            <div class="card-body">
-                <h5 class="card-title">Honey Crunch
-                    <p class="card-category">Cereal</p>
-                </h5>
-                <p class="card-text">Honey Crunch (360g) <br> </p>
-                <p style="font-size: small; float: right;"> RM 11.33/each</p>
-            </div>
-            <div class="card-body">
-                <div class="quantity buttons_added" style="float: left;">
-                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                        value="+" class="plus">
-                </div>
-                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-            </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card">
-            <img src="assets/Image/Canned&Packed Food/canned-3.png" class="mx-auto product-image" alt="Ayam Brand Tuna" height="auto" width="auto">
-            <div class="card-body">
-                <h5 class="card-title">Ayam Brand Tuna
-                    <p class="card-category">Canned</p>
-                </h5>
-                <p class="card-text">Ayam Brand Tuna Light Chunks in Olive Oil (150g) <br> </p>
-                <p style="font-size: small; float: right;"> RM 6.85/each</p>
-            </div>
-            <div class="card-body">
-                <div class="quantity buttons_added" style="float: left;">
-                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                        value="+" class="plus">
-                </div>
-                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-            </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card">
-            <img src="assets/Image/Cooking Ingredient/CS-1.png" class="mx-auto product-image" alt="Knife Cooking oil" height="auto" width="auto">
-            <div class="card-body">
-                <h5 class="card-title">Knife Cooking oil
-                    <p class="card-category">Cooking Supplies</p>
-                </h5>
-                <p class="card-text">Knife Cooking oil (5kg) <br> </p>
-                <p style="font-size: small; float: right;"> RM 26.80/each</p>
-            </div>
-            <div class="card-body">
-                <div class="quantity buttons_added" style="float: left;">
-                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                        value="+" class="plus">
-                </div>
-                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-            </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card">
-            <img src="assets/Image/Cooking Ingredient/CS-4.png" class="mx-auto product-image" alt="Soy sauce" height="auto" width="auto">
-            <div class="card-body">
-                <h5 class="card-title">Soy sauce
-                    <p class="card-category">Cooking Supplies</p>
-                </h5>
-                <p class="card-text">Lee Kum Kee selected light soy sauce (500ml) <br> </p>
-                <p style="font-size: small; float: right;"> RM 6.25/each</p>
-            </div>
-            <div class="card-body">
-                <div class="quantity buttons_added" style="float: left;">
-                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                        value="+" class="plus">
-                </div>
-                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-            </div>
-            </div>
-          </div>
+          <?php
+            $query="SELECT product_id, product_name, product_image, product_category, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product_category=categories.category_id ORDER BY RAND() LIMIT 8";        
+            
+            if ($result = $pdo->query($query)) {
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    echo'
+                    <div class="col">
+                        <div class="card">
+                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto">
+                        <div class="card-body">
+                            <h5 class="card-title">'.$row["product_name"].'
+                                <p class="card-category">'.$row["category_name"].'</p>
+                            </h5>
+                            <p class="card-text">'.$row["product_description"].'<br> </p>
+                            <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="quantity buttons_added" style="float: left;">
+                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                    value="+" class="plus">
+                            </div>
+                            <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                    ';
+                    if ($row["product_amount"]=="0"){
+                        echo"disabled>Add to list</button>
+                            </div>
+                            </div>
+                        </div>";
+                    }else{
+                        echo">Add to list</button>
+                            </div>
+                            </div>
+                        </div>";
+                    }
+                }
+            }
+          ?>
 
         </div>
 
@@ -563,205 +434,43 @@ require_once 'db/conn.php';
             <p class="lead">Thirsty? Grab a drink right now :D</p>
           </div>
           <div class="row row-flex flex-nowrap overflow-auto side-scroll" id="side-scroll">
-            <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-1.png" class="mx-auto product-image" alt="Coca-cola" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Coca-cola
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">Coca-Cola Carbonated Drink Original 320ml <br> </p>
-                  <p style="font-size: small; float: right;"> RM 1.99/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-2.png" class="mx-auto product-image" alt="100 plus" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">100 plus
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">100 plus Carbonated Drink Original 320ml<br> </p>
-                  <p style="font-size: small; float: right;"> RM 1.99/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-3.png" class="mx-auto product-image" alt="7up" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">7up
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">7up Lemon & Lime Carbonated Drink 320ml <br> </p>
-                  <p style="font-size: small; float: right;"> RM 1.99/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-4.png" class="mx-auto product-image" alt="Tropicana" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Tropicana
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">7up Lemon & Lime Carbonated Drink 320ml <br> </p>
-                  <p style="font-size: small; float: right;"> RM 2.99/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-5.png" class="mx-auto product-image" alt="Nescafe" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Nescafe
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">Nescafe Original Drink 240ml <br> </p>
-                  <p style="font-size: small; float: right;"> RM 2.60/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-6.png" class="mx-auto product-image" alt="Nestlé Milo" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Nestlé Milo
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">Nestlé Milo Chocolate Malt Drink 200ml <br> </p>
-                  <p style="font-size: small; float: right;"> RM 2.00/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-7.png" class="mx-auto product-image" alt="Farm Fresh" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Farm Fresh
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">Farm Fresh Original Yogurt Drink 700ml <br> </p>
-                  <p style="font-size: small; float: right;"> RM 4.99/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-8.png" class="mx-auto product-image" alt="GoodDay" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">GoodDay
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">GoodDay Full Cream Fresh Milk 500ml <br> </p>
-                  <p style="font-size: small; float: right;"> RM 5.20/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-9.png" class="mx-auto product-image" alt="Homesoy" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Homesoy
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">Homesoy Soya Milk Original 250ml <br> </p>
-                  <p style="font-size: small; float: right;"> RM 1.20/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Beverage/Beverage-10.png" class="mx-auto product-image" alt="Oishi" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Oishi
-                      <p class="card-category">Beverage</p>
-                  </h5>
-                  <p class="card-text">Oishi Original Green Tea Drink 380ml <br> </p>
-                  <p style="font-size: small; float: right;"> RM 1.99/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
+          <?php
+            $query="SELECT product_id, product_name, product_image, product_category, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product_category=categories.category_id WHERE categories.category_name='Beverage'";        
+            
+            if ($result = $pdo->query($query)) {
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    echo'
+                    <div class="col">
+                        <div class="card">
+                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto">
+                        <div class="card-body">
+                            <h5 class="card-title">'.$row["product_name"].'
+                                <p class="card-category">'.$row["category_name"].'</p>
+                            </h5>
+                            <p class="card-text">'.$row["product_description"].'<br> </p>
+                            <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="quantity buttons_added" style="float: left;">
+                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                    value="+" class="plus">
+                            </div>
+                            <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                    ';
+                    if ($row["product_amount"]=="0"){
+                        echo"disabled>Add to list</button>
+                            </div>
+                            </div>
+                        </div>";
+                    }else{
+                        echo">Add to list</button>
+                            </div>
+                            </div>
+                        </div>";
+                    }
+                }
+            }
+          ?>
   
           </div>
         </div>
@@ -776,205 +485,43 @@ require_once 'db/conn.php';
             <p class="lead">Grab a bite, you are just not you when you are hungry</p>
           </div>
           <div class="row row-flex flex-nowrap overflow-auto side-scroll" id="side-scroll2">
-            <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-1.png" class="mx-auto product-image" alt="Mi Sedap" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Mi Sedap
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">Mi Sedap Instant Noodle original flavour 5 packets x 91g <br> </p>
-                  <p style="font-size: small; float: right;"> RM 3.80/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-2.png" class="mx-auto product-image" alt="Mama Mee" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Mama Mee
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">Mama Mee 5 packets x60G <br> </p>
-                  <p style="font-size: small; float: right;"> RM 5.00/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-3.png" class="mx-auto product-image" alt="Samyang" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Samyang
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">Samyang Spicy Korean Ramen <br> </p>
-                  <p style="font-size: small; float: right;"> RM 19.00/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-4.png" class="mx-auto product-image" alt="Nongshim Shin Ramyun" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Nongshim Shin Ramyun
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">Nongshim Shin Ramyun Korea Ramen 5 Pack <br> </p>
-                  <p style="font-size: small; float: right;"> RM 10.50/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-5.png" class="mx-auto product-image" alt="A1 Bak Kut Teh Mee" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">A1 Bak Kut Teh Mee
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">A1 Bak Kut Teh Mee (90g x 4packs) <br> </p>
-                  <p style="font-size: small; float: right;"> RM 7.00/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-6.png" class="mx-auto product-image" alt="Maggi curry" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Maggi curry
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">Maggi curry flavour <br> </p>
-                  <p style="font-size: small; float: right;"> RM 4.80/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-7.png" class="mx-auto product-image" alt="Cintan" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Cintan
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">Cintan Instant Noodles - Assorted Flavour (75g x 5's) <br> </p>
-                  <p style="font-size: small; float: right;"> RM 3.20/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-8.png" class="mx-auto product-image" alt="Mamee Chef" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">Mamee Chef
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">Mamee Chef Instant Noodle - Creamy Tom Yam Flavour (4 x 80g) <br> </p>
-                  <p style="font-size: small; float: right;"> RM 5.90/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-9.png" class="mx-auto product-image" alt="IndoMie" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">IndoMie
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">IndoMie Instant Fried Noodle 85g x5 <br> </p>
-                  <p style="font-size: small; float: right;"> RM 4.85/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
-
-          <div class="col">
-              <div class="card">
-              <img src="assets/Image/Instant Food/Instant-10.png" class="mx-auto product-image" alt="San Remo" height="auto" width="auto">
-              <div class="card-body">
-                  <h5 class="card-title">San Remo
-                      <p class="card-category">Instant Noodle</p>
-                  </h5>
-                  <p class="card-text">San Remo Dry Pasta - Spirals (500g) <br> </p>
-                  <p style="font-size: small; float: right;"> RM 4.80/each</p>
-              </div>
-              <div class="card-body">
-                  <div class="quantity buttons_added" style="float: left;">
-                      <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                          value="+" class="plus">
-                  </div>
-                  <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()">Add to list</button>
-              </div>
-              </div>
-          </div>
+          <?php
+            $query="SELECT product_id, product_name, product_image, product_category, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product_category=categories.category_id WHERE categories.category_name='Instant Food'";        
+            
+            if ($result = $pdo->query($query)) {
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    echo'
+                    <div class="col">
+                        <div class="card">
+                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto">
+                        <div class="card-body">
+                            <h5 class="card-title">'.$row["product_name"].'
+                                <p class="card-category">'.$row["category_name"].'</p>
+                            </h5>
+                            <p class="card-text">'.$row["product_description"].'<br> </p>
+                            <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="quantity buttons_added" style="float: left;">
+                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                    value="+" class="plus">
+                            </div>
+                            <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                    ';
+                    if ($row["product_amount"]=="0"){
+                        echo"disabled>Add to list</button>
+                            </div>
+                            </div>
+                        </div>";
+                    }else{
+                        echo">Add to list</button>
+                            </div>
+                            </div>
+                        </div>";
+                    }
+                }
+            }
+          ?>
           </div>
         </div>
       </div>
