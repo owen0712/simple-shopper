@@ -51,24 +51,23 @@ function checkInputs(){
     }else{
         setSuccessFor(email);
     }
-
+    var reg=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
     //check the password format
     if(passwordValue === ''){
         setErrorFor(password, 'Password cannot be blank');
     }
     else if(!reg.test(passwordValue)){
-        setErrorFor(password, 'Password must have minimum eight characters, at least one letter, one number and one special character');
+        setErrorFor(password, 'Must have minimum eight characters, at least one letter, one number and one special character');
     }else{
         setSuccessFor(password)
     }
 
     //check the confirm password whether correct or not
-    var reg=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
     if(password2Value === ''){
         setErrorFor(password2, 'Password cannot be blank');
     }
     else if(!reg.test(password2Value)){
-        setErrorFor(password2, 'Password must have minimum eight characters, at least one letter, one number and one special character');
+        setErrorFor(password2, 'Must have minimum eight characters, at least one letter, one number and one special character');
     }else if(passwordValue !== password2Value){
         setErrorFor(password2, 'Passwords does not match');
     }
@@ -86,20 +85,6 @@ function checkInputs(){
     else{
         setSuccessFor(phone)
     }
-    
-    //check all condition, whether user had fill up all and in correct format or not?
-    if(name1Value !=='' && name2Value !== '' && passwordValue !== '' && password2Value !== '' &&
-       emailValue !== '' && phoneValue !== '' && birthValue !== '' && validatePhoneNumber(phoneValue) && isEmail(emailValue) &&
-       7 < passwordValue.length < 16 &&  7 < password2Value.length && passwordValue === password2Value){
-        if(signUp(name2Value+name1Value,emailValue,phoneValue,password2Value,birthValue,genderValue)){
-            //if correct then will pop up sign up success message
-            swal("Sign Up Success", "Please go to login page", "success");
-        }
-        else{
-            //if the account already in the local storage then user existed message will be pop up
-            swal("User existed", "Please register using other email and phone number", "error");
-        }
-    }
 }
 
 // set new class for error. If got error, then add class named error into the class name
@@ -108,7 +93,7 @@ function setErrorFor(input, message){
     const small = col_md_3.querySelector('small'); // access the small tag
 
     // add error message inside small
-    small.innerText = message;
+    small.innerHTML = message;
 
     // add error class    (new class name)
     col_md_3.className = 'col-md-3 mb-3 error';

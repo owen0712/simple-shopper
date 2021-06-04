@@ -57,11 +57,11 @@
                     $user->insertOtpPhone($number,$otp,$expires);
                     header("Location: ../php/otp.php?phone=$number");
                 }catch(Exception $e){  
-                    echo "."; 
+                    echo "<br>"; 
                     echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
                     echo '<script>
                     swal({
-                       title: "Warning",
+                       title: "Verification pending",
                        text: "Verification for this Phone number still in pending. We sincerely apologize. We will finished it soon.",
                        icon: "warning",
                        buttons: true,
@@ -75,7 +75,7 @@
                     </script>';
                 }
             }else{
-                echo ".";
+                echo "<br>"; 
                 echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
                 echo '<script>
                 swal({
@@ -93,7 +93,7 @@
                 </script>';
             }
         }else{
-            echo ".";
+            echo "<br>"; 
             echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
             echo '<script>
                 swal({
