@@ -1,7 +1,7 @@
 <?php 
     require_once '../db/conn.php';
     $min = 0;
-    $updatePriceLimit = $pdo->query("SELECT product_price FROM product WHERE product_price = (SELECT MAX(product_price) FROM product)");
+    $updatePriceLimit = $product1->updateProductMaximum();
     $updateMax = $updatePriceLimit->fetch();
     $max = $updateMax['product_price'];
     if(isset($_POST['min_price'])){
@@ -32,6 +32,12 @@
 	        width: 50px;
             padding: 5px 10px;
             text-align: center;
+            border: none;
+            background: rgba(211,211,211,0.5);
+            outline: none;
+        }
+        #min:focus {
+            border-bottom: 2px solid #555;
         }
         #slider-range {
 	        width: 100%;
@@ -41,6 +47,12 @@
 	        width: 50px;
             padding: 5px 10px;
             text-align: center;
+            border: none;
+            background: rgba(211,211,211,0.5);
+            outline: none;
+        }
+        #max:focus {
+            border-bottom: 2px solid #555;
         }
     </style>
 </head>
@@ -142,29 +154,29 @@
             <!-- Side bar with all the filters and all its side menu -->
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-default">
             <form method="POST" action="search.php">
-                <div class="px-3 pt-2">
-                    <span class="fs-5 d-none d-sm-inline" style="color: black;">Price range &nbsp;<button type="submit" class="btn btn-primary btn-sm">Search</button></span>
+                <div class="px-3 pt-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="fs-5 d-none d-sm-inline" style="color: black; justify-content: center;">Price range</span>
                 </div>
                     <div>
                     <span class="fs-5 d-none d-sm-inline" style="color: black;">RM </span>
-                    <input type="" id="min" name="min_price" value="<?= $min; ?>">
-                    <span class="fs-5 d-none d-sm-inline" style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;RM </span>
-                    <input type="" id="max" name="max_price" value="<?= $max; ?>"><br><br>
-                    <div id="slider-range"></div>
+                    <input type="text" id="min" name="min_price" value="<?= $min; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="fs-5 d-none d-sm-inline" style="color: black;">RM </span>
+                    <input type="text" id="max" name="max_price" value="<?= $max; ?>"><br><br>
+                    <div id="slider-range"></div><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success btn-sm" style="width: 192px;">Search</button>
                 </div>
             </form>
             <hr>
                 <form action="" method="GET">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <span class="fs-5 d-none d-sm-inline" style="color: black;">Filter by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary btn-sm">Search</button></span>
+                        <span class="fs-5 d-none d-sm-inline" style="color: black;">Filter by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" style="color: black;">
                             <li>
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                     <i class="bi bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Categories</span> </a>
                                 <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                     <?php
-                                        $sql = "SELECT * FROM categories";
-                                        if($ctg = $pdo->query($sql)){
+                                        if($ctg = $product1->showCategory()){
                                             while($ctgrow = $ctg->fetch(PDO::FETCH_ASSOC)){
                                                 $checked = [];
                                                 if(isset($_GET['category'])){
@@ -181,7 +193,8 @@
                                         }else{
                                             echo "No category found";
                                         }
-                                    ?>
+                                    ?><br>
+                                    <button type="submit" class="btn btn-success btn-sm">Search</button>
                                 </ul>
                             </li>
                         </ul>
@@ -197,29 +210,23 @@
                             $keywords = $_GET['keywords'];
                             if(empty($keywords))
                             {
-                                $query="SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
-                                FROM product INNER JOIN categories ON product.category_id = categories.category_id";
+                                $result = $product1->searchWhole();
                             }else{
-                                $query = "SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
-                                FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE product_description LIKE '%$keywords%'";
+                                $result = $product1->searchKeyword($keywords);
                             }
-                        }
-                        else if(isset($_GET['category'])){
+                        }else if(isset($_GET['category'])){
                             $ctgid = [];
                             $ctgid = $_GET['category'];
-                            $query = "SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
-                            FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE categories.category_id IN (".implode(',',$ctgid).")";
+                            $result = $product1->searchCategory($ctgid);
                         }
                         else if(isset($_POST['min_price']) || isset($_POST['max_price'])){
-                            $query = "SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
-                            FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE product_price BETWEEN '$min' AND '$max' ORDER BY product_price ASC";
+                            $result = $product1->searchPrice($min,$max);
                         }
                         else{
-                            $query = false;
+                            $result = false;
                         }
-                        if($query != false)
+                        if($result != false)
                         {
-                            $result = $pdo->query($query);
                             if ($result->rowCount() !== 0) {
                                 /* fetch associative array */
                                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -261,6 +268,7 @@
                         }
                         /* free result set */
                         $result = null;
+			$pdo = null;
                     ?>
                     <div class="col" style="visibility: hidden;"></div>
                     <div class="col" style="visibility: hidden;"></div>
