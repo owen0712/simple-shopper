@@ -93,6 +93,7 @@ if(isset($_POST['btnSubmit1']))
 			});
 			</script>';
    }
+   $pdo=null;
 }
 ?>
 
