@@ -1,9 +1,8 @@
 <?php
-    session_start();
-    if(isset($_POST['quantity']))
+    if(isset($_POST['quantity']) && isset($_GET['id']))
     {
         $quantity = $_POST['quantity'];
-        $id = $_SESSION["id"];
+        $id = $_GET['id'];
         echo $quantity."<br>";
         echo $id;
         // header('Location:index.php');
