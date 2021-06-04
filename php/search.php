@@ -160,7 +160,7 @@
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" style="color: black;">
                             <li>
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                    <i class="fa fa-cutlery fa-lg cutlery"></i> <span class="ms-1 d-none d-sm-inline">Categories</span> </a>
+                                    <i class="bi bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Categories</span> </a>
                                 <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                     <?php
                                         $sql = "SELECT * FROM categories";
