@@ -331,7 +331,7 @@ require_once 'db/conn.php';
             </form>
 
             <div class="col col-auto justify-content-end dropdown">
-                <button type="button" id="dLabel"  class="btn btn-default" onclick="shoppingListClick()">
+                <button type="button" id="dLabel"  class="btn btn-default" onclick="shoppingListClick(<?php if(isset($_SESSION['user_id'])){echo 1;}else{echo 0;} ?>, true)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="auto" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" align="end">
                     <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                 </svg>
@@ -391,7 +391,7 @@ require_once 'db/conn.php';
                     echo'
                     <div class="col">
                         <div class="card">
-                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
+                        <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
                         </a>
                         <div class="card-body">
                             <h5 class="card-title">'.$row["product_name"].'
@@ -442,7 +442,7 @@ require_once 'db/conn.php';
                     echo'
                     <div class="col">
                         <div class="card">
-                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
+                        <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
                         <div class="card-body">
                             <h5 class="card-title">'.$row["product_name"].'
                                 <p class="card-category">'.$row["category_name"].'</p>
@@ -493,7 +493,7 @@ require_once 'db/conn.php';
                     echo'
                     <div class="col">
                         <div class="card">
-                        <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
+                        <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
                         <div class="card-body">
                             <h5 class="card-title">'.$row["product_name"].'
                                 <p class="card-category">'.$row["category_name"].'</p>
@@ -546,7 +546,7 @@ require_once 'db/conn.php';
                         echo'
                         <div class="col">
                             <div class="card">
-                            <img src="assets/Image/'.$row["category_name"].'/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
+                            <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">'.$row["product_name"].'

@@ -26,11 +26,8 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
 function imageClick(id,page){
     if(page==0){
         window.location.href='php/item.php?id='+id;
-        console.log("this works")
     }else{
         window.location.href='../php/item.php?id='+id;
     }
-    
 }
-//function that pops up the allert when adding items to the shopping list. Also redirects to the log in page if the user is not logged in
-//currently the buttons are fixed but will be adjusted once connected to a database
+
