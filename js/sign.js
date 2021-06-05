@@ -57,7 +57,7 @@ function checkInputs(){
         setErrorFor(password, 'Password cannot be blank');
     }
     else if(!reg.test(passwordValue)){
-        setErrorFor(password, 'Must have minimum eight characters, at least one letter, one number and one special character');
+        setErrorForPassword(password, 'Must have minimum eight characters, at least one letter, one number and one special character',"-53px");
     }else{
         setSuccessFor(password)
     }
@@ -67,7 +67,7 @@ function checkInputs(){
         setErrorFor(password2, 'Password cannot be blank');
     }
     else if(!reg.test(password2Value)){
-        setErrorFor(password2, 'Must have minimum eight characters, at least one letter, one number and one special character');
+        setErrorForPassword(password2, 'Must have minimum eight characters, at least one letter, one number and one special character',"-53px");
     }else if(passwordValue !== password2Value){
         setErrorFor(password2, 'Passwords does not match');
     }
@@ -93,7 +93,7 @@ function setErrorFor(input, message){
     const small = col_md_3.querySelector('small'); // access the small tag
 
     // add error message inside small
-    small.innerHTML = message;
+    small.innerText = message;
 
     // add error class    (new class name)
     col_md_3.className = 'col-md-3 mb-3 error';
@@ -116,4 +116,12 @@ function validatePhoneNumber(input_str) {
     var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
     return re.test(input_str);
+}
+
+function setErrorForPassword(input, message,size){
+    const form_type = input.parentElement;
+    const small = form_type.querySelector('small');
+    small.innerText = message;
+    small.style.bottom=size;
+    form_type.className = 'col-md-3 mb-3 error';
 }
