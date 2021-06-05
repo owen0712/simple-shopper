@@ -9,11 +9,7 @@
       $uid=$_SESSION['user_id'];
       $product=$_GET['id'];
 
-      if ($history->visitedBefore($product,$uid)) {
-        $history->updateTime($product,$uid);
-      }else{
-        $history->newView($product,$uid);
-      }
+      $history->updateHistory($product,$uid);
     }
     
     
@@ -73,15 +69,25 @@
                     <li class="nav-item">
                         <a class="nav-link" href="search.php" style="color: white;">Product</a>
                     </li>
-                    <li class="nav-item" id='admin' style="display: none;">
-                        <a class="nav-link" href="administrator.php" style="color: white;">Administrator</a>
-                    </li>
-                    <li class="nav-item user">
-                        <a class="nav-link" id='sign-up' href="signup.php" style="color: white;">Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id='sign-in' href="login.php" style="color: white;">Log in</a>
-                    </li>
+                    <?php
+                        if(!empty($_SESSION['user_id']))
+                        {
+                            $result = $user-> getUser($_SESSION['user_id']);
+                            $_SESSION['status'] = $result['status'];
+                            if($_SESSION['status'] != "Admin"){
+                                echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';   
+                                echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
+                            }else{
+                                echo '<li class="nav-item" id="admin"><a class="nav-link" href="php/administrator.php" style="color:white;">Administrator</a>';  
+                                echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';     
+                                echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>';  
+                            }
+                        }
+                         else{
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="signup.php" style="color:white;">Sign Up</a>';
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="login.php" style="color:white;">Log in</a>';
+                         }
+                    ?>
                 </ul>
             </div>
         </div>   
@@ -104,7 +110,7 @@
             </form>
 
             <div class="col col-auto justify-content-end dropdown">
-                <button type="button" id="dLabel"  class="btn btn-default" onclick="shoppingListClick()">
+                <button type="button" id="dLabel"  class="btn btn-default" onclick="shoppingListClick(<?php if(isset($_SESSION['user_id'])){echo 1;}else{echo 0;} ?>, false)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="auto" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" align="end">
                     <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                 </svg>

@@ -41,7 +41,7 @@ class history{
         }
     }
 
-    public function visitedBefore($product_id, $uid){
+    public function updateHistory($product_id, $uid){
         try{
             $sql="SELECT product_id,user_id FROM history WHERE product_id=:product AND user_id=:uid";
             $stmt=$this->dbConnect->prepare($sql);
@@ -50,9 +50,9 @@ class history{
             $stmt->execute();
             $result=$stmt;
             if($result->rowCount()>0){
-                return true;
+                $this->updateTime($product_id,$uid);
             }else{
-                return false;
+                $this->newview($product_id,$uid);
             }
         }
         catch(PDOException $e){
