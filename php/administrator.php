@@ -1,5 +1,6 @@
 <?php
     require_once('../db/conn.php');
+    session_start();
     $query = "SELECT * FROM categories";
     $query1 = $query;
     $stmt = $pdo->prepare($query);
@@ -37,17 +38,27 @@
                             <a class="nav-link" href="../index.php" style="color: white;">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../php/search.php" style="color: white;">Product</a>
+                            <a class="nav-link" href="search.php" style="color: white;">Product</a>
                         </li>
-                        <li class="nav-item" id='admin' style="display: none;">
-                            <a class="nav-link" href="../php/administrator.php" style="color: white;">Administrator</a>
-                        </li>
-                        <li class="nav-item user">
-                            <a class="nav-link" id='sign-up' href="../php/signup.php" style="color: white;">Sign Up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id='sign-in' href="../php/login.php" style="color: white;">Log in</a>
-                        </li>
+                        <?php
+                            if(!empty($_SESSION['user_id']))
+                            {
+                                $result = $user-> getUser($_SESSION['user_id']);
+                                $_SESSION['status'] = $result['status'];
+                                if($_SESSION['status'] != "Admin"){
+                                    echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';   
+                                    echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
+                                }else{
+                                    echo '<li class="nav-item" id="admin"><a class="nav-link" href="administrator.php" style="color:white;">Administrator</a>';  
+                                    echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';     
+                                    echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>';  
+                                }
+                            }
+                            else{
+                                echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="signup.php" style="color:white;">Sign Up</a>';
+                                echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="login.php" style="color:white;">Log in</a>';
+                            }
+                        ?>
                     </ul>
                 </div>
             </div>   
@@ -55,19 +66,19 @@
         <!--nav bar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-5">
             <div class="container-fluid">
-              <div class="col col-auto">
-                <a class="navbar-brand" href="../src/index.html"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
-              </div>
-              <div class="col col-10">
-                <select name="selectedCategory" id="selectedCategory">
-                    <option value="">Category Search</option>
-                    <?php
-                        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                            echo '<option value="'.$row["category_id"].'">'.$row["category_name"].'</option>';
-                        }
-                    ?>
-                </select>
-              </div>
+                <div class="col col-auto">
+                    <a class="navbar-brand" href="../index.php"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
+                </div>
+                <div class="col col-10">
+                    <select name="selectedCategory" id="selectedCategory">
+                        <option value="">Category Search</option>
+                        <?php
+                            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                echo '<option value="'.$row["category_id"].'">'.$row["category_name"].'</option>';
+                            }
+                        ?>
+                    </select>
+                </div>
             </div>
         </nav>
         <main class="container">
