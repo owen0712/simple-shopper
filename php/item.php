@@ -2,20 +2,20 @@
     require_once '../db/conn.php';
 
     session_start();
-    $t=date("Y-m-d H:i:s");
-    $uid=$_SESSION['user_id'];
-    $product=$_GET['id'];
-    $query="SELECT product_id,user_id FROM history WHERE product_id=$product AND user_id=$uid";
-    $result = $pdo->query($query);
-    if ($result->rowCount() !== 0) {
-      $query="UPDATE history SET time='$t' WHERE product_id=$product AND user_id=$uid";
-    }else{
-      $query="INSERT INTO history(product_id,user_id,time) VALUES ($product,$uid,'$t')";
-    }
+    
+    
 
-    if ($result = $pdo->query($query)) {
-      echo'<script>console.log("Success")</script>';
+    if(isset($_SESSION['user_id'])){
+      $uid=$_SESSION['user_id'];
+      $product=$_GET['id'];
+
+      if ($history->visitedBefore($product,$uid)) {
+        $history->updateTime($product,$uid);
+      }else{
+        $history->newView($product,$uid);
+      }
     }
+    
     
 
     if(isset($_GET['id'])){

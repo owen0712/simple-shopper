@@ -20,4 +20,6 @@
     $product1 = new Product($pdo);
     require_once 'shoppingList.php';
     $shoppingList = new shoppingList($pdo);
+    require_once 'history.php';
+    $history= new history($pdo);
 ?>
