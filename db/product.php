@@ -333,10 +333,24 @@ class Product{
 
 	public function getNumRecent($uid){
 		try{
-			echo '<script>console.log("'.$category.'")</script>';
-            $sql="SELECT product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name FROM product INNER JOIN categories on product.category_id=categories.category_id WHERE categories.category_name=:category";
+            $sql="SELECT product.product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name, history.user_id, history.product_id, history.time FROM product INNER JOIN categories ON product.category_id=categories.category_id INNER JOIN history ON history.product_id=product.product_id WHERE history.user_id=:uid ORDER BY history.time DESC LIMIT 8";
             $stmt=$this->dbConnect->prepare($sql);
-            $stmt->bindparam(':category',$category);
+            $stmt->bindparam(':uid',$uid);
+            $stmt->execute();
+            $result=$stmt;
+            return $result->rowCount();
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+	}
+
+	public function getRecent($uid){
+		try{
+            $sql="SELECT product.product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name, history.user_id, history.product_id, history.time FROM product INNER JOIN categories ON product.category_id=categories.category_id INNER JOIN history ON history.product_id=product.product_id WHERE history.user_id=:uid ORDER BY history.time DESC LIMIT 8";
+            $stmt=$this->dbConnect->prepare($sql);
+            $stmt->bindparam(':uid',$uid);
             $stmt->execute();
             $result=$stmt;
             return $result;

@@ -197,9 +197,6 @@ require_once 'db/conn.php';
     <link href="style/footer.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <link rel="shortcut icon" type="image/jpg" href="assets/Logo/favicon-32x32.png"/>
-        <?php
-        echo '<script>console.log("'.$_SESSION['user_id'].'")</script>';
-        ?>
 </head>
 
 <body>
@@ -529,65 +526,64 @@ require_once 'db/conn.php';
 
 
           <?php
-            echo '<script>console.log("'.$_SESSION['user_id'].'")</script>';
-            $uid=$_SESSION["user_id"];
-            $query="SELECT product.product_id, product_name, product_image, product.category_id, product_amount, product_price, product_description, categories.category_id, categories.category_name, history.user_id, history.product_id, history.time FROM product INNER JOIN categories ON product.category_id=categories.category_id INNER JOIN history ON history.product_id=product.product_id WHERE history.user_id=$uid ORDER BY history.time DESC LIMIT 8";        
-            $result = $pdo->query($query);
-            $num=$result->rowCount();
-            if($num!==0){
-                echo'
-                <div class="spacer"></div>
-                <div >
-                    <h2>Recently viewed items</h2>
-                </div>
-                <div class="row mx-auto">
-                ';
-                if ($result) {
-                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        echo'
-                        <div class="col">
-                            <div class="card">
-                            <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">'.$row["product_name"].'
-                                    <p class="card-category">'.$row["category_name"].'</p>
-                                </h5>
-                                <p class="card-text">'.$row["product_description"].'<br> </p>
-                                <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="quantity buttons_added" style="float: left;">
-                                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
-                                        value="+" class="plus">
+            if (isset($_SESSION["user_id"])){
+                $uid=$_SESSION["user_id"];
+                $num=$product1->getNumRecent($_SESSION["user_id"]);
+                if($num!==0){
+                    echo'
+                    <div class="spacer"></div>
+                    <div >
+                        <h2>Recently viewed items</h2>
+                    </div>
+                    <div class="row mx-auto">
+                    ';
+                    if ($result=$product1->getRecent($_SESSION["user_id"])) {
+                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                            echo'
+                            <div class="col">
+                                <div class="card">
+                                <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title">'.$row["product_name"].'
+                                        <p class="card-category">'.$row["category_name"].'</p>
+                                    </h5>
+                                    <p class="card-text">'.$row["product_description"].'<br> </p>
+                                    <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
                                 </div>
-                                <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
-                        ';
-                        if ($row["product_amount"]=="0"){
-                            echo"disabled>Add to list</button>
-                                </div>
-                                </div>
-                            </div>";
-                        }else{
-                            echo">Add to list</button>
-                                </div>
-                                </div>
-                            </div>";
+                                <div class="card-body">
+                                    <div class="quantity buttons_added" style="float: left;">
+                                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                            value="+" class="plus">
+                                    </div>
+                                    <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                            ';
+                            if ($row["product_amount"]=="0"){
+                                echo"disabled>Add to list</button>
+                                    </div>
+                                    </div>
+                                </div>";
+                            }else{
+                                echo">Add to list</button>
+                                    </div>
+                                    </div>
+                                </div>";
+                            }
                         }
                     }
-                }
 
-                if($num%4!==0){
-                    $temp=4-($num%4);
-                    for ($x = 0; $x < $temp ; $x++) {
-                        echo '<div class="col" style="visibility: hidden;"></div>
-                        ';
+                    if($num%4!==0){
+                        $temp=4-($num%4);
+                        for ($x = 0; $x < $temp ; $x++) {
+                            echo '<div class="col" style="visibility: hidden;"></div>
+                            ';
+                        }
                     }
-                }
 
-                echo'
-                    </div>
-                ';
+                    echo'
+                        </div>
+                    ';
+                }
             }
           ?>
 
