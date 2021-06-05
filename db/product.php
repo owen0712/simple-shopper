@@ -271,9 +271,8 @@ class Product{
         try{
 			$ctg = implode(',',$ctgid);
             $sql="SELECT product_id, product_image, product_name,categories.category_name,product_price,product_amount, product_description 
-			FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE categories.category_id IN (:ctg)";
+			FROM product INNER JOIN categories ON product.category_id = categories.category_id WHERE categories.category_id IN (".$ctg.")";
             $stmt=$this->dbConnect->prepare($sql); 
-			$stmt->bindparam(':ctg',$ctg);
             $stmt->execute();
             $result=$stmt;
             return $result;
