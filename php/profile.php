@@ -65,20 +65,30 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
+                        <a class="nav-link" href="../index.php" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
+                        <a class="nav-link" href="search.php" style="color: white;">Product</a>
                     </li>
-                    <li class="nav-item" id='admin' style="display: none;">
-                        <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
-                    </li>
-                    <li class="nav-item user">
-                        <a class="nav-link" id='sign-up' href="../src/sign.html" style="color: white;">Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id='sign-in' href="../src/signin.html" style="color: white;">Log in</a>
-                    </li>
+                    <?php
+                        if(!empty($_SESSION['user_id']))
+                        {
+                            $result = $user-> getUser($_SESSION['user_id']);
+                            $_SESSION['status'] = $result['status'];
+                            if($_SESSION['status'] != "Admin"){
+                                echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';   
+                                echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
+                            }else{
+                                echo '<li class="nav-item" id="admin"><a class="nav-link" href="php/administrator.php" style="color:white;">Administrator</a>';  
+                                echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';     
+                                echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>';  
+                            }
+                        }
+                         else{
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="signup.php" style="color:white;">Sign Up</a>';
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="login.php" style="color:white;">Log in</a>';
+                         }
+                    ?>
                 </ul>
             </div>
         </div>   
@@ -86,22 +96,22 @@
     <header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <div class="col col-auto">
-                <a class="navbar-brand" href="../src/index.html"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
+                <a class="navbar-brand" href="../index.php"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
             </div>
 
-            <div class="col col-6">
+            <form class="col col-6" method="GET" action="search.php">
                 <div class="input-group mx-auto">
-                    <input type="search" id="search" class="form-control form-control-lg mx-auto" placeholder="Search"/>
-                    <button type="button" id="searchButton" class="btn btn-primary" onclick="searchFunc()">
+                    <input type="search" id="search" name="keywords" class="form-control form-control-lg mx-auto" placeholder="Search"/>
+                    <button type="submit" id="searchButton" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                     </button>
                 </div>
-            </div>
+            </form>
 
             <div class="col col-auto justify-content-end dropdown">
-                <button type="button" id="dLabel"  class="btn btn-default" onclick="shoppingListClick()">
+                <button type="button" id="dLabel"  class="btn btn-default" onclick="shoppingListClick(<?php if(isset($_SESSION['user_id'])){echo 1;}else{echo 0;} ?>, false)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="auto" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" align="end">
                     <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                 </svg>
@@ -116,7 +126,6 @@
                 <li class="nav-item"><a href="profile.php" class="nav-link active">Profile</a></li>
                 <li class="nav-item"><a href="address.php" class="nav-link link-dark">Addresses</a></li>
                 <li class="nav-item"><a href="password.php" class="nav-link link-dark">Change Password</a></li>
-                <li class="nav-item"><a href="bankcard.html" class="nav-link link-dark">Bank Card</a></li>
             </ul>
         </nav>
 
