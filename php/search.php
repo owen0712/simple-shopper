@@ -82,6 +82,57 @@
         });
     </script>
 
+<script>
+    function addtolist(PID){
+            console.log(PID);
+            temp="P"+PID;
+            console.log(temp);
+            Productqty=document.getElementById(temp).value;
+            swal("Do you want to add this item?",{
+                buttons:{
+                    customise: {
+                        text: "Add to cart",
+                        value: "customise",
+                    },
+                    cancel: "cancel",
+                },
+            }).then((value) => {
+                <?php $list= $shoppingList->getShoppingList($_SESSION['user_id'])?>
+                switch(value){                    
+                    case "customise":
+                        swal("Choose your cart",{
+                            buttons:{                                    
+                                    <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
+                                    <?php echo $r['list_id']?> :{
+                                        text: "<?php echo $r['list_name']?>",
+                                        value: "<?php echo $r['list_id']?>",
+                                    },                                                                        
+                                    <?php } echo "cancel:\"cancel\""?>                                    
+                                }                                                                        
+                    }).then((value) =>{
+                        switch(value){
+                            <?php $list= $shoppingList->getShoppingList($_SESSION['user_id'])?>
+                            <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
+                            case "<?php echo $r['list_id']?>":
+                                $.ajax({
+                                        url: 'addtolist.php',
+                                        data: {ListID: <?php echo $r['list_id']?>, ProID: PID, quantity: Productqty},
+                                        method: "POST"
+                                    })
+                                swal('Your item has been added to <?php echo $r['list_name']?>',"Take me home!", "success");
+                                break;                           
+                            <?php } echo"default:swal(\"See you next time :)\");"?>
+                        }
+                    });
+                    break;
+                
+                default: 
+                    swal("See you next time :)");
+            }
+        });
+    }
+        </script>
+
     <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -239,10 +290,10 @@
                                         </div>
                                         <div class='card-body' style='padding-top:0px; padding-bottom:0px'>
                                             <div class='quantity buttons_added' style='float: left;'>
-                                                <input type='button' value='-' class='minus'><input type='number' step='1' min='1' max='' name='quantity' value='1' title='Qty' class='input-text qty text' size='4' pattern='' inputmode=''><input type='button'
+                                                <input type='button' value='-' class='minus'><input type='number' step='1' min='1' max='' name='quantity' value='1' title='Qty' class='input-text qty text' size='4' pattern='' inputmode='' id='P".$row["product_id"]."'><input type='button'
                                                     value='+' class='plus'>
                                             </div>
-                                            <button id='addBtn' type='button' class='btn btn-success' style='float: right;' onclick='addtolist()'";
+                                            <button id='addBtn' type='button' class='btn btn-success' style='float: right;' onclick='addtolist(".$row['product_id'].")'";
 
                                     if ($row["product_amount"]=="0"){
                                         echo"disabled>Add to list</button>

@@ -206,68 +206,55 @@ require_once 'db/conn.php';
     <script src="js/header.js" defer></script>
     <script src="js/increment.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>function addtolist(){
-                swal("Do you want to add this item?",{
-                    buttons:{
-                        customise: {
-                            text: "Add to cart",
-                            value: "customise",
-                        },
-                        cancel: "cancel",
+    <script>
+    function addtolist(PID){
+            console.log(PID);
+            temp="P"+PID;
+            console.log(temp);
+            Productqty=document.getElementById(temp).value;
+            swal("Do you want to add this item?",{
+                buttons:{
+                    customise: {
+                        text: "Add to cart",
+                        value: "customise",
                     },
-                }).then((value) => {
-                    switch(value){
-                        case "customise":
-                            swal("Choose your cart",{
-                                buttons:{                
-    <?php
-        
-        $x=1;
-
-        $query="SELECT list_name, list_id FROM shopping_list ORDER BY list_id ASC";        
-        
-        if ($result = $pdo->query($query)) {
-            /* fetch associative array */
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                echo '                 '.$x.': {
-                                        text: "'.$row["list_name"].'",
-                                        value: "'.$row["list_id"].'",
-                                    },
-                ';
-                $x=$x+1;
+                    cancel: "cancel",
+                },
+            }).then((value) => {
+                <?php $list= $shoppingList->getShoppingList($_SESSION['user_id'])?>
+                switch(value){                    
+                    case "customise":
+                        swal("Choose your cart",{
+                            buttons:{                                    
+                                    <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
+                                    <?php echo $r['list_id']?> :{
+                                        text: "<?php echo $r['list_name']?>",
+                                        value: "<?php echo $r['list_id']?>",
+                                    },                                                                        
+                                    <?php } echo "cancel:\"cancel\""?>                                    
+                                }                                                                        
+                    }).then((value) =>{
+                        switch(value){
+                            <?php $list= $shoppingList->getShoppingList($_SESSION['user_id'])?>
+                            <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
+                            case "<?php echo $r['list_id']?>":
+                                $.ajax({
+                                        url: 'php/addtolist.php',
+                                        data: {ListID: <?php echo $r['list_id']?>, ProID: PID, quantity: Productqty},
+                                        method: "POST"
+                                    })
+                                swal('Your item has been added to <?php echo $r['list_name']?>',"Take me home!", "success");
+                                break;                           
+                            <?php } echo"default:swal(\"See you next time :)\");"?>
+                        }
+                    });
+                    break;
+                
+                default: 
+                    swal("See you next time :)");
             }
-        }
-    ?>
-                                   
-                                   cancel: "cancel",
-                                }
-                            }).then((value) =>{
-                                switch(value){
-                                    <?php
-                                        $query="SELECT list_name, list_id FROM shopping_list ORDER BY list_id ASC";        
-        
-                                        if ($result = $pdo->query($query)) {
-                                            /* fetch associative array */
-                                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                                echo '              case "'.$row["list_id"].'": 
-                                                                        swal("Your item has been added to '.$row["list_name"].'", "Take me home!","success");
-                                                                        break;
-                                                ';
-                                            }
-                                        }
-                                    ?>
-                                
-                                    default:
-                                        swal("See you next time :)");
-                                }
-                            });
-                            break;
-                        
-                        default: 
-                            swal("See you next time :)");
-                    }
-                });
-            }
+        });
+    }
         </script>
     
     <!-- The first nav bar that is not stuck on top. This is for less frequently used buttons like login and sign up -->
@@ -396,10 +383,10 @@ require_once 'db/conn.php';
                         </div>
                         <div class="card-body">
                             <div class="quantity buttons_added" style="float: left;">
-                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" id="P'.$row["product_id"].'"><input type="button"
                                     value="+" class="plus">
                             </div>
-                            <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                            <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist('.$row["product_id"].')"
                     ';
                     if ($row["product_amount"]=="0"){
                         echo"disabled>Add to list</button>
@@ -445,10 +432,10 @@ require_once 'db/conn.php';
                         </div>
                         <div class="card-body">
                             <div class="quantity buttons_added" style="float: left;">
-                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" id="P'.$row["product_id"].'"><input type="button"
                                     value="+" class="plus">
                             </div>
-                            <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                            <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist('.$row["product_id"].')"
                     ';
                     if ($row["product_amount"]=="0"){
                         echo"disabled>Add to list</button>
@@ -494,10 +481,10 @@ require_once 'db/conn.php';
                         </div>
                         <div class="card-body">
                             <div class="quantity buttons_added" style="float: left;">
-                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" id="P'.$row["product_id"].'"><input type="button"
                                     value="+" class="plus">
                             </div>
-                            <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                            <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist('.$row["product_id"].')"
                     ';
                     if ($row["product_amount"]=="0"){
                         echo"disabled>Add to list</button>
@@ -548,10 +535,10 @@ require_once 'db/conn.php';
                                 </div>
                                 <div class="card-body">
                                     <div class="quantity buttons_added" style="float: left;">
-                                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
+                                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" id="P'.$row["product_id"].'"><input type="button"
                                             value="+" class="plus">
                                     </div>
-                                    <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist()"
+                                    <button id="addBtn" type="button" class="btn btn-success" style="float: right;" onclick="addtolist('.$row["product_id"].')"
                             ';
                             if ($row["product_amount"]=="0"){
                                 echo"disabled>Add to list</button>

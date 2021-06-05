@@ -121,6 +121,41 @@ class shoppingList{
             return false;
         }
     }
+
+    public function addNewItem($listid,$productid,$qty){
+        try{
+            $sql = "INSERT INTO `shopping_list_item` (list_id,product_id,item_quantity) VALUES (:listId,:productId,:qty)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindparam(':listId',$listid);                        
+            $stmt->bindparam(':productId',$productid);
+            $stmt->bindparam(':qty',$qty);       
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function addItemToList($listid,$productid,$qty){
+        try {
+            $sql="SELECT list_id,product_id FROM `shopping_list_item` WHERE list_id=:listId AND product_id=:productId";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindparam(':listId',$listid);                        
+            $stmt->bindparam(':productId',$productid);
+            $stmt->execute();
+            $result=$stmt;
+            if($result->rowCount()>0){
+                $this->updateItemQuantity($qty,$listid,$productid);
+            }else{
+                $this->addNewItem($listid,$productid,$qty);
+            }            
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
 }
 
 ?>
