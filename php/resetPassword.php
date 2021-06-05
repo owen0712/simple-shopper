@@ -301,25 +301,24 @@ session_start();
          const passwordValue = password.value.trim();
          const password2Value = password2.value.trim();
 
+         var reg=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
          if(passwordValue === ''){
            setErrorFor(password,'Password cannot be blank');
-         }else if(passwordValue.length < 8){
-           setErrorFor(password,'Password must more than 8 characters');
-         }else if(passwordValue !== '' && password2Value ===''){
+         }else if(!reg.test(passwordValue)){
+           setErrorForPassword(password, 'Must have minimum eight characters, at least one letter, one number and one special character',"-53px");
+          }else if(passwordValue !== '' && password2Value ===''){
            setSuccessFor(password);
-         }
-         else if(passwordValue !== password2Value){
+         }else if(passwordValue !== password2Value){
           setErrorFor(password, 'Password and confirm password do not match'); 
          }
          
          if(password2Value === ''){
            setErrorFor(password2,'Confirm password cannot be blank');
+        }else if(!reg.test(passwordValue)){
+           setErrorForPassword(password, 'Must have minimum eight characters, at least one letter, one number and one special character',"-53px");
         }else if(passwordValue !== password2Value){
            setErrorFor(password2, 'Password and confirm password do not match'); 
-        }else if(password2Value.length < 8){
-           setErrorFor(password2, 'Password must more than 8 characters'); 
-        }
-        else{
+        }else{
           setSuccessFor(password2);
         }
        }
@@ -337,6 +336,14 @@ session_start();
         const form_type = input.parentElement; 
         form_type.className = 'form-type success';
       }
+
+      function setErrorForPassword(input, message,size){
+        const form_type = input.parentElement;
+        const small = form_type.querySelector('small');
+        small.innerText = message;
+        small.style.bottom=size;
+        form_type.className = 'col-md-3 mb-3 error';
+    }
 
       function setSuccessForLink(input){
         document.getElementsByClassName("popup")[0].classList.add("active");

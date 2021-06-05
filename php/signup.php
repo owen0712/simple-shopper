@@ -157,6 +157,7 @@ require_once '../db/conn.php';
 <?php
          if(isset($_POST['btnSign']))
          {
+             $Fname = $_POST['fName'];
              $Lname = $_POST['lName'];
              $email = $_POST['Uemail'];
              $phone = $_POST['Uphone'];
@@ -168,8 +169,8 @@ require_once '../db/conn.php';
                 $gender = $_POST['gender'];
                 $birth = $_POST['birthdaytime'];
                 $status = 'User';
-        
-                if($Lname =="" || $email == "" || $phone == "" || $pwd =="" ||
+                $profile = '../assets/uploads/profile.png';
+                if($Fname=="" || $Lname =="" || $email == "" || $phone == "" || $pwd =="" ||
                 $gender =="" || $birth == ""){
                   echo "<script>swalError2();</script>";
                 }
@@ -183,7 +184,8 @@ require_once '../db/conn.php';
                 $gender !="" && $birth != ""){
                   if(!$user->checkEmailExist($email))
                   {
-                    if ($user->insertDetails($Lname, $email, $phone, $pwd, $gender, $birth, $status));
+                    $name = $Fname." ".$Lname;
+                    if ($user->insertDetails($name, $email, $phone, $pwd, $gender, $birth,$profile, $status));
                     {
                         $_SESSION['Uemail'] = $email;
                         echo "<script>swalSuccess();</script>";
@@ -288,8 +290,8 @@ require_once '../db/conn.php';
         <!-- Last form-row that consist of 2 input fields which are Birthday and Gender -->
         <div>
           <div class="form-row"  style="justify-content:center">
-           <label class="form-label" style="margin-right: 160px; margin-top:10px;">Birthday</label>
-           <label class="form-label" style="margin-top: 10px;">Gender</label>
+           <label class="form-label" style="margin-right: 160px; margin-top:16px;">Birthday</label>
+           <label class="form-label" style="margin-top: 16px;">Gender</label>
           </div>
         </div>
 
