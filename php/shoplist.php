@@ -217,7 +217,7 @@
                                 <tr>
                                     <td>
                                         <div class="cart-info">                                        
-                                            <?php echo '<img src="../assets/Image/'.$i['product_image'].'" width="80" height="80"/>'?>
+                                            <?php echo '<img src="../assets/upload_image/'.$i['product_image'].'" width="80" height="80"/>'?>
                                             <div>
                                                 <p><?php echo $i['product_description'];?></p>
                                                 <small>Price: <?php echo number_format((float)$i['product_price'], 2);?></small>
