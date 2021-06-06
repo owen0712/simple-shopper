@@ -42,8 +42,10 @@ $('main').on('change', '.qty', function(e) {
     var PID = $(this).parent().find(".ProID").val();
     var LID = $(this).parent().find(".ListID").val();
     var product_description = $(this).parent().find(".ProDescription").val();
+    var availableQty = $(this).parent().find(".AvailableQty").val();
     var qty = parseInt($(this).val());
     var priceText = $(this).parent().parent().prev().find("small").text();
+    var status = $(this).parent().parent().prev().find(".status");
     var price = parseFloat(priceText.substr(7, priceText.length - 1));
     var parent = $(this).parent().parent().parent().parent().parent().next();
     var previousPriceText = $(this).parent().parent().next().html();
@@ -62,7 +64,19 @@ $('main').on('change', '.qty', function(e) {
         return;
     }
 
-
+    if (availableQty < qty) {
+        if (status.hasClass("available")) {
+            status.removeClass("available");
+            status.text("Out of Stock");
+            status.addClass("outStock");
+        }
+    } else {
+        if (status.hasClass("outStock")) {
+            status.removeClass("outStock");
+            status.text("Available");
+            status.addClass("available");
+        }
+    }
     $(this).parent().parent().next().html("RM " + (qty * price).toFixed(2));
     calculate(parent, totalAddedPrice);
     $.ajax({

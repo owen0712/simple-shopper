@@ -1,5 +1,6 @@
 <?php
     require_once '../db/conn.php';          
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,57 +26,67 @@
 
 <!-- Header -->
 <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
-                </li>
-                <li class="nav-item" id='admin' style="display: none;">
-                    <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
-                </li>
-                <li class="nav-item user">
-                    <a class="nav-link" id='sign-up' href="../src/sign.html" style="color: white;">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id='sign-in' href="../src/signin.html" style="color: white;">Log in</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</header>
-<header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
-    <div class="container-fluid">
-        <div class="col col-auto">
-            <a class="navbar-brand" href="./index.php"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
-        </div>
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.php" style="color: white;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.php" style="color: white;">Product</a>
+                    </li>
+                    <?php
+                        if(!empty($_SESSION['user_id']))
+                        {
+                            $result = $user-> getUser($_SESSION['user_id']);
+                            $_SESSION['status'] = $result['status'];
+                            if($_SESSION['status'] != "Admin"){
+                                echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';   
+                                echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
+                            }else{
+                                echo '<li class="nav-item" id="admin"><a class="nav-link" href="php/administrator.php" style="color:white;">Administrator</a>';  
+                                echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';     
+                                echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>';  
+                            }
+                        }
+                         else{
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="signup.php" style="color:white;">Sign Up</a>';
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="login.php" style="color:white;">Log in</a>';
+                         }
+                    ?>
+                </ul>
+            </div>
+        </div>   
+    </header>
+    <header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
+        <div class="container-fluid">
+            <div class="col col-auto">
+                <a class="navbar-brand" href="../index.php"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
+            </div>
 
-        <div class="col col-6">
-            <div class="input-group mx-auto">
-                <input type="search" id="search" class="form-control form-control-lg mx-auto" placeholder="Search" />
-                <button type="button" id="searchButton" class="btn btn-primary" onclick="searchFunc()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            <form class="col col-6" method="GET" action="search.php">
+                <div class="input-group mx-auto">
+                    <input type="search" id="search" name="keywords" class="form-control form-control-lg mx-auto" placeholder="Search"/>
+                    <button type="submit" id="searchButton" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                    </button>
+                </div>
+            </form>
+
+            <div class="col col-auto justify-content-end dropdown">
+                <button type="button" id="dLabel"  class="btn btn-default" onclick="shoppingListClick(<?php if(isset($_SESSION['user_id'])){echo 1;}else{echo 0;} ?>, false)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="auto" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" align="end">
+                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                 </svg>
                 </button>
             </div>
         </div>
-
-        <div class="col col-auto justify-content-end dropdown">
-            <button type="button" id="dLabel" class="btn btn-default" onclick="shoppingListClick()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" align="end">
-                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-            </svg>
-            </button>
-        </div>
-    </div>
-</header>
+    </header>
 <br>
 
 <!-- Body -->
@@ -110,7 +121,7 @@
             $id = $_POST['listid'];        
             $listname=$_POST['listname'];        
             $current= $shoppingList->getCurrentShoppingList($id)->fetch(PDO::FETCH_ASSOC);
-            $temp = $shoppingList->getShoppingList(1);//<!--remember change-->
+            $temp = $shoppingList->getShoppingList($_SESSION['user_id']);
             if ($listname!=$current['list_name']){
                 if ($listname!=''){                    
                     $duplicate=FALSE;
@@ -149,7 +160,7 @@
         <h2>My Shopping List</h2>
         <!-- <input onsubmit="newElement()" type="text" id="myInput" placeholder="New Shopping List...">
         <span onclick="newElement()" class="addBtn btn">Add</span> -->
-        <input type='hidden' name='userid' value='<?php echo 1?>'/><!--remember change-->
+        <input type='hidden' name='userid' value='<?php echo $_SESSION['user_id']?>'/>
         <input name="listname" type="text" id="myInput" placeholder="New Shopping List...">
         <input name="addList" value="Add" type="submit" class="addBtn btn">
         <!-- <input id="addBtn" type="submit" value="Add" > -->
@@ -162,7 +173,7 @@
         <div class="accordion" id="accordionExample">
             <!-- Shopping List 1-->             
             <?php
-                    $result=$shoppingList->getShoppingList(1);//<!--remember change-->
+                    $result=$shoppingList->getShoppingList($_SESSION['user_id']);
                     while($r=$result->fetch(PDO::FETCH_ASSOC)){
                 ?>                
             <div class="accordion-item">
@@ -212,9 +223,9 @@
                                                 <small>Price: <?php echo number_format((float)$i['product_price'], 2);?></small>
                                                 <?php 
                                                     if($i['product_amount']>=$i['item_quantity'])
-                                                        echo "<p class=\"available\">Available</p>";
+                                                        echo "<p class=\"status available\">Available</p>";
                                                     else
-                                                        echo "<p class=\"outStock\">Out of Stock</p>";
+                                                        echo "<p class=\"status outStock\">Out of Stock</p>";
                                                 ?>                                                
                                                 <a onclick='javascript: confirmDeleteItem(<?php echo $i["product_id"]?>,<?php echo $r["list_id"]?>,"<?php echo $i["product_description"]?>");'  type="button" class="remove">Remove</a>
                                             </div>
@@ -226,6 +237,7 @@
                                             <input type="hidden" class="ListID" value="<?php echo $r['list_id']; ?>"/>
                                             <input type="hidden" class="ProID" value="<?php echo $i['product_id']; ?>"/>
                                             <input type="hidden" class="ProDescription" value="<?php echo $i['product_description']; ?>"/>
+                                            <input type="hidden" class="AvailableQty" value="<?php echo $i['product_amount']; ?>"/>
                                             <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="<?php echo $i['item_quantity'];?>" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button"
                                                 value="+" class="plus">
                                         </div>
@@ -245,7 +257,7 @@
                         <?php }else{?>
                             <div class="small-container">
                                 <h3 class="text-center"> It is an Empty Shopping List </h3>
-                                <p class="text-muted text-center">Add item from <a class="backIndex" style="text-decoration:none;" href="./index.php"> HOME</a> page.</p>
+                                <p class="text-muted text-center">Add item from <a class="backIndex" style="text-decoration:none;" href="../index.php"> HOME</a> page.</p>
                             </div>
                         <?php } ?>     
                     </div>
