@@ -151,7 +151,7 @@
                         <a class="nav-link" href="../index.php" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search.php" style="color: white;">Product</a>
+                        <a class="nav-link" href="search.php?keywords=" style="color: white;">Product</a>
                     </li>
                     <?php
                         if(!empty($_SESSION['user_id']))

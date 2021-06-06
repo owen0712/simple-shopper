@@ -276,7 +276,7 @@ require_once 'db/conn.php';
                         <a class="nav-link" href="php/index.php" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="src/search.html" style="color: white;">Product</a>
+                        <a class="nav-link" href="php/search.php?keywords=" style="color: white;">Product</a>
                     </li>
                     <?php
                         if(!empty($_SESSION['user_id']))
