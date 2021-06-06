@@ -228,10 +228,15 @@
                                                 <p><?php echo $i['product_description'];?></p>
                                                 <small>Price: <?php echo number_format((float)$i['product_price'], 2);?></small>
                                                 <?php 
-                                                    if($i['product_amount']>=$i['item_quantity'])
-                                                        echo "<p class=\"status available\">Available</p>";
-                                                    else
+                                                    if ($i['product_amount']==0){
                                                         echo "<p class=\"status outStock\">Out of Stock</p>";
+                                                    }
+                                                    else{
+                                                        if($i['product_amount']>=$i['item_quantity'])
+                                                            echo "<p class=\"status available\">Available</p>";
+                                                        else
+                                                            echo "<p class=\"status outStock\">Quantity Exceed</p>";
+                                                    }
                                                 ?>                                                
                                                 <a onclick='javascript: confirmDeleteItem(<?php echo $i["product_id"]?>,<?php echo $r["list_id"]?>,"<?php echo $i["product_description"]?>");'  type="button" class="remove">Remove</a>
                                             </div>
