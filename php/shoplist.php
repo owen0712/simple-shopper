@@ -174,7 +174,13 @@
             <!-- Shopping List 1-->             
             <?php
                     $result=$shoppingList->getShoppingList($_SESSION['user_id']);
-                    while($r=$result->fetch(PDO::FETCH_ASSOC)){
+                    $listcount = $result->rowCount();                    
+                    if ($listcount == 0 ){
+                        echo '<h1 class="text-center">It is currently empty.</h1>';
+                        echo '<h1 class="text-center">Create a new list and manage it.</h1>';
+                    }
+                    else
+                    while($r=$result->fetch(PDO::FETCH_ASSOC)){                        
                 ?>                
             <div class="accordion-item">
                 <!-- Shopping List header button-->
