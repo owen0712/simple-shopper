@@ -245,7 +245,7 @@
                         <?php }else{?>
                             <div class="small-container">
                                 <h3 class="text-center"> It is an Empty Shopping List </h3>
-                                <p class="text-muted text-center">Add item from <a class="backIndex" style="text-decoration:none;" href="./index.html"> HOME</a> page.</p>
+                                <p class="text-muted text-center">Add item from <a class="backIndex" style="text-decoration:none;" href="./index.php"> HOME</a> page.</p>
                             </div>
                         <?php } ?>     
                     </div>
@@ -316,5 +316,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
-
+<?php $pdo=null; ?>
 </html>
