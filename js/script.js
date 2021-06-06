@@ -67,7 +67,7 @@ $('main').on('change', '.qty', function(e) {
     if (availableQty < qty) {
         if (status.hasClass("available")) {
             status.removeClass("available");
-            status.text("Out of Stock");
+            status.text("Quantity Exceed");
             status.addClass("outStock");
         }
     } else {
