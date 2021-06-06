@@ -88,48 +88,55 @@
             temp="P"+PID;
             console.log(temp);
             Productqty=document.getElementById(temp).value;
-            swal("Do you want to add this item?",{
-                buttons:{
-                    customise: {
-                        text: "Add to cart",
-                        value: "customise",
+            loggedIn=<?php if(isset($_SESSION['user_id'])){ echo 'true'; $temp=$_SESSION['user_id'];}else{echo 'false'; $temp=0;} ?>;
+
+            if(loggedIn){
+                swal("Do you want to add this item?",{
+                    buttons:{
+                        customise: {
+                            text: "Add to cart",
+                            value: "customise",
+                        },
+                        cancel: "cancel",
                     },
-                    cancel: "cancel",
-                },
-            }).then((value) => {
-                <?php $list= $shoppingList->getShoppingList($_SESSION['user_id'])?>
-                switch(value){                    
-                    case "customise":
-                        swal("Choose your cart",{
-                            buttons:{                                    
-                                    <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
-                                    <?php echo $r['list_id']?> :{
-                                        text: "<?php echo $r['list_name']?>",
-                                        value: "<?php echo $r['list_id']?>",
-                                    },                                                                        
-                                    <?php } echo "cancel:\"cancel\""?>                                    
-                                }                                                                        
-                    }).then((value) =>{
-                        switch(value){
-                            <?php $list= $shoppingList->getShoppingList($_SESSION['user_id'])?>
-                            <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
-                            case "<?php echo $r['list_id']?>":
-                                $.ajax({
-                                        url: 'addtolist.php',
-                                        data: {ListID: <?php echo $r['list_id']?>, ProID: PID, quantity: Productqty},
-                                        method: "POST"
-                                    })
-                                swal('Your item has been added to <?php echo $r['list_name']?>',"Take me home!", "success");
-                                break;                           
-                            <?php } echo"default:swal(\"See you next time :)\");"?>
-                        }
-                    });
-                    break;
-                
-                default: 
-                    swal("See you next time :)");
+                }).then((value) => {
+                    <?php $list= $shoppingList->getShoppingList($temp)?>
+                    switch(value){                    
+                        case "customise":
+                            swal("Choose your cart",{
+                                buttons:{                                    
+                                        <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
+                                        <?php echo $r['list_id']?> :{
+                                            text: "<?php echo $r['list_name']?>",
+                                            value: "<?php echo $r['list_id']?>",
+                                        },                                                                        
+                                        <?php } echo "cancel:\"cancel\""?>                                    
+                                    }                                                                        
+                        }).then((value) =>{
+                            switch(value){
+                                <?php $list= $shoppingList->getShoppingList($temp)?>
+                                <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
+                                case "<?php echo $r['list_id']?>":
+                                    $.ajax({
+                                            url: 'addtolist.php',
+                                            data: {ListID: <?php echo $r['list_id']?>, ProID: PID, quantity: Productqty},
+                                            method: "POST"
+                                        })
+                                    swal('Your item has been added to <?php echo $r['list_name']?>',"Take me home!", "success");
+                                    break;                           
+                                <?php } echo"default:swal(\"See you next time :)\");"?>
+                            }
+                        });
+                        break;
+                    
+                        default: 
+                            swal("See you next time :)");
+                    }
+                });
+            }else{
+                swal("You have to sign in first", "You will be directed to the sign in page in 3 seconds");
+                setTimeout(function(){window.location.href='login.php'}, 3000);
             }
-        });
     }
         </script>
 
