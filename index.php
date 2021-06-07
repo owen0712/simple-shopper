@@ -273,7 +273,7 @@ require_once 'db/conn.php';
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="php/index.php" style="color: white;">Home</a>
+                        <a class="nav-link" href="index.php" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="php/search.php?keywords=" style="color: white;">Product</a>
@@ -288,11 +288,11 @@ require_once 'db/conn.php';
                                 $profile=substr($result['profile'],3);
                             }
                             if($_SESSION['status'] != "Admin"){
-                                echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img class="rounded-circle" src="'.$profile.'" height="30mm;">'.$result['name'].'</a>';   
+                                echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img class="rounded-circle" src="'.$profile.'" height="30mm;"> '.$result['name'].'</a>';   
                                 echo '<li class="nav-item"><a class="nav-link" href="php/logout.php" style="color:white;">Logout</a>'; 
                             }else{
                                 echo '<li class="nav-item" id="admin"><a class="nav-link" href="php/administrator.php" style="color:white;">Administrator</a>';  
-                                echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img class="rounded-circle" src="'.$profile.'" height="30mm;">'.$result['name'].'</a>';     
+                                echo '<li class = nav-item"><a class="nav-link" href="php/profile.php" style="color: white;"><img class="rounded-circle" src="'.$profile.'" height="30mm;"> '.$result['name'].'</a>';     
                                 echo '<li class="nav-item"><a class="nav-link" href="php/logout.php" style="color:white;">Logout</a>';  
                             }
                         }
