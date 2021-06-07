@@ -174,6 +174,7 @@
       </div>
     </section>
   </div>
+  <?php $pdo = null;?>
   <div class="spacer"></div>
 
     <div class = "footer">
