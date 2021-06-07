@@ -57,7 +57,7 @@ $('main').on('change', '.qty', function(e) {
         $(this).val(qty);
         return;
     }
-    if (qty == 0) {
+    if (qty <= 0) {
         confirmDeleteItem(PID, LID, product_description);
         qty = (previousPrice / price).toFixed(0);
         $(this).val(qty);
@@ -67,7 +67,7 @@ $('main').on('change', '.qty', function(e) {
     if (availableQty < qty) {
         if (status.hasClass("available")) {
             status.removeClass("available");
-            status.text("Out of Stock");
+            status.text("Quantity Exceed");
             status.addClass("outStock");
         }
     } else {

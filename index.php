@@ -242,7 +242,7 @@ require_once 'db/conn.php';
                                 <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
                                 case "<?php echo $r['list_id']?>":
                                     $.ajax({
-                                            url: 'addtolist.php',
+                                            url: 'php/addtolist.php',
                                             data: {ListID: <?php echo $r['list_id']?>, ProID: PID, quantity: Productqty},
                                             method: "POST"
                                         })
