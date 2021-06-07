@@ -163,7 +163,9 @@ require_once '../db/conn.php';
              $phone = $_POST['Uphone'];
              if(!isset($_POST['Upass']) or empty($_POST['Upass']))
              {
-              echo "<script>swalError2();</script>";
+                echo "<script>swalError2();</script>";
+             }elseif(!preg_match('#^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$#',$_POST['Upass'])){
+                echo "<script>swalError2();</script>";
              }else{
                 $pwd = $user->sanitizePassword($_POST['Upass']);
                 $gender = $_POST['gender'];

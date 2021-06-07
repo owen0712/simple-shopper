@@ -51,7 +51,8 @@ function checkInputs(){
     }else{
         setSuccessFor(email);
     }
-    var reg=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+
+    var reg=/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
     //check the password format
     if(passwordValue === ''){
         setErrorFor(password, 'Password cannot be blank');
@@ -69,7 +70,7 @@ function checkInputs(){
     else if(!reg.test(password2Value)){
         setErrorForPassword(password2, 'Must have minimum eight characters, at least one letter, one number and one special character',"-53px");
     }else if(passwordValue !== password2Value){
-        setErrorFor(password2, 'Passwords does not match');
+        setErrorForPassword(password2, 'Passwords does not match',"-20px");
     }
     else{
         setSuccessFor(password2)
