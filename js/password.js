@@ -67,7 +67,7 @@ function checkCurrentPassword(){
 
 function checkNewPassword(){
     const newPasswordValue = n_password.value.trim();
-    var reg=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+    var reg=/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
     if(newPasswordValue === ''){
         setErrorFor(n_password,'Password cannot be blank',"-20px");
         return false;
