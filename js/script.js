@@ -57,7 +57,7 @@ $('main').on('change', '.qty', function(e) {
         $(this).val(qty);
         return;
     }
-    if (qty == 0) {
+    if (qty <= 0) {
         confirmDeleteItem(PID, LID, product_description);
         qty = (previousPrice / price).toFixed(0);
         $(this).val(qty);
