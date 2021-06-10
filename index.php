@@ -276,7 +276,7 @@ require_once 'db/conn.php';
                         <a class="nav-link" href="index.php" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="php/search.php?keywords=" style="color: white;">Product</a>
+                        <a class="nav-link" href="php/search.php?keywords=" style="color: white;">Products</a>
                     </li>
                     <?php
                         if(!empty($_SESSION['user_id']))
@@ -385,14 +385,14 @@ require_once 'db/conn.php';
                         <div class="card">
                         <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
                         </a>
-                        <div class="card-body">
+                        <div class="card-body" style="padding-bottom:0px;">
                             <h5 class="card-title">'.$row["product_name"].'
                                 <p class="card-category">'.$row["category_name"].'</p>
                             </h5>
                             <p class="card-text">'.$row["product_description"].'<br> </p>
-                            <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
+                            <p class="card-text" style="font-size: small; text-align:right;"> RM '.$row["product_price"].'/each<br>'.$row["product_amount"].' left</p>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="padding-top:0px; padding-bottom:0px">
                             <div class="quantity buttons_added" style="float: left;">
                                 <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" id="P'.$row["product_id"].'"><input type="button"
                                     value="+" class="plus">
@@ -434,14 +434,15 @@ require_once 'db/conn.php';
                     <div class="col">
                         <div class="card">
                         <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
-                        <div class="card-body">
+                        </a>
+                        <div class="card-body" style="padding-bottom:0px;">
                             <h5 class="card-title">'.$row["product_name"].'
                                 <p class="card-category">'.$row["category_name"].'</p>
                             </h5>
                             <p class="card-text">'.$row["product_description"].'<br> </p>
-                            <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
+                            <p class="card-text" style="font-size: small; text-align:right;"> RM '.$row["product_price"].'/each<br>'.$row["product_amount"].' left</p>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="padding-top:0px; padding-bottom:0px">
                             <div class="quantity buttons_added" style="float: left;">
                                 <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" id="P'.$row["product_id"].'"><input type="button"
                                     value="+" class="plus">
@@ -483,14 +484,15 @@ require_once 'db/conn.php';
                     <div class="col">
                         <div class="card">
                         <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
-                        <div class="card-body">
+                        </a>
+                        <div class="card-body" style="padding-bottom:0px;">
                             <h5 class="card-title">'.$row["product_name"].'
                                 <p class="card-category">'.$row["category_name"].'</p>
                             </h5>
                             <p class="card-text">'.$row["product_description"].'<br> </p>
-                            <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
+                            <p class="card-text" style="font-size: small; text-align:right;"> RM '.$row["product_price"].'/each<br>'.$row["product_amount"].' left</p>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="padding-top:0px; padding-bottom:0px">
                             <div class="quantity buttons_added" style="float: left;">
                                 <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" id="P'.$row["product_id"].'"><input type="button"
                                     value="+" class="plus">
@@ -537,14 +539,14 @@ require_once 'db/conn.php';
                                 <div class="card">
                                 <img src="assets/upload_image/'.$row["product_image"].'" class="mx-auto product-image" alt="'.$row["product_name"].'" height="auto" width="auto" onclick="imageClick('.$row["product_id"].',0)">
                                 </a>
-                                <div class="card-body">
+                                <div class="card-body" style="padding-bottom:0px;">
                                     <h5 class="card-title">'.$row["product_name"].'
                                         <p class="card-category">'.$row["category_name"].'</p>
                                     </h5>
                                     <p class="card-text">'.$row["product_description"].'<br> </p>
-                                    <p style="font-size: small; float: right;"> RM '.$row["product_price"].'/each</p>
+                                    <p class="card-text" style="font-size: small; text-align:right;"> RM '.$row["product_price"].'/each<br>'.$row["product_amount"].' left</p>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="padding-top:0px; padding-bottom:0px">
                                     <div class="quantity buttons_added" style="float: left;">
                                         <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" id="P'.$row["product_id"].'"><input type="button"
                                             value="+" class="plus">
@@ -641,5 +643,7 @@ require_once 'db/conn.php';
             <p class="copyright">Copyright&copy; 2021 Simple Shopper</p>
         </div>
     </div>
+
+    <?php $pdo=null; ?>
 </body>
 </html>

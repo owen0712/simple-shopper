@@ -51,10 +51,68 @@
     </style>
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/header.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+    function addtolist(PID){
+            console.log(PID);
+            temp="P"+PID;
+            console.log(temp);
+            Productqty=document.getElementById("quantity").value;
+            loggedIn=<?php if(isset($_SESSION['user_id'])){ echo 'true'; $temp=$_SESSION['user_id'];}else{echo 'false'; $temp=0;} ?>;
+
+            if(loggedIn){
+                swal("Do you want to add this item?",{
+                    buttons:{
+                        customise: {
+                            text: "Add to cart",
+                            value: "customise",
+                        },
+                        cancel: "cancel",
+                    },
+                }).then((value) => {
+                    <?php $list= $shoppingList->getShoppingList($temp)?>
+                    switch(value){                    
+                        case "customise":
+                            swal("Choose your cart",{
+                                buttons:{                                    
+                                        <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
+                                        <?php echo $r['list_id']?> :{
+                                            text: "<?php echo $r['list_name']?>",
+                                            value: "<?php echo $r['list_id']?>",
+                                        },                                                                        
+                                        <?php } echo "cancel:\"cancel\""?>                                    
+                                    }                                                                        
+                        }).then((value) =>{
+                            switch(value){
+                                <?php $list= $shoppingList->getShoppingList($temp)?>
+                                <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
+                                case "<?php echo $r['list_id']?>":
+                                    $.ajax({
+                                            url: 'addtolist.php',
+                                            data: {ListID: <?php echo $r['list_id']?>, ProID: PID, quantity: Productqty},
+                                            method: "POST"
+                                        })
+                                    swal('Your item has been added to <?php echo $r['list_name']?>',"Take me home!", "success");
+                                    break;                           
+                                <?php } echo"default:swal(\"See you next time :)\");"?>
+                            }
+                        });
+                        break;
+                    
+                        default: 
+                            swal("See you next time :)");
+                    }
+                });
+            }else{
+                swal("You have to sign in first", "You will be directed to the sign in page in 3 seconds");
+                setTimeout(function(){window.location.href='login.php'}, 3000);
+            }
+    }
+    </script>
 
     <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
         <div class="container-fluid">
@@ -149,7 +207,6 @@
             </tbody>
           </table>
           <hr>
-          <form method="POST" action="tempadditemtocart.php?id=<?= $res['product_id'];?>">
           <div class="table-responsive mb-2">
             <table class="table table-sm table-borderless">
               <tbody>
@@ -168,8 +225,7 @@
               </tbody>
             </table>
           </div>
-          <button type="submit" class="btn btn-primary btn-md mr-1 mb-2">Add to cart</button>
-          </form>
+          <button type="submit" class="btn btn-primary btn-md mr-1 mb-2" onclick="addtolist(<?php echo $res['product_id']; ?>)" <?php if($res['product_amount']==0){echo "disabled";} ?>>Add to list</button>
         </div>
       </div>
     </section>
