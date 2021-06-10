@@ -167,10 +167,10 @@
                                 echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>';  
                             }
                         }
-                         else{
+                            else{
                             echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="signup.php" style="color:white;">Sign Up</a>';
                             echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="login.php" style="color:white;">Log in</a>';
-                         }
+                            }
                     ?>
                 </ul>
             </div>

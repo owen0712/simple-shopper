@@ -42,7 +42,7 @@
                         <a class="nav-link" href="../index.php" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search.php" style="color: white;">Product</a>
+                        <a class="nav-link" href="search.php?keywords=" style="color: white;">Product</a>
                     </li>
                     <?php
                         if(!empty($_SESSION['user_id']))
@@ -58,10 +58,10 @@
                                 echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>';  
                             }
                         }
-                         else{
+                            else{
                             echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="signup.php" style="color:white;">Sign Up</a>';
                             echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="login.php" style="color:white;">Log in</a>';
-                         }
+                            }
                     ?>
                 </ul>
             </div>
