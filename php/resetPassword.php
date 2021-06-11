@@ -36,31 +36,41 @@ session_start();
     <link rel="shortcut icon" type="image/jpg" href="../assets/Logo/favicon-32x32.png"/>
    </head>
    <header class="navbar navbar-expand-lg navbar-dark py-0 " style="background-color: #4ca456;">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="../src/index.html" style="color: white;">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../src/search.html" style="color: white;">Product</a>
-                </li>
-                <li class="nav-item" id='admin' style="display: none;">
-                    <a class="nav-link" href="../src/administrator.html" style="color: white;">Administrator</a>
-                </li>
-                <li class="nav-item user">
-                    <a class="nav-link" id='sign-up' href="../src/sign.html" style="color: white;">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id='sign-in' href="../src/signin.html" style="color: white;">Log in</a>
-                </li>
-            </ul>
-        </div>
-    </div>   
-</header>
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.php" style="color: white;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.php?keywords=" style="color: white;">Product</a>
+                    </li>
+                    <?php
+                        if(!empty($_SESSION['user_id']))
+                        {
+                            $result = $user-> getUser($_SESSION['user_id']);
+                            $_SESSION['status'] = $result['status'];
+                            if($_SESSION['status'] != "Admin"){
+                                echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';   
+                                echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>'; 
+                            }else{
+                                echo '<li class="nav-item" id="admin"><a class="nav-link" href="administrator.php" style="color:white;">Administrator</a>';  
+                                echo '<li class = nav-item"><a class="nav-link" href="profile.php" style="color: white;"><img class="rounded-circle" src="'.$result['profile'].'" height="30mm;">'.$result['name'].'</a>';     
+                                echo '<li class="nav-item"><a class="nav-link" href="logout.php" style="color:white;">Logout</a>';  
+                            }
+                        }
+                            else{
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-up" href="signup.php" style="color:white;">Sign Up</a>';
+                            echo '<li class="nav-item"><a class="nav-link" id="sign-in" href="login.php" style="color:white;">Log in</a>';
+                            }
+                    ?>
+                </ul>
+            </div>
+        </div>   
+  </header>
 <header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
         <div class="col col-auto">
