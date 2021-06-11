@@ -163,9 +163,9 @@
                             <tr>
                                 <td><label for="gender">Gender</label></td>
                                 <td>
-                                    <input type="radio" id="male" name="male" onclick='removeFemale()' <?php if($result['gender']=='Male') echo 'checked'?>/>
+                                    <input type="radio" id="male" name="male" onclick='removeFemale()' <?php if($result['gender']=='male') echo 'checked'?>/>
                                     <label for="male">Male</label>
-                                    <input type="radio" id="female" name="female" onclick='removeMale()' <?php if($result['gender']=='Female') echo 'checked'?>/>
+                                    <input type="radio" id="female" name="female" onclick='removeMale()' <?php if($result['gender']=='female') echo 'checked'?>/>
                                     <label for="female">Female</label>
                                 </td>
                             </tr>

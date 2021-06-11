@@ -124,7 +124,7 @@
             </div>
         </div>   
     </header>
-    <header class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
+    <header class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <div class="col col-auto">
                 <a class="navbar-brand" href="../index.php"><img src="../assets/Logo/SSLogo2.png" height="70mm"></a>
