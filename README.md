@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1 align="center">Simple Shopper</h1>
 
 <p align="center">Project under WIF2003 Web Programming subject</p>
@@ -30,3 +31,7 @@ $ git clone https://github.com/owen0712/simple-shopper.git
 ```
 
 ```
+=======
+# simple-shopper
+Simple Shopper is the project under WIF2003 Web Programming subject.
+>>>>>>> parent of 74189c4a (Update README.md)
