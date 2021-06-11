@@ -315,10 +315,10 @@
                                     }
                                 }
                             }else{
-                                echo "<img src='../assets/Image/nothing.png' style='margin-left: 470px; margin-top: 120px; height: 200px; width:300px;'>";
+                                echo "<img src='../assets/upload_image/nothing.png' style='margin-left: 470px; margin-top: 120px; height: 200px; width:300px;'>";
                             }
                         }else{
-                            echo "<img src='../assets/Image/nothing.png' style='margin-left: 470px; margin-top: 120px; height: 200px; width:300px;'>";
+                            echo "<img src='../assets/upload_image/nothing.png' style='margin-left: 470px; margin-top: 120px; height: 200px; width:300px;'>";
                         }
                         /* free result set */
                         $result = null;
@@ -330,7 +330,7 @@
             </div>
         </div>
     </div>
-<!-- echo "<h4 class='mt-4 fw-light text-center'>Seems like nothing here...</h4>"; -->
+
     <div class="spacer"></div>
 
     <div class = "footer">
