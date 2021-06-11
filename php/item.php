@@ -196,7 +196,7 @@
         <div class="col-md-6">
           <?= "<h5>".$res["product_name"]."</h5>"?>
           <p class="mb-2 text-muted small"><?= $res['category_name']?></p>
-          <p><span class="mr-1"><strong><?= $res['product_price']?></strong></span></p>
+          <p><span class="mr-1"><strong>RM <?= $res['product_price']?></strong></span></p>
           <p class="pt-1"><?= $res['product_description']?></p>
           <table class="table table-sm table-borderless mb-0">
             <tbody>
