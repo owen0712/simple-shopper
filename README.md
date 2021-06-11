@@ -30,3 +30,14 @@ $ git clone https://github.com/owen0712/simple-shopper.git
 ```
 
 ```
+<p align="center">
+  <img src="images/tan_jun_ling_with_mask.png" width="300" height="400">
+</p>
+<p align="center">Upload Images</p>
+
+<p align="center">
+  <img src="output/image_with_mask.PNG" width="300" height="400">
+</p>
+<p align="center">Results</p>
+
+
