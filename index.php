@@ -218,7 +218,7 @@ require_once 'db/conn.php';
                 swal("Do you want to add this item?",{
                     buttons:{
                         customise: {
-                            text: "Add to cart",
+                            text: "Add to list",
                             value: "customise",
                         },
                         cancel: "cancel",
@@ -227,7 +227,7 @@ require_once 'db/conn.php';
                     <?php $list= $shoppingList->getShoppingList($temp)?>
                     switch(value){                    
                         case "customise":
-                            swal("Choose your cart",{
+                            swal("Choose your shopping list",{
                                 buttons:{                                    
                                         <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
                                         <?php echo $r['list_id']?> :{
