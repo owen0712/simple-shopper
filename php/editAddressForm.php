@@ -84,7 +84,7 @@
                     <label for="default_checked">Set as Default Address</label>
                 </div>
                 <div class="col-lg-12">
-                    <input type="submit" value="SUBMIT" class="btn btn-success">
+                    <input type="submit" value="Update" class="btn btn-success">
                 </div>
             </div>
         </form>
