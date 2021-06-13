@@ -222,7 +222,7 @@
               </tbody>
             </table>
           </div>
-          <button type="submit" class="btn btn-primary btn-md mr-1 mb-2" onclick="addtolist(<?php echo $res['product_id']; ?>)" <?php if($res['product_amount']==0){echo "disabled";} ?>>Add to list</button>
+          <button type="submit" class="btn btn-success btn-md mr-1 mb-2" onclick="addtolist(<?php echo $res['product_id']; ?>)" <?php if($res['product_amount']==0){echo "disabled";} ?>>Add to list</button>
         </div>
       </div>
     </section>
