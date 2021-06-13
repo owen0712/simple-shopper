@@ -198,14 +198,9 @@
           <p class="mb-2 text-muted small"><?= $res['category_name']?></p>
           <p><span class="mr-1"><strong>RM <?= number_format($res["product_price"], 2, '.', '');?></strong></span></p>
           <p class="pt-1"><?= $res['product_description']?></p>
-          <table class="table table-sm table-borderless mb-0">
-            <tbody>
-              <tr>
-                <th class="pl-0 w-25" scope="row"><strong>Stock</strong></th>
-                <td><?= $res['product_amount']?></td>
-              </tr>
-            </tbody>
-          </table>
+          <p class="pl-0 w-25" scope="row"><strong>Stock</strong>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span><?= $res['product_amount']?></span></p>
           <hr>
           <div class="table-responsive mb-2">
             <table class="table table-sm table-borderless">
