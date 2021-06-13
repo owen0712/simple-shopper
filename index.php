@@ -206,7 +206,7 @@ require_once 'db/conn.php';
     <script src="js/header.js" defer></script>
     <script src="js/increment.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
+    <script defer>
     function addtolist(PID){
             console.log(PID);
             temp="P"+PID;
@@ -218,23 +218,23 @@ require_once 'db/conn.php';
                 swal("Do you want to add this item?",{
                     buttons:{
                         customise: {
-                            text: "Add to list",
+                            text: "Add to list", className: "sweet-success",
                             value: "customise",
                         },
-                        cancel: "cancel",
+                        cancel: "Cancel",
                     },
                 }).then((value) => {
                     <?php $list= $shoppingList->getShoppingList($temp)?>
-                    switch(value){                    
+                    switch(value){                   
                         case "customise":
                             swal("Choose your shopping list",{
-                                buttons:{                                    
+                                buttons:{                                   
                                         <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
                                         <?php echo $r['list_id']?> :{
                                             text: "<?php echo $r['list_name']?>",
                                             value: "<?php echo $r['list_id']?>",
                                         },                                                                        
-                                        <?php } echo "cancel:\"cancel\""?>                                    
+                                        <?php } echo "cancel:\"Cancel\""?>                                    
                                     }                                                                        
                         }).then((value) =>{
                             switch(value){
@@ -257,6 +257,10 @@ require_once 'db/conn.php';
                             swal("See you next time :)");
                     }
                 });
+
+                <?php if($rowNum==0){
+                    echo '});';
+                }?>
             }else{
                 swal("You have to sign in first", "You will be directed to the sign in page in 3 seconds");
                 setTimeout(function(){window.location.href='php/login.php'}, 3000);
