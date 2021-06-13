@@ -154,8 +154,8 @@ require_once '../db/conn.php';
         function swalError(){
           swal({
             title: "Error",
-            text: "Email and password does not match",
-            icon: "warning",
+            text: "Email does not exist",
+            icon: "error",
             buttons: true,
             dangerMode: true,
             })
@@ -171,7 +171,23 @@ require_once '../db/conn.php';
           swal({
             title: "Error",
             text: "Email and password does not match",
-            icon: "warning",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+            })
+        .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/login.php'}, 900);
+                }
+          });
+        }
+    </script>
+    <script>
+        function swalError3(){
+          swal({
+            title: "Error",
+            text: "Phone number does not exist",
+            icon: "error",
             buttons: true,
             dangerMode: true,
             })
@@ -195,13 +211,19 @@ require_once '../db/conn.php';
                if($user->checkLoginEmail($email,$pwd,$status))
                {
                   echo "<script>swalSuccess();</script>";
-               }else{
+               }else if (!$user->checkEmailExist($email)){
                   echo "<script>swalError();</script>";
+               }
+               else{
+                  echo "<script>swalError2();</script>";
                }
              }else if($user->checkPhone($email))
              {
                if($user->checkLoginPhone($email,$pwd,$status)){
                 echo "<script>swalSuccess();</script>";
+               }else if (!$user->checkPhoneExist($email))
+               {
+                echo "<script>swalError3();</script>";
                }
              }else{
                 echo "<script>swalError2();</script>";
