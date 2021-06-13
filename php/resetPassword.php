@@ -176,11 +176,11 @@ session_start();
 <?php
         if(isset($_POST['btnReset']))
         {
-          if(!empty($_SESSION['user_id']))
+          if(!empty($_SESSION['Otp_user_id']))
           {
              if(!empty($_POST['password1']) && !empty($_POST['password2']))
              {
-               $user->updatePassword($_SESSION['user_id'],$user->sanitizePassword($_POST['password1']));
+               $user->updatePassword($_SESSION['Otp_user_id'],$user->sanitizePassword($_POST['password1']));
                echo "<script>swalSuccess();</script>";
              }elseif(!empty($_POST['password1']) && empty($_POST['password2']))
              {
@@ -217,7 +217,7 @@ session_start();
                 <small>Error Message</small>
               </div>
           </div>
-          <div class = "form-type" style="margin-top:30px; margin-bottom: 23px;">
+          <div class = "form-type" style="margin-top:35px; margin-bottom: 30px;">
             <i class="bi bi-lock-fill"></i>
             <input type="password" placeholder="Confirm Password" name="password2" id = "password2"/>
             <span class="eye" onclick="myFunction2()">
@@ -313,21 +313,21 @@ session_start();
 
          var reg=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
          if(passwordValue === ''){
-           setErrorFor(password,'Password cannot be blank');
+           setErrorForPassword(password,'password cannot be blank',"-20px");
          }else if(!reg.test(passwordValue)){
-           setErrorForPassword(password, 'Must have minimum eight characters, at least one letter, one number and one special character',"-53px");
-          }else if(passwordValue !== '' && password2Value ===''){
+           setErrorForPassword(password, 'Must have minimum eight characters, at least one letter, one number and one special character',"-37px");
+          }else if(passwordValue !== password2Value){
+           setErrorForPassword(password, 'Password and confirm password do not match',"-20px");
+         }else{
            setSuccessFor(password);
-         }else if(passwordValue !== password2Value){
-          setErrorFor(password, 'Password and confirm password do not match'); 
          }
          
          if(password2Value === ''){
-           setErrorFor(password2,'Confirm password cannot be blank');
-        }else if(!reg.test(passwordValue)){
-           setErrorForPassword(password, 'Must have minimum eight characters, at least one letter, one number and one special character',"-53px");
+          setErrorForPassword(password2,'Confirm password cannot be blank',"-20px");
+        }else if(!reg.test(password2Value)){
+           setErrorForPassword(password2, 'Must have minimum eight characters, at least one letter, one number and one special character',"-37px");
         }else if(passwordValue !== password2Value){
-           setErrorFor(password2, 'Password and confirm password do not match'); 
+           setErrorForPassword(password2, 'Password and confirm password do not match',"-20px");
         }else{
           setSuccessFor(password2);
         }
@@ -352,7 +352,7 @@ session_start();
         const small = form_type.querySelector('small');
         small.innerText = message;
         small.style.bottom=size;
-        form_type.className = 'col-md-3 mb-3 error';
+        form_type.className = 'form-type error';
     }
 
       function setSuccessForLink(input){
