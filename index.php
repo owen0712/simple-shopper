@@ -206,57 +206,73 @@ require_once 'db/conn.php';
     <script src="js/header.js" defer></script>
     <script src="js/increment.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
+    <script defer>
     function addtolist(PID){
-            console.log(PID);
             temp="P"+PID;
-            console.log(temp);
             Productqty=document.getElementById(temp).value;
             loggedIn=<?php if(isset($_SESSION['user_id'])){ echo 'true'; $temp=$_SESSION['user_id'];}else{echo 'false'; $temp=0;} ?>;
 
             if(loggedIn){
+                <?php 
+                $list= $shoppingList->getShoppingList($temp);
+                if($list->rowCount()===0){?>
+                    swal({
+                        title: "You do not have a shopping list yet.",
+                        text:"Add a shopping list before adding products.\nProceed to the shopping list page to do so.",
+                        buttons:{
+                            customize:{
+                                text: "Add new shopping list", className:"sweet-success",
+                                value:"addList",
+                            },cancel: "Cancel",
+                        }, 
+                    }).then((value)=>{
+                        if (value=="addList"){
+                            window.location.href='php/shoplist.php'
+                        }
+                    });
+                <?php }else { ?>
+
                 swal("Do you want to add this item?",{
                     buttons:{
                         customise: {
-                            text: "Add to list",
+                            text: "Add to list", className: "sweet-success",
                             value: "customise",
                         },
-                        cancel: "cancel",
+                        cancel: "Cancel",
                     },
-                }).then((value) => {
-                    <?php $list= $shoppingList->getShoppingList($temp)?>
-                    switch(value){                    
+                }).then((value) => {    
+                    switch(value){                   
                         case "customise":
                             swal("Choose your shopping list",{
-                                buttons:{                                    
+                                buttons:{                                   
                                         <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
-                                        <?php echo $r['list_id']?> :{
-                                            text: "<?php echo $r['list_name']?>",
-                                            value: "<?php echo $r['list_id']?>",
+                                        <?php echo $r['list_id'];?> :{
+                                            text: "<?php echo $r['list_name'];?>",
+                                            value: "<?php echo $r['list_id'];?>",
                                         },                                                                        
-                                        <?php } echo "cancel:\"cancel\""?>                                    
+                                        <?php } echo "cancel:\"Cancel\""?>                                    
                                     }                                                                        
                         }).then((value) =>{
                             switch(value){
-                                <?php $list= $shoppingList->getShoppingList($temp)?>
+                                <?php $list= $shoppingList->getShoppingList($temp);?>
                                 <?php while ($r=$list->fetch(PDO::FETCH_ASSOC)){?>
-                                case "<?php echo $r['list_id']?>":
+                                case "<?php echo $r['list_id'];?>":
                                     $.ajax({
                                             url: 'php/addtolist.php',
-                                            data: {ListID: <?php echo $r['list_id']?>, ProID: PID, quantity: Productqty},
+                                            data: {ListID: <?php echo $r['list_id'];?>, ProID: PID, quantity: Productqty},
                                             method: "POST"
                                         })
-                                    swal('Your item has been added to <?php echo $r['list_name']?>',"Take me home!", "success");
+                                    swal('Your item has been added to <?php echo $r['list_name'];?>',"Take me home!", "success");
                                     break;                           
-                                <?php } echo"default:swal(\"See you next time :)\");"?>
+                                <?php } echo"default:swal(\"See you next time :)\");";?>
                             }
                         });
                         break;
-                    
                         default: 
                             swal("See you next time :)");
                     }
                 });
+                <?php }?>
             }else{
                 swal("You have to sign in first", "You will be directed to the sign in page in 3 seconds");
                 setTimeout(function(){window.location.href='php/login.php'}, 3000);

@@ -245,6 +245,7 @@ body::-webkit-scrollbar-thumb {
 .swal-button {
   margin-left: 100px;
   margin-right: 100px;
+  height: 40px;
 }
 
 /* CSS for the category anchor tags so that they are black instead of blue */
@@ -254,4 +255,38 @@ li a{
 
 li a:hover{
   color: black;
+}
+
+.sweet-success{
+  color:#fff;
+  background: #198754;
+}
+
+.sweet-success:hover{
+  color:#198754;
+  background: #fff !important;
+  border: #198754 solid 1px;
+}
+
+.swal-button--cancel {
+  color: #fff;
+  background-color: #DC3545;
+  height: 40px;
+  box-shadow: none;
+}
+
+.swal-button--cancel:hover{
+  color:#DC3545;
+  background: #fff !important;
+  border: #DC3545 solid 1px;
+}
+
+.swal-title{
+  margin-bottom: 0%;
+  padding-bottom: 0;
+  color:black;
+}
+
+.swal-text{
+  text-align: center;
 }
