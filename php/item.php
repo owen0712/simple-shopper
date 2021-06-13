@@ -216,9 +216,11 @@
                 <tr>
                   <td class="pl-0">
                     <div class="def-number-input number-input mb-0">
-                      <input type="button" value="-" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-                      <input id="quantity" class="input-text qty text" min="1" name="quantity" value="1" type="number">
-                      <input type="button" value="+" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                      <div class='quantity buttons_added' style='float: left;'>
+                            <input type='button' value='-' onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class='minus'>
+                            <input id=quantity type='number' step='1' min='1' max='' name='quantity' value='1' title='Qty' class='input-text qty text' size='4' pattern='' inputmode=''>
+                            <input type='button' value='+' onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class='plus'>
+                        </div>
                     </div>
                   </td>
                 </tr>
