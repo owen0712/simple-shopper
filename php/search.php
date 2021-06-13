@@ -84,13 +84,29 @@
 
 <script>
     function addtolist(PID){
-            console.log(PID);
             temp="P"+PID;
-            console.log(temp);
             Productqty=document.getElementById(temp).value;
             loggedIn=<?php if(isset($_SESSION['user_id'])){ echo 'true'; $temp=$_SESSION['user_id'];}else{echo 'false'; $temp=0;} ?>;
 
             if(loggedIn){
+                <?php 
+                $list= $shoppingList->getShoppingList($temp);
+                if($list->rowCount()===0){?>
+                    swal({
+                        title: "You do not have a shopping list yet.",
+                        text:"Add a shopping list before adding products.\nProceed to the shopping list page to do so.",
+                        buttons:{
+                            customize:{
+                                text: "Add new shopping list", className:"sweet-success",
+                                value:"addList",
+                            },cancel: "Cancel",
+                        }, 
+                    }).then((value)=>{
+                        if (value=="addList"){
+                            window.location.href='shoplist.php'
+                        }
+                    });
+                <?php }else { ?>
                 swal("Do you want to add this item?",{
                     buttons:{
                         customise: {
@@ -100,7 +116,6 @@
                         cancel: "cancel",
                     },
                 }).then((value) => {
-                    <?php $list= $shoppingList->getShoppingList($temp)?>
                     switch(value){                    
                         case "customise":
                             swal("Choose your shopping list",{
@@ -133,6 +148,7 @@
                             swal("See you next time :)");
                     }
                 });
+                <?php }?>
             }else{
                 swal("You have to sign in first", "You will be directed to the sign in page in 3 seconds");
                 setTimeout(function(){window.location.href='login.php'}, 3000);

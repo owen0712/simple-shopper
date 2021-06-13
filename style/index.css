@@ -280,3 +280,13 @@ li a:hover{
   background: #fff !important;
   border: #DC3545 solid 1px;
 }
+
+.swal-title{
+  margin-bottom: 0%;
+  padding-bottom: 0;
+  color:black;
+}
+
+.swal-text{
+  text-align: center;
+}
