@@ -89,7 +89,7 @@
                         <th>Image</th>
                         <th>Name</th>
                         <th>Category</th>
-                        <th>Total Amount</th>
+                        <th>Quantity</th>
                         <th>Price (RM)</th>
                         <th>Description</th>
                         <th>Update</th>
