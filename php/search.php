@@ -293,7 +293,7 @@
                                                 <p class='card-category'>".$row["category_name"]."</p>
                                             </h5>
                                             <p class='card-text'>".$row['product_description']."</p>
-                                            <p class='card-text' style='font-size: small; text-align:right;'> RM ".number_format($row["product_price"], 2, '.', '')."/each<br>".$row["product_left"]." left</p>
+                                            <p class='card-text' style='font-size: small; text-align:right;'> RM ".number_format($row["product_price"], 2, '.', '')."/each<br>".$row["product_amount"]." left</p>
                                         </div>
                                         <div class='card-body' style='padding-top:0px; padding-bottom:0px'>
                                             <div class='quantity buttons_added' style='float: left;'>
