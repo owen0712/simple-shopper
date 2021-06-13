@@ -162,3 +162,7 @@ function confirmDeleteItem(Pid, Lid, product_description) {
             }
         });
 }
+
+function imageClick(id) {
+    window.location.href = '../php/item.php?id=' + id;
+}

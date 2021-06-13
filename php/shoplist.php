@@ -223,7 +223,7 @@
                                 <tr>
                                     <td>
                                         <div class="cart-info">                                        
-                                            <?php echo '<img src="../assets/upload_image/'.$i['product_image'].'" width="80" height="80"/>'?>
+                                            <?php echo '<img src="../assets/upload_image/'.$i['product_image'].'" width="80" height="80" onclick="imageClick('.$i['product_id'].')" />'?>
                                             <div>
                                                 <p><?php echo $i['product_description'];?></p>
                                                 <small>Price: <?php echo number_format((float)$i['product_price'], 2);?></small>
@@ -333,7 +333,7 @@
 
     <!-- Imported script-->        
     <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
-    <script src="../js/header.js" ></script>    
+    <script src="../js/header.js" ></script>        
     <script src="../js/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
