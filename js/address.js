@@ -15,3 +15,16 @@ function closeForm(){
     addressForm.style.display='none';
     $("form")[0].reset();
 }
+
+function deleteAddress(id){
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, your address will been removed",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        window.location.href='deleteAddress.php?id='+id
+    });
+}
