@@ -24,9 +24,11 @@ $ git clone https://github.com/owen0712/simple-shopper.git
 
 2. Login using the following account or sign up a new account
 ```
-
+Email: simplekid@gmail.com
+Password: Simplekid123@
 ```
 
 ```
-
+Email: admin@gmail.com
+Password: Admin123@
 ```
