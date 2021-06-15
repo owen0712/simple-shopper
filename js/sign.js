@@ -58,7 +58,7 @@ function checkInputs(){
         setErrorFor(password, 'Password cannot be blank');
     }
     else if(!reg.test(passwordValue)){
-        setErrorForPassword(password, 'Must have minimum eight characters, at least one letter, one number and one special character',"-53px");
+        setErrorForPassword(password, 'Must have minimum eight characters, at least one capital letter, one number and one special character',"-53px");
     }else{
         setSuccessFor(password)
     }
@@ -68,7 +68,7 @@ function checkInputs(){
         setErrorFor(password2, 'Password cannot be blank');
     }
     else if(!reg.test(password2Value)){
-        setErrorForPassword(password2, 'Must have minimum eight characters, at least one letter, one number and one special character',"-53px");
+        setErrorForPassword(password2, 'Must have minimum eight characters, at least one capital letter, one number and one special character',"-53px");
     }else if(passwordValue !== password2Value){
         setErrorForPassword(password2, 'Passwords does not match',"-20px");
     }
