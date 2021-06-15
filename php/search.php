@@ -330,6 +330,10 @@
                                         </div>";
                                     }
                                 }
+                                $temp=($result->rowCount()%4);
+                                for($x=0;$x<$temp;$x++){
+                                    echo'<div class="col" style="visibility: hidden; width:0px;"></div>';
+                                }
                             }else{
                                 echo "<img src='../assets/upload_image/nothing.png' style='margin-left: 470px; margin-top: 120px; height: 200px; width:300px;'>";
                             }
@@ -338,10 +342,8 @@
                         }
                         /* free result set */
                         $result = null;
-			$pdo = null;
+			            $pdo = null;
                     ?>
-                    <div class="col" style="visibility: hidden;"></div>
-                    <div class="col" style="visibility: hidden;"></div>
                 </div>
             </div>
         </div>
