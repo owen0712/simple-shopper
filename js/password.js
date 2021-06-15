@@ -72,7 +72,7 @@ function checkNewPassword(){
         setErrorFor(n_password,'Password cannot be blank',"-20px");
         return false;
     }else if(!reg.test(newPasswordValue)){
-        setErrorFor(n_password,'Password must have minimum eight characters, at least one letter, one number and one special character',"-40px");
+        setErrorFor(n_password,'Password must have minimum eight characters, at least one capital letter, one number and one special character',"-40px");
         return false;
     }else{
         setSuccessFor(n_password,"-20px");
