@@ -164,6 +164,22 @@ require_once '../db/conn.php';
           });
         }
     </script>
+    <script>
+        function swalError3(){
+          swal({
+            title: "Error",
+            text: "Phone number already been registered",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((proceedLogin) => {
+                if (proceedLogin) {
+                  setTimeout(function(){window.location.href='../php/signup.php'}, 1000);
+                }
+          });
+        }
+    </script>
 <?php
          if(isset($_POST['btnSign']))
          {
@@ -189,9 +205,13 @@ require_once '../db/conn.php';
         
                 if($user->checkEmailExist($email))
                 {
-                echo "<script>swalError();</script>";
+                   echo "<script>swalError();</script>";
                 }
                 
+                if($user->checkPhoneExist($phone))
+                {
+                  echo "<script>swalError3();</script>";
+                }
                 if($Lname !="" && $email != "" && $phone != "" && $pwd !="" &&
                 $gender !="" && $birth != ""){
                   if(!$user->checkEmailExist($email))
