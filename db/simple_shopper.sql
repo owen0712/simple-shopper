@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2021 at 12:39 PM
+-- Generation Time: Jun 14, 2021 at 04:59 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -44,8 +44,7 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`address_id`, `receiptient_name`, `phone_number`, `postal_code`, `state`, `area`, `description`, `default_status`, `user_id`) VALUES
-(1, 'Sim Ple Kid', '0123456789', 50603, 'Kuala Lumpur', 'Wilayah Persekutuan', 'Universiti Malaya', 1, 2),
-(29, 'Sim Ple Kid', '12345678', 12345, 'Pahang', 'Bagan Selatan,', '123,', 0, 2);
+(1, 'Sim Ple Kid', '0123456789', 50603, 'Kuala Lumpur', 'Wilayah Persekutuan', 'Universiti Malaya', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -93,16 +92,24 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`product_id`, `user_id`, `time`) VALUES
-(3, 2, '2021-06-04 05:53:56'),
+(1, 2, '2021-06-11 00:44:30'),
+(2, 2, '2021-06-11 00:44:33'),
+(3, 2, '2021-06-11 00:44:36'),
 (4, 2, '2021-06-05 01:32:29'),
-(11, 2, '2021-06-04 07:35:15'),
+(7, 2, '2021-06-11 00:36:33'),
+(10, 2, '2021-06-11 00:39:21'),
+(11, 2, '2021-06-11 00:45:17'),
 (12, 2, '2021-06-04 07:35:43'),
 (13, 2, '2021-06-04 05:53:19'),
-(14, 2, '2021-06-04 07:35:06'),
+(14, 2, '2021-06-11 00:44:40'),
+(15, 2, '2021-06-11 00:44:44'),
 (20, 2, '2021-06-05 01:32:12'),
+(22, 2, '2021-06-11 00:44:48'),
 (24, 2, '2021-06-04 05:53:59'),
+(28, 2, '2021-06-11 00:44:56'),
 (34, 2, '2021-06-04 05:54:01'),
 (37, 2, '2021-06-05 01:25:00'),
+(54, 2, '2021-06-11 00:34:56'),
 (63, 2, '2021-06-05 01:46:44'),
 (76, 2, '2021-06-04 05:54:04'),
 (80, 2, '2021-06-04 05:54:06'),
@@ -154,7 +161,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_image`, `product_name`, `category_id`, `product_amount`, `product_price`, `product_description`) VALUES
-(1, 'Beverage-1.png', 'Cocal-cola', 1, 10, 1.99, 'Coca-Cola Carbonated Drink Original 320ml'),
+(1, 'Beverage-1.png', 'Coca-cola', 1, 0, 1.99, 'Coca-Cola Carbonated Drink Original 320ml'),
 (2, 'Beverage-2.png', '100 plus', 1, 10, 1.99, '100 plus Carbonated Drink Original 320ml'),
 (3, 'Beverage-3.png', '7up', 1, 10, 1.99, '7up Lemon  and  Lime Carbonated Drink 320ml'),
 (4, 'Beverage-4.png', 'Tropicana', 1, 10, 2.99, 'Tropicana Twister Orange Drink 350ml'),
@@ -230,7 +237,7 @@ INSERT INTO `product` (`product_id`, `product_image`, `product_name`, `category_
 (74, 'Paper_Product-4.png', 'Kitchen Paper Towel', 8, 10, 5.8, 'Scott Kitchen Paper Towel 2Rolls x60s'),
 (75, 'Paper_Product-5.png', 'Facial Tissue', 8, 10, 5.9, 'Kleenex Skincare 3ply Facial Tissue 44sx4'),
 (76, 'Paper_Product-6.png', 'Sampling Paper Cup', 8, 10, 4.99, 'Sampling Paper Cup 50pcs/set'),
-(77, 'Paper_Product-7.png', 'Cooking  and  Baking Paper', 8, 10, 9.99, 'Diamond Cooking  and  Baking Paper 8mx30cm'),
+(77, 'Paper_Product-7.png', 'Baking Paper', 8, 10, 9.99, 'Diamond Cooking  and  Baking Paper 8mx30cm'),
 (78, 'Paper_Product-8.png', 'Coffee Filter Paper', 8, 10, 3.5, 'MOMO Coffee Filter Paper 100pcs'),
 (79, 'Paper_Product-9.png', 'Wax Paper Sandwich Bag', 8, 10, 6.99, 'Reynolds Wax Paper Sandwich Bag 50pcs'),
 (80, 'Paper_Product-10.png', 'Brown Paper Bag', 8, 10, 2.8, 'Brown Paper Bag 20pcs'),
@@ -267,13 +274,13 @@ INSERT INTO `product` (`product_id`, `product_image`, `product_name`, `category_
 (111, 'pet-1.png', 'Pedigree Dog Lamb', 12, 25, 27.5, 'Pedigree Dog Lamb and Vegetables Dog Food'),
 (112, 'pet-2.png', 'Whiskas Canned Tuna', 12, 25, 4.91, 'Whiskas Canned Tuna 400g'),
 (113, 'pet-3.png', 'Cat Dry Food Tuna', 12, 25, 7.17, 'Whiskas Adult Cat Dry Food Tuna Flavour 480g'),
-(114, 'pet-4.png', 'Cesar Chicken  and  Cheese', 12, 25, 9.34, 'Cesar Chicken  and  Cheese 100g x 3'),
+(114, 'pet-4.png', 'Cesar Chicken Cheese', 12, 25, 9.34, 'Cesar Chicken  and  Cheese 100g x 3'),
 (115, 'pet-5.png', 'Cat Litter', 12, 25, 14.58, 'Catsan Clumping Cat Litter 5L'),
 (116, 'pet-6.png', 'Sheba Tender Chicken', 12, 25, 3.9, 'Sheba Tender Chicken and Fine Flakes Wet Food 85g'),
 (117, 'pet-7.png', 'Cesar Beef Dog Food', 12, 25, 3.8, 'Cesar Beef Dog Food 100g'),
 (118, 'pet-8.png', 'Kitty Bed', 12, 25, 128, 'Kitty City Cozy Bed'),
 (119, 'pet-9.png', 'Water Dispenser', 12, 25, 33, 'Auto Food Water Dispenser'),
-(120, 'pet-10.png', 'Foldable Cat Cage', 12, 25, 75, 'Foldable Cat Cage');
+(120, 'pet-10.png', 'Foldable Cat Cage', 12, 20, 70, 'Foldable Cat Cage');
 
 -- --------------------------------------------------------
 
@@ -295,12 +302,13 @@ INSERT INTO `shopping_list` (`list_id`, `list_name`, `user_id`) VALUES
 (1, 'Shopping List 1', 1),
 (2, 'Shopping List 2', 1),
 (3, 'Shopping List 4', 1),
-(4, 'User 2 Shopping 1', 2),
+(4, 'User 2 Shopping 6', 2),
 (5, 'User 2 Shopping 2', 2),
 (9, 'User 2 Shopping 5', 2),
 (10, 'Hello', 2),
 (15, 'Shopping List 6', 1),
-(16, 'Hello', 1);
+(16, 'Hello', 1),
+(17, 'hi', 2);
 
 -- --------------------------------------------------------
 
@@ -330,10 +338,10 @@ INSERT INTO `shopping_list_item` (`list_id`, `product_id`, `item_quantity`) VALU
 (3, 26, 5),
 (3, 28, 1),
 (4, 3, 5),
-(4, 11, 4),
+(4, 11, 18),
 (4, 13, 9),
 (5, 1, 9),
-(5, 12, 7),
+(5, 12, 1),
 (5, 28, 2);
 
 -- --------------------------------------------------------
@@ -359,8 +367,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `password`, `name`, `email`, `phone`, `gender`, `dob`, `profile`, `status`) VALUES
-(1, '25d55ad283aa400af464c76d713c07ad', 'Admin', 'admin@gmail.com', '0123456789', 'male', '2021-06-05', '../assets/uploads/profile.png', 'Admin'),
-(2, '25d55ad283aa400af464c76d713c07ad', 'Sim Ple Kid', 'simplekid@gmail.com', '012345678', 'male', '2020-10-08', '../assets/uploads/profile.png', 'User');
+(1, 'a43c27c2babefd68df8a694900f30a1c', 'Admin', 'admin@gmail.com', '0123456789', 'male', '2021-06-05', '../assets/uploads/profile.png', 'Admin'),
+(2, 'bab3f1e57da7208228498a28398aa1ce', 'Sim Ple Kid', 'simplekid@gmail.com', '012345678', 'male', '2020-10-09', '../assets/uploads/profile.png', 'User');
 
 --
 -- Indexes for dumped tables
@@ -432,37 +440,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `otp`
 --
 ALTER TABLE `otp`
-  MODIFY `Otp_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Otp_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `shopping_list`
 --
 ALTER TABLE `shopping_list`
-  MODIFY `list_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `list_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables

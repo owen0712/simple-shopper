@@ -21,6 +21,8 @@
     <!--custom javascript-->
     <script src="../js/address.js" defer></script>
     <script src="../js/header.js" defer></script>
+    <!--sweetalert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!--bootstrap js and jquery-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -173,7 +175,7 @@
                 ?>
                     <div class="address shadow p-3 mb-5 bg-white rounded">
                         <label class='id'><?php echo $r['address_id']; ?></label>
-                        <a href='deleteAddress.php?id=<?php echo $r['address_id']?>'><button class="btn btn-danger delete"><i class="bi bi-trash"></i> Delete</button></a>
+                        <button class="btn btn-danger delete" onclick="deleteAddress(<?php echo $r['address_id']?>)"><i class="bi bi-trash"></i> Delete</button>
                         <a href="editAddressForm.php?id=<?php echo $r['address_id'];?>"><button class="btn btn-info edit" id="edit_btn"><i class="bi bi-pencil-square"></i> Edit</button></a>
                         <table>
                             <?php if($r['default_status']) echo "<tr><td colspan='2'><strong>Default Address</strong></td></tr>" ?>
