@@ -284,7 +284,7 @@ class User{
             return false;
         }
     }
- 
+
     public function checkLoginPhone($phone,$pwd,$status)
     {   
         try{

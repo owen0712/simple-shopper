@@ -7,10 +7,10 @@
         $email=$_POST['email'];
         $phone=$_POST['phone'];
         if(isset($_POST['male'])){
-            $gender='male';
+            $gender='Male';
         }
         else{
-            $gender='female';
+            $gender='Female';
         }
         $dob=$_POST['dob'];
         if($_FILES['profile']['size']>0){
@@ -163,9 +163,9 @@
                             <tr>
                                 <td><label for="gender">Gender</label></td>
                                 <td>
-                                    <input type="radio" id="male" name="male" onclick='removeFemale()' <?php if($result['gender']=='male') echo 'checked'?>/>
+                                    <input type="radio" id="male" name="male" onclick='removeFemale()' <?php if($result['gender']=='Male') echo 'checked'?>/>
                                     <label for="male">Male</label>
-                                    <input type="radio" id="female" name="female" onclick='removeMale()' <?php if($result['gender']=='female') echo 'checked'?>/>
+                                    <input type="radio" id="female" name="female" onclick='removeMale()' <?php if($result['gender']=='Female') echo 'checked'?>/>
                                     <label for="female">Female</label>
                                 </td>
                             </tr>

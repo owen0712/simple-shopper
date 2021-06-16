@@ -335,10 +335,10 @@
                                     echo'<div class="col" style="visibility: hidden; width:0px;"></div>';
                                 }
                             }else{
-                                echo "<img src='../assets/upload_image/nothing.png' style='margin-left: 470px; margin-top: 120px; height: 200px; width:300px;'>";
+                                echo "<img src='../assets/upload_image/nothing.png' style='margin-left: 300px; height: 600px; width:600px;'>";
                             }
                         }else{
-                            echo "<img src='../assets/upload_image/nothing.png' style='margin-left: 470px; margin-top: 120px; height: 200px; width:300px;'>";
+                            echo "<img src='../assets/upload_image/nothing.png' style='margin-left: 300px; height: 600px; width:600px;'>";
                         }
                         /* free result set */
                         $result = null;
