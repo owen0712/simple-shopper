@@ -26,7 +26,9 @@
             $user->updateProfile($id,$name,$email,$phone,$gender,$dob);
         }
     }
+    if(!empty($_SESSION['user_id'])){
     $result=$user->getUser($_SESSION['user_id']);
+    }
 ?>
 
 <!DOCTYPE html>

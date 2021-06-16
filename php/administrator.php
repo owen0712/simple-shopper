@@ -81,6 +81,7 @@
                 </div>
             </div>
         </nav>
+        <?php if(!empty($_SESSION['user_id'])){?>
         <main class="container">
             <table id="productTable" class="mb-4">    <!--add the products inside a table-->
                 <thead>
@@ -100,6 +101,11 @@
             <button id="add_btn" class="btn btn-success btn-lg"><i class="bi bi-plus-square"></i> Add product</button> &nbsp;    <!--add product button-->
             <button id="add_category" class="btn btn-warning btn-lg"><i class="bi bi-plus-square"></i> Add category</button> &nbsp;    <!--add new category button-->
         </main>
+        <?php } else {?>
+            <div class='d-flex justify-content-center'>
+                <img src='../assets/upload_image/notfound.png' style=' height: 400px; width:600px;'>
+            </div>
+        <?php } ?>
         <!--footer-->
         <footer>
             <div class = "footer mt-5">
