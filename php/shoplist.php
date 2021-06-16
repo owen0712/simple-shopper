@@ -153,7 +153,7 @@
     //     echo "<div class='alert alert-danger' role='alert'>Operation encountered an error. Please retry!</div>";
     // }
 ?>
-
+<?php if(!empty($_SESSION['user_id'])){?>
 <body>
     <!-- Add new shopping list division -->
     <form id="myDIV" class="header container" method="POST">    
@@ -279,7 +279,11 @@
             </div>            
         </div>
     </main>
-
+    <?php } else {?>
+        <div class='d-flex justify-content-center'>
+            <img src='../assets/upload_image/notfound.png' style=' height: 400px; width:600px;'>
+        </div>
+    <?php } ?>
     <!-- Footer-->
     <div class="footer">
         <div class="container">
