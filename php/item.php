@@ -83,7 +83,7 @@
                 swal("Do you want to add this item?",{
                     buttons:{
                         customise: {
-                            text: "Add to list",
+                            text: "Add to list", className:"sweet-success",
                             value: "customise",
                         },
                         cancel: "cancel",
