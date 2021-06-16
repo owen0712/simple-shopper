@@ -11,7 +11,7 @@
             {
                 try {
                     $AccountSid = "AC2afcafb499e46db279adf7b992616f2f";
-                    $AuthToken = "9e025fe79b6cf78d3df0648bac5c6407";
+                    $AuthToken = "0c9c05cd166cc3858ed52fab899d2ccf";
                     $client = new Client($AccountSid, $AuthToken);
                     $otp=mt_rand(1000,9999);
                     date_default_timezone_set("Asia/Kuala_Lumpur");

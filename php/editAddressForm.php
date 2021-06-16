@@ -153,7 +153,7 @@
             </div>
         </div>
     </header>
-    
+    <?php if(isset($_SESSION['user_id'])){?>
     <div class="container-fluid main-content">
         <!--navigation bar-->
         <nav class="navbar navbar-light bg-white">
@@ -198,6 +198,11 @@
             </div>
         </main>
     </div>
+    <?php } else {?>
+        <div class='d-flex justify-content-center'>
+            <img src='../assets/upload_image/notfound.png' style=' height: 400px; width:600px;'>
+        </div>
+    <?php } ?>
     <!--footer-->
     <div class = "footer">
         <div class="container">
