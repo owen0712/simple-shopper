@@ -64,6 +64,7 @@
             </div>   
         </header>
         <!--nav bar-->
+        <?php if(!empty($_SESSION['user_id'])){?>
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-5">
             <div class="container-fluid">
                 <div class="col col-auto">
@@ -81,7 +82,6 @@
                 </div>
             </div>
         </nav>
-        <?php if(!empty($_SESSION['user_id'])){?>
         <main class="container">
             <table id="productTable" class="mb-4">    <!--add the products inside a table-->
                 <thead>
