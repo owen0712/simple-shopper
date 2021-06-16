@@ -16,7 +16,9 @@ $ git clone https://github.com/owen0712/simple-shopper.git
 
 3. Run APACHE server and MYSQL option in XAMPP control panel
 
-4. Import the sql file (simple-shopper/db/simple-shopper.sql) into the database
+4. Create the database named 'simple_shopper' in the phpMyAdmin panel
+
+5. Import the sql file (simple-shopper/db/simple-shopper.sql) into the database
 
 ## :bulb: Working
 
